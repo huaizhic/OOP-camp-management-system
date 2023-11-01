@@ -1,7 +1,7 @@
 package camp_Application_Management_System;
 
 import java.util.Date;
-//test 
+
 public class camp_Information {
     private String campName;
     private Date campStartDate;
