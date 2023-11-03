@@ -1,12 +1,12 @@
 package camp_Application_Management_System;
 
 public class User {
-    private String userID;
+    private String userId;
     private String password;
     private String faculty;
 
     public User(String userID, String password, String faculty) {
-        this.userID = userID;
+        this.userID = userId;
         this.password = password;
         this.faculty = faculty;
     }

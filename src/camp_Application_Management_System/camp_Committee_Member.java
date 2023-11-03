@@ -10,7 +10,7 @@ public class camp_Committee_Member {
     private int points; // Points earned by the committee member
 
     public camp_Committee_Member(String userID) {
-        this.userID = userID;
+        this.userID = userID; // Hello
         this.registeredCamps = new ArrayList<>();
         this.suggestions = new ArrayList<>();
         this.points = 0;
