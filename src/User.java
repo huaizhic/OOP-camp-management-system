@@ -1,4 +1,3 @@
-package camp_Application_Management_System;
 
 public class User {
     private String userId;

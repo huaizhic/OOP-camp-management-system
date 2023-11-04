@@ -1,4 +1,4 @@
-package Package2;
+package Staff;
 
 public class StaffAcc extends AccountManager {
 

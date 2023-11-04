@@ -1,4 +1,4 @@
-import Package.*;
+import Student.*;
 
 public class Enquiry {
 
@@ -51,20 +51,6 @@ public class Enquiry {
 		this.reply = reply;
 	}
 
-	public void getAttribute() {
-		// TODO - implement Enquiry.getAttribute
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param attribute
-	 */
-	public void setAttribute(int attribute) {
-		// TODO - implement Enquiry.setAttribute
-		throw new UnsupportedOperationException();
-	}
-
 	public boolean getProcessed() {
 		return this.processed;
 	}
@@ -75,20 +61,6 @@ public class Enquiry {
 	 */
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
-	}
-
-	public Camp getCamp() {
-		// TODO - implement Enquiry.getCamp
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param camp
-	 */
-	public void setCamp(Camp camp) {
-		// TODO - implement Enquiry.setCamp
-		throw new UnsupportedOperationException();
 	}
 
 }

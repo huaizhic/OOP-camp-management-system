@@ -1,6 +1,4 @@
-//yooooo testing 
-
-package camp_Application_Management_System;
+//yooooo testing
 
 import java.util.ArrayList;
 import java.util.List;

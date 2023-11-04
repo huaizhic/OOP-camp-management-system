@@ -1,4 +1,6 @@
-package student;
+package Student;
+
+import java.text.Format;
 
 public class committee {
 

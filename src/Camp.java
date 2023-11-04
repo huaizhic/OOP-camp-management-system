@@ -1,5 +1,6 @@
-import Package2.*;
-import Package.*;
+import Student.Student;
+
+import java.util.ArrayList;
 
 public class Camp {
 
@@ -11,7 +12,7 @@ public class Camp {
 	private int totalSlots;
 	private int committeeSlots = 10;
 	private String description;
-	private StaffMember staffInCharge;
+	private Package2.StaffMember staffInCharge;
 	private ArrayList<Student> studentsRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry;
@@ -127,7 +128,7 @@ public class Camp {
 		this.description = description;
 	}
 
-	public StaffMember getStaffInCharge() {
+	public Package2.StaffMember getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
@@ -135,7 +136,7 @@ public class Camp {
 	 * 
 	 * @param staffInCharge
 	 */
-	public void setStaffInCharge(StaffMember staffInCharge) {
+	public void setStaffInCharge(Package2.StaffMember staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 
