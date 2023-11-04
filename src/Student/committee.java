@@ -1,5 +1,7 @@
 package Student;
 
+import restOfitems.Camp;
+
 import java.text.Format;
 
 public class committee {
@@ -10,7 +12,7 @@ public class committee {
 	 * 
 	 * @param student
 	 */
-	public camp viewRegisteredCamp(Student student) {
+	public Camp viewRegisteredCamp(Student student) {
 		// TODO - implement Committee.viewRegisteredCamp
 		throw new UnsupportedOperationException();
 	}

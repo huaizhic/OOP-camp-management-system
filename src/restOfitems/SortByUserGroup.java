@@ -1,3 +1,8 @@
+package restOfitems;
+
+import restOfitems.Camp;
+import restOfitems.DisplayOption;
+
 public class SortByUserGroup implements DisplayOption {
 
 	/**
@@ -5,7 +10,7 @@ public class SortByUserGroup implements DisplayOption {
 	 * @param campList
 	 */
 	public ArrayList<Camp> sortByUserGroup(ArrayList<Camp> campList) {
-		// TODO - implement SortByUserGroup.sortByUserGroup
+		// TODO - implement restOfitems.SortByUserGroup.sortByUserGroup
 		throw new UnsupportedOperationException();
 	}
 

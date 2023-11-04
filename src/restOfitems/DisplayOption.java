@@ -1,3 +1,5 @@
+package restOfitems;
+
 public interface DisplayOption {
 
 	/**

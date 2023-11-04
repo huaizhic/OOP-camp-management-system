@@ -1,9 +1,21 @@
-public class Suggestion {
+package restOfitems;
+
+import Student.*;
+
+public class Enquiry {
 
 	private String content;
-	private CommitteeMember submitter;
-	private Status status;
+	private Student submitter;
+	private String reply;
 	private boolean processed;
+
+	// enquiry class constructor
+	public Enquiry(String message, Student student ){
+		this.content = message;
+		this.submitter = student;
+		this.reply = null;
+		this.processed = false;
+	}
 
 	public String getContent() {
 		return this.content;
@@ -17,7 +29,7 @@ public class Suggestion {
 		this.content = content;
 	}
 
-	public CommitteeMember getSubmitter() {
+	public Student getSubmitter() {
 		return this.submitter;
 	}
 
@@ -25,20 +37,20 @@ public class Suggestion {
 	 * 
 	 * @param submitter
 	 */
-	public void setSubmitter(CommitteeMember submitter) {
+	public void setSubmitter(Student submitter) {
 		this.submitter = submitter;
 	}
 
-	public Status getStatus() {
-		return this.status;
+	public String getReply() {
+		return this.reply;
 	}
 
 	/**
 	 * 
-	 * @param status
+	 * @param reply
 	 */
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 
 	public boolean getProcessed() {

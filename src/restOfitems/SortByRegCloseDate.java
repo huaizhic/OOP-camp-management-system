@@ -1,3 +1,7 @@
+package restOfitems;
+
+import restOfitems.Camp;
+
 public class SortByRegCloseDate {
 
 	/**
@@ -5,7 +9,7 @@ public class SortByRegCloseDate {
 	 * @param campList
 	 */
 	public ArrayList<Camp> sortByRegCloseDate(ArrayList<Camp> campList) {
-		// TODO - implement SortByRegCloseDate.sortByRegCloseDate
+		// TODO - implement restOfitems.SortByRegCloseDate.sortByRegCloseDate
 		throw new UnsupportedOperationException();
 	}
 

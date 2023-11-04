@@ -5,11 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55e6db08-0a86-4539-86dd-2bd18a4ed025" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DisplayOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/DisplayOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/Enquiry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Format.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/Format.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LoginRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/LoginRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Month.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/Month.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RegisterRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/RegisterRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortByCommitteeSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/SortByCommitteeSlots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/SortByLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortByName_Default.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/SortByName_Default.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortByRegCloseDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/SortByRegCloseDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortByTotalSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/SortByTotalSlots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortByUserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/SortByUserGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Student/attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/attendee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/committee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/password_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/student_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/UserGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/campData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/camp_Committee_Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/restOfitems/camp_Committee_Member.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +55,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "huaizhi",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Huai Zhi/Downloads/OOP-camp-management-system",

@@ -1,10 +1,10 @@
-//yooooo testing
+package restOfitems;//yooooo testing
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class camp_Committee_Member {
-    private String userID; // User ID for the committee member
+    private String userID; // restOfitems.User ID for the committee member
     private List<Camp> registeredCamps; // List of camps that the committee member is overseeing
     private List<Suggestion> suggestions; // List of suggestions submitted by the committee member
     private int points; // Points earned by the committee member

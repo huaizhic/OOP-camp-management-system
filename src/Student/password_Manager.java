@@ -6,7 +6,7 @@ public class password_Manager {
 
     public static boolean checkPassword(String studentID, String roleChoice, String enteredPassword) {
         // Retrieve the student based on studentID
-        student student_Information = student.getStudentById(studentID);
+        Student student_Information = Student.getStudentById(studentID);
 
         // Check if the student exists and validate the password and roleChoice.
         if (student_Information != null) {
@@ -24,7 +24,7 @@ public class password_Manager {
 
     public boolean setPassword(String userID, String updatedPassword) {
         // Find the student based on the userID (you need to implement this part)
-        student Student = student.getStudentById(userID);
+        Student Student = Student.getStudentById(userID);
 
         if (Student != null) {
             String oldPassword = Student.getPassword();
@@ -50,7 +50,7 @@ public class password_Manager {
                 return false;
             }
         } else {
-            System.out.println("User not found. Password reset failed.");
+            System.out.println("restOfitems.User not found. Password reset failed.");
             // Return false to indicate failure (user not found)
             return false;
         }
@@ -62,10 +62,10 @@ public class password_Manager {
     public void forgotPassword(String userID) {
         // First, retrieve the student based on the userID
         Scanner scanner;
-        student Student = student.getStudentById(userID);
+        Student Student = Student.getStudentById(userID);
 
         if (Student != null) {
-            System.out.println("Password recovery for " + student.getName(userID));
+            System.out.println("Password recovery for " + Student.getName(userID));
 
             // Get security questions and answers from the student
             String securityQuestions = Student.getSecurityQuestion();
@@ -122,7 +122,7 @@ public class password_Manager {
                     }
                 }
             } else {
-                System.out.println("User not found. Password reset failed.");
+                System.out.println("restOfitems.User not found. Password reset failed.");
             }
         }
 

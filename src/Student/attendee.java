@@ -1,5 +1,9 @@
 package Student;
 
+import restOfitems.*;
+import restOfitems.Camp;
+import restOfitems.Enquiry;
+//import Student.Student;
 import java.util.ArrayList;
 
 public class attendee {
@@ -71,17 +75,17 @@ public class attendee {
 	 * @param student
 	 * @param camp
 	 */
-	public void viewEnquiry(Student student, Camp camp) {
+	public String viewEnquiry(Student student, Camp camp) {
 		// TODO - implement Attendee.viewEnquiry
 		// enquiry.getContent();
 		/* EnquiryArray = student.getEnquirySubmitted();
-		for (Enquiry enquiry : EnquiryArray){
+		for (restOfitems.Enquiry enquiry : EnquiryArray){
 			System.out.println(enquiry.getContent());
 		}  */
 
 		// array of enquiry objects, need to narrow down to a specific camp requested
-		studentEnquiryArray = student.getEnquirySubmitted();
-		campEnquiryArray = camp.getEnquiry();
+		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
+		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
 
 		for (Enquiry studentEnquiry: studentEnquiryArray){
 			for (Enquiry campEnquiry: campEnquiryArray){
@@ -90,9 +94,8 @@ public class attendee {
 				}
 			}
 		}
-
-
  		// throw new UnsupportedOperationException();
+		return "error";
 	}
 
 	/**
@@ -101,9 +104,25 @@ public class attendee {
 	 * @param camp
 	 * @param enquiry
 	 */
-	public void editEnquiry(Student student, Camp camp, int enquiry) {
+	public void editEnquiry(Student student, Camp camp, int enquiryNo, String newMessage) {
 		// TODO - implement Attendee.editEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+		// key is to find the right enquiry from indexing
+		// delete enquiry from both student and camp side
+		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
+		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
+
+		// ASSUMING enquiryNo is based on studentArray indexing, from the user POV
+		// studentEnquiryArray.remove(enquiryNo);
+		studentEnquiryArray.get(enquiryNo).setContent(newMessage);
+
+		for (Enquiry campEnquiry: campEnquiryArray){
+			if (campEnquiry.getSubmitter().getStudentID() == student.getStudentID()){
+				// get correct index of enquiry from camp enquiry array, then remove it
+				campEnquiry.setContent(newMessage);
+				return;
+			}
+		}
 	}
 
 	/**
@@ -112,9 +131,26 @@ public class attendee {
 	 * @param camp
 	 * @param enquiry
 	 */
-	public void deleteEnquiry(Student student, Camp camp, int enquiry) {
+	public void deleteEnquiry(Student student, Camp camp, int enquiryNo) {
 		// TODO - implement Attendee.deleteEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		// key is to find the right enquiry from indexing
+		// delete enquiry from both student and camp side
+		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
+		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
+
+		// ASSUMING enquiryNo is based on studentArray indexing, from the user POV
+		studentEnquiryArray.remove(enquiryNo);
+
+		for (Enquiry campEnquiry: campEnquiryArray){
+			if (campEnquiry.getSubmitter().getStudentID() == student.getStudentID()){
+				// get correct index of enquiry from camp enquiry array, then remove it
+				campEnquiryArray.remove(campEnquiry);
+				return;
+			}
+		}
+
 	}
 
 }

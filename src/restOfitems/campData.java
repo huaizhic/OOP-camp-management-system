@@ -1,3 +1,5 @@
+package restOfitems;
+
 public class campData {
 
 	private ArrayList<Camp> campList;

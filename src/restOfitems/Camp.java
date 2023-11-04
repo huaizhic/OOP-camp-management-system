@@ -1,3 +1,5 @@
+package restOfitems;
+
 import Student.Student;
 
 import java.util.ArrayList;
@@ -104,7 +106,7 @@ public class Camp {
 	}
 
 	public void getAttribute() {
-		// TODO - implement Camp.getAttribute
+		// TODO - implement restOfitems.Camp.getAttribute
 		throw new UnsupportedOperationException();
 	}
 
@@ -165,7 +167,7 @@ public class Camp {
 	}
 
 	public ArrayList<Enquiry> getEnquiry() {
-		// TODO - implement Camp.getEnquiry
+		// TODO - implement restOfitems.Camp.getEnquiry
 		// throw new UnsupportedOperationException();
 		return this.enquiry;
 	}
@@ -175,11 +177,20 @@ public class Camp {
 	 * @param enquiry
 	 */
 	public void setEnquiry(Enquiry enquiry) {
-		// TODO - implement Camp.setEnquiry
+		// TODO - implement restOfitems.Camp.setEnquiry
 		// throw new UnsupportedOperationException();
+
+		/* if (addOrDelete == 1){
+			// add newly created enquiry object to existing arraylist of enquiries
+			this.enquiry.add(enquiry);
+		} else if (addOrDelete == 0){
+			// delete
+			this.enquiry.remove(enquiry);
+		} */
 
 		// add newly created enquiry object to existing arraylist of enquiries
 		this.enquiry.add(enquiry);
+
 	}
 
 	public ArrayList<Suggestion> getSuggestion() {

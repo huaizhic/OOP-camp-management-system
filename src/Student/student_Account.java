@@ -39,7 +39,7 @@ public class student_Account extends account_Manager {
 
             // Check the password and get the student's name
             if (passwordManager.checkPassword(userId, role, enteredPassword)) {
-                String studentName = student.getName(userId);
+                String studentName = Student.getName(userId);
 
                 if ("Committee".equals(role)) {
                     System.out.println("Welcome, Committee Member " + studentName);
