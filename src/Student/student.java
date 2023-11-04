@@ -160,9 +160,12 @@ public class student extends attendee {
 	 *
 	 * @param enquirySubmitted
 	 */
-	public void setEnquirySubmitted(Enquiry enquirySubmitted) {
+	public void setEnquirySubmitted(Enquiry newEnquiry) {
 		// TODO - implement Student.setEnquirySubmitted
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		// add new enquiry object to arraylist
+		this.enquirySubmitted.add(newEnquiry);
 	}
 
 }

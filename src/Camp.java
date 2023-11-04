@@ -164,18 +164,22 @@ public class Camp {
 		this.visibility = visibility;
 	}
 
-	public ArrayList<enquiry> getEnquiry() {
+	public ArrayList<Enquiry> getEnquiry() {
 		// TODO - implement Camp.getEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+		return this.enquiry;
 	}
 
 	/**
 	 * 
 	 * @param enquiry
 	 */
-	public void setEnquiry(ArrayList<enquiry> enquiry) {
+	public void setEnquiry(Enquiry enquiry) {
 		// TODO - implement Camp.setEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		// add newly created enquiry object to existing arraylist of enquiries
+		this.enquiry.add(enquiry);
 	}
 
 	public ArrayList<Suggestion> getSuggestion() {

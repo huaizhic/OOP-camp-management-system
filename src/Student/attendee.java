@@ -60,7 +60,10 @@ public class attendee {
 	 */
 	public void submitEnquiry(Student student, Camp camp, String content) {
 		// TODO - implement Attendee.submitEnquiry
-		throw new UnsupportedOperationException();
+		Enquiry newEnquiry = new Enquiry(content, student);    // create new enquiry object
+		student.setEnquirySubmitted(newEnquiry);
+		camp.setEnquiry(newEnquiry);
+		//throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -70,7 +73,26 @@ public class attendee {
 	 */
 	public void viewEnquiry(Student student, Camp camp) {
 		// TODO - implement Attendee.viewEnquiry
-		throw new UnsupportedOperationException();
+		// enquiry.getContent();
+		/* EnquiryArray = student.getEnquirySubmitted();
+		for (Enquiry enquiry : EnquiryArray){
+			System.out.println(enquiry.getContent());
+		}  */
+
+		// array of enquiry objects, need to narrow down to a specific camp requested
+		studentEnquiryArray = student.getEnquirySubmitted();
+		campEnquiryArray = camp.getEnquiry();
+
+		for (Enquiry studentEnquiry: studentEnquiryArray){
+			for (Enquiry campEnquiry: campEnquiryArray){
+				if (studentEnquiry.getContent() == campEnquiry.getContent()){
+					return studentEnquiry.getContent();
+				}
+			}
+		}
+
+
+ 		// throw new UnsupportedOperationException();
 	}
 
 	/**
