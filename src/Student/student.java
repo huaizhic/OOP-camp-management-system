@@ -1,12 +1,19 @@
 package Student;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Student extends attendee {
+import javax.swing.GroupLayout.Group;
+
+import camp_Application_Management_System.Camp;
+import camp_Application_Management_System.Enquiry;
+
+public class student extends attendee {
 
 	private String studentID;
 	private String password = "password";
 	private String name;
-	private UserGroup userGroup;
+	private String userGroup;
 	private ArrayList<Camp> registeredCamps;
 	private boolean campCommittee;
 	private ArrayList<Camp> notRegisterable;
@@ -14,7 +21,7 @@ public class Student extends attendee {
 	private String securityAns;
 	private ArrayList<Enquiry> enquirySubmitted;
 
-	public Student() {
+	public student() {
 		// TODO - implement Student.Student
 		throw new UnsupportedOperationException();
 	}
@@ -23,19 +30,65 @@ public class Student extends attendee {
 		return this.studentID;
 	}
 
-	public String getName() {
-		return this.name;
+
+	// Getter for password
+	public String getPassword() {
+		return password;
 	}
 
-	public UserGroup getUserGroup() {
+	// Setter for password
+	public void setPassword(String newPassword) {
+		this.password = newPassword;
+	}
+
+
+	public static student getStudentById(String studentID) {
+		// For demonstration purposes, let's assume you have a list of existing students.
+		List<student> existingStudents = getExistingStudents(); // You need to implement this method.
+
+		// Search for the student with the provided studentID.
+		for (student student : existingStudents) {
+			if (studentID.equals(student.getStudentID())) {
+				return student; // Return the found student.
+			}
+		}
+
+		// Return null if the student is not found.
+		return null;
+	}
+
+	public static List<student> getExistingStudents() {
+		// Implement a method to retrieve a list of existing students from your data source.
+		// For this example, we'll return an empty list initially.
+
+		List<student> existingStudents = new ArrayList<>();
+
+		// You can add logic to retrieve the list of existing students from your data source here.
+
+		return existingStudents;
+	}
+
+	public static String getName(String userID) {
+		// For demonstration purposes, let's assume you have a list of existing students.
+		List<student> existingStudents = getExistingStudents(); // You need to implement this method.
+
+		for (student Student : existingStudents) { // assuming existingStudents is the list of students
+			if (userID.equals(Student.getStudentID())) {
+				return Student.name;
+			}
+		}
+		return null; // Return null if the userID is not found in the list.
+	}
+
+	public String getUserGroup() {
 		return this.userGroup;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param userGroup
 	 */
-	public void setUserGroup(UserGroup userGroup) {
+	public void setUserGroup(String userGroup) {
 		this.userGroup = userGroup;
 	}
 
@@ -44,7 +97,7 @@ public class Student extends attendee {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param registeredCamps
 	 */
 	public void setRegisteredCamps(ArrayList<Camp> registeredCamps) {
@@ -56,7 +109,7 @@ public class Student extends attendee {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param campCommittee
 	 */
 	public void setCampCommittee(boolean campCommittee) {
@@ -68,7 +121,7 @@ public class Student extends attendee {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param notRegisterable
 	 */
 	public void setNotRegisterable(ArrayList<Camp> notRegisterable) {
@@ -80,7 +133,7 @@ public class Student extends attendee {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param securityQuestion
 	 */
 	public void setSecurityQuestion(String securityQuestion) {
@@ -92,7 +145,7 @@ public class Student extends attendee {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param securityAns
 	 */
 	public void setSecurityAns(String securityAns) {
@@ -104,7 +157,7 @@ public class Student extends attendee {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param enquirySubmitted
 	 */
 	public void setEnquirySubmitted(Enquiry enquirySubmitted) {

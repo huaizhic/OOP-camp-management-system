@@ -1,48 +1,78 @@
 package Student;
 
 import java.util.Scanner;
+
+import camp_Application_Management_System.Student;
 import user_Login.account_Manager;
 
 public class student_Account extends account_Manager {
-    private Student student; // Add a field to hold the Student object
+    private String userId; // Add a field to hold the student ID
     private Scanner scanner;
-    private PasswordManager passwordManager; // Add a PasswordManager field
 
-    public student_Account(Scanner scanner, Student student, PasswordManager passwordManager) {
+    public student_Account(Scanner scanner, String userId) {
         super(scanner);
-        this.student = student;
-        this.scanner = scanner; // Initialize the scanner
-        this.passwordManager = passwordManager; // Initialize the PasswordManager
+        this.userId = userId;
     }
 
+    public void start() {
+        int maxAttempts = 3; // Maximum allowed password attempts
+        int attempts = 0; // Counter for password attempts
 
-	public void start() {
-        System.out.println("Welcome, Student " + student.getName());
-        System.out.print("Enter your role (1 for Attendee or 2 for Committee): ");
-        int roleChoice = scanner.nextInt();
+        while (attempts < maxAttempts) {
+            System.out.print("Enter your role (1 for Attendee or 2 for Committee): ");
+            int roleChoice = scanner.nextInt();
 
-        if (roleChoice == 1 && !student.getCampCommittee()) {
-            // Check if it's an attendee and they have the correct password
+            String role;
+            if (roleChoice == 1) {
+                role = "Attendee";
+            } else if (roleChoice == 2) {
+                role = "Committee";
+            } else {
+                System.out.println("Invalid role. Please enter '1' for Attendee or '2' for Committee.");
+                continue; // Retry if the role is invalid.
+            }
+
             System.out.print("Enter your password: ");
             String enteredPassword = scanner.next();
-            if (enteredPassword.equals(student.getPassword())) {
-                System.out.println("You are an Attendee. You can register for camps.");
-                // Redirect to the attendee class here
+
+            password_Manager passwordManager = new password_Manager(); // Create an instance
+
+            // Check the password and get the student's name
+            if (passwordManager.checkPassword(userId, role, enteredPassword)) {
+                String studentName = student.getName(userId);
+
+                if ("Committee".equals(role)) {
+                    System.out.println("Welcome, Committee Member " + studentName);
+                    // Redirect to the committee class here
+                } else if ("Attendee".equals(role)) {
+                    System.out.println("Welcome, Attendee " + studentName);
+                    // Redirect to the attendee class here
+                } else {
+                    System.out.println("Invalid role. Please enter 'committee' or 'attendee'.");
+                }
+
+                // Successful login, reset the attempts counter
+                attempts = 0;
+                break;
             } else {
-                System.out.println("Invalid password.");
+                attempts++;
+
+                if (attempts == maxAttempts) {
+                    System.out.print("Forgot password (1 for Yes, 0 for No): ");
+                    int forgotPasswordChoice = scanner.nextInt();
+
+                    if (forgotPasswordChoice == 1) {
+                        // Implement the logic for password reset here
+                        passwordManager.forgotPassword(userId);
+                    }
+
+                    break;
+                }
             }
-        } else if (roleChoice == 2 && student.getCampCommittee()) {
-            // Check if it's a committee member and they have the correct password
-            System.out.print("Enter your password: ");
-            String enteredPassword = scanner.next();
-            if (enteredPassword.equals(student.getPassword())) {
-                System.out.println("You are a Committee member. You can help manage camps.");
-                // Redirect to the committee class here
-            } else {
-                System.out.println("Invalid password.");
-            }
-        } else {
-            System.out.println("Invalid role or you do not have the required role. Please enter '1' for Attendee or '2' for Committee.");
         }
     }
+
+
+
+
 }
