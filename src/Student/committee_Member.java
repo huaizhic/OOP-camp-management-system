@@ -1,5 +1,11 @@
 package Student;
 
+import restOfitems.Camp;
+import restOfitems.Suggestion;
+import restOfitems.UserGroup;
+
+import java.util.ArrayList;
+
 public class commitee_Member extends committee {
 
 	private String studentID;

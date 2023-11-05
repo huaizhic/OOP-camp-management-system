@@ -1,6 +1,10 @@
 package Staff;
 
+import restOfitems.Camp;
+import restOfitems.Enquiry;
+
 import java.text.Format;
+import java.util.ArrayList;
 
 public class Staff {
 
@@ -52,9 +56,13 @@ public class Staff {
 	 * @param staff
 	 * @param camp
 	 */
-	public void viewEnquiry(Staff staff, int camp) {
+	public void viewEnquiry(StaffMember staffMember, int campNo) {
 		// TODO - implement Staff.viewEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp campSelected = campsCreatedArray.get(campNo);
+		System.out.println(campSelected.getEnquiry());
 	}
 
 	/**
@@ -64,9 +72,18 @@ public class Staff {
 	 * @param enquiry
 	 * @param reply
 	 */
-	public void replyEnquiry(Staff staff, int camp, int enquiry, String reply) {
+	public void replyEnquiry(StaffMember staffMember, int campNo, int enquiryNo, String reply) {
 		// TODO - implement Staff.replyEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		// at this stage, we assume that only either committee member OR staff can use a reply slot per enquiry.
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
+		ArrayList<Enquiry> campEnquiryArray = selectedCamp.getEnquiry();
+		Enquiry selectedEnquiry = campEnquiryArray.get(enquiryNo);
+		selectedEnquiry.setReply(reply);
+		selectedEnquiry.setProcessed(true);
+
 	}
 
 	/**

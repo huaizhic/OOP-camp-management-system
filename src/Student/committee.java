@@ -1,8 +1,10 @@
 package Student;
 
 import restOfitems.Camp;
+import restOfitems.Enquiry;
 
 import java.text.Format;
+import java.util.ArrayList;
 
 public class committee {
 
@@ -23,7 +25,13 @@ public class committee {
 	 */
 	public void viewEnquiry(Camp camp) {
 		// TODO - implement Committee.viewEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		// view all enquiries from a camp
+		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
+		for (Enquiry enquiry: campEnquiryArray){
+			System.out.println(campEnquiryArray.indexOf(enquiry) + ". " + enquiry.getContent());
+		}
 	}
 
 	/**
@@ -34,7 +42,20 @@ public class committee {
 	 */
 	public void replyEnquiry(Student student, Camp camp, String reply) {
 		// TODO - implement Committee.replyEnquiry
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
+		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
+		for (Enquiry studentEnquiry: studentEnquiryArray){
+			for (Enquiry campEnquiry: campEnquiryArray){
+				if (studentEnquiry.equals(campEnquiry)){
+					studentEnquiry.setReply(reply);
+					studentEnquiry.setProcessed(true);
+					campEnquiry.setReply(reply);
+					campEnquiry.setProcessed(true);
+					return;
+				}
+			}
+		}
 	}
 
 	/**

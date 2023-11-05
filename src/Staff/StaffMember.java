@@ -1,5 +1,10 @@
 package Staff;
 
+import restOfitems.Camp;
+import restOfitems.UserGroup;
+
+import java.util.ArrayList;
+
 public class StaffMember extends Staff {
 
 	private String staffID;
