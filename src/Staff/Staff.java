@@ -2,6 +2,8 @@ package Staff;
 
 import restOfitems.Camp;
 import restOfitems.Enquiry;
+import restOfitems.Suggestion;
+import restOfitems.Status;
 
 import java.text.Format;
 import java.util.ArrayList;
@@ -91,9 +93,12 @@ public class Staff {
 	 * @param staff
 	 * @param camp
 	 */
-	public void viewSuggestion(Staff staff, int camp) {
+	public void viewSuggestion(StaffMember staffMember, int campNo) {
 		// TODO - implement Staff.viewSuggestion
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp campSelected = campsCreatedArray.get(campNo);
+		System.out.println(campSelected.getSuggestion());
 	}
 
 	/**
@@ -102,9 +107,16 @@ public class Staff {
 	 * @param camp
 	 * @param suggestion
 	 */
-	public void approveSuggestion(Staff staff, int camp, int suggestion) {
+	public void approveSuggestion(StaffMember staffMember, int campNo, int suggestionNo, Status status) {
 		// TODO - implement Staff.approveSuggestion
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
+		ArrayList<Suggestion> campSuggestionArray = selectedCamp.getSuggestion();
+		Suggestion selectedSuggestion = campSuggestionArray.get(suggestionNo);
+		selectedSuggestion.setStatus(status);
+		selectedSuggestion.setProcessed(true);
+
 	}
 
 	/**

@@ -6,7 +6,7 @@ import restOfitems.UserGroup;
 
 import java.util.ArrayList;
 
-public class commitee_Member extends committee {
+public class committeeMember extends committee {
 
 	private String studentID;
 	private String name;
@@ -81,9 +81,12 @@ public class commitee_Member extends committee {
 	 * 
 	 * @param suggestionSubmitted
 	 */
-	public void setSuggestionSubmitted(Suggestion suggestionSubmitted) {
+	public void setSuggestionSubmitted(Suggestion newSuggestion) {
 		// TODO - implement CommiteeMember.setSuggestionSubmitted
-		throw new UnsupportedOperationException();
+		// throw new UnsupportedOperationException();
+
+		// interpretation: append new suggestion to existing suggestion arraylist
+		suggestionSubmitted.add(newSuggestion);
 	}
 
 	public int getPoint() {

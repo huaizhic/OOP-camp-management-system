@@ -14,7 +14,7 @@ public class Camp {
 	private int totalSlots;
 	private int committeeSlots = 10;
 	private String description;
-	private Package2.StaffMember staffInCharge;
+	private Staff.StaffMember staffInCharge;
 	private ArrayList<Student> studentsRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry;
@@ -130,7 +130,7 @@ public class Camp {
 		this.description = description;
 	}
 
-	public Package2.StaffMember getStaffInCharge() {
+	public Staff.StaffMember getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
@@ -138,7 +138,7 @@ public class Camp {
 	 * 
 	 * @param staffInCharge
 	 */
-	public void setStaffInCharge(Package2.StaffMember staffInCharge) {
+	public void setStaffInCharge(Staff.StaffMember staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 
@@ -201,8 +201,11 @@ public class Camp {
 	 * 
 	 * @param suggestion
 	 */
-	public void setSuggestion(ArrayList<Suggestion> suggestion) {
-		this.suggestion = suggestion;
+	public void setSuggestion(Suggestion newSuggestion) {
+		// this.suggestion = suggestion;
+
+		// since arraylist of suggestions will already be created by constructor, this set method is just to add new suggestion obj
+		suggestion.add(newSuggestion);
 	}
 
 }

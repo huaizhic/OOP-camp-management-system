@@ -1,11 +1,20 @@
 package restOfitems;
 
+import Student.committeeMember;
 public class Suggestion {
 
 	private String content;
-	private CommitteeMember submitter;
+	private committeeMember submitter;
 	private Status status;
 	private boolean processed;
+
+	// constructor for suggestion
+	public Suggestion(committeeMember submitter, String content){
+		this.content = content;
+		this.submitter = submitter;
+		this.status = null;
+		this.processed = false;
+	}
 
 	public String getContent() {
 		return this.content;
@@ -19,7 +28,7 @@ public class Suggestion {
 		this.content = content;
 	}
 
-	public CommitteeMember getSubmitter() {
+	public committeeMember getSubmitter() {
 		return this.submitter;
 	}
 
@@ -27,7 +36,7 @@ public class Suggestion {
 	 * 
 	 * @param submitter
 	 */
-	public void setSubmitter(CommitteeMember submitter) {
+	public void setSubmitter(committeeMember submitter) {
 		this.submitter = submitter;
 	}
 
