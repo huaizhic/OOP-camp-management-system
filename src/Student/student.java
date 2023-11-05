@@ -1,5 +1,7 @@
 package Student;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +19,12 @@ public class student extends attendee {
 	private ArrayList<Camp> registeredCamps;
 	private boolean campCommittee;
 	private ArrayList<Camp> notRegisterable;
-	private String securityQuestion;
-	private String securityAns;
+	private ArrayList<String> securityQuestion;
+	private ArrayList<String> securityAns;
 	private ArrayList<Enquiry> enquirySubmitted;
+
+	// Initialize the ArrayList
+	private static List<student> existingStudents = new ArrayList<>();
 
 	public student() {
 		// TODO - implement Student.Student
@@ -30,6 +35,9 @@ public class student extends attendee {
 		return this.studentID;
 	}
 
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
 
 	// Getter for password
 	public String getPassword() {
@@ -41,6 +49,13 @@ public class student extends attendee {
 		this.password = newPassword;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public static student getStudentById(String studentID) {
 		// For demonstration purposes, let's assume you have a list of existing students.
@@ -58,15 +73,17 @@ public class student extends attendee {
 	}
 
 	public static List<student> getExistingStudents() {
-		// Implement a method to retrieve a list of existing students from your data source.
-		// For this example, we'll return an empty list initially.
-
-		List<student> existingStudents = new ArrayList<>();
-
-		// You can add logic to retrieve the list of existing students from your data source here.
-
 		return existingStudents;
 	}
+
+	public static void addStudent(student newStudent) {
+		List<student> existingStudents = getExistingStudents(); // Retrieve the list of existing students
+		existingStudents.add(newStudent); // Add the new student to the list
+
+		// Now, save the updated list of students to a text file (you can choose a different data source as needed).
+		saveStudentsToFile(existingStudents);
+	}
+
 
 	public static String getName(String userID) {
 		// For demonstration purposes, let's assume you have a list of existing students.
@@ -128,7 +145,7 @@ public class student extends attendee {
 		this.notRegisterable = notRegisterable;
 	}
 
-	public String getSecurityQuestion() {
+	public ArrayList<String> getSecurityQuestion() {
 		return this.securityQuestion;
 	}
 
@@ -136,11 +153,11 @@ public class student extends attendee {
 	 *
 	 * @param securityQuestion
 	 */
-	public void setSecurityQuestion(String securityQuestion) {
-		this.securityQuestion = securityQuestion;
+	public void setSecurityQuestions(List<String> securityQuestions) {
+		this.securityQuestion = (ArrayList<String>) securityQuestions;
 	}
 
-	public String getSecurityAns() {
+	public ArrayList<String> getSecurityAns() {
 		return this.securityAns;
 	}
 
@@ -148,8 +165,8 @@ public class student extends attendee {
 	 *
 	 * @param securityAns
 	 */
-	public void setSecurityAns(String securityAns) {
-		this.securityAns = securityAns;
+	public void setSecurityAnswers(List<String> securityAnswers) {
+		this.securityAns = (ArrayList<String>) securityAnswers;
 	}
 
 	public ArrayList<Enquiry> getEnquirySubmitted() {
@@ -163,6 +180,19 @@ public class student extends attendee {
 	public void setEnquirySubmitted(Enquiry enquirySubmitted) {
 		// TODO - implement Student.setEnquirySubmitted
 		throw new UnsupportedOperationException();
+	}
+
+	// Method to save the list of students to a text file
+	private static void saveStudentsToFile(List<student> students) {
+		try {
+			FileWriter writer = new FileWriter("students.txt"); // You can choose a different file name or location
+			for (student student : students) {
+				writer.write(student.getStudentID() + "," + student.getName() + "," + student.getUserGroup() + "\n");
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

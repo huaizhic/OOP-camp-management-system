@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/password_Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Student/student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Student/student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Student/student_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user_Login/AccountManager.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +21,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2XheNbFY4jQtgTfWhAMBvQZhMLi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />

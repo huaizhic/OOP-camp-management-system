@@ -1,5 +1,6 @@
 package Student;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class password_Manager {
@@ -22,7 +23,10 @@ public class password_Manager {
         return false;
     }
 
-    public boolean setPassword(String userID, String updatedPassword) {
+
+
+
+    public boolean updatePassword(String userID, String updatedPassword) {
         // Find the student based on the userID (you need to implement this part)
         student Student = student.getStudentById(userID);
 
@@ -61,23 +65,23 @@ public class password_Manager {
 
     public void forgotPassword(String userID) {
         // First, retrieve the student based on the userID
-        Scanner scanner;
+        Scanner scanner = null;
         student Student = student.getStudentById(userID);
 
         if (Student != null) {
             System.out.println("Password recovery for " + student.getName(userID));
 
             // Get security questions and answers from the student
-            String securityQuestions = Student.getSecurityQuestion();
-            String securityAnswers = Student.getSecurityAns();
+            ArrayList<String> securityQuestions = Student.getSecurityQuestion();
+            ArrayList<String> securityAnswers = Student.getSecurityAns();
 
             // Maximum wrong attempts allowed per question
             int maxWrongAttempts = 2;
             int correct = 0;
 
 
-            for (int i = 0; i < securityQuestions.length(); i++) {
-                String securityQuestion = securityQuestions[i];
+            for (int i = 0; i < securityQuestions.size(); i++) {
+                String securityQuestion = securityQuestions.get(i);
                 System.out.println("Security Question: " + securityQuestion);
                 System.out.print("Enter your answer: ");
                 String userAnswer = scanner.next();
@@ -85,14 +89,14 @@ public class password_Manager {
                 int wrongAttempts = 0;
 
                 // Allow a limited number of wrong attempts
-                while (!userAnswer.equals(securityAnswers[i]) && wrongAttempts < maxWrongAttempts) {
+                while (!userAnswer.equals(securityAnswers.get(i)) && wrongAttempts < maxWrongAttempts) {
                     wrongAttempts++;
                     System.out.println("Wrong answer. Attempts left: " + (maxWrongAttempts - wrongAttempts));
                     System.out.print("Try again: ");
                     userAnswer = scanner.next();
                 }
 
-                if (userAnswer.equals(securityAnswers[i])) {
+                if (userAnswer.equals(securityAnswers.get(i))) {
                     System.out.println("Security question answered correctly.");
                     correct += 1;
                 } else {
@@ -114,7 +118,7 @@ public class password_Manager {
                         break; // Exit the loop if the user chooses to cancel
                     }
 
-                    if (setPassword(userID, newPassword)) {
+                    if (updatePassword(userID, newPassword)) {
                         System.out.println("Password reset successful. You can now log in with your new password.");
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
                     } else {
@@ -128,7 +132,7 @@ public class password_Manager {
 
     }
 
-    public boolean isValidPassword(String password) {
+    public static boolean isValidPassword(String password) {
         // Check if the password is at least 8 characters long
         if (password.length() < 8) {
             return false;

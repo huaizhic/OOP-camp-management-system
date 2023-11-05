@@ -43,6 +43,7 @@ public class student_Account extends account_Manager {
 
                 if ("Committee".equals(role)) {
                     System.out.println("Welcome, Committee Member " + studentName);
+
                     // Redirect to the committee class here
                 } else if ("Attendee".equals(role)) {
                     System.out.println("Welcome, Attendee " + studentName);
