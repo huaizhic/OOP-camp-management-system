@@ -1,3 +1,5 @@
+package Camp;
+
 import Student.Student;
 
 import java.util.ArrayList;
