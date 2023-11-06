@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.example.cms.password_Manager;
-import com.example.cms.StudentUser;
+import com.example.cms.Student.password_Manager;
+import com.example.cms.Student.student_User;
 
 public class user_Registration {
 	public static void registerNewUser(Scanner scanner) {
@@ -17,7 +17,7 @@ public class user_Registration {
 	    String studentID = scanner.next();
 
 	    // Check if the student already exists
-	    StudentUser existingStudent = StudentUser.getStudentById(studentID);
+	    student_User existingStudent = student_User.getStudentById(studentID);
 	    if (existingStudent != null) {
 	        System.out.println("This student already has an account.");
 	        return;
@@ -155,7 +155,7 @@ public class user_Registration {
 	    }
 
 	    // Store the confirmed information in the student instance
-	    StudentUser newStudent = new StudentUser();
+	    student_User newStudent = new student_User();
 	    newStudent.setStudentID(studentID);
 	    newStudent.setName(name);
 	    newStudent.setUserGroup(userGroup);
@@ -164,7 +164,7 @@ public class user_Registration {
 	    newStudent.setSecurityAnswers(securityAnswers);
 
 	 // Add the new student to the list of existing students
-	    StudentUser.addStudent(newStudent);
+	    student_User.addStudent(newStudent);
 
 	    System.out.println("Registration successful!");
 	}

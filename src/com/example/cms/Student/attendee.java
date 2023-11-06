@@ -1,4 +1,4 @@
-package com.example.cms;
+package com.example.cms.Student;
 
 import com.example.cms.Camp.Camp;
 
@@ -10,7 +10,7 @@ public class attendee {
 	 * 
 	 * @param student
 	 */
-	public ArrayList<Camp> viewOpenCamp(StudentUser Student) {
+	public ArrayList<Camp> viewOpenCamp(student_User Student) {
 		// TODO - implement Attendee.viewOpenCamp
 		throw new UnsupportedOperationException();
 	}
@@ -30,7 +30,7 @@ public class attendee {
 	 * @param student
 	 * @param role
 	 */
-	public void register(Camp camp, StudentUser Student, RegisterRole role) {
+	public void register(Camp camp, student_User Student, RegisterRole role) {
 		// TODO - implement Attendee.register
 		throw new UnsupportedOperationException();
 	}
@@ -39,7 +39,7 @@ public class attendee {
 	 * 
 	 * @param student
 	 */
-	public ArrayList<Camp> viewRegisteredCamp(StudentUser Student) {
+	public ArrayList<Camp> viewRegisteredCamp(student_User Student) {
 		// TODO - implement Attendee.viewRegisteredCamp
 		throw new UnsupportedOperationException();
 	}
@@ -49,7 +49,7 @@ public class attendee {
 	 * @param student
 	 * @param camp
 	 */
-	public void withdraw(StudentUser Student, Camp camp) {
+	public void withdraw(student_User Student, Camp camp) {
 		// TODO - implement Attendee.withdraw
 		throw new UnsupportedOperationException();
 	}
@@ -60,7 +60,7 @@ public class attendee {
 	 * @param camp
 	 * @param content
 	 */
-	public void submitEnquiry(StudentUser Student, Camp camp, String content) {
+	public void submitEnquiry(student_User Student, Camp camp, String content) {
 		// TODO - implement Attendee.submitEnquiry
 		throw new UnsupportedOperationException();
 	}
@@ -70,7 +70,7 @@ public class attendee {
 	 * @param student
 	 * @param camp
 	 */
-	public void viewEnquiry(StudentUser Student, Camp camp) {
+	public void viewEnquiry(student_User Student, Camp camp) {
 		// TODO - implement Attendee.viewEnquiry
 		throw new UnsupportedOperationException();
 	}
@@ -81,7 +81,7 @@ public class attendee {
 	 * @param camp
 	 * @param enquiry
 	 */
-	public void editEnquiry(StudentUser Student, Camp camp, int enquiry) {
+	public void editEnquiry(student_User Student, Camp camp, int enquiry) {
 		// TODO - implement Attendee.editEnquiry
 		throw new UnsupportedOperationException();
 	}
@@ -92,7 +92,7 @@ public class attendee {
 	 * @param camp
 	 * @param enquiry
 	 */
-	public void deleteEnquiry(StudentUser Student, Camp camp, int enquiry) {
+	public void deleteEnquiry(student_User Student, Camp camp, int enquiry) {
 		// TODO - implement Attendee.deleteEnquiry
 		throw new UnsupportedOperationException();
 	}

@@ -1,5 +1,6 @@
-package com.example.cms;
+package com.example.cms.Student;
 
+import com.example.cms.Enquiry;
 import com.example.cms.Camp.Camp;
 
 import java.util.ArrayList;
@@ -83,3 +84,4 @@ public class attendee_Account extends student_Account {
 
     // Additional helper methods, e.g., to get the role for a specific camp
 }
+

@@ -1,4 +1,4 @@
-package com.example.cms;
+package com.example.cms.Student;
 
 public class committee_Account extends student_Account {
 

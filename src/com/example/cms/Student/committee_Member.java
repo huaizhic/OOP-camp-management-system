@@ -1,17 +1,19 @@
-package com.example.cms;//yooooo testing
+package com.example.cms.Student;
 
+import com.example.cms.Enquiry;
+import com.example.cms.Suggestion;
 import com.example.cms.Camp.Camp;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommitteeMember {
+public class committee_Member {
     private String userID; // User ID for the committee member
     private List<Camp> registeredCamps; // List of camps that the committee member is overseeing
     private List<Suggestion> suggestions; // List of suggestions submitted by the committee member
     private int points; // Points earned by the committee member
 
-    public CommitteeMember(String userID) {
+    public committee_Member(String userID) {
         this.userID = userID; // Hello
         this.registeredCamps = new ArrayList<>();
         this.suggestions = new ArrayList<>();
@@ -50,4 +52,5 @@ public class CommitteeMember {
 
     // Other methods and getters/setters as needed
 }
+
 

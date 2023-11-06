@@ -1,4 +1,5 @@
-package com.example.cms;
+package com.example.cms.Student;
+
 
 import com.example.cms.Camp.Camp;
 
@@ -12,7 +13,7 @@ public class committee {
 	 * 
 	 * @param student
 	 */
-	public Camp viewRegisteredCamp(StudentUser Student) {
+	public Camp viewRegisteredCamp(student_User Student) {
 		// TODO - implement Committee.viewRegisteredCamp
 		throw new UnsupportedOperationException();
 	}
@@ -32,7 +33,7 @@ public class committee {
 	 * @param camp
 	 * @param reply
 	 */
-	public void replyEnquiry(StudentUser Student, Camp camp, String reply) {
+	public void replyEnquiry(student_User Student, Camp camp, String reply) {
 		// TODO - implement Committee.replyEnquiry
 		throw new UnsupportedOperationException();
 	}
@@ -43,7 +44,7 @@ public class committee {
 	 * @param suggestion
 	 * @param student
 	 */
-	public void submitSuggestion(Camp camp, String suggestion, StudentUser Student) {
+	public void submitSuggestion(Camp camp, String suggestion, student_User Student) {
 		// TODO - implement Committee.submitSuggestion
 		throw new UnsupportedOperationException();
 	}
@@ -52,7 +53,7 @@ public class committee {
 	 * 
 	 * @param student
 	 */
-	public void viewSuggestion(StudentUser Student) {
+	public void viewSuggestion(student_User Student) {
 		// TODO - implement Committee.viewSuggestion
 		throw new UnsupportedOperationException();
 	}
@@ -62,7 +63,7 @@ public class committee {
 	 * @param student
 	 * @param suggestion
 	 */
-	public void editSuggestion(StudentUser Student, int suggestion) {
+	public void editSuggestion(student_User Student, int suggestion) {
 		// TODO - implement Committee.editSuggestion
 		throw new UnsupportedOperationException();
 	}
@@ -72,7 +73,7 @@ public class committee {
 	 * @param student
 	 * @param suggestion
 	 */
-	public void deleteSuggestion(StudentUser Student, int suggestion) {
+	public void deleteSuggestion(student_User Student, int suggestion) {
 		// TODO - implement Committee.deleteSuggestion
 		throw new UnsupportedOperationException();
 	}

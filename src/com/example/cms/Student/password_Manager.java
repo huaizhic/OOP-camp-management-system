@@ -1,4 +1,4 @@
-package com.example.cms;
+package com.example.cms.Student;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,7 +7,7 @@ public class password_Manager {
 
     public static boolean checkPassword(String studentID, String roleChoice, String enteredPassword) {
         // Retrieve the student based on studentID
-        StudentUser student_Information = StudentUser.getStudentById(studentID);
+        student_User student_Information = student_User.getStudentById(studentID);
 
         // Check if the student exists and validate the password and roleChoice.
         if (student_Information != null) {
@@ -28,7 +28,7 @@ public class password_Manager {
 
     public boolean updatePassword(String userID, String updatedPassword) {
         // Find the student based on the userID (you need to implement this part)
-        StudentUser Student = StudentUser.getStudentById(userID);
+        student_User Student = student_User.getStudentById(userID);
 
         if (Student != null) {
             String oldPassword = Student.getPassword();
@@ -66,10 +66,10 @@ public class password_Manager {
     public void forgotPassword(String userID) {
         // First, retrieve the student based on the userID
         Scanner scanner = null;
-        StudentUser Student = StudentUser.getStudentById(userID);
+        student_User Student = student_User.getStudentById(userID);
 
         if (Student != null) {
-            System.out.println("Password recovery for " + StudentUser.getName(userID));
+            System.out.println("Password recovery for " + student_User.getName(userID));
 
             // Get security questions and answers from the student
             ArrayList<String> securityQuestions = Student.getSecurityQuestion();
