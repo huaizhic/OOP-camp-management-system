@@ -1,15 +1,13 @@
 package com.example.cms.Camp;
-
-
 import com.example.cms.*;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Camp {
 
 	private String campName;
-	private ArrayList<Date> dates;
-	private Date regCloseDate;
+	private ArrayList<LocalDate> campDates;
+	private LocalDate regCloseDate;
 	private ArrayList<UserGroup> userGroup;
 	private String location;
 	private int totalSlots;
@@ -35,27 +33,19 @@ public class Camp {
 		this.campName = campName;
 	}
 
-	public ArrayList<Date> getDates() {
-		return this.dates;
+	public ArrayList<LocalDate> getCampDates() {
+		return this.campDates;
 	}
 
-	/**
-	 * 
-	 * @param dates
-	 */
-	public void setDates(ArrayList<Date> dates) {
-		this.dates = dates;
+	public void setCampDates(ArrayList<LocalDate> dates) {
+		campDates = dates;
 	}
 
-	public Date getRegCloseDate() {
+	public LocalDate getRegCloseDate() {
 		return this.regCloseDate;
 	}
 
-	/**
-	 * 
-	 * @param regCloseDate
-	 */
-	public void setRegCloseDate(Date regCloseDate) {
+	public void setRegCloseDate(LocalDate regCloseDate) {
 		this.regCloseDate = regCloseDate;
 	}
 
@@ -111,18 +101,6 @@ public class Camp {
 		this.committeeSlots = committeeSlots;
 	}
 
-	public void getAttribute() {
-		// TODO - implement com.example.cms.Camp.getAttribute
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param attribute
-	 */
-	public void setAttribute(int attribute) {
-		this.attribute = attribute;
-	}
 
 	public String getDescription() {
 		return this.description;
@@ -152,10 +130,7 @@ public class Camp {
 		return this.studentsRegistered;
 	}
 
-	/**
-	 * 
-	 * @param stuAdentsRegistered
-	 */
+
 	public void setStudentsRegistered(ArrayList<StudentUser> studentsRegistered) {
 		this.studentsRegistered = studentsRegistered;
 	}
