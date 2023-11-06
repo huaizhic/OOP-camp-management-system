@@ -2,15 +2,14 @@ package Student;
 
 import java.util.Scanner;
 
-import camp_Application_Management_System.Student;
+//import camp_Application_Management_System.Student;
 import user_Login.account_Manager;
 
-public class student_Account extends account_Manager {
+public class student_Account {
     private String userId; // Add a field to hold the student ID
     private Scanner scanner;
 
-    public student_Account(Scanner scanner, String userId) {
-        super(scanner);
+    public student_Account(String userId) {
         this.userId = userId;
     }
 

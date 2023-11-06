@@ -7,12 +7,12 @@ import java.util.List;
 
 import javax.swing.GroupLayout.Group;
 
-import camp_Application_Management_System.Camp;
-import camp_Application_Management_System.Enquiry;
+import Camp.Camp;
+import Others.Enquiry;
 
-public class student extends attendee {
+public class student{
 
-	private String studentID;
+	protected String studentID;
 	private String password = "password";
 	private String name;
 	private String userGroup;

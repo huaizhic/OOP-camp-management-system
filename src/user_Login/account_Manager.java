@@ -28,7 +28,7 @@ public class account_Manager {
             if (accountChoice == 1) {
                 System.out.print("Enter your student ID: ");
                 String userId = scanner.next();
-                student_Account studentAccount = new student_Account(scanner, userId);
+                student_Account studentAccount = new student_Account(userId);
                 studentAccount.start();
             } else if (accountChoice == 0) {
                 // Redirect to the registration process (you need to implement this part)

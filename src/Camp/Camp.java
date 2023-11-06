@@ -148,7 +148,7 @@ public class Camp {
 
 	/**
 	 * 
-	 * @param studentsRegistered
+	 * @param stuAdentsRegistered
 	 */
 	public void setStudentsRegistered(ArrayList<Student> studentsRegistered) {
 		this.studentsRegistered = studentsRegistered;
