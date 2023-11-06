@@ -13,6 +13,7 @@ public class Camp {
 	private ArrayList<UserGroup> userGroup;
 	private String location;
 	private int totalSlots;
+	private int remainingSlots;
 	private int committeeSlots = 10;
 	private String description;
 	private StaffMember staffInCharge;
@@ -93,6 +94,10 @@ public class Camp {
 	public void setTotalSlots(int totalSlots) {
 		this.totalSlots = totalSlots;
 	}
+
+	public int getRemainingSlots(){return this.remainingSlots;}
+
+	public void setRemainingSlots(int remainingSlots){this.remainingSlots = remainingSlots;}
 
 	public int getCommitteeSlots() {
 		return this.committeeSlots;

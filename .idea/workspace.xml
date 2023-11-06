@@ -5,39 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DisplayOptions/DisplayOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DisplayOptions/SortByName_Default.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByName_Default.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Format.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Format.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/LoginRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Month.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Month.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Others/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Enquiry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Others/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RegisterRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/RegisterRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SortByCommitteeSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/SortByCommitteeSlots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SortByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/SortByLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SortByRegCloseDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/SortByRegCloseDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SortByTotalSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/SortByTotalSlots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SortByUserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/SortByUserGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/StaffAcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/StaffAcc.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/StaffMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/StaffMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Staff/staff_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/staff_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/attendee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/attendee_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/committee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/committee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/committee_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/password_Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Student/student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/student_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/UserGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/campData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/camp_Committee_Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/CommitteeMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user_Login/account_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/user_Login/AccountManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user_Login/user_Registration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/user_Login/user_Registration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/SortByTotalSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByTotalSlots.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +21,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -62,16 +32,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Huai Zhi/Downloads/OOP-camp-management-system&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Huai Zhi/Downloads/OOP-camp-management-system",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editor.preferences.appearance",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/com/example/cms" />
@@ -85,7 +61,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699085700758</updated>
+      <workItem from="1699278556892" duration="538000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>
