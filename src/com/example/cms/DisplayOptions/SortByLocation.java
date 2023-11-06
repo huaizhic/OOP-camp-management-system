@@ -4,13 +4,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 
-public class SortByTotalSlots implements DisplayOption{
-
+public class SortByLocation implements DisplayOption {
 	public void Sorting(ArrayList<Camp> campList) {
 		if(campList == null){
 			System.out.println("No camp available yet");
 		}else {
-			Collections.sort(campList, campSlotsComparator.thenComparing(SortByName_Default.campNameComparator));
+			Collections.sort(campList, campLocationComparator.thenComparing(SortByName_Default.campNameComparator));
 
 			//Needs to find out how to sav2
 			// e potentially into csv format
@@ -22,11 +21,13 @@ public class SortByTotalSlots implements DisplayOption{
 		}
 	}
 
-	public static Comparator<Camp> campSlotsComparator = new Comparator<>(){
+	public static Comparator<Camp> campLocationComparator = new Comparator<>(){
 		public int compare(Camp c1, Camp c2){
-			int c1SlotsLeft = c1.getRemainingSlots();
-			int c2SlotsLeft = c2.getRemainingSlots();
-			return -1* Integer.compare(c1SlotsLeft, c2SlotsLeft);
+			String campLocation1 = c1.getLocation().toUpperCase();
+			String campLocation2 = c2.getLocation().toUpperCase();
+
+			return campLocation1.compareTo(campLocation2);
 		}
 	};
+
 }
