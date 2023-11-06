@@ -4,10 +4,10 @@ import java.util.Scanner;
 import com.example.cms.staff_Account;
 import com.example.cms.Student.student_Account;
 
-public class AccountManager {
+public class account_Manager {
     private Scanner scanner;
 
-    public AccountManager(Scanner scanner) {
+    public account_Manager(Scanner scanner) {
         this.scanner = scanner;
     }
 
@@ -43,7 +43,7 @@ public class AccountManager {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        AccountManager accountManager = new AccountManager(scanner);
+        account_Manager accountManager = new account_Manager(scanner);
         accountManager.start();
         scanner.close();
     }
