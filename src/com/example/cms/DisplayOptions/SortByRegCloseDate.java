@@ -22,6 +22,15 @@ public class SortByRegCloseDate implements DisplayOption{
 			}
 		}
 	}
+
+	public void SortSearchRegCloseDate(LocalDate regCloseDate, ArrayList<Camp> campList){
+		Collections.sort(campList, campRegDateComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			if(camp.getRegCloseDate().compareTo(regCloseDate) == 0){
+				System.out.print(camp);
+			}
+		}
+	}
 	public static Comparator<Camp> campRegDateComparator = new Comparator<>(){
 		public int compare(Camp c1, Camp c2){
 			LocalDate camp1Date = c1.getRegCloseDate();

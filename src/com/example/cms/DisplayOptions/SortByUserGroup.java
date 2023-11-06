@@ -1,5 +1,8 @@
 package com.example.cms.DisplayOptions;
+
 import com.example.cms.Camp.Camp;
+import com.example.cms.UserGroup;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +21,16 @@ public class SortByUserGroup implements DisplayOption {
 			for (Camp camp : campList) {
 				System.out.println(camp);
 				//Needs to find out how to print camp information, potentially direct from csv
+			}
+		}
+	}
+
+	public void SortSearchUserGroup(UserGroup userGroup, ArrayList<Camp> campList){
+		Collections.sort(campList, campUserGroupComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			for(int i = 0; i < camp.getUserGroup().size(); i++)
+				if(camp.getUserGroup().get(i).compareTo(userGroup) == 0){
+					System.out.print(camp);
 			}
 		}
 	}

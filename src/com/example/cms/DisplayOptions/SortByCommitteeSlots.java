@@ -22,6 +22,15 @@ public class SortByCommitteeSlots implements DisplayOption {
 		}
 	}
 
+	public void SortSearchCommitteeSlots(int committeeSlot, ArrayList<Camp> campList){
+		Collections.sort(campList, campCommitteeSlotsComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			if(camp.getCommitteeSlots() >= committeeSlot){
+				System.out.print(camp);
+			}
+		}
+	}
+
 	public static Comparator<Camp> campCommitteeSlotsComparator = new Comparator<>(){
 		public int compare(Camp c1, Camp c2){
 			int campCommitteeSlot1 = c1.getCommitteeSlots();

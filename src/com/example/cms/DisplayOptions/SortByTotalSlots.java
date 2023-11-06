@@ -1,8 +1,10 @@
 package com.example.cms.DisplayOptions;
+
 import com.example.cms.Camp.Camp;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.ArrayList;
 
 public class SortByTotalSlots implements DisplayOption{
 
@@ -18,6 +20,15 @@ public class SortByTotalSlots implements DisplayOption{
 			for (Camp camp : campList) {
 				System.out.println(camp);
 				//Needs to find out how to print camp information, potentially direct from csv
+			}
+		}
+	}
+
+	public void SortSearchRegCloseDate(int totalSlots, ArrayList<Camp> campList){
+		Collections.sort(campList, campSlotsComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			if(camp.getTotalSlots() >= totalSlots){
+				System.out.print(camp);
 			}
 		}
 	}

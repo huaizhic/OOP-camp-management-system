@@ -21,6 +21,15 @@ public class SortByLocation implements DisplayOption {
 		}
 	}
 
+	public void SortSearchName(String location, ArrayList<Camp> campList){
+		Collections.sort(campList, campLocationComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			if(camp.getLocation().contains(location)){
+				System.out.print(camp);
+			}
+		}
+	}
+
 	public static Comparator<Camp> campLocationComparator = new Comparator<>(){
 		public int compare(Camp c1, Camp c2){
 			String campLocation1 = c1.getLocation().toUpperCase();

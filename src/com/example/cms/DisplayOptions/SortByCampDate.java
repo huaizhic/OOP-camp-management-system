@@ -22,6 +22,22 @@ public class SortByCampDate implements DisplayOption{
             }
         }
     }
+
+    public void SortSearchCampDate(LocalDate campDate, ArrayList<Camp> campList){
+        if (campList == null) {
+            System.out.println("No camp available yet");
+        }else {
+            Collections.sort(campList, campDateComparator.thenComparing(SortByName_Default.campNameComparator));
+            for (Camp camp : campList) {
+                for (int i = 0; i < camp.getCampDates().size(); i++) {
+                    if (camp.getCampDates().get(i).compareTo(campDate) == 0) {
+                        System.out.print(camp);
+                        break;
+                    }
+                }
+            }
+        }
+    }
     public static Comparator<Camp> campDateComparator = new Comparator<>(){
         public int compare(Camp c1, Camp c2){
             LocalDate camp1Date = c1.getCampDates().get(0);
