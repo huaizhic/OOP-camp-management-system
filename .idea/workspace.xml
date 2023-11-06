@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="SortByTotalSlots">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByTotalSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByTotalSlots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/SortByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByLocation.java" afterDir="false" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="SortByLocation">
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/SortByCommitteeSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCommitteeSlots.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +59,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699085700758</updated>
-      <workItem from="1699278556892" duration="1278000" />
+      <workItem from="1699278556892" duration="1370000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -71,7 +69,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699279130383</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="SortByLocation">
+      <option name="closed" value="true" />
+      <created>1699279892345</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699279892345</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,6 +85,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="SortByTotalSlots" />
-    <option name="LAST_COMMIT_MESSAGE" value="SortByTotalSlots" />
+    <MESSAGE value="SortByLocation" />
+    <option name="LAST_COMMIT_MESSAGE" value="SortByLocation" />
   </component>
 </project>
