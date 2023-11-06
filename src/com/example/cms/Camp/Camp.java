@@ -12,14 +12,29 @@ public class Camp {
 	private String location;
 	private int totalSlots;
 	private int remainingSlots;
-	private int committeeSlots = 10;
+	private int committeeSlots;
 	private String description;
 	private StaffMember staffInCharge;
 	private ArrayList<student_User> studentsRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry ;
 	private ArrayList<Suggestion> suggestion;
-	private int attribute;
+
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<UserGroup> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
+		this.campName = campName;
+		this.campDates = campDate;
+		this.regCloseDate = regCloseDate;
+		this.userGroup = userGroup;
+		this.location = location;
+		this.totalSlots = totalSlots;
+		remainingSlots = totalSlots;
+		committeeSlots = 10;
+		staffInCharge = staff;
+		studentsRegistered = new ArrayList<>();
+		this.visibility = visibility;
+		enquiry = new ArrayList<>();
+		suggestion = new ArrayList<>();
+	}
 
 	public String getCampName() {
 		return this.campName;
@@ -127,12 +142,7 @@ public class Camp {
 		return this.suggestion;
 	}
 
-	/**
-	 * 
-	 * @param suggestion
-	 */
 	public void setSuggestion(ArrayList<Suggestion> suggestion) {
 		this.suggestion = suggestion;
 	}
-
 }
