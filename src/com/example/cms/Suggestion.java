@@ -1,11 +1,19 @@
 package com.example.cms;
+import com.example.cms.Student.committee_Member;
 
 public class Suggestion {
 
 	private String content;
-	private CommitteeMember submitter;
+	private committee_Member submitter;
 	private Status status;
 	private boolean processed;
+
+	public Suggestion(String content, committee_Member submitter, Status status, boolean processed){
+		this.content = content;
+		this.submitter = submitter;
+		this.status = status;
+		this.processed = processed;
+	}
 
 	public String getContent() {
 		return this.content;
@@ -19,7 +27,7 @@ public class Suggestion {
 		this.content = content;
 	}
 
-	public CommitteeMember getSubmitter() {
+	public committee_Member getSubmitter() {
 		return this.submitter;
 	}
 
@@ -27,7 +35,7 @@ public class Suggestion {
 	 * 
 	 * @param submitter
 	 */
-	public void setSubmitter(CommitteeMember submitter) {
+	public void setSubmitter(committee_Member submitter) {
 		this.submitter = submitter;
 	}
 

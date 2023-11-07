@@ -1,14 +1,15 @@
 package com.example.cms;
+import com.example.cms.Student.student_User;
 
 public class Enquiry {
 
 	private String content;
-	private Student submitter;
+	private student_User submitter;
 	private String reply;
 	private boolean processed;
 
 	// enquiry class constructor
-	public Enquiry(String message, Student student ){
+	public Enquiry(String message, student_User student ){
 		this.content = message;
 		this.submitter = student;
 		this.reply = null;
@@ -27,7 +28,7 @@ public class Enquiry {
 		this.content = content;
 	}
 
-	public Student getSubmitter() {
+	public student_User getSubmitter() {
 		return this.submitter;
 	}
 
@@ -35,7 +36,7 @@ public class Enquiry {
 	 * 
 	 * @param submitter
 	 */
-	public void setSubmitter(Student submitter) {
+	public void setSubmitter(student_User submitter) {
 		this.submitter = submitter;
 	}
 
