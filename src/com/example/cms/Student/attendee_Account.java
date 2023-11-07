@@ -27,10 +27,9 @@ public class attendee_Account extends student_Account {
         while (running) {
             System.out.println("Student Home Page");
             System.out.println("1. Display Registered Camps");
-            System.out.println("2. Camp Information");
+            System.out.println("2. Camp Enquiries");
             System.out.println("3. Manage Enquiries");
-            System.out.println("4. Book Camps");
-            System.out.println("5. Logout");
+            System.out.println("4. Logout");
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -41,15 +40,12 @@ public class attendee_Account extends student_Account {
                     displayRegisteredCamps();
                     break;
                 case 2:
-                    viewCampInformation(scanner);
+                    campEnquiries();
                     break;
                 case 3:
                     manageEnquiries(studentID); // Call manageEnquiries and pass the student ID
                     break;
                 case 4:
-                    bookCamps(scanner);
-                    break;
-                case 5:
                     running = false;
                     System.out.println("Logging out.");
                     break;
@@ -72,8 +68,12 @@ public class attendee_Account extends student_Account {
         }
     }
 
-    public void viewCampInformation(Scanner scanner) {
+    public void campEnquiries() {
         // Implement camp information retrieval and display here
+    	// I want this to be able to book, and withdraw from camps
+    	// I also want this function to be able to see available open camps 
+    	// However by default, student are only able to see their camps based on faculty
+    	// However, to see the rest of the camps outside of the faculty the visibility would need to be toggled 
     }
 
     public void manageEnquiries(String studentID) {
