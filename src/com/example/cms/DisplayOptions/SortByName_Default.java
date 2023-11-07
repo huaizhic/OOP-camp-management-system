@@ -8,11 +8,18 @@ public class SortByName_Default implements DisplayOption{
 	public void Sorting(ArrayList<Camp> campList){
 		Collections.sort(campList, campNameComparator);
 
-		//Needs to find out how to save potentially into csv format
-
 		for(Camp camp : campList){
 			System.out.println(camp);
 			//Needs to find out how to print camp information, potentially direct from csv
+		}
+	}
+
+	public void SortSearchName(String name, ArrayList<Camp> campList){
+		Collections.sort(campList, campNameComparator);
+		for(Camp camp:campList){
+			if(camp.getCampName().contains(name)){
+				System.out.print(camp);
+			}
 		}
 	}
 

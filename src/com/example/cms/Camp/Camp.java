@@ -1,60 +1,62 @@
 package com.example.cms.Camp;
-
-
 import com.example.cms.*;
-
+import com.example.cms.Student.student_User;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Camp {
-
 	private String campName;
-	private ArrayList<Date> dates;
-	private Date regCloseDate;
+	private ArrayList<LocalDate> campDates;
+	private LocalDate regCloseDate;
 	private ArrayList<UserGroup> userGroup;
 	private String location;
 	private int totalSlots;
-	private int committeeSlots = 10;
+	private int remainingSlots;
+	private int committeeSlots;
 	private String description;
 	private StaffMember staffInCharge;
-	private ArrayList<StudentUser> studentsRegistered;
+	private ArrayList<student_User> studentsRegistered;
 	private boolean visibility;
-	private ArrayList<Enquiry> enquiry;
+	private ArrayList<Enquiry> enquiry ;
 	private ArrayList<Suggestion> suggestion;
-	private int attribute;
+
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<UserGroup> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
+		this.campName = campName;
+		this.campDates = campDate;
+		this.regCloseDate = regCloseDate;
+		this.userGroup = userGroup;
+		this.location = location;
+		this.totalSlots = totalSlots;
+		remainingSlots = totalSlots;
+		committeeSlots = 10;
+		staffInCharge = staff;
+		studentsRegistered = new ArrayList<>();
+		this.visibility = visibility;
+		enquiry = new ArrayList<>();
+		suggestion = new ArrayList<>();
+	}
 
 	public String getCampName() {
 		return this.campName;
 	}
 
-	/**
-	 * 
-	 * @param campName
-	 */
 	public void setCampName(String campName) {
 		this.campName = campName;
 	}
 
-	public ArrayList<Date> getDates() {
-		return this.dates;
+	public ArrayList<LocalDate> getCampDates() {
+		return this.campDates;
 	}
 
-	/**
-	 * 
-	 * @param dates
-	 */
-	public void setDates(ArrayList<Date> dates) {
-		this.dates = dates;
+	public void setCampDates(ArrayList<LocalDate> dates) {
+		campDates = dates;
 	}
 
-	public Date getRegCloseDate() {
+	public LocalDate getRegCloseDate() {
 		return this.regCloseDate;
 	}
 
-	/**
-	 * 
-	 * @param regCloseDate
-	 */
-	public void setRegCloseDate(Date regCloseDate) {
+	public void setRegCloseDate(LocalDate regCloseDate) {
 		this.regCloseDate = regCloseDate;
 	}
 
@@ -62,10 +64,6 @@ public class Camp {
 		return this.userGroup;
 	}
 
-	/**
-	 * 
-	 * @param userGroup
-	 */
 	public void setUserGroup(ArrayList<UserGroup> userGroup) {
 		this.userGroup = userGroup;
 	}
@@ -74,10 +72,6 @@ public class Camp {
 		return this.location;
 	}
 
-	/**
-	 * 
-	 * @param location
-	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}
@@ -86,47 +80,27 @@ public class Camp {
 		return this.totalSlots;
 	}
 
-	/**
-	 * 
-	 * @param totalSlots
-	 */
 	public void setTotalSlots(int totalSlots) {
 		this.totalSlots = totalSlots;
 	}
+
+	public int getRemainingSlots(){return this.remainingSlots;}
+
+	public void setRemainingSlots(int remainingSlots){this.remainingSlots = remainingSlots;}
 
 	public int getCommitteeSlots() {
 		return this.committeeSlots;
 	}
 
-	/**
-	 * 
-	 * @param committeeSlots
-	 */
 	public void setCommitteeSlots(int committeeSlots) {
 		this.committeeSlots = committeeSlots;
 	}
 
-	public void getAttribute() {
-		// TODO - implement com.example.cms.Camp.getAttribute
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param attribute
-	 */
-	public void setAttribute(int attribute) {
-		this.attribute = attribute;
-	}
 
 	public String getDescription() {
 		return this.description;
 	}
 
-	/**
-	 * 
-	 * @param description
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -135,23 +109,16 @@ public class Camp {
 		return this.staffInCharge;
 	}
 
-	/**
-	 * 
-	 * @param staffInCharge
-	 */
 	public void setStaffInCharge(StaffMember staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 
-	public ArrayList<StudentUser> getStudentsRegistered() {
+	public ArrayList<student_User> getStudentsRegistered() {
 		return this.studentsRegistered;
 	}
 
-	/**
-	 * 
-	 * @param stuAdentsRegistered
-	 */
-	public void setStudentsRegistered(ArrayList<StudentUser> studentsRegistered) {
+
+	public void setStudentsRegistered(ArrayList<student_User> studentsRegistered) {
 		this.studentsRegistered = studentsRegistered;
 	}
 
@@ -159,38 +126,23 @@ public class Camp {
 		return this.visibility;
 	}
 
-	/**
-	 * 
-	 * @param visibility
-	 */
 	public void setVisibility(boolean visibility) {
 		this.visibility = visibility;
 	}
 
-	public ArrayList<enquiry> getEnquiry() {
-		// TODO - implement com.example.cms.Camp.getEnquiry
-		throw new UnsupportedOperationException();
+	public ArrayList<Enquiry> getEnquiry() {
+		return this.enquiry;
 	}
 
-	/**
-	 * 
-	 * @param enquiry
-	 */
-	public void setEnquiry(ArrayList<enquiry> enquiry) {
-		// TODO - implement com.example.cms.Camp.setEnquiry
-		throw new UnsupportedOperationException();
+	public void setEnquiry(Enquiry enquiry) {
+		this.enquiry.add(enquiry);
 	}
 
 	public ArrayList<Suggestion> getSuggestion() {
 		return this.suggestion;
 	}
 
-	/**
-	 * 
-	 * @param suggestion
-	 */
 	public void setSuggestion(ArrayList<Suggestion> suggestion) {
 		this.suggestion = suggestion;
 	}
-
 }
