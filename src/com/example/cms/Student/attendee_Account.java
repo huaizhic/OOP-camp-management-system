@@ -67,7 +67,7 @@ public class attendee_Account extends student_Account {
         } else {
             for (Camp camp : registeredCamps) {
                 System.out.println("Camp Name: " + camp.getCampName());
-                System.out.println("Dates: " + camp.getDates());
+                System.out.println("Dates: " + camp.getCampDates());
             }
         }
     }
