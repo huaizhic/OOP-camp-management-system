@@ -1,7 +1,7 @@
 package com.example.cms.Student;
 
-import com.example.cms.Enquiry;
 import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
 
 import java.io.FileWriter;
 import java.io.IOException;
