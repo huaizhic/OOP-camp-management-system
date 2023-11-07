@@ -1,25 +1,91 @@
 package com.example.cms.Student;
 
-import com.example.cms.Enquiry;
-import com.example.cms.Suggestion;
 import com.example.cms.Camp.Camp;
+import com.example.cms.Suggestion;
+import com.example.cms.UserGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class committee_Member {
-    private String userID; // User ID for the committee member
-    private List<Camp> registeredCamps; // List of camps that the committee member is overseeing
-    private List<Suggestion> suggestions; // List of suggestions submitted by the committee member
-    private int points; // Points earned by the committee member
+    private String userID;
+    private String name;
+    private UserGroup userGroup;
+    private String securityQuestion;
+    private String securityAns;
+    private ArrayList<Suggestion> suggestions;
+    private Camp registeredCamps;
+    private int points;
 
-    public committee_Member(String userID) {
-        this.userID = userID; // Hello
-        this.registeredCamps = new ArrayList<>();
+    public committee_Member(String name, String userID, UserGroup userGroup, String securityQuestion, String securityAns, Camp camp) {
+        this.name = name;
+        this.userID = userID;
+        this.userGroup = userGroup;
+        this.securityQuestion = securityQuestion;
+        this.securityAns = securityAns;
         this.suggestions = new ArrayList<>();
+        registeredCamps = camp;
         this.points = 0;
     }
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+    }
+
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+    }
+
+    public String getSecurityAns() {
+        return securityAns;
+    }
+
+    public void setSecurityAns(String securityAns) {
+        this.securityAns = securityAns;
+    }
+
+    public ArrayList<Suggestion> getSuggestions() {
+        return suggestions;
+    }
+
+    public void setSuggestions(Suggestion suggestion) {
+        suggestions.add(suggestion);
+    }
+
+    public Camp getRegisteredCamps() {
+        return registeredCamps;
+    }
+
+    public void setRegisteredCamps(Camp registeredCamps) {
+        this.registeredCamps = registeredCamps;
+    }
+}
+
+
+
+    /*
     // View camp details for camps the committee member is overseeing
     public void viewCampDetails(Camp camp) {
         // Implement viewing camp details logic
@@ -52,5 +118,5 @@ public class committee_Member {
 
     // Other methods and getters/setters as needed
 }
-
+*/
 
