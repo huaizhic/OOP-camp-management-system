@@ -1,7 +1,6 @@
-package com.example.cms;
-
+package com.example.cms.Staff;
 import com.example.cms.Camp.Camp;
-
+import com.example.cms.UserGroup;
 import java.util.ArrayList;
 
 public class StaffMember extends Staff {

@@ -1,21 +1,13 @@
 package com.example.cms.Student;
-
-
 import com.example.cms.Camp.Camp;
-
 import java.text.Format;
 
 public class committee {
 
 	private int point;
 
-	/**
-	 * 
-	 * @param student
-	 */
 	public Camp viewRegisteredCamp(student_User Student) {
-		// TODO - implement Committee.viewRegisteredCamp
-		throw new UnsupportedOperationException();
+
 	}
 
 	/**
