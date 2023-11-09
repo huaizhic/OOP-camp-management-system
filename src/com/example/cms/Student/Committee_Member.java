@@ -6,7 +6,7 @@ import com.example.cms.UserGroup;
 
 import java.util.ArrayList;
 
-public class committee_Member {
+public class Committee_Member {
     private String userID;
     private String name;
     private UserGroup userGroup;
@@ -16,7 +16,7 @@ public class committee_Member {
     private Camp registeredCamps;
     private int points;
 
-    public committee_Member(String name, String userID, UserGroup userGroup, String securityQuestion, String securityAns, Camp camp) {
+    public Committee_Member(String name, String userID, UserGroup userGroup, String securityQuestion, String securityAns, Camp camp) {
         this.name = name;
         this.userID = userID;
         this.userGroup = userGroup;

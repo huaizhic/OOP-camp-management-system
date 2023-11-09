@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class student_User {
+public class Student_User {
 
 	protected String studentID;
 	private String password = "password";
@@ -22,9 +22,9 @@ public class student_User {
 	private ArrayList<Enquiry> enquirySubmitted;
 
 	// Initialize the ArrayList
-	private static List<student_User> existingStudents = new ArrayList<>();
+	private static List<Student_User> existingStudents = new ArrayList<>();
 
-	public student_User() {
+	public Student_User() {
 		// TODO - implement Student.Student
 		throw new UnsupportedOperationException();
 	}
@@ -55,12 +55,12 @@ public class student_User {
 		this.name = name;
 	}
 
-	public static student_User getStudentById(String studentID) {
+	public static Student_User getStudentById(String studentID) {
 		// For demonstration purposes, let's assume you have a list of existing students.
-		List<student_User> existingStudents = getExistingStudents(); // You need to implement this method.
+		List<Student_User> existingStudents = getExistingStudents(); // You need to implement this method.
 
 		// Search for the student with the provided studentID.
-		for (student_User student : existingStudents) {
+		for (Student_User student : existingStudents) {
 			if (studentID.equals(student.getStudentID())) {
 				return student; // Return the found student.
 			}
@@ -70,12 +70,12 @@ public class student_User {
 		return null;
 	}
 
-	public static List<student_User> getExistingStudents() {
+	public static List<Student_User> getExistingStudents() {
 		return existingStudents;
 	}
 
-	public static void addStudent(student_User newStudent) {
-		List<student_User> existingStudents = getExistingStudents(); // Retrieve the list of existing students
+	public static void addStudent(Student_User newStudent) {
+		List<Student_User> existingStudents = getExistingStudents(); // Retrieve the list of existing students
 		existingStudents.add(newStudent); // Add the new student to the list
 
 		// Now, save the updated list of students to a text file (you can choose a different data source as needed).
@@ -85,9 +85,9 @@ public class student_User {
 
 	public static String getName(String userID) {
 		// For demonstration purposes, let's assume you have a list of existing students.
-		List<student_User> existingStudents = getExistingStudents(); // You need to implement this method.
+		List<Student_User> existingStudents = getExistingStudents(); // You need to implement this method.
 
-		for (student_User Student : existingStudents) { // assuming existingStudents is the list of students
+		for (Student_User Student : existingStudents) { // assuming existingStudents is the list of students
 			if (userID.equals(Student.getStudentID())) {
 				return Student.name;
 			}
@@ -181,10 +181,10 @@ public class student_User {
 	}
 
 	// Method to save the list of students to a text file
-	private static void saveStudentsToFile(List<student_User> students) {
+	private static void saveStudentsToFile(List<Student_User> students) {
 		try {
 			FileWriter writer = new FileWriter("students.txt"); // You can choose a different file name or location
-			for (student_User student : students) {
+			for (Student_User student : students) {
 				writer.write(student.getStudentID() + "," + student.getName() + "," + student.getUserGroup() + "\n");
 			}
 			writer.close();

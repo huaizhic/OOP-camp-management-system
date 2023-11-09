@@ -2,7 +2,7 @@ package com.example.cms.user_Login;
 
 import java.util.Scanner;
 import com.example.cms.staff_Account;
-import com.example.cms.Student.student_Account;
+import com.example.cms.Student.Student_Account;
 
 public class account_Manager {
     private Scanner scanner;
@@ -28,7 +28,7 @@ public class account_Manager {
             if (accountChoice == 1) {
                 System.out.print("Enter your student ID: ");
                 String userId = scanner.next();
-                student_Account studentAccount = new student_Account(userId);
+                Student_Account studentAccount = new Student_Account(userId);
                 studentAccount.start();
             } else if (accountChoice == 0) {
                 // Redirect to the registration process (you need to implement this part)

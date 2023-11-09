@@ -3,7 +3,7 @@ package com.example.cms.Enquiries;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.example.cms.Student.student_User;
+import com.example.cms.Student.Student_User;
 
 public class Enquiry {
     private String studentID;
@@ -49,7 +49,7 @@ public class Enquiry {
     }
 
     public void setStudentName(String studentID) {
-        String studentName = student_User.getName(studentID);
+        String studentName = Student_User.getName(studentID);
         if (studentName != null) {
             this.studentName = studentName;
         } else {

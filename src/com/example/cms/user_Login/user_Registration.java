@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.example.cms.Student.password_Manager;
-import com.example.cms.Student.student_User;
+import com.example.cms.Student.Password_Manager;
+import com.example.cms.Student.Student_User;
 
 public class user_Registration {
 	public static void registerNewUser(Scanner scanner) {
@@ -17,7 +17,7 @@ public class user_Registration {
 	    String studentID = scanner.next();
 
 	    // Check if the student already exists
-	    student_User existingStudent = student_User.getStudentById(studentID);
+	    Student_User existingStudent = Student_User.getStudentById(studentID);
 	    if (existingStudent != null) {
 	        System.out.println("This student already has an account.");
 	        return;
@@ -69,7 +69,7 @@ public class user_Registration {
 	        System.out.print("Create a password: ");
 	        password = scanner.next();
 
-	        if (password_Manager.isValidPassword(password)) {
+	        if (Password_Manager.isValidPassword(password)) {
 	            break; // Exit the loop if the password is valid
 	        } else {
 	            System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
@@ -94,7 +94,7 @@ public class user_Registration {
 	                while (true) {
 	                    System.out.print("Create a new password: ");
 	                    password = scanner.next();
-	                    if (password_Manager.isValidPassword(password)) {
+	                    if (Password_Manager.isValidPassword(password)) {
 	                        break; // Exit the loop if the new password is valid
 	                    } else {
 	                        System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
@@ -155,7 +155,7 @@ public class user_Registration {
 	    }
 
 	    // Store the confirmed information in the student instance
-	    student_User newStudent = new student_User();
+	    Student_User newStudent = new Student_User();
 	    newStudent.setStudentID(studentID);
 	    newStudent.setName(name);
 	    newStudent.setUserGroup(userGroup);
@@ -164,7 +164,7 @@ public class user_Registration {
 	    newStudent.setSecurityAnswers(securityAnswers);
 
 	 // Add the new student to the list of existing students
-	    student_User.addStudent(newStudent);
+	    Student_User.addStudent(newStudent);
 
 	    System.out.println("Registration successful!");
 	}
