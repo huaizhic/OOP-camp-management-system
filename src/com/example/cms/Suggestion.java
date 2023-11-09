@@ -6,13 +6,13 @@ public class Suggestion {
 	private String content;
 	private Committee_Member submitter;
 	private Status status;
-	private boolean processed;
 
-	public Suggestion(String content, Committee_Member submitter, Status status, boolean processed){
+	private boolean processed = false;
+
+	public Suggestion(String content, Committee_Member submitter, Status status){
 		this.content = content;
 		this.submitter = submitter;
 		this.status = status;
-		this.processed = processed;
 	}
 
 	public String getContent() {
