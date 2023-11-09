@@ -6,6 +6,40 @@
   <component name="ChangeListManager">
     <list default="true" id="55e6db08-0a86-4539-86dd-2bd18a4ed025" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/StaffAcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Staff/StaffAcc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/StaffMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Staff/StaffMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Staff/staff_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Staff/staff_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/attendee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/attendee_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/committee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/committeeMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/committeeMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/committee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/committee_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/password_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Student/student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Student/student_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/DisplayOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/DisplayOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Enquiries/Enquiry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Format.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Format.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/LoginRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/LoginRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Month.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Month.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/RegisterRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/RegisterRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/SortByCommitteeSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/SortByCommitteeSlots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/SortByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/SortByLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/SortByName_Default.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/SortByName_Default.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/SortByRegCloseDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/SortByRegCloseDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/SortByTotalSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/SortByTotalSlots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/SortByUserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/DisplayOptions/SortByUserGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/UserGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/Camp/campData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/restOfitems/camp_Committee_Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/camp_Committee_Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user_Login/AccountManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/user_Login/AccountManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/user_Login/account_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/user_Login/account_Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +50,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -33,17 +68,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "huaizhi-enquiries-suggestions",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Huai Zhi/Downloads/OOP-camp-management-system",
-    "settings.editor.selected.configurable": "editor.preferences.appearance"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;huaizhi-enquiries-suggestions&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Huai Zhi/Downloads/OOP-camp-management-system&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
