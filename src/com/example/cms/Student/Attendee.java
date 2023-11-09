@@ -64,10 +64,12 @@ public class Attendee {
 	 */
 	public void submitEnquiry(Student_User Student, Camp camp, String content) {
 		// TODO - implement Attendee.submitEnquiry
-		Enquiry newEnquiry = new Enquiry(content, student);    // create new enquiry object
+		/* Enquiry newEnquiry = new Enquiry(content, student);    // create new enquiry object
 		student.setEnquirySubmitted(newEnquiry);
 		camp.setEnquiry(newEnquiry);
-		//throw new UnsupportedOperationException();
+		//throw new UnsupportedOperationException(); */
+		Enquiry newEnquiry = new Enquiry(Student.getStudentID(), Student.getName(), content, "datePlaceholder", null, false);
+		newEnquiry.createEnquiry(Student.getStudentID(),Student.getName());
 	}
 
 	/**
@@ -85,12 +87,13 @@ public class Attendee {
 		for (Enquiry studentEnquiry: studentEnquiryArray){
 			for (Enquiry campEnquiry: campEnquiryArray){
 				if (studentEnquiry.getContent() == campEnquiry.getContent()){
-					return studentEnquiry.getContent();
+					System.out.println(studentEnquiry.getContent());
+					return;
 				}
 			}
 		}
 		// throw new UnsupportedOperationException();
-		return "error";
+		// return;
 	}
 		//throw new UnsupportedOperationException();
 	}
@@ -113,7 +116,7 @@ public class Attendee {
 		studentEnquiryArray.get(enquiryNo).setContent(newMessage);
 
 		for (Enquiry campEnquiry: campEnquiryArray){
-			if (campEnquiry.getSubmitter().getStudentID() == student.getStudentID()){
+			if (campEnquiry.getStudentID() == student.getStudentID()){
 				// get correct index of enquiry from camp enquiry array, then remove it
 				campEnquiry.setContent(newMessage);
 				return;
@@ -129,7 +132,7 @@ public class Attendee {
 	 * @param camp
 	 * @param enquiry
 	 */
-	public void deleteEnquiry(student_User student, Camp camp, int enquiryNo) {
+	public void deleteEnquiry(Student_User student, Camp camp, int enquiryNo) {
 		// TODO - implement Attendee.deleteEnquiry
 		// key is to find the right enquiry from indexing
 		// delete enquiry from both student and camp side
@@ -140,7 +143,7 @@ public class Attendee {
 		studentEnquiryArray.remove(enquiryNo);
 
 		for (Enquiry campEnquiry: campEnquiryArray){
-			if (campEnquiry.getSubmitter().getStudentID() == student.getStudentID()){
+			if (campEnquiry.getStudentID() == student.getStudentID()){
 				// get correct index of enquiry from camp enquiry array, then remove it
 				campEnquiryArray.remove(campEnquiry);
 				return;
