@@ -1,6 +1,7 @@
 package com.example.cms.Staff;
 
 import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.UserGroup;
 
 import java.text.Format;
@@ -154,9 +155,12 @@ public class Staff {
 	 * @param staff
 	 * @param camp
 	 */
-	public void viewEnquiry(Staff staff, int camp) {
+	public void viewEnquiry(Staff staffMember, int campNo) {
 		// TODO - implement Staff.viewEnquiry
-		throw new UnsupportedOperationException();
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp campSelected = campsCreatedArray.get(campNo);
+		System.out.println(campSelected.getEnquiry());
+		// throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -166,9 +170,17 @@ public class Staff {
 	 * @param enquiry
 	 * @param reply
 	 */
-	public void replyEnquiry(Staff staff, int camp, int enquiry, String reply) {
+	public void replyEnquiry(Staff staffMember, int campNo, int enquiryNo, String reply) {
 		// TODO - implement Staff.replyEnquiry
-		throw new UnsupportedOperationException();
+		// at this stage, we assume that only either committee member OR staff can use a reply slot per enquiry.
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
+		ArrayList<Enquiry> campEnquiryArray = selectedCamp.getEnquiry();
+		Enquiry selectedEnquiry = campEnquiryArray.get(enquiryNo);
+		selectedEnquiry.setReply(reply);
+		selectedEnquiry.setProcessed(true);
+
+		//throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -176,9 +188,12 @@ public class Staff {
 	 * @param staff
 	 * @param camp
 	 */
-	public void viewSuggestion(Staff staff, int camp) {
+	public void viewSuggestion(Staff staffMember, int campNo) {
 		// TODO - implement Staff.viewSuggestion
-		throw new UnsupportedOperationException();
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp campSelected = campsCreatedArray.get(campNo);
+		System.out.println(campSelected.getSuggestion());
+		// throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -187,9 +202,15 @@ public class Staff {
 	 * @param camp
 	 * @param suggestion
 	 */
-	public void approveSuggestion(Staff staff, int camp, int suggestion) {
+	public void approveSuggestion(Staff staffMember, int campNo, int suggestionNo) {
 		// TODO - implement Staff.approveSuggestion
-		throw new UnsupportedOperationException();
+		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
+		ArrayList<Suggestion> campSuggestionArray = selectedCamp.getSuggestion();
+		Suggestion selectedSuggestion = campSuggestionArray.get(suggestionNo);
+		selectedSuggestion.setStatus(status);
+		selectedSuggestion.setProcessed(true);
+		// throw new UnsupportedOperationException();
 	}
 
 	/**
