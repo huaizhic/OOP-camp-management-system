@@ -1,8 +1,8 @@
 package com.example.cms.Student;
 
-public class committee_Account extends student_Account {
+public class Committee_Account extends Student_Account {
 
-    public committee_Account(String userId) {
+    public Committee_Account(String userId) {
 		super(userId);
 		// TODO Auto-generated constructor stub
 	}

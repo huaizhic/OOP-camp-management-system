@@ -6,13 +6,13 @@ import com.example.cms.RegisterRole;
 
 import java.util.ArrayList;
 
-public class attendee {
+public class Attendee {
 
 	/**
 	 * 
 	 * @param student
 	 */
-	public ArrayList<Camp> viewOpenCamp(student_User Student) {
+	public ArrayList<Camp> viewOpenCamp(Student_User Student) {
 		// TODO - implement Attendee.viewOpenCamp
 		throw new UnsupportedOperationException();
 	}
@@ -32,7 +32,7 @@ public class attendee {
 	 * @param student
 	 * @param role
 	 */
-	public void register(Camp camp, student_User Student, RegisterRole role) {
+	public void register(Camp camp, Student_User Student, RegisterRole role) {
 		// TODO - implement Attendee.register
 		throw new UnsupportedOperationException();
 	}
@@ -41,7 +41,7 @@ public class attendee {
 	 * 
 	 * @param student
 	 */
-	public ArrayList<Camp> viewRegisteredCamp(student_User Student) {
+	public ArrayList<Camp> viewRegisteredCamp(Student_User Student) {
 		// TODO - implement Attendee.viewRegisteredCamp
 		throw new UnsupportedOperationException();
 	}
@@ -51,7 +51,7 @@ public class attendee {
 	 * @param student
 	 * @param camp
 	 */
-	public void withdraw(student_User Student, Camp camp) {
+	public void withdraw(Student_User Student, Camp camp) {
 		// TODO - implement Attendee.withdraw
 		throw new UnsupportedOperationException();
 	}
@@ -62,7 +62,7 @@ public class attendee {
 	 * @param camp
 	 * @param content
 	 */
-	public void submitEnquiry(student_User Student, Camp camp, String content) {
+	public void submitEnquiry(Student_User Student, Camp camp, String content) {
 		// TODO - implement Attendee.submitEnquiry
 		Enquiry newEnquiry = new Enquiry(content, student);    // create new enquiry object
 		student.setEnquirySubmitted(newEnquiry);
@@ -75,7 +75,7 @@ public class attendee {
 	 * @param student
 	 * @param camp
 	 */
-	public void viewEnquiry(student_User student, Camp camp) {
+	public void viewEnquiry(Student_User student, Camp camp) {
 		// TODO - implement Attendee.viewEnquiry
 
 		// array of enquiry objects, need to narrow down to a specific camp requested
@@ -101,7 +101,7 @@ public class attendee {
 	 * @param camp
 	 * @param enquiry
 	 */
-	public void editEnquiry(student_User student, Camp camp, int enquiryNo, String newMessage) {
+	public void editEnquiry(Student_User student, Camp camp, int enquiryNo, String newMessage) {
 		// TODO - implement Attendee.editEnquiry
 		// key is to find the right enquiry from indexing
 		// delete enquiry from both student and camp side

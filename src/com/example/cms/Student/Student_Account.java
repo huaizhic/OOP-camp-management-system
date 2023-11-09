@@ -2,16 +2,14 @@ package com.example.cms.Student;
 
 import java.util.Scanner;
 
-import com.example.cms.Student.password_Manager;
-
 //import camp_Application_Management_System.Student;
 
 
-public class student_Account {
+public class Student_Account {
   private String userId; // Add a field to hold the student ID
   private Scanner scanner;
 
-  public student_Account(String userId) {
+  public Student_Account(String userId) {
       this.userId = userId;
   }
 
@@ -36,11 +34,11 @@ public class student_Account {
           System.out.print("Enter your password: ");
           String enteredPassword = scanner.next();
 
-          password_Manager passwordManager = new password_Manager(); // Create an instance
+          Password_Manager passwordManager = new Password_Manager(); // Create an instance
 
           // Check the password and get the student's name
           if (passwordManager.checkPassword(userId, role, enteredPassword)) {
-              String studentName = student_User.getName(userId);
+              String studentName = Student_User.getName(userId);
 
               if ("Committee".equals(role)) {
                   System.out.println("Welcome, Committee Member " + studentName);

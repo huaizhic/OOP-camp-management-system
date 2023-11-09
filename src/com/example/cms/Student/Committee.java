@@ -1,15 +1,16 @@
 package com.example.cms.Student;
 
+import com.example.cms.Suggestion;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
 
 import java.util.ArrayList;
 
-public class committee {
+public class Committee {
 
 	private int point;
 
-	public Camp viewRegisteredCamp(student_User Student) {
+	public Camp viewRegisteredCamp(Student_User Student) {
 
 	}
 
@@ -33,7 +34,7 @@ public class committee {
 	 * @param camp
 	 * @param reply
 	 */
-	public void replyEnquiry(student_User student, Camp camp, String reply) {
+	public void replyEnquiry(Student_User student, Camp camp, String reply) {
 		// TODO - implement Committee.replyEnquiry
 		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
 		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
@@ -51,7 +52,7 @@ public class committee {
 	}
 
 	//throw new UnsupportedOperationException();
-	}
+
 
 	/**
 	 * 
@@ -59,7 +60,7 @@ public class committee {
 	 * @param suggestion
 	 * @param student
 	 */
-	public void submitSuggestion(Camp camp, String suggestion, student_User Student) {
+	public void submitSuggestion(Camp camp, String suggestion, Student_User Student) {
 		// TODO - implement Committee.submitSuggestion
 		ArrayList<Suggestion> suggestionsArray = camp.getSuggestion();
 		Suggestion newSuggestion = new Suggestion(submitter, suggestion);
@@ -77,24 +78,24 @@ public class committee {
 	 * 
 	 * @param student
 	 */
-	public void viewSuggestion(student_User Student) {
+	public void viewSuggestion(Student_User Student) {
 		// TODO - implement Committee.viewSuggestion
-		ArrayList<Suggestion> suggestionsArray = committeeMember.getSuggestionSubmitted();
+		ArrayList<Suggestion> suggestionsArray = Committee_Member.getSuggestionSubmitted();
 		for (Suggestion suggestion: suggestionsArray){
 			System.out.println(suggestionsArray.indexOf(suggestion) + suggestion.getContent());
 		}
 	}
 		//throw new UnsupportedOperationException();
-	}
+
 
 	/**
 	 * 
 	 * @param student
 	 * @param suggestion
 	 */
-	public void editSuggestion(student_User Student, int suggestionNo) {
+	public void editSuggestion(Student_User Student, int suggestionNo, String newContent) {
 		// TODO - implement Committee.editSuggestion
-		ArrayList<Suggestion> suggestionsArray = committeeMember.getSuggestionSubmitted();
+		ArrayList<Suggestion> suggestionsArray = Committee_Member.getSuggestionSubmitted();
 		Suggestion suggestionToEdit = suggestionsArray.get(suggestionNo);  // gets the specified suggestion obj from ArrayList
 		suggestionToEdit.setContent(newContent);
 
@@ -106,7 +107,7 @@ public class committee {
 	 * @param student
 	 * @param suggestion
 	 */
-	public void deleteSuggestion(student_User Student, int suggestionNo) {
+	public void deleteSuggestion(Student_User Student, int suggestionNo) {
 		// TODO - implement Committee.deleteSuggestion
 		ArrayList<Suggestion> suggestionsArray = committeeMember.getSuggestionSubmitted();
 		suggestionsArray.remove(suggestionNo);

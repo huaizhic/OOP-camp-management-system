@@ -6,14 +6,14 @@ import com.example.cms.Enquiries.Enquiry;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class attendee_Account extends student_Account {
+public class Attendee_Account extends Student_Account {
 
 	 // Fields to store registered camps and other necessary data
     private ArrayList<Camp> registeredCamps;
     private ArrayList<Enquiry> enquiries;
     private String studentID; // Add an instance variable to store the studentID
 
-    public attendee_Account(String studentID) {
+    public Attendee_Account(String studentID) {
         super(studentID);
         this.studentID = studentID; // Initialize the studentID instance variable
         this.registeredCamps = new ArrayList<>();
