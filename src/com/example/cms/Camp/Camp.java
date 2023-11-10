@@ -1,6 +1,7 @@
 package com.example.cms.Camp;
 import com.example.cms.*;
-import com.example.cms.Student.Student_User;
+import com.example.cms.Student.student_User;
+import com.example.cms.UserGroup;
 import com.example.cms.Staff.StaffMember;
 import com.example.cms.Enquiries.Enquiry;
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ public class Camp {
 	private String campName;
 	private ArrayList<LocalDate> campDates;
 	private LocalDate regCloseDate;
-	private ArrayList<userGroup> userGroup;
+	private ArrayList<UserGroup> userGroup;
 	private String location;
 	private int totalSlots;
 	private int remainingSlots;
@@ -21,6 +22,7 @@ public class Camp {
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry ;
 	private ArrayList<Suggestion> suggestion;
+	private static int counter =0;
 
 	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<UserGroup> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
 		this.campName = campName;
@@ -36,9 +38,19 @@ public class Camp {
 		this.visibility = visibility;
 		enquiry = new ArrayList<>();
 		suggestion = new ArrayList<>();
+		counter ++;
 	}
 
 	// Add a hashmap
+
+
+	public static int getCounter() {
+		return counter;
+	}
+
+	public static String campNameGenerator(){
+		return "camp" + counter ;
+	}
 
 	public String getCampName() {
 		return this.campName;
@@ -64,11 +76,11 @@ public class Camp {
 		this.regCloseDate = regCloseDate;
 	}
 
-	public ArrayList<userGroup> getUserGroup() {
+	public ArrayList<UserGroup> getUserGroup() {
 		return this.userGroup;
 	}
 
-	public void setUserGroup(ArrayList<userGroup> userGroup) {
+	public void setUserGroup(ArrayList<UserGroup> userGroup) {
 		this.userGroup = userGroup;
 	}
 
@@ -122,7 +134,7 @@ public class Camp {
 	}
 
 
-	public void setStudentsRegistered(ArrayList<Student_User> studentsRegistered) {
+	public void setStudentsRegistered(ArrayList<student_User> studentsRegistered) {
 		this.studentsRegistered = studentsRegistered;
 	}
 

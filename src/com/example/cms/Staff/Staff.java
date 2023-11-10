@@ -1,6 +1,5 @@
 package com.example.cms.Staff;
-
-import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Status;
 import com.example.cms.Suggestion;
@@ -109,8 +108,10 @@ public class Staff {
 			campDate.add(startDate);
 			campDate.add(endDate);
 
-			Camp camp1 = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility);
 
+
+			Camp  campNameGenerator = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility);
+			campData.addCampToMap(campName, campNameGenerator);
 
 
 
@@ -152,11 +153,7 @@ public class Staff {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param staff
-	 * @param camp
-	 */
+
 	public void viewEnquiry(StaffMember staffMember, int campNo) {
 		// TODO - implement Staff.viewEnquiry
 		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();

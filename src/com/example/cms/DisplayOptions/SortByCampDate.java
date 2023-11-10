@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SortByCampDate implements DisplayOption{
+public class SortByCampDate extends DisplayOption{
 
     public void Sorting(ArrayList<Camp> campList) {
         if (campList == null) {

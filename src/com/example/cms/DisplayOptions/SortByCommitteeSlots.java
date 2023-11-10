@@ -3,7 +3,7 @@ import com.example.cms.Camp.Camp;
 import java.util.Comparator;
 import java.util.Collections;
 import java.util.ArrayList;
-public class SortByCommitteeSlots implements DisplayOption {
+public class SortByCommitteeSlots extends DisplayOption {
 
 	public void Sorting (ArrayList<Camp> campList) {
 		if(campList == null){

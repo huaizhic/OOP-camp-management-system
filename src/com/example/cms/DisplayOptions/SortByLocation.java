@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 
-public class SortByLocation implements DisplayOption {
+public class SortByLocation extends DisplayOption {
 	public void Sorting(ArrayList<Camp> campList) {
 		if(campList == null){
 			System.out.println("No camp available yet");

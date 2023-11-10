@@ -2,7 +2,7 @@ package com.example.cms.Student;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Others.Faculty;
+import com.example.cms.UserGroup;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class student_User {
 	protected String studentID;
 	private String password = "password";
 	private String name;
-	private Faculty faculty;
+	private UserGroup faculty;
 	private String userGroup;
 	private ArrayList<Camp> registeredCamps;
 	protected static List<String> campAccessibility; // This indicates which camp the attendee can see
@@ -58,13 +58,13 @@ public class student_User {
 		this.name = name;
 	}
 	
-	 public Faculty getFaculty() {
+	 public UserGroup getFaculty() {
 	        return this.faculty;
 	    }
 
 	 public void setFaculty(String faculty) {
 
-	            this.faculty = Faculty.valueOf(faculty.toUpperCase()); // Convert to uppercase for case-insensitive comparison
+	            this.faculty = UserGroup.valueOf(faculty.toUpperCase()); // Convert to uppercase for case-insensitive comparison
 	       
 	    }
 
@@ -73,7 +73,7 @@ public class student_User {
 		    // Capitalize and remove spaces from the user input
 		    String formattedFaculty = faculty.trim().toUpperCase();
 
-		    for (Faculty validFaculty : Faculty.values()) {
+		    for (UserGroup validFaculty : UserGroup.values()) {
 		        if (validFaculty.name().equalsIgnoreCase(formattedFaculty)) {
 		            return true;
 		        }

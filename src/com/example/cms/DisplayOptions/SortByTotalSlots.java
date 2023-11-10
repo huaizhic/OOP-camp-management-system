@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SortByTotalSlots implements DisplayOption{
+public class SortByTotalSlots extends DisplayOption{
 
 	public void Sorting(ArrayList<Camp> campList) {
 		if(campList == null){

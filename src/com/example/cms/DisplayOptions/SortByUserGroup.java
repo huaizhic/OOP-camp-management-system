@@ -6,7 +6,7 @@ import com.example.cms.UserGroup;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-public class SortByUserGroup implements DisplayOption {
+public class SortByUserGroup extends DisplayOption {
 
 	public void Sorting(ArrayList<Camp> campList) {
 

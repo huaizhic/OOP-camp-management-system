@@ -3,7 +3,7 @@ import com.example.cms.Camp.Camp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-public class SortByName_Default implements DisplayOption{
+public class SortByName_Default extends DisplayOption{
 
 	public void Sorting(ArrayList<Camp> campList){
 		Collections.sort(campList, campNameComparator);
