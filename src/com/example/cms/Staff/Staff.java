@@ -108,25 +108,22 @@ public class Staff {
 			campDate.add(startDate);
 			campDate.add(endDate);
 
-
-
-			Camp  campNameGenerator = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility);
-			campData.addCampToMap(campName, campNameGenerator);
-
-
-
-
+			campData.setCampList(new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility));
+			campData.addCampToMap(campName, campData.getCampList().get(Camp.getCounter()));
 
 	}
 
-	/**
-	 * 
-	 * @param staff
-	 * @param camp
-	 */
-	public void editCamp(Staff staff, int camp) {
-		// TODO - implement Staff.editCamp
-		throw new UnsupportedOperationException();
+
+	public void editCamp(StaffMember staff) {
+		if(staff.getCampsCreated().isEmpty()){
+			System.out.println("No camp has been created, please create one before editing");
+		}else{
+			System.out.println("Please choose the camp that you would like to edit");
+			for(Camp camp: staff.getCampsCreated()) {
+				camp.printAllCampInfo(camp);
+			}
+		}
+
 	}
 
 	/**

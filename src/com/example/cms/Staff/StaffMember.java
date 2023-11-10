@@ -40,9 +40,8 @@ public class StaffMember extends Staff {
 	 * 
 	 * @param campsCreated
 	 */
-	public void setCampsCreated(ArrayList<Camp> campsCreated) {
-		this.campsCreated = campsCreated;
-	}
+	public void setCampsCreated(Camp campsCreated) {this.campsCreated.add(campsCreated);}
+
 
 	public String getSecurityQuestion() {
 		return this.securityQuestion;

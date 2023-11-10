@@ -5,7 +5,7 @@ import java.util.Scanner;
 //import camp_Application_Management_System.Student;
 
 
-public class student_Account {
+public class Student_Account {
   private String userId; // Add a field to hold the student ID
   private Scanner scanner;
 

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class student_User {
+public class Student_User {
 
 	protected String studentID;
 	private String password = "password";
@@ -25,7 +25,7 @@ public class student_User {
 	private ArrayList<Enquiry> enquirySubmitted;
 
 	// Initialize the ArrayList
-	private static List<student_User> existingStudents = new ArrayList<>();
+	private static List<Student_User> existingStudents = new ArrayList<>();
 
 	public student_User() {
 		// TODO - implement Student.Student

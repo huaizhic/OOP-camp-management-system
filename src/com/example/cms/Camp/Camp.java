@@ -1,6 +1,6 @@
 package com.example.cms.Camp;
 import com.example.cms.*;
-import com.example.cms.Student.student_User;
+import com.example.cms.Student.Student_User;
 import com.example.cms.UserGroup;
 import com.example.cms.Staff.StaffMember;
 import com.example.cms.Enquiries.Enquiry;
@@ -16,13 +16,18 @@ public class Camp {
 	private int totalSlots;
 	private int remainingSlots;
 	private int committeeSlots;
+	private int remainingCommitteeSlots;
 	private String description;
 	private StaffMember staffInCharge;
-	private ArrayList<student_User> studentsRegistered;
+	private ArrayList<Student_User> studentsRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry ;
 	private ArrayList<Suggestion> suggestion;
-	private static int counter =0;
+	private static int counter = -1;
+
+	public Camp(){
+
+	}
 
 	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<UserGroup> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
 		this.campName = campName;
@@ -33,6 +38,7 @@ public class Camp {
 		this.totalSlots = totalSlots;
 		remainingSlots = totalSlots;
 		committeeSlots = 10;
+		remainingCommitteeSlots = committeeSlots;
 		staffInCharge = staff;
 		studentsRegistered = new ArrayList<>();
 		this.visibility = visibility;
@@ -41,15 +47,24 @@ public class Camp {
 		counter ++;
 	}
 
-	// Add a hashmap
 
 
 	public static int getCounter() {
 		return counter;
 	}
 
-	public static String campNameGenerator(){
-		return "camp" + counter ;
+	public void printAllCampInfo(Camp camp){
+		System.out.print("Camp: " + camp.getCampName() + " - ");
+		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
+		System.out.print("Reg close date: " + camp.getRegCloseDate());
+		System.out.print("Eligible group: " + camp.getUserGroup());
+		System.out.print("location: " + camp.getLocation());
+		System.out.print("Remaining slot: " + camp.getRemainingSlots());
+		System.out.print("Staff: " + camp.getStaffInCharge());
+		System.out.println("Description: " + camp.getDescription());
+		System.out.println();
+		System.out.println();
+
 	}
 
 	public String getCampName() {
@@ -112,6 +127,13 @@ public class Camp {
 		this.committeeSlots = committeeSlots;
 	}
 
+	public int getRemainingCommitteeSlots() {
+		return remainingCommitteeSlots;
+	}
+
+	public void setRemainingCommitteeSlots(int remainingCommitteeSlots){
+		this.remainingCommitteeSlots = remainingCommitteeSlots;
+	}
 
 	public String getDescription() {
 		return this.description;
@@ -129,12 +151,12 @@ public class Camp {
 		this.staffInCharge = staffInCharge;
 	}
 
-	public ArrayList<student_User> getStudentsRegistered() {
+	public ArrayList<Student_User> getStudentsRegistered() {
 		return this.studentsRegistered;
 	}
 
 
-	public void setStudentsRegistered(ArrayList<student_User> studentsRegistered) {
+	public void setStudentsRegistered(ArrayList<Student_User> studentsRegistered) {
 		this.studentsRegistered = studentsRegistered;
 	}
 

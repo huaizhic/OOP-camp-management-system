@@ -3,11 +3,11 @@ package com.example.cms.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class password_Manager {
+public class Password_Manager {
 
     public static boolean checkPassword(String studentID, String roleChoice, String enteredPassword) {
         // Retrieve the student based on studentID
-        student_User student_Information = student_User.getStudentById(studentID);
+        Student_User student_Information = Student_User.getStudentById(studentID);
 
         // Check if the student exists and validate the password and roleChoice.
         if (student_Information != null) {

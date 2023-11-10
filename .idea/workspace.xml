@@ -4,23 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="committee_Member.java">
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/UserGroup.java" afterDir="false" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="improved camp reference">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCampDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCampDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCommitteeSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCommitteeSlots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByLocation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByName_Default.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByName_Default.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByRegCloseDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByRegCloseDate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByTotalSlots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByTotalSlots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByUserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByUserGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Others/Faculty.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/StaffMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/StaffMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/StaffAcc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/StaffAcc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee_Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee_Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Password_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Student_Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Student_User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Student_User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +92,7 @@
       <workItem from="1699278556892" duration="4332000" />
       <workItem from="1699282946916" duration="2331000" />
       <workItem from="1699327002838" duration="2071000" />
-      <workItem from="1699610328767" duration="3496000" />
+      <workItem from="1699610328767" duration="9204000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -172,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699329021896</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="improved camp reference">
+      <option name="closed" value="true" />
+      <created>1699614035875</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699614035875</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,6 +189,7 @@
     <MESSAGE value="camp info class and camp data class completed" />
     <MESSAGE value="Constructor built" />
     <MESSAGE value="committee_Member.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="committee_Member.java" />
+    <MESSAGE value="improved camp reference" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved camp reference" />
   </component>
 </project>
