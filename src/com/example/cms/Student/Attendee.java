@@ -5,154 +5,172 @@ import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.RegisterRole;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Attendee {
+public class Attendee extends student_User {
 
-	/**
-	 * 
-	 * @param student
-	 */
-	public ArrayList<Camp> viewOpenCamp(Student_User Student) {
-		// TODO - implement Attendee.viewOpenCamp
-		throw new UnsupportedOperationException();
-	}
+    // Fields to store registered camps and other necessary data
+    private static ArrayList<Camp> registeredCamps;
+    private static ArrayList<Camp> campAccessibility;
+    private ArrayList<Enquiry> enquiries;
 
-	/**
-	 * 
-	 * @param camp
-	 */
-	public int viewRemainingSlot(Camp camp) {
-		// TODO - implement Attendee.viewRemainingSlot
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Constructor for the Attendee class.
+     */
+    public Attendee() {
+        // Call the constructor of the superclass (student_User)
+        super();
+        this.registeredCamps = new ArrayList<>();
+        this.campAccessibility =  new ArrayList<>();
+        this.enquiries = new ArrayList<>();
+    }
 
-	/**
-	 * 
-	 * @param camp
-	 * @param student
-	 * @param role
-	 */
-	public void register(Camp camp, Student_User Student, RegisterRole role) {
-		// TODO - implement Attendee.register
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * View registered camps for the attendee.
+     */
+    public static void viewRegisteredCamps() {
+        System.out.println("Registered Camps:");
+        if (registeredCamps.isEmpty()) {
+            System.out.println("You are not registered for any camps.");
+        } else {
+            for (Camp camp : registeredCamps) {
+                System.out.println("Camp Name: " + camp.getCampName());
+                System.out.println("Dates: " + camp.getCampDates());
+            }
+        }
+    }
+    
+    public static void viewCampEnquiries() {
+        System.out.println("Camp Enquiries Menu:");
+        System.out.println("1. View Camps");
+        System.out.println("2. Register for a Camp");
+        System.out.println("3. Withdraw from a Camp");
+        System.out.println("4. Back to Main Menu");
+        
+        System.out.print("Enter your choice: ");
+        Scanner scanner;
+		int choice = scanner.nextInt();
 
-	/**
-	 * 
-	 * @param student
-	 */
-	public ArrayList<Camp> viewRegisteredCamp(Student_User Student) {
-		// TODO - implement Attendee.viewRegisteredCamp
-		throw new UnsupportedOperationException();
-	}
+        switch (choice) {
+            case 1:
+                // Delegate to specific functionality in the Attendee class
+                viewCamps();
+                break;
+            case 2:
+                // Delegate to specific functionality in the Attendee class
+                registerForCamp();
+                break;
+            case 3:
+                // Delegate to specific functionality in the Attendee class
+                withdrawFromCamp();
+                break;
+            case 4:
+                // Back to the main menu
+                break;
+            default:
+                System.out.println("Invalid choice. Please enter a valid option.");
+                break;
+        }
+    }
+    
+    public static void viewCamps() {
+        System.out.println("Available Camps:");
+        for (Camp camp : campAccessibility) {
+            System.out.println("Camp Name: " + camp.getCampName());
+            System.out.println("Dates: " + camp.getCampDates());
+            // This must show the number of vacancies as well
+        }
+    }
 
-	/**
-	 * 
-	 * @param student
-	 * @param camp
-	 */
-	public void withdraw(Student_User Student, Camp camp) {
-		// TODO - implement Attendee.withdraw
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * View open camps.
+     */
+    public ArrayList<Camp> viewOpenCamps() {
+        // TODO - Implement logic to retrieve and display open camps
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param student
-	 * @param camp
-	 * @param content
-	 */
-	public void submitEnquiry(Student_User Student, Camp camp, String content) {
-		// TODO - implement Attendee.submitEnquiry
-		/* Enquiry newEnquiry = new Enquiry(content, student);    // create new enquiry object
-		student.setEnquirySubmitted(newEnquiry);
-		camp.setEnquiry(newEnquiry);
-		//throw new UnsupportedOperationException(); */
-		Enquiry newEnquiry = new Enquiry(Student.getStudentID(), Student.getName(), content, "datePlaceholder", null, false);
-		newEnquiry.createEnquiry(Student.getStudentID(),Student.getName());
-	}
+    /**
+     * View remaining slots for a specific camp.
+     *
+     * @param camp The camp for which to view remaining slots.
+     * @return The number of remaining slots.
+     */
+    public int viewRemainingSlots(Camp camp) {
+        // TODO - Implement logic to calculate and return remaining slots for the specified camp
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param student
-	 * @param camp
-	 */
-	public void viewEnquiry(Student_User student, Camp camp) {
-		// TODO - implement Attendee.viewEnquiry
+    /**
+     * Register for a camp.
+     *
+     * @param camp The camp to register for.
+     * @param role The role for registration.
+     */
+    public void registerForCamp(Camp camp, RegisterRole role) {
+        // TODO - Implement camp registration logic 
+    	// This function will see the viewOpenCamp, so that students can still see which camp is still open or vacant
+    	// Then, they will have the register option, if the camp clashes with the current date of their registered camps then it won't be able to bookk it 
+        throw new UnsupportedOperationException();
+    }
 
-		// array of enquiry objects, need to narrow down to a specific camp requested
-		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
-		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
+    /**
+     * Withdraw from a registered camp.
+     *
+     * @param camp The camp to withdraw from.
+     */
+    public void withdrawFromCamp(Camp camp) {
+        // TODO - Implement camp withdrawal logic
+    	// Show the lists of registeredCamps, have the option to withdraw from it 
+        throw new UnsupportedOperationException();
+    }
 
-		for (Enquiry studentEnquiry: studentEnquiryArray){
-			for (Enquiry campEnquiry: campEnquiryArray){
-				if (studentEnquiry.getContent() == campEnquiry.getContent()){
-					System.out.println(studentEnquiry.getContent());
-					return;
-				}
-			}
-		}
-		// throw new UnsupportedOperationException();
-		// return;
-	}
-		//throw new UnsupportedOperationException();
-	}
+    /**
+     * Submit an enquiry for a camp.
+     *
+     * @param camp    The camp related to the enquiry.
+     * @param content The content of the enquiry.
+     */
+    public void submitEnquiry(Camp camp, String content) {
+        Enquiry newEnquiry = new Enquiry(this.getStudentID(), this.getName(), content, "datePlaceholder", null, false);
+        newEnquiry.createEnquiry(this.getStudentID(), this.getName());
+        enquiries.add(newEnquiry);
+    }
 
-	/**
-	 * 
-	 * @param student
-	 * @param camp
-	 * @param enquiry
-	 */
-	public void editEnquiry(Student_User student, Camp camp, int enquiryNo, String newMessage) {
-		// TODO - implement Attendee.editEnquiry
-		// key is to find the right enquiry from indexing
-		// delete enquiry from both student and camp side
-		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
-		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
+    /**
+     * View enquiries related to a specific camp.
+     *
+     * @param camp The camp for which to view enquiries.
+     */
+    public void viewEnquiriesForCamp(Camp camp) {
+        // TODO - Implement logic to retrieve and display enquiries for the specified camp
+        throw new UnsupportedOperationException();
+    }
 
-		// ASSUMING enquiryNo is based on studentArray indexing, from the user POV
-		// studentEnquiryArray.remove(enquiryNo);
-		studentEnquiryArray.get(enquiryNo).setContent(newMessage);
+    /**
+     * Edit an existing enquiry.
+     *
+     * @param enquiryNo  The index of the enquiry to edit.
+     * @param newMessage The new message content for the enquiry.
+     */
+    public void editEnquiry(int enquiryNo, String newMessage) {
+        if (enquiryNo >= 0 && enquiryNo < enquiries.size()) {
+            enquiries.get(enquiryNo).setContent(newMessage);
+        } else {
+            System.out.println("Invalid enquiry number.");
+        }
+    }
 
-		for (Enquiry campEnquiry: campEnquiryArray){
-			if (campEnquiry.getStudentID() == student.getStudentID()){
-				// get correct index of enquiry from camp enquiry array, then remove it
-				campEnquiry.setContent(newMessage);
-				return;
-			}
-		}
-	}
-		//throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param student
-	 * @param camp
-	 * @param enquiry
-	 */
-	public void deleteEnquiry(Student_User student, Camp camp, int enquiryNo) {
-		// TODO - implement Attendee.deleteEnquiry
-		// key is to find the right enquiry from indexing
-		// delete enquiry from both student and camp side
-		ArrayList<Enquiry> studentEnquiryArray = student.getEnquirySubmitted();
-		ArrayList<Enquiry> campEnquiryArray = camp.getEnquiry();
-
-		// ASSUMING enquiryNo is based on studentArray indexing, from the user POV
-		studentEnquiryArray.remove(enquiryNo);
-
-		for (Enquiry campEnquiry: campEnquiryArray){
-			if (campEnquiry.getStudentID() == student.getStudentID()){
-				// get correct index of enquiry from camp enquiry array, then remove it
-				campEnquiryArray.remove(campEnquiry);
-				return;
-			}
-		}
-
-	}
-
-		//throw new UnsupportedOperationException();
-	}
-
+    /**
+     * Delete an existing enquiry.
+     *
+     * @param enquiryNo The index of the enquiry to delete.
+     */
+    public void deleteEnquiry(int enquiryNo) {
+        if (enquiryNo >= 0 && enquiryNo < enquiries.size()) {
+            enquiries.remove(enquiryNo);
+        } else {
+            System.out.println("Invalid enquiry number.");
+        }
+    }
 }
