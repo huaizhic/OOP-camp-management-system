@@ -38,6 +38,8 @@ public class Camp {
 		suggestion = new ArrayList<>();
 	}
 
+	// Add a hashmap
+
 	public String getCampName() {
 		return this.campName;
 	}
