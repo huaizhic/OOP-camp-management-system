@@ -10,14 +10,14 @@ public class Camp {
 	private String campName;
 	private ArrayList<LocalDate> campDates;
 	private LocalDate regCloseDate;
-	private ArrayList<UserGroup> userGroup;
+	private ArrayList<userGroup> userGroup;
 	private String location;
 	private int totalSlots;
 	private int remainingSlots;
 	private int committeeSlots;
 	private String description;
 	private StaffMember staffInCharge;
-	private ArrayList<Student_User> studentsRegistered;
+	private ArrayList<student_User> studentsRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry ;
 	private ArrayList<Suggestion> suggestion;
@@ -64,11 +64,11 @@ public class Camp {
 		this.regCloseDate = regCloseDate;
 	}
 
-	public ArrayList<UserGroup> getUserGroup() {
+	public ArrayList<userGroup> getUserGroup() {
 		return this.userGroup;
 	}
 
-	public void setUserGroup(ArrayList<UserGroup> userGroup) {
+	public void setUserGroup(ArrayList<userGroup> userGroup) {
 		this.userGroup = userGroup;
 	}
 
@@ -117,7 +117,7 @@ public class Camp {
 		this.staffInCharge = staffInCharge;
 	}
 
-	public ArrayList<Student_User> getStudentsRegistered() {
+	public ArrayList<student_User> getStudentsRegistered() {
 		return this.studentsRegistered;
 	}
 
