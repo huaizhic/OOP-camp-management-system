@@ -6,10 +6,15 @@ import java.util.Comparator;
 public class SortByName_Default extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 	public ArrayList<Camp> Sorting(ArrayList<Camp> campList){
-		 Collections.sort(campList, campNameComparator);
-		campAfterSorting.clear();
-		campAfterSorting.addAll(campList);
-		return campAfterSorting;
+		if (campList == null) {
+			System.out.println("No camp available yet");
+			return null;
+		} else {
+			Collections.sort(campList, campNameComparator);
+			campAfterSorting.clear();
+			campAfterSorting.addAll(campList);
+			return campAfterSorting;
+		}
 	}
 
 	public static Comparator<Camp> campNameComparator = new Comparator<>(){

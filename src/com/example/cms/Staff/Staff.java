@@ -127,10 +127,17 @@ public class Staff {
 			switch(choice){
 				case(1):
 					DisplayBySort aOb = new SortByName_Default();
-					for(Camp camp : aOb.Sorting(staff.getCampsCreated())){
-						Camp.printAllCampInfo(camp);
+					ArrayList<Camp> sorted =aOb.Sorting(staff.getCampsCreated());
+					if(sorted == null){
+						System.out.println("Please choose again");
+						break;
+					}else{
+						for(Camp camp:sorted) {
+							Camp.printAllCampInfo(camp);
+						}
+						break;
 					}
-					break;
+
 				case(2):
 
 				case(3):
@@ -244,9 +251,5 @@ public class Staff {
 		throw new UnsupportedOperationException();
 	}
 
-	public void operation() {
-		// TODO - implement Staff.operation
-		throw new UnsupportedOperationException();
-	}
 
 }
