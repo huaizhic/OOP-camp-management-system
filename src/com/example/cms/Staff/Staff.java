@@ -4,6 +4,7 @@ import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Status;
 import com.example.cms.Suggestion;
 import com.example.cms.UserGroup;
+import com.example.cms.DisplayOptions.*;
 
 import java.text.Format;
 import java.time.LocalDate;
@@ -118,9 +119,21 @@ public class Staff {
 		if(staff.getCampsCreated().isEmpty()){
 			System.out.println("No camp has been created, please create one before editing");
 		}else{
-			System.out.println("Please choose the camp that you would like to edit");
-			for(Camp camp: staff.getCampsCreated()) {
-				camp.printAllCampInfo(camp);
+			System.out.println("Please view the camp that you have created with the following ways:");
+			System.out.println("1. Default: alphabetical order");
+			System.out.println("2. Search for keywords");
+			System.out.println("3. Sort by camp features");
+			int choice = input.nextInt();
+			switch(choice){
+				case(1):
+					DisplayBySort aOb = new SortByName_Default();
+					for(Camp camp : aOb.Sorting(staff.getCampsCreated())){
+						Camp.printAllCampInfo(camp);
+					}
+					break;
+				case(2):
+
+				case(3):
 			}
 		}
 

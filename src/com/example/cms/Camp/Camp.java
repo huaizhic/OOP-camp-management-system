@@ -53,7 +53,7 @@ public class Camp {
 		return counter;
 	}
 
-	public void printAllCampInfo(Camp camp){
+	public static void printAllCampInfo(Camp camp){
 		System.out.print("Camp: " + camp.getCampName() + " - ");
 		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
 		System.out.print("Reg close date: " + camp.getRegCloseDate());

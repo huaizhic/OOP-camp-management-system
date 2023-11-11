@@ -6,31 +6,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SortByTotalSlots extends DisplayOption{
+public class SortByTotalSlots extends DisplayBySort{
+	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 
-	public void Sorting(ArrayList<Camp> campList) {
+	public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {
 		if(campList == null){
 			System.out.println("No camp available yet");
+			return null;
 		}else {
 			Collections.sort(campList, campSlotsComparator.thenComparing(SortByName_Default.campNameComparator));
-
-			//Needs to find out how to sav2
-			// e potentially into csv format
-
-			for (Camp camp : campList) {
-				System.out.println(camp);
-				//Needs to find out how to print camp information, potentially direct from csv
+			campAfterSorting.clear();
+			campAfterSorting.addAll(campList);
+			return campAfterSorting;
 			}
-		}
-	}
 
-	public void SortSearchRegCloseDate(int totalSlots, ArrayList<Camp> campList){
-		Collections.sort(campList, campSlotsComparator.thenComparing(SortByName_Default.campNameComparator));
-		for(Camp camp:campList){
-			if(camp.getTotalSlots() >= totalSlots){
-				System.out.print(camp);
-			}
-		}
 	}
 
 	public static Comparator<Camp> campSlotsComparator = new Comparator<>(){
