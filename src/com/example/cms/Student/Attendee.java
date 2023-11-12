@@ -7,7 +7,7 @@ import com.example.cms.RegisterRole;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Attendee extends student_User {
+public class Attendee extends Student_User {
 
     // Fields to store registered camps and other necessary data
     private static ArrayList<Camp> registeredCamps;
@@ -48,7 +48,7 @@ public class Attendee extends student_User {
         System.out.println("4. Back to Main Menu");
         
         System.out.print("Enter your choice: ");
-        Scanner scanner;
+        Scanner scanner = new Scanner(System.in);
 		int choice = scanner.nextInt();
 
         switch (choice) {
