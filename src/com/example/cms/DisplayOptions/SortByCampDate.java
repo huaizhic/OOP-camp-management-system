@@ -8,7 +8,7 @@ import java.util.Comparator;
 public class SortByCampDate extends DisplayBySort{
     private ArrayList<Camp> campAfterSorting = new ArrayList<>();
     public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {
-        if (campList == null) {
+        if (campList.isEmpty()) {
             System.out.println("No camp available yet");
             return null;
         } else {

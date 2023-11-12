@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public abstract class DisplayBySearch <T, U>{
 
     public abstract ArrayList<Camp> Searching(T campList, U variableParameter);
-}
+    }
+

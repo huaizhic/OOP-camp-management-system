@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Separated sort and search class by inherit differnt abstract">
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByName_Default.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByName_Default.java" afterDir="false" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Staff.java">
+      <change afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SearchApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayBySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayBySearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCampDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCampDate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +89,8 @@
       <workItem from="1699327002838" duration="2071000" />
       <workItem from="1699610328767" duration="10095000" />
       <workItem from="1699629592698" duration="870000" />
-      <workItem from="1699712249225" duration="6846000" />
+      <workItem from="1699712249225" duration="6871000" />
+      <workItem from="1699768005152" duration="4792000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -192,7 +196,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699719396987</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Staff.java">
+      <option name="closed" value="true" />
+      <created>1699720300392</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699720300392</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +222,7 @@
     <MESSAGE value="improved camp reference" />
     <MESSAGE value="Progress on staff class" />
     <MESSAGE value="Separated sort and search class by inherit differnt abstract" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separated sort and search class by inherit differnt abstract" />
+    <MESSAGE value="Staff.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Staff.java" />
   </component>
 </project>

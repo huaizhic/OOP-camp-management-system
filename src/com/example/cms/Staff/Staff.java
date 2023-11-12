@@ -1,10 +1,12 @@
 package com.example.cms.Staff;
-import com.example.cms.Camp.*;
+
+import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.campData;
+import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Status;
 import com.example.cms.Suggestion;
 import com.example.cms.UserGroup;
-import com.example.cms.DisplayOptions.*;
 
 import java.text.Format;
 import java.time.LocalDate;
@@ -128,18 +130,14 @@ public class Staff {
 				case(1):
 					DisplayBySort aOb = new SortByName_Default();
 					ArrayList<Camp> sorted =aOb.Sorting(staff.getCampsCreated());
-					if(sorted == null){
-						System.out.println("Please choose again");
-						break;
-					}else{
 						for(Camp camp:sorted) {
 							Camp.printAllCampInfo(camp);
 						}
 						break;
-					}
-
 				case(2):
-
+					for(Camp camp:SearchApp.startSearch(staff.getCampsCreated())){
+						Camp.printAllCampInfo(camp);
+				}
 				case(3):
 			}
 		}
