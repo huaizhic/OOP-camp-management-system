@@ -67,7 +67,7 @@ public class Committee {
 		Suggestion newSuggestion = new Suggestion(content,committeeMember, status);
 		suggestionsArray.add(newSuggestion);
 
-		ArrayList<Suggestion> commMemberSuggestions = submitter.getSuggestionSubmitted();
+		ArrayList<Suggestion> commMemberSuggestions = committeeMember.getSuggestions();
 		commMemberSuggestions.add(newSuggestion);
 	}
 

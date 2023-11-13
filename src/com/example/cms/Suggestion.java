@@ -1,15 +1,15 @@
 package com.example.cms;
-import com.example.cms.Student.Committee_Member;
+import com.example.cms.Student.committee_Member;
 
 public class Suggestion {
 
 	private String content;
-	private Committee_Member submitter;
+	private committee_Member submitter;
 	private Status status;
 
 	private boolean processed = false;
 
-	public Suggestion(String content, Committee_Member submitter, Status status){
+	public Suggestion(String content, committee_Member submitter, Status status){
 		this.content = content;
 		this.submitter = submitter;
 		this.status = status;
@@ -27,7 +27,7 @@ public class Suggestion {
 		this.content = content;
 	}
 
-	public Committee_Member getSubmitter() {
+	public committee_Member getSubmitter() {
 		return this.submitter;
 	}
 
@@ -35,7 +35,7 @@ public class Suggestion {
 	 * 
 	 * @param submitter
 	 */
-	public void setSubmitter(Committee_Member submitter) {
+	public void setSubmitter(committee_Member submitter) {
 		this.submitter = submitter;
 	}
 

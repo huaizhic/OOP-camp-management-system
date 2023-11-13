@@ -9,7 +9,7 @@ public class Student_Account {
   private String userId; // Add a field to hold the student ID
   private Scanner scanner;
 
-  public Student_Account(String userId) {
+  public student_Account(String userId) {
       this.userId = userId;
   }
 
@@ -34,11 +34,11 @@ public class Student_Account {
           System.out.print("Enter your password: ");
           String enteredPassword = scanner.next();
 
-          Password_Manager passwordManager = new Password_Manager(); // Create an instance
+          password_Manager passwordManager = new password_Manager(); // Create an instance
 
           // Check the password and get the student's name
           if (passwordManager.checkPassword(userId, role, enteredPassword)) {
-              String studentName = Student_User.getName(userId);
+              String studentName = student_User.getName(userId);
 
               if ("Committee".equals(role)) {
                   System.out.println("Welcome, Committee Member " + studentName);
