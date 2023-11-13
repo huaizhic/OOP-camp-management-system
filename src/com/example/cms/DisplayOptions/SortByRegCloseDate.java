@@ -5,18 +5,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class SortByRegCloseDate extends DisplayBySort{
-	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
+public class SortByRegCloseDate implements DisplayOption{
 
-	public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {
+	public void Sorting(ArrayList<Camp> campList) {
 		if (campList == null) {
 			System.out.println("No camp available yet");
-			return null;
 		} else {
 			Collections.sort(campList, campRegDateComparator.thenComparing(SortByName_Default.campNameComparator));
-			campAfterSorting.clear();
-			campAfterSorting.addAll(campList);
-			return campAfterSorting;
+
+			//Needs to find out how to sav2
+			// e potentially into csv format
+
+			for (Camp camp : campList) {
+				System.out.println(camp);
+				//Needs to find out how to print camp information, potentially direct from csv
+			}
+		}
+	}
+
+	public void SortSearchRegCloseDate(LocalDate regCloseDate, ArrayList<Camp> campList){
+		Collections.sort(campList, campRegDateComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			if(camp.getRegCloseDate().compareTo(regCloseDate) == 0){
+				System.out.print(camp);
+			}
 		}
 	}
 	public static Comparator<Camp> campRegDateComparator = new Comparator<>(){

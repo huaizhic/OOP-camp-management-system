@@ -1,27 +1,39 @@
 package com.example.cms.DisplayOptions;
 
 import com.example.cms.Camp.Camp;
+import com.example.cms.UserGroup;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-public class SortByUserGroup extends DisplayBySort{
-	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
+public class SortByUserGroup implements DisplayOption {
 
-	public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {
+	public void Sorting(ArrayList<Camp> campList) {
 
 		if(campList == null){
 			System.out.println("No camp available yet");
-			return null;
 		}else {
 			Collections.sort(campList, campUserGroupComparator.thenComparing(SortByName_Default.campNameComparator));
-			campAfterSorting.clear();
-			campAfterSorting.addAll(campList);
-			return campAfterSorting;
+
+			//Needs to find out how to sav2
+			// e potentially into csv format
+
+			for (Camp camp : campList) {
+				System.out.println(camp);
+				//Needs to find out how to print camp information, potentially direct from csv
 			}
+		}
 	}
 
-
+	public void SortSearchUserGroup(UserGroup userGroup, ArrayList<Camp> campList){
+		Collections.sort(campList, campUserGroupComparator.thenComparing(SortByName_Default.campNameComparator));
+		for(Camp camp:campList){
+			for(int i = 0; i < camp.getUserGroup().size(); i++)
+				if(camp.getUserGroup().get(i).compareTo(userGroup) == 0){
+					System.out.print(camp);
+			}
+		}
+	}
 	public static Comparator<Camp> campUserGroupComparator = new Comparator<>(){
 		public int compare(Camp c1, Camp c2){
 			int c1UserGroup = c1.getUserGroup().size();

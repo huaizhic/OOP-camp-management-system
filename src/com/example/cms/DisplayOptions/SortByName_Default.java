@@ -3,17 +3,23 @@ import com.example.cms.Camp.Camp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-public class SortByName_Default extends DisplayBySort{
-	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
-	public ArrayList<Camp> Sorting(ArrayList<Camp> campList){
-		if (campList == null) {
-			System.out.println("No camp available yet");
-			return null;
-		} else {
-			Collections.sort(campList, campNameComparator);
-			campAfterSorting.clear();
-			campAfterSorting.addAll(campList);
-			return campAfterSorting;
+public class SortByName_Default implements DisplayOption{
+
+	public void Sorting(ArrayList<Camp> campList){
+		Collections.sort(campList, campNameComparator);
+
+		for(Camp camp : campList){
+			System.out.println(camp);
+			//Needs to find out how to print camp information, potentially direct from csv
+		}
+	}
+
+	public void SortSearchName(String name, ArrayList<Camp> campList){
+		Collections.sort(campList, campNameComparator);
+		for(Camp camp:campList){
+			if(camp.getCampName().contains(name)){
+				System.out.print(camp);
+			}
 		}
 	}
 
