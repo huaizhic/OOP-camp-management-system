@@ -1,6 +1,8 @@
 package com.example.cms.Staff;
+
 import com.example.cms.Camp.Camp;
 import com.example.cms.UserGroup;
+
 import java.util.ArrayList;
 
 public class StaffMember extends Staff {
@@ -11,6 +13,15 @@ public class StaffMember extends Staff {
 	private ArrayList<Camp> campsCreated;
 	private String securityQuestion;
 	private String securityAns;
+
+	public StaffMember(String staffID, String name, UserGroup userGroup, String securityQuestion, String securityAns){
+		this.staffID = staffID;
+		this.name = name;
+		this.userGroup = userGroup;
+		campsCreated = new ArrayList<>();
+		this.securityQuestion = securityQuestion;
+		this.securityAns = securityAns;
+	}
 
 	public String getStaffID() {
 		return this.staffID;

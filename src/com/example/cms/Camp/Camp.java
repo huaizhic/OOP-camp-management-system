@@ -1,5 +1,6 @@
 package com.example.cms.Camp;
 import com.example.cms.*;
+import com.example.cms.Student.Committee_Member;
 import com.example.cms.Student.Student_User;
 import com.example.cms.UserGroup;
 import com.example.cms.Staff.StaffMember;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 
 public class Camp {
 	private String campName;
-	private ArrayList<LocalDate> campDates;
+	private ArrayList<LocalDate> campDates = new ArrayList<>();
 	private LocalDate regCloseDate;
-	private ArrayList<UserGroup> userGroup;
+	private ArrayList<UserGroup> userGroup = new ArrayList<>();
 	private String location;
 	private int totalSlots;
 	private int remainingSlots;
@@ -20,6 +21,7 @@ public class Camp {
 	private String description;
 	private StaffMember staffInCharge;
 	private ArrayList<Student_User> studentsRegistered;
+	private ArrayList<Committee_Member> committeeRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry ;
 	private ArrayList<Suggestion> suggestion;
@@ -158,6 +160,14 @@ public class Camp {
 
 	public void setStudentsRegistered(ArrayList<Student_User> studentsRegistered) {
 		this.studentsRegistered = studentsRegistered;
+	}
+
+	public ArrayList<Committee_Member> getCommitteeRegistered() {
+		return committeeRegistered;
+	}
+
+	public void setCommitteeRegistered(Committee_Member committeeMember) {
+		this.committeeRegistered.add(committeeMember);
 	}
 
 	public boolean getVisibility() {

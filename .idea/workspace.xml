@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Staff.java">
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SearchApp.java" afterDir="false" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="SearchApp for easier usage">
+      <change afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayBySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayBySearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCampDate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortByCampDate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/StaffMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/StaffMember.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Kenneth0528&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d5b3bc67-1705-42f1-9f11-fd374e7619fd" />
+        <option name="url" value="https://github.com/huaizhic/OOP-camp-management-system.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -90,7 +104,8 @@
       <workItem from="1699610328767" duration="10095000" />
       <workItem from="1699629592698" duration="870000" />
       <workItem from="1699712249225" duration="6871000" />
-      <workItem from="1699768005152" duration="4792000" />
+      <workItem from="1699768005152" duration="5575000" />
+      <workItem from="1699862579665" duration="9173000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -204,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699720300392</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="SearchApp for easier usage">
+      <option name="closed" value="true" />
+      <created>1699772847637</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1699772847637</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +246,7 @@
     <MESSAGE value="Progress on staff class" />
     <MESSAGE value="Separated sort and search class by inherit differnt abstract" />
     <MESSAGE value="Staff.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Staff.java" />
+    <MESSAGE value="SearchApp for easier usage" />
+    <option name="LAST_COMMIT_MESSAGE" value="SearchApp for easier usage" />
   </component>
 </project>
