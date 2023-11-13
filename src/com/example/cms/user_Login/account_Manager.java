@@ -19,8 +19,8 @@ public class account_Manager {
         if (userTypeChoice == 2) {
             System.out.print("Enter your staff ID: ");
             String userId = scanner.next();
-           // staff_Account staffAccount = new staff_Account(scanner, userId);
-           // staffAccount.start();
+            staff_Account staffAccount = new staff_Account(scanner, userId);
+            staffAccount.start();
         } else if (userTypeChoice == 1) {
             System.out.print("Do you have an existing account? (1 for Yes, 0 for No): ");
             int accountChoice = scanner.nextInt();

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Staff.java">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
+>>>>>>> 3370471794a2e26a95701cd9e808684c7fbd13e1
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2XheNbFY4jQtgTfWhAMBvQZhMLi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Huai Zhi/Downloads/OOP-camp-management-system&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;IntelliLang.Configuration&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/example/cms" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="" />
+      <created>1699085700758</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699085700758</updated>
+      <workItem from="1699278556892" duration="4332000" />
+      <workItem from="1699282946916" duration="2331000" />
+      <workItem from="1699327002838" duration="2071000" />
+      <workItem from="1699610328767" duration="10095000" />
+      <workItem from="1699629592698" duration="870000" />
+      <workItem from="1699712249225" duration="6871000" />
+      <workItem from="1699768005152" duration="4792000" />
+    </task>
+    <task id="LOCAL-00001" summary="SortByTotalSlots">
+      <option name="closed" value="true" />
+      <created>1699279130383</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699279130383</updated>
+    </task>
+    <task id="LOCAL-00002" summary="SortByLocation">
+      <option name="closed" value="true" />
+      <created>1699279892345</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699279892345</updated>
+    </task>
+    <task id="LOCAL-00003" summary="SortByCommitteeSlots">
+      <option name="closed" value="true" />
+      <created>1699279991336</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699279991336</updated>
+    </task>
+    <task id="LOCAL-00004" summary="SortByCommitteeSlots">
+      <option name="closed" value="true" />
+      <created>1699280191599</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699280191599</updated>
+    </task>
+    <task id="LOCAL-00005" summary="All sort methods implemented">
+      <option name="closed" value="true" />
+      <created>1699281186988</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699281186988</updated>
+    </task>
+    <task id="LOCAL-00006" summary="search methods added">
+      <option name="closed" value="true" />
+      <created>1699284562457</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699284562457</updated>
+    </task>
+    <task id="LOCAL-00007" summary="camp info class and camp data class completed">
+      <option name="closed" value="true" />
+      <created>1699285332795</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1699285332795</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Constructor built">
+      <option name="closed" value="true" />
+      <created>1699327895432</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1699327895432</updated>
+    </task>
+    <task id="LOCAL-00009" summary="committee_Member.java">
+      <option name="closed" value="true" />
+      <created>1699329021895</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699329021896</updated>
+    </task>
+    <task id="LOCAL-00010" summary="improved camp reference">
+      <option name="closed" value="true" />
+      <created>1699614035875</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699614035875</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Progress on staff class">
+      <option name="closed" value="true" />
+      <created>1699622450616</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1699622450616</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Progress on staff class">
+      <option name="closed" value="true" />
+      <created>1699624617256</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1699624617256</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Separated sort and search class by inherit differnt abstract">
+      <option name="closed" value="true" />
+      <created>1699719396987</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699719396987</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Staff.java">
+      <option name="closed" value="true" />
+      <created>1699720300392</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699720300392</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="SortByTotalSlots" />
+    <MESSAGE value="SortByLocation" />
+    <MESSAGE value="SortByCommitteeSlots" />
+    <MESSAGE value="All sort methods implemented" />
+    <MESSAGE value="search methods added" />
+    <MESSAGE value="camp info class and camp data class completed" />
+    <MESSAGE value="Constructor built" />
+    <MESSAGE value="committee_Member.java" />
+    <MESSAGE value="improved camp reference" />
+    <MESSAGE value="Progress on staff class" />
+    <MESSAGE value="Separated sort and search class by inherit differnt abstract" />
+    <MESSAGE value="Staff.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Staff.java" />
+  </component>
+</project>

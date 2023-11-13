@@ -3,11 +3,11 @@ package com.example.cms.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class password_Manager {
+public class Password_Manager {
 
     public static boolean checkPassword(String studentID, String roleChoice, String enteredPassword) {
         // Retrieve the student based on studentID
-        student_User student_Information = student_User.getStudentById(studentID);
+        Student_User student_Information = Student_User.getStudentById(studentID);
 
         // Check if the student exists and validate the password and roleChoice.
         if (student_Information != null) {
@@ -28,7 +28,7 @@ public class password_Manager {
 
     public boolean updatePassword(String userID, String updatedPassword) {
         // Find the student based on the userID (you need to implement this part)
-        student_User Student = student_User.getStudentById(userID);
+        Student_User Student = Student_User.getStudentById(userID);
 
         if (Student != null) {
             String oldPassword = Student.getPassword();
@@ -66,14 +66,14 @@ public class password_Manager {
     public void forgotPassword(String userID) {
         // First, retrieve the student based on the userID
         Scanner scanner = null;
-        student_User Student = student_User.getStudentById(userID);
+        Student_User Student = Student_User.getStudentById(userID);
 
         if (Student != null) {
-            System.out.println("Password recovery for " + student_User.getName(userID));
+            System.out.println("Password recovery for " + Student_User.getName(userID));
 
             // Get security questions and answers from the student
             ArrayList<String> securityQuestions = Student.getSecurityQuestion();
-            ArrayList<String> securityAnswers = Student.getSecurityAnswers();
+            ArrayList<String> securityAnswers = Student.getSecurityAns();
 
             // Maximum wrong attempts allowed per question
             int maxWrongAttempts = 2;

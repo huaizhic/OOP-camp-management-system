@@ -2,32 +2,29 @@ package com.example.cms.Student;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Others.Faculty;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class student_User {
+public class Student_User {
 
 	protected String studentID;
 	private String password = "password";
 	private String name;
-	private Faculty faculty;
 	private String userGroup;
 	private ArrayList<Camp> registeredCamps;
-	protected static List<String> campAccessibility; // This indicates which camp the attendee can see
 	private boolean campCommittee;
-	//private ArrayList<Camp> notRegisterable; // what is this for? 
+	private ArrayList<Camp> notRegisterable;
 	private ArrayList<String> securityQuestion;
-	private ArrayList<String> securityAnswers;
+	private ArrayList<String> securityAns;
 	private ArrayList<Enquiry> enquirySubmitted;
 
 	// Initialize the ArrayList
-	private static List<student_User> existingStudents = new ArrayList<>();
+	private static List<Student_User> existingStudents = new ArrayList<>();
 
-	public student_User() {
+	public Student_User() {
 		// TODO - implement Student.Student
 		throw new UnsupportedOperationException();
 	}
@@ -57,39 +54,13 @@ public class student_User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	 public Faculty getFaculty() {
-	        return this.faculty;
-	    }
 
-	 public void setFaculty(String faculty) {
-
-	            this.faculty = Faculty.valueOf(faculty.toUpperCase()); // Convert to uppercase for case-insensitive comparison
-	       
-	    }
-
-	    // Method to check if the provided faculty is valid
-	 public static boolean isValidFaculty(String faculty) {
-		    // Capitalize and remove spaces from the user input
-		    String formattedFaculty = faculty.trim().toUpperCase();
-
-		    for (Faculty validFaculty : Faculty.values()) {
-		        if (validFaculty.name().equalsIgnoreCase(formattedFaculty)) {
-		            return true;
-		        }
-		    }
-		    return false;
-		}
-
-
-	    
-
-	public static student_User getStudentById(String studentID) {
+	public static Student_User getStudentById(String studentID) {
 		// For demonstration purposes, let's assume you have a list of existing students.
-		List<student_User> existingStudents = getExistingStudents(); // You need to implement this method.
+		List<Student_User> existingStudents = getExistingStudents(); // You need to implement this method.
 
 		// Search for the student with the provided studentID.
-		for (student_User student : existingStudents) {
+		for (Student_User student : existingStudents) {
 			if (studentID.equals(student.getStudentID())) {
 				return student; // Return the found student.
 			}
@@ -99,12 +70,12 @@ public class student_User {
 		return null;
 	}
 
-	public static List<student_User> getExistingStudents() {
+	public static List<Student_User> getExistingStudents() {
 		return existingStudents;
 	}
 
-	public static void addStudent(student_User newStudent) {
-		List<student_User> existingStudents = getExistingStudents(); // Retrieve the list of existing students
+	public static void addStudent(Student_User newStudent) {
+		List<Student_User> existingStudents = getExistingStudents(); // Retrieve the list of existing students
 		existingStudents.add(newStudent); // Add the new student to the list
 
 		// Now, save the updated list of students to a text file (you can choose a different data source as needed).
@@ -114,9 +85,9 @@ public class student_User {
 
 	public static String getName(String userID) {
 		// For demonstration purposes, let's assume you have a list of existing students.
-		List<student_User> existingStudents = getExistingStudents(); // You need to implement this method.
+		List<Student_User> existingStudents = getExistingStudents(); // You need to implement this method.
 
-		for (student_User Student : existingStudents) { // assuming existingStudents is the list of students
+		for (Student_User Student : existingStudents) { // assuming existingStudents is the list of students
 			if (userID.equals(Student.getStudentID())) {
 				return Student.name;
 			}
@@ -147,14 +118,7 @@ public class student_User {
 	public void setRegisteredCamps(ArrayList<Camp> registeredCamps) {
 		this.registeredCamps = registeredCamps;
 	}
-	
-	public List<String> getCampAccessibility() {
-        return this.campAccessibility;
-    }
 
-    public void setCampAccessibility(List<String> campAccessibility) {
-        this.campAccessibility = campAccessibility;
-    }
 	public boolean getCampCommittee() {
 		return this.campCommittee;
 	}
@@ -167,17 +131,17 @@ public class student_User {
 		this.campCommittee = campCommittee;
 	}
 
-//	public ArrayList<Camp> getNotRegisterable() {
-//		return this.notRegisterable;
-//	}
-//
-//	/**
-//	 *
-//	 * @param notRegisterable
-//	 */
-//	public void setNotRegisterable(ArrayList<Camp> notRegisterable) {
-//		this.notRegisterable = notRegisterable;
-//	}
+	public ArrayList<Camp> getNotRegisterable() {
+		return this.notRegisterable;
+	}
+
+	/**
+	 *
+	 * @param notRegisterable
+	 */
+	public void setNotRegisterable(ArrayList<Camp> notRegisterable) {
+		this.notRegisterable = notRegisterable;
+	}
 
 	public ArrayList<String> getSecurityQuestion() {
 		return this.securityQuestion;
@@ -191,16 +155,16 @@ public class student_User {
 		this.securityQuestion = (ArrayList<String>) securityQuestions;
 	}
 
-	public ArrayList<String> getSecurityAnswers() {
-		return this.securityAnswers;
+	public ArrayList<String> getSecurityAns() {
+		return this.securityAns;
 	}
 
 	/**
 	 *
-	 * @param securityAnswers
+	 * @param securityAns
 	 */
 	public void setSecurityAnswers(List<String> securityAnswers) {
-		this.securityAnswers = (ArrayList<String>) securityAnswers;
+		this.securityAns = (ArrayList<String>) securityAnswers;
 	}
 
 	public ArrayList<Enquiry> getEnquirySubmitted() {
@@ -217,10 +181,10 @@ public class student_User {
 	}
 
 	// Method to save the list of students to a text file
-	private static void saveStudentsToFile(List<student_User> students) {
+	private static void saveStudentsToFile(List<Student_User> students) {
 		try {
 			FileWriter writer = new FileWriter("students.txt"); // You can choose a different file name or location
-			for (student_User student : students) {
+			for (Student_User student : students) {
 				writer.write(student.getStudentID() + "," + student.getName() + "," + student.getUserGroup() + "\n");
 			}
 			writer.close();

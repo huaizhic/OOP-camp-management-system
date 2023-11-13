@@ -2,8 +2,6 @@ package com.example.cms.Staff;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Status;
-import com.example.cms.Suggestion;
 import com.example.cms.UserGroup;
 
 import java.text.Format;
@@ -157,7 +155,7 @@ public class Staff {
 	 * @param staff
 	 * @param camp
 	 */
-	public void viewEnquiry(StaffMember staffMember, int campNo) {
+	public void viewEnquiry(Staff staffMember, int campNo) {
 		// TODO - implement Staff.viewEnquiry
 		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
 		Camp campSelected = campsCreatedArray.get(campNo);
@@ -172,7 +170,7 @@ public class Staff {
 	 * @param enquiry
 	 * @param reply
 	 */
-	public void replyEnquiry(StaffMember staffMember, int campNo, int enquiryNo, String reply) {
+	public void replyEnquiry(Staff staffMember, int campNo, int enquiryNo, String reply) {
 		// TODO - implement Staff.replyEnquiry
 		// at this stage, we assume that only either committee member OR staff can use a reply slot per enquiry.
 		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
@@ -190,7 +188,7 @@ public class Staff {
 	 * @param staff
 	 * @param camp
 	 */
-	public void viewSuggestion(StaffMember staffMember, int campNo) {
+	public void viewSuggestion(Staff staffMember, int campNo) {
 		// TODO - implement Staff.viewSuggestion
 		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
 		Camp campSelected = campsCreatedArray.get(campNo);
@@ -199,12 +197,12 @@ public class Staff {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param staff
 	 * @param camp
 	 * @param suggestion
 	 */
-	public void approveSuggestion(StaffMember staffMember, int campNo, int suggestionNo, Status status) {
+	public void approveSuggestion(Staff staffMember, int campNo, int suggestionNo) {
 		// TODO - implement Staff.approveSuggestion
 		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
 		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
