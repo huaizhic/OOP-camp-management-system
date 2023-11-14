@@ -20,11 +20,11 @@ public class Camp {
 	private int remainingCommitteeSlots;
 	private String description;
 	private StaffMember staffInCharge;
-	private ArrayList<Student_User> studentsRegistered;
+	private ArrayList<Student_User> studentsRegistered = new ArrayList<>();
 	private ArrayList<Committee_Member> committeeRegistered;
 	private boolean visibility;
-	private ArrayList<Enquiry> enquiry ;
-	private ArrayList<Suggestion> suggestion;
+	private ArrayList<Enquiry> enquiry = new ArrayList<>();
+	private ArrayList<Suggestion> suggestion = new ArrayList<>();
 	private static int counter = -1;
 
 	public Camp(){
@@ -42,10 +42,7 @@ public class Camp {
 		committeeSlots = 10;
 		remainingCommitteeSlots = committeeSlots;
 		staffInCharge = staff;
-		studentsRegistered = new ArrayList<>();
 		this.visibility = visibility;
-		enquiry = new ArrayList<>();
-		suggestion = new ArrayList<>();
 		counter ++;
 	}
 

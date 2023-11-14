@@ -2,10 +2,7 @@ package com.example.cms.Staff;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
-import com.example.cms.DisplayOptions.DisplayBySort;
-import com.example.cms.DisplayOptions.SortApp;
-import com.example.cms.DisplayOptions.SearchApp;
-import com.example.cms.DisplayOptions.SortByName_Default;
+import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Status;
 import com.example.cms.Suggestion;
@@ -163,22 +160,33 @@ public class Staff {
 			}
 		}
 	}
+	private Camp selectCamp(ArrayList<Camp> campArrayList){
+		String campToBeSelectedStr;
+		Camp campToBeSelected = null;
+		do{System.out.println("Please insert the camp name or enter exit to cancel in lower case");
+			campToBeSelectedStr = input.nextLine();
+			if(campToBeSelectedStr.equals("exit")){
+				return null;
+			}
+			else {
+				campToBeSelected = campData.getCampHashMap().get(campToBeSelectedStr);
+				if (campToBeSelected == null) {
+					System.out.println("The camp does not exist, please verify the CAMP NAME");
+				}
+			}
+		}while(campToBeSelected == null);
+		return campToBeSelected;
+	}
 
 
-	public void editCamp(StaffMember staff) {
+	public String editCamp(StaffMember staff) {
 		viewCampCreated(staff);
 			boolean completedEditing = false;
 			do {
-				Camp campToBeEdited = null;
-				String campToEditString;
-				do{System.out.println("Please insert the camp name that you would like to edit");
-				campToEditString = input.nextLine();
-				campToBeEdited = campData.getCampHashMap().get(campToEditString);
-					if(campToBeEdited == null){
-						System.out.println("The camp does not exist, please verify the CAMP NAME");
-					}
-				}while(campToBeEdited == null);
-
+				Camp campToBeEdited = selectCamp(staff.getCampsCreated());
+				if(campToBeEdited == null){
+					return "Action terminated, exiting...";
+				}
 				System.out.println("====What camp information would you like to edit====");
 				System.out.println("1. Camp name");
 				System.out.println("2. Camp location");
@@ -187,13 +195,15 @@ public class Staff {
 				System.out.println("5. Camp registration close date");
 				System.out.println("6. Camp total slots");
 				System.out.println("7. Camp eligible user group");
+				System.out.println("8. Exiting");
 				int thingsToEdit = input.nextInt();
 				switch(thingsToEdit){
 					case(1):
 						System.out.println("Enter the new camp name");
 						String newCampName = input.nextLine();
+						String oldCampName = campToBeEdited.getCampName();
+						campData.getCampHashMap().remove(oldCampName);
 						campToBeEdited.setCampName(newCampName);
-						campData.getCampHashMap().remove(campToEditString);
 						campData.addCampToMap(newCampName, campToBeEdited);
 						System.out.println("The new camp name is now: " + campToBeEdited.getCampName());
 						System.out.println("Any other camp to edit? Yes or No");
@@ -296,6 +306,9 @@ public class Staff {
 						}while(!conti);
 						campToBeEdited.setUserGroup(userGroups);
 						break;
+					case(8):
+						System.out.println("Action terminated by the user");
+						return "Exiting...";
 				}
 				String ans;
 				do {
@@ -304,122 +317,95 @@ public class Staff {
 					completedEditing = (ans == "No");
 				}while(ans != "Yes" && ans != "No");
 			}while(!completedEditing);
+
+			return "Edit successful!";
 		}
 
 
-	public void deleteCamp(StaffMember staff) {
+	public String deleteCamp(StaffMember staff) {
 		if(staff.getCampsCreated().isEmpty()){
 			System.out.println("No camp has been created");
+			return "exiting...";
 		}
 		else {
 			viewCampCreated(staff);
-			String campNameToDeleteStr;
-			Camp campToBeDeleted = null;
-			do {
-				System.out.println("Please select the camp by camp NAME that you would like to delete");
-				campNameToDeleteStr = input.nextLine();
-				campToBeDeleted = campData.getCampHashMap().get(campNameToDeleteStr);
-				if (campToBeDeleted == null) {
-					System.out.println("The camp does not exist, please verify the CAMP NAME");
-				}
-			} while (campToBeDeleted == null);
-			if (campToBeDeleted.getStudentsRegistered().isEmpty() && campToBeDeleted.getCommitteeRegistered().isEmpty()) {
-				System.out.println("Confirm to delete Camp: " + campNameToDeleteStr +". Insert Confirm or any other key");
-				if(input.nextLine().equals("Confirm")){
-					staff.getCampsCreated().remove(campToBeDeleted);
-					campData.getCampHashMap().remove(campNameToDeleteStr);
-				}
+			Camp campToBeDeleted = selectCamp(staff.getCampsCreated());
+			if (campToBeDeleted == null) {
+				return null;
 			} else {
-				System.out.println("There is already attendee or committee registered, the camp cannot be deleted");
+				String campNameToDeleteStr = campToBeDeleted.getCampName();
+				if (campToBeDeleted.getStudentsRegistered().isEmpty() && campToBeDeleted.getCommitteeRegistered().isEmpty()) {
+					System.out.println("Confirm to delete Camp: " + campNameToDeleteStr + ". Insert Confirm or any other key");
+					if (input.nextLine().equals("Confirm")) {
+						staff.getCampsCreated().remove(campToBeDeleted);
+						campData.getCampList().remove(campToBeDeleted);
+						campData.getCampHashMap().remove(campNameToDeleteStr);
+						return "Camp deletes successfully";
+					}
+					else{
+						System.out.println("Action terminated by user");
+						return "exiting...";
+					}
+				} else {
+					System.out.println("There is already attendee or committee registered, the camp cannot be deleted");
+					return "Action terminated, exiting...";
+				}
 			}
 		}
 	}
 
 	public void viewAllCamps() {
-		System.out.println("Please view all camps with the following ways:");
-		System.out.println("1. Default: alphabetical order of camp name");
-		System.out.println("2. Search for keywords");
-		System.out.println("3. Sort by camp features");
-		int choice = input.nextInt();
-		switch (choice) {
-			case (1):
-				DisplayBySort aOb = new SortByName_Default();
-				ArrayList<Camp> sorted = aOb.Sorting(campData.getCampList());
-				for (Camp camp : sorted) {
-					Camp.printAllCampInfo(camp);
-				}
-				break;
-			case (2):
-				ArrayList<Camp> afterSearchCamp;
-				do {
-					afterSearchCamp = SearchApp.startSearch(campData.getCampList());
-					if (afterSearchCamp == null) {
-						System.out.println("Please choose a correct option");
-					} else {
-						for (Camp camp : afterSearchCamp) {
-							Camp.printAllCampInfo(camp);
-						}
-					}
-				} while (afterSearchCamp == null);
-			case (3):
-				ArrayList<Camp> afterSortCamp;
-				do {
-					afterSortCamp = SortApp.startSorting(campData.getCampList());
-					if (afterSortCamp == null) {
-						System.out.println("Please choose a correct option");
-					} else {
-						for (Camp camp : afterSortCamp) {
-							Camp.printAllCampInfo(camp);
-						}
-					}
-				} while (afterSortCamp == null);
+		ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
+		if(campArrayList == null){
+			System.out.println("Action terminated");
+		}else{
+			for(Camp camp: campArrayList){
+				Camp.printAllCampInfo(camp);
+			}
 		}
 
 	}
 
 
 
-	public void viewEnquiry(StaffMember staff, int campNo) {
+	public void viewEnquiry(StaffMember staff) {
 		viewCampCreated(staff);
-		String campNameToViewEnquiryStr;
-		Camp campNameToViewEnquiry = null;
-		do {
-			System.out.println("Please select the camp that you have created by camp NAME that you would like to see the enquiry");
-			campNameToViewEnquiryStr = input.nextLine();
-			campNameToViewEnquiry = campData.getCampHashMap().get(campNameToViewEnquiryStr);
-			if (campNameToViewEnquiry == null) {
-				System.out.println("The camp does not exist, please verify the CAMP NAME");
+		Camp campNameToViewEnquiry = selectCamp(staff.getCampsCreated());
+		if(campNameToViewEnquiry.getEnquiry().isEmpty()){
+			System.out.println("No enquiry has been submitted for this camp");
+			System.out.println("Existing...");
+		}
+		else {
+			for (Enquiry enquiry : campNameToViewEnquiry.getEnquiry()) {
+				Enquiry.printAllEnquiryInfo(enquiry);
 			}
-		} while (campNameToViewEnquiry == null);
-		Enquiry.
-
-
-
-
-		ArrayList<Camp> campsCreatedArray = staff.getCampsCreated();
-		Camp campSelected = campsCreatedArray.get(campNo);
-		System.out.println(campSelected.getEnquiry());
-		// throw new UnsupportedOperationException();
+		}
 	}
 
-	/**
-	 * 
-	 * @param staff
-	 * @param camp
-	 * @param enquiry
-	 * @param reply
-	 */
-	public void replyEnquiry(StaffMember staffMember, int campNo, int enquiryNo, String reply) {
-		// TODO - implement Staff.replyEnquiry
-		// at this stage, we assume that only either committee member OR staff can use a reply slot per enquiry.
-		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
-		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
-		ArrayList<Enquiry> campEnquiryArray = selectedCamp.getEnquiry();
-		Enquiry selectedEnquiry = campEnquiryArray.get(enquiryNo);
-		selectedEnquiry.setReply(reply);
-		selectedEnquiry.setProcessed(true);
+/*
+!!!!!
+This needs to be completed after the enquiry class has been fully completed !!!
+ */
+	public void replyEnquiry(StaffMember staff, int campNo, int enquiryNo) {
+		Scanner input = new Scanner(System.in);
+		viewCampCreated(staff);
+		String campNameToViewEnquiryStr;
+		Camp campNameToViewEnquiry = selectCamp(staff.getCampsCreated());
+		if(campNameToViewEnquiry.getEnquiry().isEmpty()){
+			System.out.println("No enquiry has been submitted for this camp");
+			System.out.println("Existing...");
+		}
+		else {
+			for (Enquiry enquiry : campNameToViewEnquiry.getEnquiry()) {
+				Enquiry.printAllEnquiryInfo(enquiry);
+			}
+			System.out.println("Which enquiry would you like to reply to? Insert enquiry SUBJECT");
+			//Implement enquiry picking
+			System.out.println("Insert your reply:");
+			String reply = input.nextLine();
+		}
 
-		//throw new UnsupportedOperationException();
+
 	}
 
 	/**
