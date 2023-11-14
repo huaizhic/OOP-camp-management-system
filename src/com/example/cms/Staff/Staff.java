@@ -379,8 +379,24 @@ public class Staff {
 
 
 
-	public void viewEnquiry(StaffMember staffMember, int campNo) {
-		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
+	public void viewEnquiry(StaffMember staff, int campNo) {
+		viewCampCreated(staff);
+		String campNameToViewEnquiryStr;
+		Camp campNameToViewEnquiry = null;
+		do {
+			System.out.println("Please select the camp that you have created by camp NAME that you would like to see the enquiry");
+			campNameToViewEnquiryStr = input.nextLine();
+			campNameToViewEnquiry = campData.getCampHashMap().get(campNameToViewEnquiryStr);
+			if (campNameToViewEnquiry == null) {
+				System.out.println("The camp does not exist, please verify the CAMP NAME");
+			}
+		} while (campNameToViewEnquiry == null);
+		Enquiry.
+
+
+
+
+		ArrayList<Camp> campsCreatedArray = staff.getCampsCreated();
 		Camp campSelected = campsCreatedArray.get(campNo);
 		System.out.println(campSelected.getEnquiry());
 		// throw new UnsupportedOperationException();

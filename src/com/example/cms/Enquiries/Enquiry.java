@@ -1,9 +1,23 @@
+/*
+System.out.println("    Please insert the registration close date of the camp in the format yyyy-mm-dd");
+		LocalDate regCloseDate = null;
+		do{String regCloseString = input.nextLine();
+			try{
+				regCloseDate = LocalDate.parse(regCloseString);
+				System.out.println("Registration Close Date: " + regCloseDate);
+			}catch(DateTimeParseException e){
+				System.out.println("Please insert the registration close data in the correct format: yyyy-mm-dd");
+			}}while(regCloseDate == null);
+ */
+
+
+
 package com.example.cms.Enquiries;
+
+import com.example.cms.Student.Student_User;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import com.example.cms.Student.Student_User;
 
 public class Enquiry {
     private String studentID;
@@ -19,13 +33,20 @@ public class Enquiry {
     // Initialize a list to store separate HashMaps for inquiries of different students
     private List<Map<String, Enquiry>> inquiryList = new ArrayList<>();
 
-    public Enquiry(String studentID, String studentName, String content, String dateSent, String reply, boolean processed) {
+    public static void printAllEnquiryInfo(Enquiry enquiry){
+        System.out.println("Submitted by: " + enquiry.getStudentName());
+        System.out.println("Date sent: " + enquiry.getDateSent());
+        System.out.println("Enquiry content: " + enquiry.getContent());
+        System.out.println("Processed: " + enquiry.isProcessed());
+    }
+
+    public Enquiry(String studentID, String studentName, String content, String dateSent) {
         this.studentID = studentID;
         this.studentName = studentName;
         this.content = content;
         this.dateSent = dateSent;
-        this.reply = reply;
-        this.processed = processed;
+        this.reply = null;
+        this.processed = false;
 
         // Create a new Enquiry and add it to the enquiries map
         enquiries.put(studentID, this);
@@ -176,7 +197,7 @@ public class Enquiry {
                 String dateSent = sdf.format(date);
 
                 // Create a new Enquiry and add it to the enquiries map
-                Enquiry newEnquiry = new Enquiry(studentID, studentName, content, dateSent, null, false);
+                Enquiry newEnquiry = new Enquiry(studentID, studentName, content, dateSent);
                 enquiries.put(newEnquiry.getStudentID(), newEnquiry);
 
                 // Create a new HashMap for this student's inquiry and add it to the list
@@ -195,7 +216,7 @@ public class Enquiry {
     }
     
     public static void main(String[] args) {
-        Enquiry enquiry = new Enquiry("studentID1", "", "", "", "", false);
+        Enquiry enquiry = new Enquiry("studentID1", "", "", "");
         enquiry.setStudentName("studentID1");
         enquiry.start();
     }

@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="SearchApp for easier usage">
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/SortApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OOP-camp-management-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP-camp-management-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/StaffMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/StaffMember.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +64,15 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Huai Zhi/Downloads/OOP-camp-management-system&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.33333334&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;IntelliLang.Configuration&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -78,11 +83,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <option name="filePath" />
       <method v="2">
@@ -106,6 +106,8 @@
       <workItem from="1699712249225" duration="6871000" />
       <workItem from="1699768005152" duration="5575000" />
       <workItem from="1699862579665" duration="9173000" />
+      <workItem from="1699882208477" duration="1958000" />
+      <workItem from="1699936014676" duration="1437000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
