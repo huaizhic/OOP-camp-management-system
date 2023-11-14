@@ -122,28 +122,29 @@ public class Committee {
 
 	public String deleteSuggestion(Committee_Member committeeMember, int suggestionNo) {
 		Scanner input = new Scanner(System.in);
-		if(committeeMember.getSuggestions().isEmpty()){
+		if (committeeMember.getSuggestions().isEmpty()) {
 			return "No suggestion has been submitted";
-		}else {
+		} else {
 			for (Suggestion suggestion : committeeMember.getSuggestions()) {
 				Suggestion.printSuggestionInfo(suggestion);
 			}
 			Suggestion suggestionToBeDel;
-			do{	System.out.println("Please select the suggestion that you want to delete by SUBJECT or enter exit in lower case to exit");
+			do {
+				System.out.println("Please select the suggestion that you want to delete by SUBJECT or enter exit in lower case to exit");
 				String suggestionToBeDelStr = input.nextLine();
-				if(suggestionToBeDelStr.equals("exit")){
-				System.out.println("Action terminated by user");
-				return "exiting...";
+				if (suggestionToBeDelStr.equals("exit")) {
+					System.out.println("Action terminated by user");
+					return "exiting...";
 				}
 				suggestionToBeDel = Suggestion.getSuggestionHashMap().get(suggestionToBeDelStr);
-				if(suggestionToBeDel == null){
+				if (suggestionToBeDel == null) {
 					System.out.println("Please insert the correct subject name");
 				}
-		}while(suggestionToBeDel == null);
-			if(suggestionToBeDel.getProcessed()) {
+			} while (suggestionToBeDel == null);
+			if (suggestionToBeDel.getProcessed()) {
 				System.out.println("Cannot be deleted, the suggestion has been processed");
 				return "exiting...";
-			}else {
+			} else {
 				System.out.println("Do you confirm to delete the suggestion: " + suggestionToBeDel.getSubject());
 				System.out.println("Enter confirm or any other key to cancel");
 				if (input.nextLine().equalsIgnoreCase("confirm")) {
@@ -158,6 +159,7 @@ public class Committee {
 					return "exiting...";
 				}
 			}
+		}
 	}
 
 	/**
@@ -168,18 +170,6 @@ public class Committee {
 	public void generateReport(Camp camp, Format format) {
 		// TODO - implement Committee.generateReport
 		throw new UnsupportedOperationException();
-	}
-
-	public int getPoint() {
-		return this.point;
-	}
-
-	/**
-	 * 
-	 * @param point
-	 */
-	public void setPoint(int point) {
-		this.point = point;
 	}
 
 }
