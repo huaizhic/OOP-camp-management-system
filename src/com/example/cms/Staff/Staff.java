@@ -21,8 +21,19 @@ public class Staff {
 	public void createCamp() {
 		input = new Scanner(System.in);
 		System.out.println("===== Creating a New Camp =====");
-		System.out.println("    Please insert the new camp name");
-		String campName = input.nextLine();
+		boolean uniqueCampName = true;
+		String campName;
+		do {
+			System.out.println("    Please insert the new camp name that is unique");
+			campName = input.nextLine();
+			for (Camp camp : campData.getCampList()) {
+				if (camp.getCampName().equals(campName)) {
+					System.out.println("This name has already been taken, please have an unique camp name");
+					uniqueCampName = false;
+					break;
+				}
+			}
+		}while(!uniqueCampName);
 		System.out.println("    Camp name: " + campName);
 
 		System.out.println("    Please insert the starting date of the camp in the format yyyy-mm-dd");
@@ -113,6 +124,7 @@ public class Staff {
 
 			campData.setCampList(new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility));
 			campData.addCampToMap(campName, campData.getCampList().get(Camp.getCounter()));
+		((StaffMember) this).setCampsCreated(campData.getCampHashMap().get(campName));
 
 	}
 
@@ -340,6 +352,8 @@ public class Staff {
 						staff.getCampsCreated().remove(campToBeDeleted);
 						campData.getCampList().remove(campToBeDeleted);
 						campData.getCampHashMap().remove(campNameToDeleteStr);
+						int originalCounter = Camp.getCounter();
+						Camp.setCounter(originalCounter - 1);
 						return "Camp deletes successfully";
 					}
 					else{
@@ -365,8 +379,6 @@ public class Staff {
 		}
 
 	}
-
-
 
 	public void viewEnquiry(StaffMember staff) {
 		viewCampCreated(staff);

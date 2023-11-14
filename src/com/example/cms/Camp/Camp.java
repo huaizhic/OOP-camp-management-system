@@ -52,6 +52,10 @@ public class Camp {
 		return counter;
 	}
 
+	public static void setCounter(int counter){
+		Camp.counter = counter;
+	}
+
 	public static void printAllCampInfo(Camp camp){
 		System.out.print("Camp: " + camp.getCampName() + " - ");
 		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));

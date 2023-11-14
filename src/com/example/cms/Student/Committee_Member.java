@@ -6,7 +6,7 @@ import com.example.cms.UserGroup;
 
 import java.util.ArrayList;
 
-public class Committee_Member {
+public class Committee_Member extends Committee{
     private String userID;
     private String name;
     private UserGroup userGroup;
