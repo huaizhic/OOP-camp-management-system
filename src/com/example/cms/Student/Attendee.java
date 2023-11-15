@@ -58,7 +58,7 @@ public class Attendee extends Student_User {
         System.out.println("4. Back to Main Menu");
         
         System.out.print("Enter your choice: ");
-        Scanner scanner;
+        Scanner scanner = null;
 		int choice = scanner.nextInt();
 
         switch (choice) {
@@ -72,7 +72,7 @@ public class Attendee extends Student_User {
                 break;
             case 3:
                 // Delegate to specific functionality in the Attendee class
-                withdrawFromCamp();
+                withdrawFromCamp(studentID);
                 break;
             case 4:
                 // Back to the main menu
@@ -138,7 +138,7 @@ public class Attendee extends Student_User {
      *
      * @param camp The camp to withdraw from.
      */
-    public void withdrawFromCamp(String studentID) {
+    public static void withdrawFromCamp(String studentID) {
         // Retrieve the withdrawn camp name
         String withdrawnCampName = camp_Test_Data.withdrawFromCamp(studentID);
 
@@ -158,7 +158,7 @@ public class Attendee extends Student_User {
     }
 
     // Method to find a Camp by name in the registeredCamps list
-    private Camp findCampByName(String campName) {
+    private static Camp findCampByName(String campName) {
         for (Camp camp : registeredCamps) {
             if (camp.getCampName().equals(campName)) {
                 return camp;
