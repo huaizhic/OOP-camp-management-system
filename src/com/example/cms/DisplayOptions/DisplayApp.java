@@ -10,21 +10,26 @@ public class DisplayApp {
 
     // the method returns null either there is no camp or the user exits, therefore the main should go back.
     public static ArrayList<Camp> viewAllCamp() {
+        DisplayBySort aOb = new SortByName_Default();
         if (campData.getCampList().isEmpty()) {
             System.out.println("No camp is available to view");
             return null;
         } else {
             Scanner input = new Scanner(System.in);
             int choice;
-            do{System.out.println("Please choose how to view camps:");
+            System.out.println("Please choose how to view camps:");
             System.out.println("1. Default: alphabetical order of camp name");
             System.out.println("2. Search for keywords");
-            System.out.println("3. Sort by camp features");
-            System.out.println("4. Exiting...");
-            choice = input.nextInt();
+            System.out.println("3. Exiting...");
+            do{
+                choice = input.nextInt();
+                if(choice != 1 && choice != 2 && choice != 3){
+                    System.out.println("Invalid input, please enter a valid option (1, 2, 3)");
+                }
+            }while(choice != 1 && choice != 2 && choice != 3);
+
             switch (choice) {
                 case (1):
-                    DisplayBySort aOb = new SortByName_Default();
                     return aOb.Sorting(campData.getCampList());
                 case (2):
                     ArrayList<Camp> afterSearchCamp;
@@ -34,17 +39,34 @@ public class DisplayApp {
                             System.out.println("Please choose a correct option");
                         }
                     } while (afterSearchCamp == null);
-                    return afterSearchCamp;
-                case (3):
-                    ArrayList<Camp> afterSortCamp;
+                    boolean sorting = false;
+                    String sortingStr;
                     do {
-                        afterSortCamp = SortApp.startSorting(campData.getCampList());
-                        if (afterSortCamp == null) {
-                            System.out.println("Please choose a correct option");
+                        System.out.println("Do you want to view the camp in any specific sequence i.e. sorting? Enter Yes or No");
+                        sortingStr = input.nextLine();
+                        if(sortingStr.equalsIgnoreCase("Yes")){
+                            sorting = true;
+                        }else if(sortingStr.equalsIgnoreCase("No")){
+                            sorting = false;
                         }
-                    } while (afterSortCamp == null);
-                    return afterSortCamp;
-                case (4):
+                        else{
+                            System.out.println("Please enter Yes or No");
+                        }
+                    }while(!sortingStr.equalsIgnoreCase("Yes") && !sortingStr.equalsIgnoreCase("No"));
+                    if(!sorting){
+                        return aOb.Sorting(afterSearchCamp);
+                    }else {
+                        ArrayList<Camp> afterSortCamp;
+                        do {
+                            afterSortCamp = SortApp.startSorting(afterSearchCamp);
+                            if (afterSortCamp == null) {
+                                System.out.println("Please choose a correct option");
+                            }
+                        } while (afterSortCamp == null);
+                        return afterSearchCamp;
+                    }
+
+                case (3):
                     System.out.println("Action terminated by the user");
                     System.out.println("Exiting...");
                     return null;
@@ -52,7 +74,6 @@ public class DisplayApp {
                     System.out.println("Please insert a valid choice");
                     return null;
             }
-            }while(choice == 1 || choice == 2 || choice == 3 || choice == 4);
         }
     }
 }
