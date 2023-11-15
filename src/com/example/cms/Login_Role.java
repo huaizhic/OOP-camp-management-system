@@ -1,6 +1,6 @@
 package com.example.cms;
 
-public enum LoginRole {
+public enum Login_Role {
 	Student,
 	Staff
 }

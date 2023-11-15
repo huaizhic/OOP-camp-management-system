@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.example.cms.Student.password_Manager;
-import com.example.cms.Student.student_User;
+import com.example.cms.Faculty;
+import com.example.cms.Student_Role;
+import com.example.cms.Student.Password_Manager;
+import com.example.cms.Student.Student_User;
 
 public class user_Registration {
 	public static void registerNewUser(Scanner scanner) {
@@ -17,7 +19,7 @@ public class user_Registration {
 	    String studentID = scanner.next();
 
 	    // Check if the student already exists
-	    student_User existingStudent = student_User.getStudentById(studentID);
+	    Student_User existingStudent = Student_User.getStudentById(studentID);
 	    if (existingStudent != null) {
 	        System.out.println("This student already has an account.");
 	        return;
@@ -28,7 +30,7 @@ public class user_Registration {
 
 	    // Collect user group
 	    System.out.print("Enter your user group (1 for Attendee, 2 for Committee): ");
-	    String userGroup = null;
+	    Student_Role userGroup  = null;
 	    boolean campCommittee = false;
 	    boolean confirmed = false;
 
@@ -36,7 +38,7 @@ public class user_Registration {
 	        int userGroupChoice = scanner.nextInt();
 
 	        if (userGroupChoice == 1) {
-	            userGroup = "Attendee";
+	            userGroup = Student_Role.Attendee;
 	            System.out.println("You have selected 'Attendee'. Is this correct? (1 for Yes, 2 for No): ");
 	            int confirmationChoice = scanner.nextInt();
 
@@ -49,7 +51,7 @@ public class user_Registration {
 	                System.out.println("Invalid confirmation choice. Please enter '1' for Yes or '2' for No.");
 	            }
 	        } else if (userGroupChoice == 2) {
-	            userGroup = "Committee";
+	            userGroup = Student_Role.Committee;
 	            System.out.println("You have selected 'Committee'. Is this correct? (1 for Yes, 2 for No): ");
 	            int confirmationChoice = scanner.nextInt();
 
@@ -72,7 +74,7 @@ public class user_Registration {
 	        System.out.print("Create a password: ");
 	        password = scanner.next();
 
-	        if (password_Manager.isValidPassword(password)) {
+	        if (Password_Manager.isValidPassword(password)) {
 	            break; // Exit the loop if the password is valid
 	        } else {
 	            System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
@@ -97,7 +99,7 @@ public class user_Registration {
 	                while (true) {
 	                    System.out.print("Create a new password: ");
 	                    password = scanner.next();
-	                    if (password_Manager.isValidPassword(password)) {
+	                    if (Password_Manager.isValidPassword(password)) {
 	                        break; // Exit the loop if the new password is valid
 	                    } else {
 	                        System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
@@ -108,26 +110,119 @@ public class user_Registration {
 	    }
 
 	 // Add faculty information
-	    String facultyInput = null;
 	    List<String> campAccessibility = new ArrayList<>();
-	    boolean isValidFaculty = false;
+	    System.out.println("Select your faculty:");
+	    System.out.println("1. ADM");
+	    System.out.println("2. ASE");
+	    System.out.println("3. CCEB");
+	    System.out.println("4. CEE");
+	    System.out.println("5. EEE");
+	    System.out.println("6. IGS");
+	    System.out.println("7. NBS");
+	    System.out.println("8. MAE");
+	    System.out.println("9. MSE");
+	    System.out.println("10. NIE");
+	    System.out.println("11. RSIS");
+	    System.out.println("12. SBS");
+	    System.out.println("13. SCSE");
+	    System.out.println("14. SPMS");
+	    System.out.println("15. SSS");
+	    System.out.println("16. SOH");
+	    System.out.println("17. WKWSCI");
+	    System.out.println("18. ALL");
 
-	    while (!isValidFaculty) {
-	        System.out.print("Enter your faculty: ");
-	        facultyInput = scanner.next();
+	    // Get faculty input as a number
+	    int facultyChoice;
 
-	        // Check if the provided faculty exists in the Faculty enum
-	        if (student_User.isValidFaculty(facultyInput)) {
-	            isValidFaculty = true;
-
-	            // Format and save the faculty input
-	            facultyInput = facultyInput.trim().toUpperCase();
-	            campAccessibility.add(facultyInput);
-	        } else {
-	            System.out.println("Invalid faculty. Please enter a valid faculty from the list.");
+	    do {
+	        System.out.print("Enter the number corresponding to your faculty: ");
+	        while (!scanner.hasNextInt()) {
+	            System.out.println("Invalid input. Please enter a number.");
+	            scanner.next(); // consume the invalid input
 	        }
-	    }
+	        facultyChoice = scanner.nextInt();
+	    } while (facultyChoice < 1 || facultyChoice > 18);
 
+	    // Map the faculty choice to the actual faculty
+	    Faculty facultyInput = null ;
+	    switch (facultyChoice) {
+	        case 1:
+	            facultyInput = Faculty.ADM;
+	            campAccessibility.add("ADM");
+	            break;
+	        case 2:
+	        	facultyInput = Faculty.ASE;
+	            campAccessibility.add("ASE");
+	            break;
+	        case 3:
+	        	facultyInput = Faculty.CCEB;
+	            campAccessibility.add("CCEB");
+	            break;
+	        case 4:
+	        	facultyInput = Faculty.CEE;
+	            campAccessibility.add("CEE");
+	            break;
+	        case 5:
+	        	facultyInput = Faculty.EEE;
+	            campAccessibility.add("EEE");
+	            break;
+	        case 6:
+	        	facultyInput = Faculty.IGS;
+	            campAccessibility.add("IGS");
+	            break;
+	        case 7:
+	        	facultyInput = Faculty.NBS;
+	            campAccessibility.add("NBS");
+	            break;
+	        case 8:
+	        	facultyInput = Faculty.MAE;
+	            campAccessibility.add("MAE");
+	            break;
+	        case 9:
+	        	facultyInput = Faculty.MSE;
+	            campAccessibility.add("MSE");
+	            break;
+	        case 10:
+	        	facultyInput = Faculty.NIE;
+	            campAccessibility.add("NIE");
+	            break;
+	        case 11:
+	        	facultyInput = Faculty.RSIS;
+	            campAccessibility.add("RSIS");
+	            break;
+	        case 12:
+	        	facultyInput = Faculty.SBS;
+	            campAccessibility.add("SBS");
+	            break;
+	        case 13:
+	        	facultyInput = Faculty.SCSE;
+	            campAccessibility.add("SCSE");
+	            break;
+	        case 14:
+	        	facultyInput = Faculty.SPMS;
+	            campAccessibility.add("SPMS");
+	            break;
+	        case 15:
+	        	facultyInput = Faculty.SSS;
+	            campAccessibility.add("SSS");
+	            break;
+	        case 16:
+	        	facultyInput = Faculty.SOH;
+	            campAccessibility.add("SOH");
+	            break;
+	        case 17:
+	        	facultyInput = Faculty.WKWSCI;
+	            campAccessibility.add("WKWSCI");
+	            break;
+	        case 18:
+	        	facultyInput = Faculty.ALL;
+	            campAccessibility.add("ALL");
+	            break;
+	        default:
+	            facultyInput = Faculty.NIL; // Handle invalid choices
+	            campAccessibility.add("NIL");
+	            break;
+	    }
 
 
 	    int numSecurityQuestions = 3;
@@ -178,7 +273,7 @@ public class user_Registration {
 	    }
 
 	    // Store the confirmed information in the student instance
-	    student_User newStudent = new student_User();
+	    Student_User newStudent = new Student_User();
         newStudent.setStudentID(studentID);
         newStudent.setName(name);
         newStudent.setUserGroup(userGroup);
@@ -192,9 +287,12 @@ public class user_Registration {
         newStudent.setEnquirySubmitted(null);
 
 	 // Add the new student to the list of existing students
-	    student_User.addStudent(newStudent);
+	    Student_User.addStudent(newStudent);
 
 	    System.out.println("Registration successful!");
+	    
+	    account_Manager accountManager = new account_Manager(scanner);
+	    accountManager.start();
 	}
 
 }

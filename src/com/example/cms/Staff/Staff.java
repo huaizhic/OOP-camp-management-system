@@ -6,7 +6,7 @@ import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Status;
 import com.example.cms.Suggestion;
-import com.example.cms.UserGroup;
+import com.example.cms.Faculty;
 
 import java.text.Format;
 import java.time.LocalDate;
@@ -68,7 +68,7 @@ public class Staff {
 
 		boolean conti = true;
 		String ans;
-		ArrayList<UserGroup> userGroups = new ArrayList<>();
+		ArrayList<Faculty> userGroups = new ArrayList<>();
 			do {
 				System.out.println("    Please insert the school/faculty that have access to the camp separated by space");
 				String userGroupString = input.nextLine();
@@ -76,7 +76,7 @@ public class Staff {
 				ArrayList<String> userGroupArray = new ArrayList<>();
 				Collections.addAll(userGroupArray, usergroups);
 				for (String usergroup : userGroupArray) {
-					for (UserGroup enumUserGroup : UserGroup.values()) {
+					for (Faculty enumUserGroup : Faculty.values()) {
 						if (usergroup.equals(enumUserGroup.name())) {
 							userGroups.add(enumUserGroup);
 							break;
@@ -85,12 +85,12 @@ public class Staff {
 				}
 				if (userGroups.size() == userGroupArray.size()) {
 					System.out.println("The following school/faculty can view and register");
-					for (UserGroup userGroup : userGroups) {
+					for (Faculty userGroup : userGroups) {
 						System.out.print(userGroup + " ");
 					}
 				} else {
 					System.out.println("Invalid input has received, only the following is valid, continue? ");
-					for (UserGroup userGroup : userGroups) {
+					for (Faculty userGroup : userGroups) {
 						System.out.print(userGroup + " ");
 					}
 					do {
@@ -284,7 +284,7 @@ public class Staff {
 					case(7):
 						boolean conti = true;
 						String ans;
-						ArrayList<UserGroup> userGroups = new ArrayList<>();
+						ArrayList<Faculty> userGroups = new ArrayList<>();
 						do {
 							System.out.println("    Please insert the school/faculty that have access to the camp separated by space");
 							String userGroupString = input.nextLine();
@@ -292,7 +292,7 @@ public class Staff {
 							ArrayList<String> userGroupArray = new ArrayList<>();
 							Collections.addAll(userGroupArray, usergroups);
 							for (String usergroup : userGroupArray) {
-								for (UserGroup enumUserGroup : UserGroup.values()) {
+								for (Faculty enumUserGroup : Faculty.values()) {
 									if (usergroup.equals(enumUserGroup.name())) {
 										userGroups.add(enumUserGroup);
 										break;
@@ -301,12 +301,12 @@ public class Staff {
 							}
 							if (userGroups.size() == userGroupArray.size()) {
 								System.out.println("The following school/faculty can view and register");
-								for (UserGroup userGroup : userGroups) {
+								for (Faculty userGroup : userGroups) {
 									System.out.print(userGroup + " ");
 								}
 							} else {
 								System.out.println("Invalid input has received, only the following is valid, continue? ");
-								for (UserGroup userGroup : userGroups) {
+								for (Faculty userGroup : userGroups) {
 									System.out.print(userGroup + " ");
 								}
 								do {

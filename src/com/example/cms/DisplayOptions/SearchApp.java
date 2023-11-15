@@ -1,6 +1,6 @@
 package com.example.cms.DisplayOptions;
 import com.example.cms.Camp.Camp;
-import com.example.cms.UserGroup;
+import com.example.cms.Faculty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -75,16 +75,16 @@ public class SearchApp {
 
             case(7):
                 System.out.println("Insert an user group to search");
-                UserGroup userGroupToSearch = null;
+                Faculty userGroupToSearch = null;
                 do {
                     String userGroupString = input.nextLine();
                     try{
-                        userGroupToSearch = UserGroup.valueOf(userGroupString);
+                        userGroupToSearch = Faculty.valueOf(userGroupString);
                     }catch(IllegalArgumentException e){
                         System.out.println("The user group does not exist, please re-enter an user group to search");
                     }
                 }while(userGroupToSearch == null);
-                DisplayBySearch<UserGroup, ArrayList<Camp>> userGroupSearcher = new SearchByUserGroup();
+                DisplayBySearch<Faculty, ArrayList<Camp>> userGroupSearcher = new SearchByUserGroup();
                 return userGroupSearcher.Searching(userGroupToSearch, campArrayList);
             default:
                 return null;

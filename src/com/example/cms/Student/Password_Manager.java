@@ -3,16 +3,25 @@ package com.example.cms.Student;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.example.cms.Student_Role;
+
 public class Password_Manager {
 
-    public static boolean checkPassword(String studentID, String roleChoice, String enteredPassword) {
+    private Scanner scanner; // Add a Scanner field
+
+    // Constructor to initialize the Scanner
+    public Password_Manager(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public static boolean checkPassword(String studentID, Student_Role roleChoice, String enteredPassword) {
         // Retrieve the student based on studentID
         Student_User student_Information = Student_User.getStudentById(studentID);
 
         // Check if the student exists and validate the password and roleChoice.
         if (student_Information != null) {
             // Assuming the roleChoice is stored in the user group.
-            String studentRoleChoice = student_Information.getUserGroup();
+            Student_Role studentRoleChoice = student_Information.getUserGroup();
             String storedPassword = student_Information.getPassword();
 
             if (enteredPassword.equals(storedPassword) && roleChoice.equals(studentRoleChoice)) {
@@ -23,22 +32,19 @@ public class Password_Manager {
         return false;
     }
 
-
-
-
     public boolean updatePassword(String userID, String updatedPassword) {
         // Find the student based on the userID (you need to implement this part)
-        student_User Student = student_User.getStudentById(userID);
+        Student_User student = Student_User.getStudentById(userID);
 
-        if (Student != null) {
-            String oldPassword = Student.getPassword();
+        if (student != null) {
+            String oldPassword = student.getPassword();
 
             // Check if the updatedPassword is different from the old password
             if (!updatedPassword.equals(oldPassword)) {
                 // Check if the updatedPassword meets criteria (8 characters, alphanumeric, and mixed case)
                 if (isValidPassword(updatedPassword)) {
                     // Assuming a successful password update
-                    Student.setPassword(updatedPassword);
+                    student.setPassword(updatedPassword);
 
                     System.out.println("Password reset successful.");
                     // Return true to indicate success
@@ -60,25 +66,20 @@ public class Password_Manager {
         }
     }
 
-
-
-
     public void forgotPassword(String userID) {
         // First, retrieve the student based on the userID
-        Scanner scanner = null;
-        student_User Student = student_User.getStudentById(userID);
+        Student_User student = Student_User.getStudentById(userID);
 
-        if (Student != null) {
-            System.out.println("Password recovery for " + student_User.getName(userID));
+        if (student != null) {
+            System.out.println("Password recovery for " + student.getName());
 
             // Get security questions and answers from the student
-            ArrayList<String> securityQuestions = Student.getSecurityQuestion();
-            ArrayList<String> securityAnswers = Student.getSecurityAnswers();
+            ArrayList<String> securityQuestions = student.getSecurityQuestion();
+            ArrayList<String> securityAnswers = student.getSecurityAnswers();
 
             // Maximum wrong attempts allowed per question
             int maxWrongAttempts = 2;
             int correct = 0;
-
 
             for (int i = 0; i < securityQuestions.size(); i++) {
                 String securityQuestion = securityQuestions.get(i);
@@ -106,7 +107,7 @@ public class Password_Manager {
             }
 
             // If all security questions are answered correctly, allow the user to set a new password
-            if (correct == 2) {
+            if (correct == securityQuestions.size()) {
                 boolean passwordResetSuccessful = false;
 
                 while (!passwordResetSuccessful) {
@@ -121,6 +122,9 @@ public class Password_Manager {
                     if (updatePassword(userID, newPassword)) {
                         System.out.println("Password reset successful. You can now log in with your new password.");
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
+                        Student_Account studentAccount = new  Student_Account(userID);
+                        studentAccount.start();
+                        
                     } else {
                         System.out.println("Password does not meet the criteria. Please try again.");
                     }
@@ -129,7 +133,6 @@ public class Password_Manager {
                 System.out.println("User not found. Password reset failed.");
             }
         }
-
     }
 
     public static boolean isValidPassword(String password) {
@@ -161,6 +164,4 @@ public class Password_Manager {
         // Return true if all criteria are met
         return containsDigit && containsUpperCase && containsLowerCase;
     }
-
-
 }

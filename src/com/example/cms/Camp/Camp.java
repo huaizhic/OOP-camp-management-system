@@ -2,7 +2,7 @@ package com.example.cms.Camp;
 import com.example.cms.*;
 import com.example.cms.Student.Committee_Member;
 import com.example.cms.Student.Student_User;
-import com.example.cms.UserGroup;
+import com.example.cms.Faculty;
 import com.example.cms.Staff.StaffMember;
 import com.example.cms.Enquiries.Enquiry;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ public class Camp {
 	private String campName;
 	private ArrayList<LocalDate> campDates = new ArrayList<>();
 	private LocalDate regCloseDate;
-	private ArrayList<UserGroup> userGroup = new ArrayList<>();
+	private ArrayList<Faculty> userGroup = new ArrayList<>();
 	private String location;
 	private int totalSlots;
 	private int remainingSlots;
@@ -31,7 +31,7 @@ public class Camp {
 
 	}
 
-	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<UserGroup> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
 		this.campName = campName;
 		this.campDates = campDate;
 		this.regCloseDate = regCloseDate;
@@ -94,11 +94,11 @@ public class Camp {
 		this.regCloseDate = regCloseDate;
 	}
 
-	public ArrayList<UserGroup> getUserGroup() {
+	public ArrayList<Faculty> getUserGroup() {
 		return this.userGroup;
 	}
 
-	public void setUserGroup(ArrayList<UserGroup> userGroup) {
+	public void setUserGroup(ArrayList<Faculty> userGroup) {
 		this.userGroup = userGroup;
 	}
 

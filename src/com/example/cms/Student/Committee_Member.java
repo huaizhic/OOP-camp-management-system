@@ -2,21 +2,21 @@ package com.example.cms.Student;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Suggestion;
-import com.example.cms.UserGroup;
+import com.example.cms.Faculty;
 
 import java.util.ArrayList;
 
 public class Committee_Member extends Committee{
     private String userID;
     private String name;
-    private UserGroup userGroup;
+    private Faculty userGroup;
     private String securityQuestion;
     private String securityAns;
     private ArrayList<Suggestion> suggestions;
     private Camp registeredCamps;
     private int points;
 
-    public Committee_Member(String name, String userID, UserGroup userGroup, String securityQuestion, String securityAns, Camp camp) {
+    public Committee_Member(String name, String userID, Faculty userGroup, String securityQuestion, String securityAns, Camp camp) {
         this.name = name;
         this.userID = userID;
         this.userGroup = userGroup;
@@ -42,11 +42,11 @@ public class Committee_Member extends Committee{
         this.userID = userID;
     }
 
-    public UserGroup getUserGroup() {
+    public Faculty getUserGroup() {
         return userGroup;
     }
 
-    public void setUserGroup(UserGroup userGroup) {
+    public void setUserGroup(Faculty userGroup) {
         this.userGroup = userGroup;
     }
 

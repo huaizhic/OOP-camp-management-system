@@ -1,46 +1,56 @@
 package com.example.cms.Student;
 
 import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.camp_Test_Data.camp_Test_Data;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.RegisterRole;
+import com.example.cms.Student_Role;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Attendee extends student_User {
+public class Attendee extends Student_User {
 
-    // Fields to store registered camps and other necessary data
-    private static ArrayList<Camp> registeredCamps;
-    private static ArrayList<Camp> campAccessibility;
-    private ArrayList<Enquiry> enquiries;
+	 private static Map<String, Attendee> attendeesMap = new HashMap<>();
+	    private static ArrayList<Camp> registeredCamps;
+	    private static List<String> campAccessibility;
+	    private ArrayList<Enquiry> enquiries;
 
-    /**
-     * Constructor for the Attendee class.
-     */
-    public Attendee() {
-        // Call the constructor of the superclass (student_User)
-        super();
-        this.registeredCamps = new ArrayList<>();
-        this.campAccessibility =  new ArrayList<>();
-        this.enquiries = new ArrayList<>();
-    }
+	    public Attendee() {
+	        super();
+	        this.registeredCamps = new ArrayList<>();
+	        this.campAccessibility = new ArrayList<>();
+	        this.enquiries = new ArrayList<>();
+	        attendeesMap.put(this.getStudentID(), this);
+	    }
 
-    /**
-     * View registered camps for the attendee.
-     */
-    public static void viewRegisteredCamps() {
-        System.out.println("Registered Camps:");
-        if (registeredCamps.isEmpty()) {
-            System.out.println("You are not registered for any camps.");
-        } else {
-            for (Camp camp : registeredCamps) {
-                System.out.println("Camp Name: " + camp.getCampName());
-                System.out.println("Dates: " + camp.getCampDates());
-            }
-        }
-    }
-    
-    public static void viewCampEnquiries() {
+	    public static Map<String, Attendee> getAttendeesMap() {
+	        return attendeesMap;
+	    }
+
+	 // New method to display registered camps for a specific student
+	    public static void displayRegisteredCamps(String studentId) {
+	        if (attendeesMap.containsKey(studentId)) {
+	            Attendee attendee = attendeesMap.get(studentId);
+	            System.out.println("Registered Camps for Student ID " + studentId + ":");
+	            if (attendee.registeredCamps.isEmpty()) {
+	                System.out.println("This student is not registered for any camps.");
+	            } else {
+	            	for (Camp camp : attendee.registeredCamps) {
+	            	    // Call the viewRegisteredCamp method for each registered camp
+	            	    camp_Test_Data.viewRegisteredCamp(camp.getCampName());
+	            	}
+
+	            }
+	        } else {
+	            System.out.println("Student with ID " + studentId + " not found.");
+	        }
+	    }
+	    
+
+    public static void manageCamp(String studentID) {
         System.out.println("Camp Enquiries Menu:");
         System.out.println("1. View Camps");
         System.out.println("2. Register for a Camp");
@@ -54,11 +64,11 @@ public class Attendee extends student_User {
         switch (choice) {
             case 1:
                 // Delegate to specific functionality in the Attendee class
-                viewCamps();
+                viewCamp(campAccessibility);
                 break;
             case 2:
                 // Delegate to specific functionality in the Attendee class
-                registerForCamp();
+                registerForCamp(studentID);
                 break;
             case 3:
                 // Delegate to specific functionality in the Attendee class
@@ -73,22 +83,17 @@ public class Attendee extends student_User {
         }
     }
     
-    public static void viewCamps() {
+   
+    /**
+     * View camps.
+     */
+    public static void viewCamp(List<String> campAccessibility) {
         System.out.println("Available Camps:");
-        for (Camp camp : campAccessibility) {
-            System.out.println("Camp Name: " + camp.getCampName());
-            System.out.println("Dates: " + camp.getCampDates());
-            // This must show the number of vacancies as well
+        for (String campName : campAccessibility) {
+            camp_Test_Data.viewCamp(campName);
         }
     }
 
-    /**
-     * View open camps.
-     */
-    public ArrayList<Camp> viewOpenCamps() {
-        // TODO - Implement logic to retrieve and display open camps
-        throw new UnsupportedOperationException();
-    }
 
     /**
      * View remaining slots for a specific camp.
@@ -107,22 +112,42 @@ public class Attendee extends student_User {
      * @param camp The camp to register for.
      * @param role The role for registration.
      */
-    public void registerForCamp(Camp camp, RegisterRole role) {
+    public static void registerForCamp(String studentID) {
         // TODO - Implement camp registration logic 
-    	// This function will see the viewOpenCamp, so that students can still see which camp is still open or vacant
-    	// Then, they will have the register option, if the camp clashes with the current date of their registered camps then it won't be able to bookk it 
-        throw new UnsupportedOperationException();
+        // This function will see the viewOpenCamp, so that students can still see which camp is still open or vacant
+        // Then, they will have the register option, if the camp clashes with the current date of their registered camps then it won't be able to bookk it 
+        camp_Test_Data registeredCamp = camp_Test_Data.registerForCamp(registeredCamps, studentID);
+        
+        // Assuming you have a method to convert camp_Test_Data to Camp
+        Camp convertedCamp = convertToCamp(registeredCamp);
+        
+        registeredCamps.add(convertedCamp);
     }
+    
+    // Example conversion function
+    private static Camp convertToCamp(camp_Test_Data campData) {
+        // Create a new Camp object and set its properties based on camp_Test_Data
+        Camp camp = new Camp();
+        camp.setCampName(campData.getcamp_Test_DataName());
+        // Set other properties...
 
+        return camp;
+    }
     /**
      * Withdraw from a registered camp.
      *
      * @param camp The camp to withdraw from.
      */
-    public void withdrawFromCamp(Camp camp) {
-        // TODO - Implement camp withdrawal logic
-    	// Show the lists of registeredCamps, have the option to withdraw from it 
-        throw new UnsupportedOperationException();
+    public void withdrawFromCamp(String studentID) {
+    	   // TODO - Implement camp registration logic 
+        // This function will see the viewOpenCamp, so that students can still see which camp is still open or vacant
+        // Then, they will have the register option, if the camp clashes with the current date of their registered camps then it won't be able to bookk it 
+        camp_Test_Data registeredCamp = camp_Test_Data.withdrawFromCamp(registeredCamps, studentID);
+        
+        // Assuming you have a method to convert camp_Test_Data to Camp
+        Camp convertedCamp = convertToCamp(registeredCamp);
+        
+        registeredCamps.add(convertedCamp);
     }
 
     /**

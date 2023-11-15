@@ -1,6 +1,6 @@
 package com.example.cms;
 
-    public enum UserGroup {
+    public enum Faculty {
         ADM,
         ASE,
         CCEB,
@@ -18,7 +18,8 @@ package com.example.cms;
         SSS,
         SOH,
         WKWSCI,
-        ALL
+        ALL,
+        NIL
     }
 
 

@@ -1,7 +1,7 @@
 package com.example.cms.Staff;
 
 import com.example.cms.Camp.Camp;
-import com.example.cms.UserGroup;
+import com.example.cms.Faculty;
 
 import java.util.ArrayList;
 
@@ -9,12 +9,12 @@ public class StaffMember extends Staff {
 
 	private String staffID;
 	private String name;
-	private UserGroup userGroup;
+	private Faculty userGroup;
 	private ArrayList<Camp> campsCreated;
 	private String securityQuestion;
 	private String securityAns;
 
-	public StaffMember(String staffID, String name, UserGroup userGroup, String securityQuestion, String securityAns){
+	public StaffMember(String staffID, String name, Faculty userGroup, String securityQuestion, String securityAns){
 		this.staffID = staffID;
 		this.name = name;
 		this.userGroup = userGroup;
@@ -31,7 +31,7 @@ public class StaffMember extends Staff {
 		return this.name;
 	}
 
-	public UserGroup getUserGroup() {
+	public Faculty getUserGroup() {
 		return this.userGroup;
 	}
 
@@ -39,7 +39,7 @@ public class StaffMember extends Staff {
 	 * 
 	 * @param userGroup
 	 */
-	public void setUserGroup(UserGroup userGroup) {
+	public void setUserGroup(Faculty userGroup) {
 		this.userGroup = userGroup;
 	}
 

@@ -1,13 +1,13 @@
 package com.example.cms.DisplayOptions;
 
 import com.example.cms.Camp.Camp;
-import com.example.cms.UserGroup;
+import com.example.cms.Faculty;
 
 import java.util.ArrayList;
 
-public class SearchByUserGroup extends DisplayBySearch<UserGroup, ArrayList<Camp>>{
+public class SearchByUserGroup extends DisplayBySearch<Faculty, ArrayList<Camp>>{
     private ArrayList<Camp> campAfterSearch = new ArrayList<>();
-    public ArrayList<Camp> Searching(UserGroup userGroup, ArrayList<Camp> campList){
+    public ArrayList<Camp> Searching(Faculty userGroup, ArrayList<Camp> campList){
         campAfterSearch.clear();
         if (campList == null) {
             System.out.println("No camp available yet");
