@@ -139,16 +139,34 @@ public class Attendee extends Student_User {
      * @param camp The camp to withdraw from.
      */
     public void withdrawFromCamp(String studentID) {
-    	   // TODO - Implement camp registration logic 
-        // This function will see the viewOpenCamp, so that students can still see which camp is still open or vacant
-        // Then, they will have the register option, if the camp clashes with the current date of their registered camps then it won't be able to bookk it 
-        camp_Test_Data registeredCamp = camp_Test_Data.withdrawFromCamp(registeredCamps, studentID);
-        
-        // Assuming you have a method to convert camp_Test_Data to Camp
-        Camp convertedCamp = convertToCamp(registeredCamp);
-        
-        registeredCamps.add(convertedCamp);
+        // Retrieve the withdrawn camp name
+        String withdrawnCampName = camp_Test_Data.withdrawFromCamp(studentID);
+
+        // Find the corresponding Camp object by name
+        Camp withdrawnCamp = findCampByName(withdrawnCampName);
+
+        if (withdrawnCamp != null) {
+            // Remove the camp from the registeredCamps list
+            registeredCamps.remove(withdrawnCamp);
+
+            // Perform additional logic as needed
+
+            System.out.println("Withdrawal successful from " + withdrawnCampName);
+        } else {
+            System.out.println("Camp not found with name: " + withdrawnCampName);
+        }
     }
+
+    // Method to find a Camp by name in the registeredCamps list
+    private Camp findCampByName(String campName) {
+        for (Camp camp : registeredCamps) {
+            if (camp.getCampName().equals(campName)) {
+                return camp;
+            }
+        }
+        return null; // Camp not found
+    }
+
 
     /**
      * Submit an enquiry for a camp.

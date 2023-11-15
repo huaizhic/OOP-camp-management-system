@@ -283,7 +283,7 @@ public class camp_Test_Data {
         return userChoice;
     }
 	
-    public String withdrawFromCamp(String studentID) {
+    public static String withdrawFromCamp(String studentID) {
         // Retrieve the student based on the provided studentID
         Student_User student = Student_User.getStudentById(studentID);
 
@@ -322,7 +322,7 @@ public class camp_Test_Data {
         return null; // Return null if no camp is withdrawn
     }
 
-    private int getUserInputForCampWithdrawal(int maxChoice) {
+    private static int getUserInputForCampWithdrawal(int maxChoice) {
         Scanner scanner = new Scanner(System.in);
         int userChoice = 0;
 
