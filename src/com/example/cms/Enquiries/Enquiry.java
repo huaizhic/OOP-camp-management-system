@@ -3,6 +3,7 @@ package com.example.cms.Enquiries;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.example.cms.Camp.Camp;
 import com.example.cms.Student.Student_User;
 
 public class Enquiry {
@@ -99,7 +100,14 @@ public class Enquiry {
     public void setProcessed(boolean processed) {
         this.processed = processed;
     }
-
+    
+    public String getCampName() {
+    	return campName;
+    }
+    
+    public void setCampName(String campName) {
+    	this.campName = campName;
+    }
 
     
     public static void viewEnquiry(String studentID) {
@@ -221,4 +229,164 @@ public class Enquiry {
             System.out.println("No enquiries found for student with ID: " + studentID);
         }
     }
+    
+    /*************************FOR CAMP COMMITEE********************************/
+    
+    public static void viewRelatedEnquiries(String studentID) {
+        // Get the list of registered camps for the student
+        List<Camp> registeredCamps = Student_User.getStudentById(studentID).getRegisteredCamps();
+
+        if (registeredCamps.isEmpty()) {
+            System.out.println("You are not registered for any camps. No related enquiries to display.");
+            return;
+        }
+
+        // Display enquiries related to the registered camps
+        System.out.println("Enquiries Related to Your Registered Camps:");
+
+        for (Camp camp : registeredCamps) {
+            String campName = camp.getCampName();
+
+            // Check if there are any enquiries related to the current camp
+            if (enquiries.containsKey(campName)) {
+                List<Enquiry> campEnquiries = getEnquiriesByCamp(campName);
+
+                // Display enquiries for the current camp
+                System.out.println("Camp: " + campName);
+                for (Enquiry enquiry : campEnquiries) {
+                    System.out.println("Subject: " + enquiry.getEnquiry_Subject());
+                    System.out.println("Date Sent: " + enquiry.getDateSent());
+                    System.out.println("Content: " + enquiry.getContent());
+
+                    if (enquiry.getReply() != null) {
+                        System.out.println("Date of Response: " + enquiry.getDateSent()); // Assuming you meant to display the sent date
+                        System.out.println("Response Content: " + enquiry.getReply());
+                    } else {
+                        System.out.println("Date of Response: N/A");
+                        System.out.println("Response Content: Pending");
+                    }
+
+                    System.out.println("------------------------------------------------------------------------------------------");
+                }
+            } else {
+                System.out.println("No enquiries found for the camp: " + campName);
+            }
+        }
+    }
+    
+    public static void answerEnquiries(String studentID) {
+        // Get the list of registered camps for the student
+        List<Camp> registeredCamps = Student_User.getStudentById(studentID).getRegisteredCamps();
+
+        if (registeredCamps.isEmpty()) {
+            System.out.println("You are not registered for any camps. No enquiries to answer.");
+            return;
+        }
+
+        // Display the registered camps for the user to choose
+        System.out.println("Select the registered camp to answer enquiries (enter the index) or enter 0 to go back:");
+        for (int i = 0; i < registeredCamps.size(); i++) {
+            System.out.println((i + 1) + ". " + registeredCamps.get(i).getCampName());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int campChoice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        if (campChoice > 0 && campChoice <= registeredCamps.size()) {
+            Camp selectedCamp = registeredCamps.get(campChoice - 1);
+            String campName = selectedCamp.getCampName();
+
+            // Check if there are any enquiries related to the selected camp
+            if (enquiries.containsKey(campName)) {
+                List<Enquiry> campEnquiries = getEnquiriesByCamp(campName);
+
+                // Display enquiries for the selected camp
+                System.out.println("Enquiries for Camp: " + campName);
+                for (int i = 0; i < campEnquiries.size(); i++) {
+                    Enquiry enquiry = campEnquiries.get(i);
+                    System.out.println((i + 1) + ". " + "Subject: " + enquiry.getEnquiry_Subject());
+                    System.out.println("   Date Sent: " + enquiry.getDateSent());
+                    System.out.println("   Content: " + enquiry.getContent());
+                    System.out.println("------------------------------------------------------------------------------------------");
+                }
+
+                // Ask the user to choose which enquiry to answer
+                System.out.println("Select the enquiry to answer (enter the index) or enter 0 to go back:");
+                int enquiryChoice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline character
+
+                if (enquiryChoice > 0 && enquiryChoice <= campEnquiries.size()) {
+                    Enquiry selectedEnquiry = campEnquiries.get(enquiryChoice - 1);
+
+                    // Display student information and enquiry details
+                    System.out.println("Attendee Student ID: " + selectedEnquiry.getStudentID());
+                    System.out.println("Attendee Name: " + selectedEnquiry.getStudentName());
+                    System.out.println("Enquiry Subject: " + selectedEnquiry.getEnquiry_Subject());
+                    System.out.println("Enquiry Content: " + selectedEnquiry.getContent());
+                    System.out.println("------------------------------------------------------------------------------------------");
+
+                    // Ask for the reply
+                    System.out.print("Enter your reply: ");
+                    String reply = scanner.nextLine();
+
+                    // Display the reply for confirmation and editing
+                    System.out.println("Your Reply: " + reply);
+                    System.out.println("Do you want to:");
+                    System.out.println("1. Confirm and Send");
+                    System.out.println("2. Edit Reply");
+                    System.out.println("3. Cancel");
+
+                    int replyChoice = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character
+
+                    switch (replyChoice) {
+                        case 1:
+                            // Update the enquiry with the reply and mark it as processed
+                            selectedEnquiry.setReply(reply);
+                            selectedEnquiry.setProcessed(true);
+
+                            System.out.println("Reply sent successfully.");
+                            break;
+                        case 2:
+                            // Edit the reply
+                            System.out.print("Enter your edited reply: ");
+                            reply = scanner.nextLine();
+
+                            // Recursively call answerEnquiries to retry the process
+                            answerEnquiries(studentID);
+                            break;
+                        case 3:
+                            System.out.println("Reply canceled.");
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Reply canceled.");
+                    }
+                } else if (enquiryChoice != 0) {
+                    System.out.println("Invalid index. No changes made.");
+                } else {
+                    System.out.println("Going back to the previous menu.");
+                }
+            } else {
+                System.out.println("No enquiries found for the camp: " + campName);
+            }
+        } else if (campChoice != 0) {
+            System.out.println("Invalid index. No changes made.");
+        } else {
+            System.out.println("Going back to the previous menu.");
+        }
+    }
+
+    private static List<Enquiry> getEnquiriesByCamp(String campName) {
+        List<Enquiry> campEnquiries = new ArrayList<>();
+
+        for (Enquiry enquiry : enquiries.values()) {
+            if (enquiry.getCampName().equals(campName)) {
+                campEnquiries.add(enquiry);
+            }
+        }
+
+        return campEnquiries;
+    }
+
 }

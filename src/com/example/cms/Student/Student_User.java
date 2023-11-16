@@ -19,7 +19,7 @@ public class Student_User {
     private String name;
     private Faculty faculty;
     private Student_Role userGroup;
-    private ArrayList<Camp> registeredCamps;
+    protected static ArrayList<Camp> registeredCamps;
     public static Map<String, Student_User> existingStudents = new HashMap<>(); // Use a HashMap instead of a List
     protected static List<String> campAccessibility; // This indicates which camp the attendee can see
     private boolean campCommittee;
