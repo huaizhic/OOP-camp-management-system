@@ -16,13 +16,11 @@ public class Attendee extends Student_User {
 	 private static Map<String, Attendee> attendeesMap = new HashMap<>();
 	    private static ArrayList<Camp> registeredCamps;
 	    private static List<String> campAccessibility;
-	    private ArrayList<Enquiry> enquiries;
 
 	    public Attendee() {
 	        super();
-	        this.registeredCamps = new ArrayList<>();
-	        this.campAccessibility = new ArrayList<>();
-	        this.enquiries = new ArrayList<>();
+	        Attendee.registeredCamps = new ArrayList<>();
+	        Attendee.campAccessibility = new ArrayList<>();
 	        attendeesMap.put(this.getStudentID(), this);
 	    }
 
@@ -35,10 +33,10 @@ public class Attendee extends Student_User {
 	        if (attendeesMap.containsKey(studentId)) {
 	            Attendee attendee = attendeesMap.get(studentId);
 	            System.out.println("Registered Camps for Student ID " + studentId + ":");
-	            if (attendee.registeredCamps.isEmpty()) {
+	            if (Attendee.registeredCamps.isEmpty()) {
 	                System.out.println("This student is not registered for any camps.");
 	            } else {
-	            	for (Camp camp : attendee.registeredCamps) {
+	            	for (Camp camp : Attendee.registeredCamps) {
 	            	    // Call the viewRegisteredCamp method for each registered camp
 	            	    camp_Test_Data.viewRegisteredCamp(camp.getCampName());
 	            	}
