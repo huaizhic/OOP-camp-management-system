@@ -168,52 +168,39 @@ public class Attendee extends Student_User {
     }
 
 
-    /**
-     * Submit an enquiry for a camp.
-     *
-     * @param camp    The camp related to the enquiry.
-     * @param content The content of the enquiry.
-     */
-    public void submitEnquiry(Camp camp, String content) {
-        Enquiry newEnquiry = new Enquiry(this.getStudentID(), this.getName(), content, "datePlaceholder", null, false);
-        newEnquiry.createEnquiry(this.getStudentID(), this.getName());
-        enquiries.add(newEnquiry);
-    }
+    /**************** FOR ENQUIRIES ***********************************/
+    
+    
+    public static void manageEnquiries(String studentID) {
+        System.out.println("Camp Enquiries Menu:");
+        System.out.println("1. View Enquiries");
+        System.out.println("2. Make Enquiries");
+        System.out.println("3. Delete Enquiries");
+        System.out.println("4. Back to Main Menu");
+        
+        System.out.print("Enter your choice: ");
+        Scanner scanner = null;
+		int choice = scanner.nextInt();
 
-    /**
-     * View enquiries related to a specific camp.
-     *
-     * @param camp The camp for which to view enquiries.
-     */
-    public void viewEnquiriesForCamp(Camp camp) {
-        // TODO - Implement logic to retrieve and display enquiries for the specified camp
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Edit an existing enquiry.
-     *
-     * @param enquiryNo  The index of the enquiry to edit.
-     * @param newMessage The new message content for the enquiry.
-     */
-    public void editEnquiry(int enquiryNo, String newMessage) {
-        if (enquiryNo >= 0 && enquiryNo < enquiries.size()) {
-            enquiries.get(enquiryNo).setContent(newMessage);
-        } else {
-            System.out.println("Invalid enquiry number.");
+        switch (choice) {
+            case 1:
+                // Delegate to specific functionality in the Attendee class
+                Enquiry.viewEnquiry(studentID);
+                break;
+            case 2:
+                // Delegate to specific functionality in the Attendee class
+                Enquiry.makeEnquiry(studentID);
+                break;
+            case 3:
+                // Delegate to specific functionality in the Attendee class
+                Enquiry.deleteEnquiry(studentID);
+                break;
+            case 4:
+                // Back to the main menu
+                break;
+            default:
+                System.out.println("Invalid choice. Please enter a valid option.");
+                break;
         }
     }
-
-    /**
-     * Delete an existing enquiry.
-     *
-     * @param enquiryNo The index of the enquiry to delete.
-     */
-    public void deleteEnquiry(int enquiryNo) {
-        if (enquiryNo >= 0 && enquiryNo < enquiries.size()) {
-            enquiries.remove(enquiryNo);
-        } else {
-            System.out.println("Invalid enquiry number.");
-        }
     }
-}
