@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="View Camp function separated as static">
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/DisplayOptions/DisplayApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
