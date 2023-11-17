@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.example.cms.Student_Role;
 
 public class Student_Account {
-    private String userId; // Add a field to hold the student ID
+    protected static String userId; // Add a field to hold the student ID
     private Scanner scanner;
 
     // Constructor to initialize the scanner

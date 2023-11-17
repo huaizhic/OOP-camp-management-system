@@ -9,17 +9,17 @@ import java.util.ArrayList;
 public class Committee_Member extends Committee{
     private String userID;
     private String name;
-    private Faculty userGroup;
+    private Faculty faculty;
     private String securityQuestion;
     private String securityAns;
     private ArrayList<Suggestion> suggestions;
     private Camp registeredCamps;
     private int points;
 
-    public Committee_Member(String name, String userID, Faculty userGroup, String securityQuestion, String securityAns, Camp camp) {
+    public Committee_Member(String name, String userID, Faculty faculty, String securityQuestion, String securityAns, Camp camp) {
         this.name = name;
         this.userID = userID;
-        this.userGroup = userGroup;
+        this.faculty = faculty;
         this.securityQuestion = securityQuestion;
         this.securityAns = securityAns;
         this.suggestions = new ArrayList<>();

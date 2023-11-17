@@ -1,22 +1,13 @@
 package com.example.cms.Student;
-
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class attendee_Account extends Student_Account {
 
-    private ArrayList<Camp> registeredCamps;
-    private ArrayList<Enquiry> enquiries;
     private String studentID;
 
     public attendee_Account(String studentID) {
         super(studentID);
         this.studentID = studentID;
-        this.registeredCamps = new ArrayList<>();
-        this.enquiries = new ArrayList<>();
     }
 
     public void start() {
@@ -42,7 +33,7 @@ public class attendee_Account extends Student_Account {
                     Attendee.manageCamp(studentID);
                     break;
                 case 3:
-                    manageEnquiries(studentID);
+                	Attendee.manageEnquiries(studentID);
                     break;
                 case 4:
                     running = false;
@@ -54,4 +45,6 @@ public class attendee_Account extends Student_Account {
             }
         }
     }
+
+
 }
