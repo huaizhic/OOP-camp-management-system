@@ -3,7 +3,6 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.camp_Test_Data.camp_Test_Data;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Suggestion;
 
 import java.util.HashMap;
 import java.util.List;
@@ -132,16 +131,16 @@ public class Committee extends Student_User {
 
         switch (choice) {
             case 1:
-                viewSuggestions();
+                //viewSuggestions();
                 break;
             case 2:
-                submitSuggestion();
+                //submitSuggestion();
                 break;
             case 3:
-                editSuggestion();
+                //editSuggestion();
                 break;
             case 4:
-                deleteSuggestion();
+                //deleteSuggestion();
                 break;
             case 5:
                 // Back to the com.example.cms.main menu
