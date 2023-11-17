@@ -106,7 +106,7 @@ public class Committee extends Student_User {
                 Enquiry.answerEnquiries(studentID);
                 break;
             case 3:
-            	// Back to the main menu
+            	// Back to the com.example.cms.main menu
             	Committee_Account.Start();
                 break;
             default:
@@ -144,7 +144,7 @@ public class Committee extends Student_User {
                 deleteSuggestion();
                 break;
             case 5:
-                // Back to the main menu
+                // Back to the com.example.cms.main menu
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
@@ -186,7 +186,7 @@ public class Committee extends Student_User {
                 viewStudentReports();
                 break;
             case 3:
-                // Back to the main menu
+                // Back to the com.example.cms.main menu
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");

@@ -73,7 +73,7 @@ public class Attendee extends Student_User {
                 withdrawFromCamp(studentID);
                 break;
             case 4:
-                // Back to the main menu
+                // Back to the com.example.cms.main menu
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
@@ -194,7 +194,7 @@ public class Attendee extends Student_User {
                 Enquiry.deleteEnquiry(studentID);
                 break;
             case 4:
-                // Back to the main menu
+                // Back to the com.example.cms.main menu
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
