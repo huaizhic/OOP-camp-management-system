@@ -3,24 +3,39 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.camp_Test_Data.camp_Test_Data;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Suggestion;
+import com.example.cms.Suggestions.Suggestion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Committee extends Student_User {
+	
+    private static Map<String, Committee> committeeMap = new HashMap<>();
+    private static ArrayList<Camp> registeredCamps;
+    private static List<String> campAccessibility;
+    private int points = 0; // Additional element for Committee UserGroup
 
-    private static Map<String, Committee_Member> committeeMembersMap = new HashMap<>();
-
-    public Committee(String studentID) {
+    public Committee(String studentID, int points) {
         super();
-        committeeMembersMap.put(studentID, (Committee_Member) this);
+        this.points = points;
+        Committee.registeredCamps = new ArrayList<>();
+        Committee.campAccessibility = new ArrayList<>();
+        committeeMap.put(studentID, this); // Use studentID as the key
     }
-
-    public static Map<String, Committee_Member> getCommitteeMembersMap() {
-        return committeeMembersMap;
+    
+    public static Map<String, Committee> getCommitteeMap() {
+        return committeeMap;
+    }
+    
+    public int getPoints() {
+        return points;
+    }
+    
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public static void manageCamp(String studentId) {
@@ -103,7 +118,7 @@ public class Committee extends Student_User {
                 Enquiry.viewRelatedEnquiries(studentID);
                 break;
             case 2:
-                Enquiry.answerEnquiries(studentID);
+                answerEnquiries(studentID);
                 break;
             case 3:
             	// Back to the main menu
@@ -115,16 +130,33 @@ public class Committee extends Student_User {
         }
     }
 
-    
+    public static void answerEnquiries(String studentId) {
+        int result = Enquiry.answerEnquiries(studentID);
+
+        // Check the result and update points accordingly
+        if (result == 1) {
+            // If the reply is sent successfully, increment the points of the current user
+            Committee currentUser = Committee.getCommitteeMap().get(studentId);
+            if (currentUser != null) {
+                // Assuming points is an attribute in the Committee class
+                currentUser.setPoints(currentUser.getPoints() + 1);
+                System.out.println("Points incremented for user " + studentId + ". New points: " + currentUser.getPoints());
+            } else {
+                System.out.println("User " + studentId + " not found in the committee map.");
+            }
+        } else {
+            System.out.println("Reply not sent successfully. Points remain unchanged.");
+        }
+    }
+
  /*************************************FOR SUGGESTIONS****************************************/
 
     public static void manageSuggestions(String studentID) {
         System.out.println("Suggestions Management Menu:");
         System.out.println("1. View Suggestions");
-        System.out.println("2. Submit Suggestions");
-        System.out.println("3. Edit Suggestions");
-        System.out.println("4. Delete Suggestions");
-        System.out.println("5. Back to Main Menu");
+        System.out.println("2. Make Suggestions");
+        System.out.println("3. Delete Suggestions");
+        System.out.println("4. Back to Main Menu");
 
         System.out.print("Enter your choice: ");
         Scanner scanner = new Scanner(System.in);
@@ -132,18 +164,15 @@ public class Committee extends Student_User {
 
         switch (choice) {
             case 1:
-                viewSuggestions();
+                Suggestion.viewSuggestion(studentID);
                 break;
             case 2:
-                submitSuggestion();
+                Suggestion.makeSuggestion(studentID, registeredCamps);
                 break;
             case 3:
-                editSuggestion();
+                Suggestion.deleteSuggestion(studentID, registeredCamps);
                 break;
             case 4:
-                deleteSuggestion();
-                break;
-            case 5:
                 // Back to the main menu
                 break;
             default:

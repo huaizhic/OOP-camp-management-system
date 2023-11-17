@@ -274,13 +274,13 @@ public class Enquiry {
         }
     }
     
-    public static void answerEnquiries(String studentID) {
+     public static int answerEnquiries(String studentID) {
         // Get the list of registered camps for the student
         List<Camp> registeredCamps = Student_User.getStudentById(studentID).getRegisteredCamps();
 
         if (registeredCamps.isEmpty()) {
             System.out.println("You are not registered for any camps. No enquiries to answer.");
-            return;
+            return 0;
         }
 
         // Display the registered camps for the user to choose
@@ -347,23 +347,24 @@ public class Enquiry {
                             selectedEnquiry.setProcessed(true);
 
                             System.out.println("Reply sent successfully.");
-                            break;
+                            return 1; // Return 1 only if the reply is sent successfully
                         case 2:
                             // Edit the reply
                             System.out.print("Enter your edited reply: ");
                             reply = scanner.nextLine();
 
                             // Recursively call answerEnquiries to retry the process
-                            answerEnquiries(studentID);
-                            break;
+                            return answerEnquiries(studentID); // Return the result of the recursive call
                         case 3:
                             System.out.println("Reply canceled.");
-                            break;
+                            return 0; // Return 0 if the reply is canceled
                         default:
                             System.out.println("Invalid choice. Reply canceled.");
+                            return 0; // Return 0 for any other invalid choice
                     }
                 } else if (enquiryChoice != 0) {
                     System.out.println("Invalid index. No changes made.");
+                    return 0;
                 } else {
                     System.out.println("Going back to the previous menu.");
                 }
@@ -375,6 +376,7 @@ public class Enquiry {
         } else {
             System.out.println("Going back to the previous menu.");
         }
+		return 0;
     }
 
     private static List<Enquiry> getEnquiriesByCamp(String campName) {

@@ -1,6 +1,6 @@
 package com.example.cms;
 
-import com.example.cms.Student.Committee_Member;
+import com.example.cms.Student.Committee;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

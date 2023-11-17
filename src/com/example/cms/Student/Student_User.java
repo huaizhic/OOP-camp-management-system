@@ -14,7 +14,7 @@ import com.example.cms.Enquiries.Enquiry;
 
 public class Student_User {
 
-    protected String studentID;
+    protected static String studentID;
     private String password = "password";
     private String name;
     private Faculty faculty;
