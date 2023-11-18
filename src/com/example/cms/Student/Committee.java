@@ -13,29 +13,41 @@ import java.util.Scanner;
 
 public class Committee extends Student_User {
 	
-    private static Map<String, Committee> committeeMap = new HashMap<>();
+	private static Map<String, Committee> committeeMap = new HashMap<>();
     private static ArrayList<Camp> registeredCamps;
     private static List<String> campAccessibility;
     private int points = 0; // Additional element for Committee UserGroup
+
+    // Add a list to store suggestions associated with the committee
+    private List<Suggestion> suggestions;
 
     public Committee(String studentID, int points) {
         super();
         this.points = points;
         Committee.registeredCamps = new ArrayList<>();
         Committee.campAccessibility = new ArrayList<>();
+        this.suggestions = new ArrayList<>();
         committeeMap.put(studentID, this); // Use studentID as the key
     }
-    
+
     public static Map<String, Committee> getCommitteeMap() {
         return committeeMap;
     }
-    
+
     public int getPoints() {
         return points;
     }
-    
+
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public List<Suggestion> getSuggestions() {
+        return suggestions;
+    }
+
+    public void setSuggestions(List<Suggestion> suggestions) {
+        this.suggestions = suggestions;
     }
 
     public static void manageCamp(String studentId) {
@@ -164,13 +176,13 @@ public class Committee extends Student_User {
 
         switch (choice) {
             case 1:
-                Suggestion.viewSuggestion(studentID);
+                viewSuggestions(studentID);
                 break;
             case 2:
-                Suggestion.makeSuggestion(studentID, registeredCamps);
+                makeSuggestion(studentID, registeredCamps);
                 break;
             case 3:
-                Suggestion.deleteSuggestion(studentID, registeredCamps);
+                deleteSuggestion(studentID, registeredCamps);
                 break;
             case 4:
                 // Back to the main menu
@@ -181,20 +193,46 @@ public class Committee extends Student_User {
         }
     }
 
-    public void viewSuggestions() {
-        // Implement code to view suggestions
+    public static void viewSuggestions(String studentID) {
+        Committee committee = committeeMap.get(studentID);
+        if (committee != null) {
+            List<Suggestion> suggestions = committee.getSuggestions();
+            System.out.println("Suggestions:");
+
+            for (Suggestion suggestion : suggestions) {
+                Suggestion.printSuggestionInfo(suggestion);
+            }
+        } else {
+            System.out.println("Committee not found for student ID: " + studentID);
+        }
     }
 
-    public void submitSuggestion() {
-        // Implement code for submitting suggestions
+    public static void makeSuggestion(String studentID, ArrayList<Camp> registeredCamps) {
+        // ... (existing makeSuggestion method remains unchanged)
+
+        // After creating a new suggestion, add it to the committee's list of suggestions
+        Committee committee = committeeMap.get(studentID);
+        if (committee != null) {
+            committee.getSuggestions().add(newSuggestion);
+        } else {
+            System.out.println("Committee not found for student ID: " + studentID);
+        }
+
+        System.out.println("Suggestion sent successfully.");
     }
 
-    public void editSuggestion() {
-        // Implement code for editing suggestions
-    }
+    public static void deleteSuggestion(String studentID, ArrayList<Camp> registeredCamps) {
+        // ... (existing deleteSuggestion method remains unchanged)
 
-    public void deleteSuggestion() {
-        // Implement code for deleting suggestions
+        // After deleting a suggestion, remove it from the committee's list of suggestions
+        Committee committee = committeeMap.get(studentID);
+        if (committee != null) {
+            committee.getSuggestions().remove(deletedSuggestion);
+        } else {
+            System.out.println("Committee not found for student ID: " + studentID);
+        }
+
+        System.out.println("Suggestion deleted successfully.");
     }
 
     public void generateReport() {
