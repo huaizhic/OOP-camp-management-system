@@ -1,6 +1,7 @@
 package com.example.cms.Camp.camp_Test_Data;
 
 import com.example.cms.*;
+import com.example.cms.Student.Committee;
 import com.example.cms.Student.Committee_Member;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Faculty;
@@ -346,6 +347,57 @@ public class camp_Test_Data {
 
         return userChoice;
     }
+
+    
+/********************FOR CAMP COMMITEE***********************************/
+    public static void generate_List(String studentId) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Display the list of available camps with index
+        System.out.println("Available Camps:");
+        int index = 1;
+        for (String campName : campsData.keySet()) {
+            System.out.println(index + ". " + campName);
+            index++;
+        }
+
+        // Ask the user to select a camp by entering the corresponding number
+        System.out.print("Enter the number of the camp: ");
+        int selectedCampIndex;
+        try {
+            selectedCampIndex = Integer.parseInt(scanner.nextLine());
+
+            // Check if the entered index is within the valid range
+            if (selectedCampIndex >= 1 && selectedCampIndex <= campsData.size()) {
+                // Get the camp name based on the selected index
+                String selectedCampName = getCampNameByIndex(selectedCampIndex);
+
+                // Print the names of students registered for the selected camp
+                camp_Test_Data selectedCamp = campsData.get(selectedCampName);
+                System.out.println("Students Registered for " + selectedCampName + ":");
+                for (Student_User student : selectedCamp.getStudentsRegistered()) {
+                    System.out.println("- " + student.getName());
+                }
+                Committee.manageCamp(studentId);
+            } else {
+                System.out.println("Invalid index. Please enter a number between 1 and " + campsData.size() + ".");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        }
+    }
+
+    private static String getCampNameByIndex(int index) {
+        int currentIndex = 1;
+        for (String campName : campsData.keySet()) {
+            if (currentIndex == index) {
+                return campName;
+            }
+            currentIndex++;
+        }
+        return null; // Return null if index is not found (should not happen if the input is valid)
+    }
+
 
 
 

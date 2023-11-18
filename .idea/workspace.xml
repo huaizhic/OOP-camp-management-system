@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Implementing suggestion and some committee methods" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="View Camp function separated as static">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +74,6 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/test" />
       <recent name="$PROJECT_DIR$/src/com/example/cms" />
     </key>
   </component>
@@ -102,7 +103,7 @@
       <workItem from="1699862579665" duration="9173000" />
       <workItem from="1699882208477" duration="1958000" />
       <workItem from="1699936014676" duration="1703000" />
-      <workItem from="1699939913791" duration="13979000" />
+      <workItem from="1699939913791" duration="6626000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -240,23 +241,7 @@
       <option name="project" value="LOCAL" />
       <updated>1699968743934</updated>
     </task>
-    <task id="LOCAL-00018" summary="Implementing suggestion and some committee methods">
-      <option name="closed" value="true" />
-      <created>1699979157876</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1699979157876</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Implementing suggestion and some committee methods">
-      <option name="closed" value="true" />
-      <created>1699979232969</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1699979232969</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,7 +273,6 @@
     <MESSAGE value="Staff.java" />
     <MESSAGE value="SearchApp for easier usage" />
     <MESSAGE value="View Camp function separated as static" />
-    <MESSAGE value="Implementing suggestion and some committee methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing suggestion and some committee methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="View Camp function separated as static" />
   </component>
 </project>
