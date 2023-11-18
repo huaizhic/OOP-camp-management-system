@@ -4,22 +4,49 @@ import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.camp_Test_Data.camp_Test_Data;
 import com.example.cms.Enquiries.Enquiry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Committee extends Student_User {
+	
+	private static Map<String, Committee> committeeMap = new HashMap<>();
+    private static ArrayList<Camp> registeredCamps;
+    private static List<String> campAccessibility;
+    private int points = 0; // Additional element for Committee UserGroup
 
-    private static Map<String, Committee_Member> committeeMembersMap = new HashMap<>();
+    // Add a list to store suggestions associated with the committee
+    private List<Suggestion> suggestions;
 
-    public Committee(String studentID) {
+    public Committee(String studentID, int points) {
         super();
-        committeeMembersMap.put(studentID, (Committee_Member) this);
+        this.points = points;
+        Committee.registeredCamps = new ArrayList<>();
+        Committee.campAccessibility = new ArrayList<>();
+        this.suggestions = new ArrayList<>();
+        committeeMap.put(studentID, this); // Use studentID as the key
     }
 
-    public static Map<String, Committee_Member> getCommitteeMembersMap() {
-        return committeeMembersMap;
+    public static Map<String, Committee> getCommitteeMap() {
+        return committeeMap;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public List<Suggestion> getSuggestions() {
+        return suggestions;
+    }
+
+    public void setSuggestions(List<Suggestion> suggestions) {
+        this.suggestions = suggestions;
     }
 
     public static void manageCamp(String studentId) {
@@ -102,7 +129,7 @@ public class Committee extends Student_User {
                 Enquiry.viewRelatedEnquiries(studentID);
                 break;
             case 2:
-                Enquiry.answerEnquiries(studentID);
+                answerEnquiries(studentID);
                 break;
             case 3:
             	// Back to the com.example.cms.main menu
@@ -114,16 +141,33 @@ public class Committee extends Student_User {
         }
     }
 
-    
+    public static void answerEnquiries(String studentId) {
+        int result = Enquiry.answerEnquiries(studentID);
+
+        // Check the result and update points accordingly
+        if (result == 1) {
+            // If the reply is sent successfully, increment the points of the current user
+            Committee currentUser = Committee.getCommitteeMap().get(studentId);
+            if (currentUser != null) {
+                // Assuming points is an attribute in the Committee class
+                currentUser.setPoints(currentUser.getPoints() + 1);
+                System.out.println("Points incremented for user " + studentId + ". New points: " + currentUser.getPoints());
+            } else {
+                System.out.println("User " + studentId + " not found in the committee map.");
+            }
+        } else {
+            System.out.println("Reply not sent successfully. Points remain unchanged.");
+        }
+    }
+
  /*************************************FOR SUGGESTIONS****************************************/
 
     public static void manageSuggestions(String studentID) {
         System.out.println("Suggestions Management Menu:");
         System.out.println("1. View Suggestions");
-        System.out.println("2. Submit Suggestions");
-        System.out.println("3. Edit Suggestions");
-        System.out.println("4. Delete Suggestions");
-        System.out.println("5. Back to Main Menu");
+        System.out.println("2. Make Suggestions");
+        System.out.println("3. Delete Suggestions");
+        System.out.println("4. Back to Main Menu");
 
         System.out.print("Enter your choice: ");
         Scanner scanner = new Scanner(System.in);
@@ -151,20 +195,46 @@ public class Committee extends Student_User {
         }
     }
 
-    public void viewSuggestions() {
-        // Implement code to view suggestions
+    public static void viewSuggestions(String studentID) {
+        Committee committee = committeeMap.get(studentID);
+        if (committee != null) {
+            List<Suggestion> suggestions = committee.getSuggestions();
+            System.out.println("Suggestions:");
+
+            for (Suggestion suggestion : suggestions) {
+                Suggestion.printSuggestionInfo(suggestion);
+            }
+        } else {
+            System.out.println("Committee not found for student ID: " + studentID);
+        }
     }
 
-    public void submitSuggestion() {
-        // Implement code for submitting suggestions
+    public static void makeSuggestion(String studentID, ArrayList<Camp> registeredCamps) {
+        // ... (existing makeSuggestion method remains unchanged)
+
+        // After creating a new suggestion, add it to the committee's list of suggestions
+        Committee committee = committeeMap.get(studentID);
+        if (committee != null) {
+            committee.getSuggestions().add(newSuggestion);
+        } else {
+            System.out.println("Committee not found for student ID: " + studentID);
+        }
+
+        System.out.println("Suggestion sent successfully.");
     }
 
-    public void editSuggestion() {
-        // Implement code for editing suggestions
-    }
+    public static void deleteSuggestion(String studentID, ArrayList<Camp> registeredCamps) {
+        // ... (existing deleteSuggestion method remains unchanged)
 
-    public void deleteSuggestion() {
-        // Implement code for deleting suggestions
+        // After deleting a suggestion, remove it from the committee's list of suggestions
+        Committee committee = committeeMap.get(studentID);
+        if (committee != null) {
+            committee.getSuggestions().remove(deletedSuggestion);
+        } else {
+            System.out.println("Committee not found for student ID: " + studentID);
+        }
+
+        System.out.println("Suggestion deleted successfully.");
     }
 
     public void generateReport() {

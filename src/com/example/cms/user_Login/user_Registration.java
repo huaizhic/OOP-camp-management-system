@@ -1,11 +1,16 @@
 package com.example.cms.user_Login;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.example.cms.Faculty;
 import com.example.cms.Student_Role;
+import com.example.cms.CSVConverter.CSVWriter;
 import com.example.cms.Student.Password_Manager;
 import com.example.cms.Student.Student_User;
 
@@ -87,6 +92,7 @@ public class user_Registration {
 	        String confirmPassword = scanner.next();
 
 	        if (password.equals(confirmPassword)) {
+	        	//password = confirmPassword;
 	            break; // Exit the confirmation loop if the passwords match
 	        } else {
 	            System.out.println("Password confirmation doesn't match. Please try again.");
@@ -285,14 +291,18 @@ public class user_Registration {
         newStudent.setSecurityQuestions(securityQuestions);
         newStudent.setSecurityAnswers(securityAnswers);
         newStudent.setEnquirySubmitted(null);
+        newStudent.setSuggestionSubmitted(null);
 
 	 // Add the new student to the list of existing students
-	    Student_User.addStudent(newStudent);
-
+	  //  Student_User.addStudent(newStudent);
+	    
+	    CSVWriter.writeUserToCSV(newStudent, true);
+	    
 	    System.out.println("Registration successful!");
 	    
 	    account_Manager accountManager = new account_Manager(scanner);
 	    accountManager.start();
 	}
+	
 
 }

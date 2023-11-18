@@ -400,40 +400,7 @@ public class camp_Test_Data {
 
 
 
-    public static void viewRelatedEnquiries(String studentID) {
-        // Retrieve the student based on the provided studentID
-        Student_User student = Student_User.getStudentById(studentID);
 
-        if (student != null) {
-            List<Camp> registeredCamps = student.getRegisteredCamps();
-
-            // Display the enquiries related to the student's registered camps
-            if (!registeredCamps.isEmpty()) {
-                System.out.println("Enquiries for Your Registered Camps:");
-
-                for (Camp registeredCamp : registeredCamps) {
-                    // Check if the camp data exists in the campsData HashMap
-                    if (campsData.containsKey(registeredCamp.getCampName())) {
-                        camp_Test_Data camp = campsData.get(registeredCamp.getCampName());
-
-                        // Display enquiries for the current camp
-                        System.out.println("Camp Name: " + camp.getcamp_Test_DataName());
-                        System.out.println("Enquiries:");
-                        for (Enquiry enquiry : camp.getEnquiry()) {
-                            System.out.println("Enquiry ID: " + enquiry.getEnquiryID() + ", Content: " + enquiry.getContent());
-                        }
-                        System.out.println();
-                    } else {
-                        System.out.println("Camp data not found for camp: " + registeredCamp.getCampName());
-                    }
-                }
-            } else {
-                System.out.println("You are not registered for any camps. No enquiries to display.");
-            }
-        } else {
-            System.out.println("Student not found with ID: " + studentID);
-        }
-    }
 
 	
 

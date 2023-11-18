@@ -1,5 +1,7 @@
 package com.example.cms.Student;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +13,11 @@ import com.example.cms.Faculty;
 import com.example.cms.Student_Role;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Suggestions.Suggestion;
 
 public class Student_User {
 
-    protected String studentID;
+    protected static String studentID;
     private String password = "password";
     private String name;
     private Faculty faculty;
@@ -26,6 +29,7 @@ public class Student_User {
     private ArrayList<String> securityQuestion;
     private ArrayList<String> securityAnswers;
     private ArrayList<Enquiry> enquirySubmitted;
+    private ArrayList<Suggestion> suggestionSubmitted;
 
     public Student_User() {
         this.studentID = ""; // You can set an initial value or leave it empty
@@ -130,6 +134,14 @@ public class Student_User {
     public void setEnquirySubmitted(ArrayList<Enquiry> enquirySubmitted) {
         this.enquirySubmitted = enquirySubmitted;
     }
+    
+    public ArrayList<Suggestion> getSuggestionSubmitted() {
+        return this.suggestionSubmitted;
+    }
+
+    public void setSuggestionSubmitted(ArrayList<Suggestion> suggestionSubmitted) {
+        this.suggestionSubmitted = suggestionSubmitted;
+    }
 
     public static Student_User getStudentById(String StudentId) {
         return existingStudents.get(StudentId);
@@ -141,24 +153,104 @@ public class Student_User {
 
     public static void addStudent(Student_User newStudent) {
         existingStudents.put(newStudent.getStudentID(), newStudent);
-        saveStudentsToFile(existingStudents.values());
+        //saveStudentsToFile(existingStudents.values());
     }
 
     public static String getName(String userID) {
         Student_User student = existingStudents.get(userID);
         return (student != null) ? student.name : null;
     }
+    
+    public static void loadStudentsFromCSV() {
+        String csvFilePath = "student.csv";
 
-    private static void saveStudentsToFile(Iterable<Student_User> students) {
-        try {
-            FileWriter writer = new FileWriter("students.txt");
-            for (Student_User student : students) {
-                writer.write(student.getStudentID() + "," + student.getName() + "," + student.getUserGroup() + "\n");
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Split the CSV line into an array
+                String[] data = line.split(",");
+
+                // Create a new Student_User instance and set its attributes
+                Student_User student = new Student_User();
+                student.setStudentID(data[0]);
+                student.setName(data[1]);
+                student.setUserGroup(Student_Role.valueOf(data[2])); // Assuming Student_Role values are in the CSV
+                student.setFaculty(Faculty.valueOf(data[3])); // Assuming Faculty values are in the CSV
+
+                // Parse CampAccessibility from the CSV
+                List<String> campAccessibility = new ArrayList<>();
+                String[] campAccessibilityArray = data[4].split("\\|");
+                for (String camp : campAccessibilityArray) {
+                    campAccessibility.add(camp);
+                }
+                student.setCampAccessibility(campAccessibility);
+
+                // Parse CampCommittee from the CSV
+                boolean campCommittee = Boolean.parseBoolean(data[5]);
+                student.setCampCommittee(campCommittee);
+
+                // Parse RegisteredCamps from the CSV
+                List<Camp> registeredCamps = new ArrayList<>();
+                String[] registeredCampsArray = data[6].split("\\|");
+                for (String camp : registeredCampsArray) {
+                    // Assuming Camp class has a static method to get a Camp instance by its name
+                    Camp registeredCamp = Camp.getCampByName(camp);
+                    if (registeredCamp != null) {
+                        registeredCamps.add(registeredCamp);
+                    }
+                }
+                student.setRegisteredCamps(registeredCamps);
+
+                // Parse SecurityQuestions from the CSV
+                List<String> securityQuestions = new ArrayList<>();
+                String[] securityQuestionsArray = data[7].split("\\|");
+                for (String question : securityQuestionsArray) {
+                    securityQuestions.add(question);
+                }
+                student.setSecurityQuestions(securityQuestions);
+
+                // Parse SecurityAnswers from the CSV
+                List<String> securityAnswers = new ArrayList<>();
+                String[] securityAnswersArray = data[8].split("\\|");
+                for (String answer : securityAnswersArray) {
+                    securityAnswers.add(answer);
+                }
+                student.setSecurityAnswers(securityAnswers);
+
+                // Parse EnquirySubmitted from the CSV
+                List<Enquiry> enquirySubmitted = new ArrayList<>();
+                String[] enquirySubmittedArray = data[9].split("\\|");
+                for (String enquiry : enquirySubmittedArray) {
+                    // Assuming Enquiry class has a static method to get an Enquiry instance by its subject
+                    Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
+                    if (submittedEnquiry != null) {
+                        enquirySubmitted.add(submittedEnquiry);
+                    }
+                }
+                student.setEnquirySubmitted(enquirySubmitted);
+
+                // Parse SuggestionSubmitted from the CSV
+                List<Suggestion> suggestionSubmitted = new ArrayList<>();
+                String[] suggestionSubmittedArray = data[10].split("\\|");
+                for (String suggestion : suggestionSubmittedArray) {
+                    // Assuming Suggestion class has a static method to get a Suggestion instance by its subject
+                    Suggestion submittedSuggestion = Suggestion.getSuggestionBySubject(suggestion);
+                    if (submittedSuggestion != null) {
+                        suggestionSubmitted.add(submittedSuggestion);
+                    }
+                }
+                student.setSuggestionSubmitted(suggestionSubmitted);
+
+                existingStudents.put(student.getStudentID(), student);
             }
-            writer.close();
+
+            System.out.println("Students loaded from " + csvFilePath + " successfully.");
         } catch (IOException e) {
+            System.out.println("An error occurred while reading from the CSV file.");
             e.printStackTrace();
         }
     }
+
+   
 
 }
