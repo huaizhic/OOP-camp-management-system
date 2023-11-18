@@ -49,8 +49,8 @@ public class main {
                         if (check(UserID, password, 1) == true)
                         {
                             access = true;
-                            Student_User s = new Student_User(UserID,password);
-                            menuChoice=StudentMenu.display(); //depending on type of student menu display differs
+                            User user = new User(UserID,password,);
+                            menuChoice=Student.display(); //depending on type of student menu display differs
 
                             while (menuChoice != 8)
                             {
