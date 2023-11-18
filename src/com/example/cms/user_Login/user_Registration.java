@@ -294,7 +294,7 @@ public class user_Registration {
         newStudent.setSuggestionSubmitted(null);
 
 	 // Add the new student to the list of existing students
-	    Student_User.addStudent(newStudent);
+	  //  Student_User.addStudent(newStudent);
 	    
 	    CSVWriter.writeUserToCSV(newStudent, true);
 	    
