@@ -1,10 +1,10 @@
 package com.example.cms.Enquiries;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 import com.example.cms.Camp.Camp;
 import com.example.cms.Student.Student_User;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Enquiry {
     private String studentID;
@@ -17,7 +17,7 @@ public class Enquiry {
     private boolean processed;
 
     // Initialize a HashMap to store individual student inquiries with enquiry_Subject as the key
-    private static Map<String, Enquiry> enquiries = new HashMap<>();
+    private static HashMap<String, Enquiry> enquiryHashMap = new HashMap<>();
 
     public static void printAllEnquiryInfo(Enquiry enquiry) {
         System.out.println("Submitted by: " + enquiry.getStudentName());
@@ -37,7 +37,7 @@ public class Enquiry {
         this.processed = false;
 
         // Create a new Enquiry and add it to the enquiries map with enquiry_Subject as the key
-        enquiries.put(enquiry_Subject, this);
+        enquiryHashMap.put(enquiry_Subject, this);
     }
 
     public String getStudentID() {
@@ -109,29 +109,10 @@ public class Enquiry {
     	this.campName = campName;
     }
 
-    
-    public static void viewEnquiry(String studentID) {
-        if (enquiries.containsKey(studentID)) {
-            Enquiry studentEnquiry = enquiries.get(studentID);
-
-            System.out.println("Enquiry Subject: " + studentEnquiry.getEnquiry_Subject());
-            System.out.println("Date of Enquiry Sent: " + studentEnquiry.getDateSent());
-            System.out.println("Student Name: " + studentEnquiry.getStudentName());
-            System.out.println("Enquiry Content: " + studentEnquiry.getContent());
-
-            if (studentEnquiry.getReply() != null) {
-                System.out.println("Date of Response: " + studentEnquiry.getDateSent()); // Assuming you meant to display the sent date
-                System.out.println("Response Content: " + studentEnquiry.getReply());
-            } else {
-                System.out.println("Date of Response: N/A");
-                System.out.println("Response Content: Pending");
-            }
-
-            System.out.println("------------------------------------------------------------------------------------------");
-        } else {
-            System.out.println("No enquiries found for student with ID: " + studentID);
-        }
+    public static HashMap<String, Enquiry> getEnquiryHashMap() {
+        return enquiryHashMap;
     }
+
     
     
 
@@ -231,48 +212,7 @@ public class Enquiry {
     }
     
     /*************************FOR CAMP COMMITEE********************************/
-    
-    public static void viewRelatedEnquiries(String studentID) {
-        // Get the list of registered camps for the student
-        List<Camp> registeredCamps = Student_User.getStudentById(studentID).getRegisteredCamps();
 
-        if (registeredCamps.isEmpty()) {
-            System.out.println("You are not registered for any camps. No related enquiries to display.");
-            return;
-        }
-
-        // Display enquiries related to the registered camps
-        System.out.println("Enquiries Related to Your Registered Camps:");
-
-        for (Camp camp : registeredCamps) {
-            String campName = camp.getCampName();
-
-            // Check if there are any enquiries related to the current camp
-            if (enquiries.containsKey(campName)) {
-                List<Enquiry> campEnquiries = getEnquiriesByCamp(campName);
-
-                // Display enquiries for the current camp
-                System.out.println("Camp: " + campName);
-                for (Enquiry enquiry : campEnquiries) {
-                    System.out.println("Subject: " + enquiry.getEnquiry_Subject());
-                    System.out.println("Date Sent: " + enquiry.getDateSent());
-                    System.out.println("Content: " + enquiry.getContent());
-
-                    if (enquiry.getReply() != null) {
-                        System.out.println("Date of Response: " + enquiry.getDateSent()); // Assuming you meant to display the sent date
-                        System.out.println("Response Content: " + enquiry.getReply());
-                    } else {
-                        System.out.println("Date of Response: N/A");
-                        System.out.println("Response Content: Pending");
-                    }
-
-                    System.out.println("------------------------------------------------------------------------------------------");
-                }
-            } else {
-                System.out.println("No enquiries found for the camp: " + campName);
-            }
-        }
-    }
     
      public static int answerEnquiries(String studentID) {
         // Get the list of registered camps for the student

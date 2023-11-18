@@ -1,24 +1,23 @@
 package com.example.cms.Suggestions;
 
 import com.example.cms.Status;
+import com.example.cms.Student.Committee;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Suggestion {
     private String suggestion_Subject;
-    private String submitter;
+    private Committee submitter;
     private String content;
-    private String dateSubmitted;
+    private LocalDate dateSubmitted;
     private Status status;
     private boolean processed = false;
 
     // Use suggestion_Subject as the key for the HashMap
     private static HashMap<String, Suggestion> suggestionHashMap = new HashMap<>();
 
-    public Suggestion(String suggestion_Subject, String submitter, String content, String dateSubmitted) {
+    public Suggestion(String suggestion_Subject, Committee committee, String content, LocalDate dateSubmitted) {
         this.suggestion_Subject = suggestion_Subject;
         this.submitter = submitter;
         this.content = content;
@@ -28,7 +27,16 @@ public class Suggestion {
         suggestionHashMap.put(suggestion_Subject, this);
     }
 
+    public static void printSuggestionInfo(Suggestion suggestion){
+        System.out.println("The subject: " + suggestion.getSuggestion_Subject());
+        System.out.println("The submitter: " + suggestion.getSubmitter());
+        System.out.println("The date submitted: " + suggestion.getDateSubmitted());
+        System.out.println("The content: "+ suggestion.getContent());
+        System.out.println("The status: " + suggestion.getStatus());
+    }
+
     // Getter and setter for suggestion_Subject
+
     public String getSuggestion_Subject() {
         return suggestion_Subject;
     }
@@ -38,11 +46,11 @@ public class Suggestion {
     }
 
     // Getter and setter for submitter
-    public String getSubmitter() {
-        return submitter;
+    public Committee getSubmitter() {
+        return this.submitter;
     }
 
-    public void setSubmitter(String submitter) {
+    public void setSubmitter(Committee submitter) {
         this.submitter = submitter;
     }
 
@@ -56,11 +64,11 @@ public class Suggestion {
     }
 
     // Getter and setter for dateSubmitted
-    public String getDateSubmitted() {
+    public LocalDate getDateSubmitted() {
         return dateSubmitted;
     }
 
-    public void setDateSubmitted(String dateSubmitted) {
+    public void setDateSubmitted(LocalDate dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 
@@ -74,7 +82,7 @@ public class Suggestion {
     }
 
     // Getter and setter for processed
-    public boolean isProcessed() {
+    public boolean getProcessed() {
         return processed;
     }
 

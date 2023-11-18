@@ -4,15 +4,16 @@ import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
 import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Status;
-import com.example.cms.Suggestion;
 import com.example.cms.Faculty;
+import com.example.cms.Status;
+import com.example.cms.Suggestions.Suggestion;
 
 import java.text.Format;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Staff {
@@ -270,11 +271,11 @@ public class Staff {
 						boolean eligibleSlot = false;
 						do{System.out.println("Enter the new camp attendee slots");
 						int newAttendeeSlot = input.nextInt();
-						if(campToBeEdited.getStudentsRegistered().size() > newAttendeeSlot){
+						if(campToBeEdited.getAttendeesRegistered().size() > newAttendeeSlot){
 							System.out.println("The number of registered attendee has already passed the new slot number");
 						}else{
 							eligibleSlot = true;
-							campToBeEdited.setRemainingSlots(newAttendeeSlot - campToBeEdited.getStudentsRegistered().size());
+							campToBeEdited.setRemainingSlots(newAttendeeSlot - campToBeEdited.getAttendeesRegistered().size());
 							campToBeEdited.setTotalSlots(newAttendeeSlot);
 							System.out.println("The new camp attendee slots is now: " + campToBeEdited.getTotalSlots());
 							System.out.println("Any other camp to edit? Yes or No");
@@ -346,7 +347,7 @@ public class Staff {
 				return null;
 			} else {
 				String campNameToDeleteStr = campToBeDeleted.getCampName();
-				if (campToBeDeleted.getStudentsRegistered().isEmpty() && campToBeDeleted.getCommitteeRegistered().isEmpty()) {
+				if (campToBeDeleted.getAttendeesRegistered().isEmpty() && campToBeDeleted.getCommitteeRegistered().isEmpty()) {
 					System.out.println("Confirm to delete Camp: " + campNameToDeleteStr + ". Insert Confirm or any other key");
 					if (input.nextLine().equals("Confirm")) {
 						staff.getCampsCreated().remove(campToBeDeleted);
@@ -383,6 +384,9 @@ public class Staff {
 	public void viewEnquiry(StaffMember staff) {
 		viewCampCreated(staff);
 		Camp campNameToViewEnquiry = selectCamp(staff.getCampsCreated());
+		if(campNameToViewEnquiry == null){
+			return;
+		}
 		if(campNameToViewEnquiry.getEnquiry().isEmpty()){
 			System.out.println("No enquiry has been submitted for this camp");
 			System.out.println("Existing...");
@@ -394,79 +398,131 @@ public class Staff {
 		}
 	}
 
-/*
-!!!!!
-This needs to be completed after the enquiry class has been fully completed !!!
- */
-	public void replyEnquiry(StaffMember staff, int campNo, int enquiryNo) {
+	public void replyEnquiry(StaffMember staff) {
 		Scanner input = new Scanner(System.in);
 		viewCampCreated(staff);
-		String campNameToViewEnquiryStr;
-		Camp campNameToViewEnquiry = selectCamp(staff.getCampsCreated());
-		if(campNameToViewEnquiry.getEnquiry().isEmpty()){
-			System.out.println("No enquiry has been submitted for this camp");
-			System.out.println("Existing...");
+		Enquiry enquiryToReply = null;
+		Camp campNameToReplyEnquiry = selectCamp(staff.getCampsCreated());
+		if(campNameToReplyEnquiry == null){
+			return;
 		}
-		else {
-			for (Enquiry enquiry : campNameToViewEnquiry.getEnquiry()) {
+		if(campNameToReplyEnquiry.getEnquiry().isEmpty()){
+			System.out.println("No enquiry has been submitted for this camp, exiting...");
+			return;
+		}
+
+		for (Enquiry enquiry : campNameToReplyEnquiry.getEnquiry()) {
 				Enquiry.printAllEnquiryInfo(enquiry);
-			}
-			System.out.println("Which enquiry would you like to reply to? Insert enquiry SUBJECT");
-			//Implement enquiry picking
-			System.out.println("Insert your reply:");
-			String reply = input.nextLine();
 		}
 
+		do{
+			System.out.println("Which enquiry would you like to reply to? Insert enquiry SUBJECT. Enter \"exit \" to go back");
+			String enquirySubjectStr = input.nextLine();
+			if(enquirySubjectStr.equalsIgnoreCase("exit")){
+				System.out.println("Action terminated by the user, exiting...");
+				return;
+			}
+			enquiryToReply = Enquiry.getEnquiryHashMap().get(enquirySubjectStr);
+			if(enquiryToReply == null){
+				System.out.println("Please check the subject of the enquiry and try again");
+			}
+		}while(enquiryToReply == null);
 
+		System.out.println("The enquiry selected is: " + enquiryToReply.getContent());
+		System.out.println();
+		System.out.println("Insert your reply:");
+		String reply = input.nextLine();
+		System.out.println("Enter \"confirm\" to submit your reply or any other key to cancel");
+		if(input.next().equalsIgnoreCase("confirm")){
+			enquiryToReply.setReply(reply);
+		}else{
+			System.out.println("Action terminated by the user, exiting...");
+		}
 	}
 
-	/**
-	 * 
-	 * @param staff
-	 * @param camp
-	 */
-	public void viewSuggestion(StaffMember staffMember, int campNo) {
-		// TODO - implement Staff.viewSuggestion
-		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
-		Camp campSelected = campsCreatedArray.get(campNo);
-		System.out.println(campSelected.getSuggestion());
-		// throw new UnsupportedOperationException();
+	public void viewSuggestion(StaffMember staff) {
+		viewCampCreated(staff);
+		Camp toView = selectCamp(staff.getCampsCreated());
+		if(toView == null){
+			return;
+		}
+		if(toView.getSuggestion().isEmpty()){
+			System.out.println("No suggestion has been submitted for " + toView.getCampName());
+		}
+		else{
+			for(Suggestion suggestion : toView.getSuggestion()){
+				Suggestion.printSuggestionInfo(suggestion);
+			}
+		}
 	}
 
-	/**
-	 *
-	 * @param staff
-	 * @param camp
-	 * @param suggestion
-	 */
-	public void approveSuggestion(StaffMember staffMember, int campNo, int suggestionNo, Status status) {
-		// TODO - implement Staff.approveSuggestion
-		ArrayList<Camp> campsCreatedArray = staffMember.getCampsCreated();
-		Camp selectedCamp = campsCreatedArray.get(campNo);  // select camp object instance
-		ArrayList<Suggestion> campSuggestionArray = selectedCamp.getSuggestion();
-		Suggestion selectedSuggestion = campSuggestionArray.get(suggestionNo);
-		selectedSuggestion.setStatus(status);
-		selectedSuggestion.setProcessed(true);
-		// throw new UnsupportedOperationException();
+
+	public void approveSuggestion(StaffMember staff) {
+		viewSuggestion(staff);
+		Suggestion suggestionToApprove;
+		do{
+			System.out.println("Which suggestion would you like to approve/disapprove? Insert suggestion SUBJECT. Enter \"exit \" to go back");
+			String suggestionSubjectStr = input.nextLine();
+			if(suggestionSubjectStr.equalsIgnoreCase("exit")){
+				System.out.println("Action terminated by the user, exiting...");
+				return;
+			}
+			suggestionToApprove =Suggestion.getSuggestionHashMap().get(suggestionSubjectStr);
+			if(suggestionToApprove == null){
+				System.out.println("Please enter the SUBJECT of the suggestion and try again");
+			}
+		}while(suggestionToApprove == null);
+		System.out.println("The enquiry selected is: " + suggestionToApprove.getContent());
+		System.out.println();
+		System.out.println("Please select your response from the following");
+		System.out.println("1. Approve");
+		System.out.println("2. Disapprove");
+		System.out.println("3. Pending");
+		System.out.println("4. Cancel and exit");
+		int decision;
+		do {
+			try {
+				System.out.print("Enter your choice: ");
+				decision = input.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a valid integer.");
+				input.nextLine(); // Consume the invalid input
+				decision = -1; // Set a default value or use a flag to handle the loop
+			}
+		} while (decision != 1 && decision != 2 && decision != 3 && decision != 4);
+		Status response = null;
+		switch(decision){
+			case(1):
+				response = Status.Approved;
+				break;
+			case(2):
+				response = Status.Disapproved;
+				break;
+			case(3):
+				response = Status.Pending;
+				break;
+			case(4):
+				System.out.println("Action terminated by the user, exiting");
+				return;
+		}
+
+		System.out.println("Enter \"confirm\" to submit your decision or any other key to cancel");
+		if(input.next().equalsIgnoreCase("confirm")){
+			suggestionToApprove.setStatus(response);
+			suggestionToApprove.setProcessed(true);
+			System.out.println("The suggestion has been processed and your response has been successfully recorded");
+		}else{
+			System.out.println("Action terminated by the user, exiting...");
+		}
 	}
 
-	/**
-	 * 
-	 * @param staff
-	 * @param camp
-	 * @param format
-	 */
+
 	public void generateCampReport(Staff staff, int camp, Format format) {
 		// TODO - implement Staff.generateCampReport
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param staff
-	 * @param camp
-	 * @param format
-	 */
+
 	public void generateCommitteeReport(Staff staff, Camp camp, Format format) {
 		// TODO - implement Staff.generateCommitteeReport
 		throw new UnsupportedOperationException();

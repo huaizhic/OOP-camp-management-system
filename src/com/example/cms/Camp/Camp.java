@@ -1,10 +1,12 @@
 package com.example.cms.Camp;
-import com.example.cms.*;
-import com.example.cms.Student.Committee_Member;
-import com.example.cms.Student.Student_User;
+
+import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Staff.StaffMember;
-import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
+import com.example.cms.Suggestions.Suggestion;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -20,8 +22,8 @@ public class Camp {
 	private int remainingCommitteeSlots;
 	private String description;
 	private StaffMember staffInCharge;
-	private ArrayList<Student_User> studentsRegistered = new ArrayList<>();
-	private ArrayList<Committee_Member> committeeRegistered;
+	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
+	private ArrayList<Committee> committeeRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry = new ArrayList<>();
 	private ArrayList<Suggestion> suggestion = new ArrayList<>();
@@ -154,20 +156,20 @@ public class Camp {
 		this.staffInCharge = staffInCharge;
 	}
 
-	public ArrayList<Student_User> getStudentsRegistered() {
-		return this.studentsRegistered;
+	public ArrayList<Attendee> getAttendeesRegistered() {
+		return this.attendeesRegistered;
 	}
 
 
-	public void setStudentsRegistered(ArrayList<Student_User> studentsRegistered) {
-		this.studentsRegistered = studentsRegistered;
+	public void setAttendeesRegistered(ArrayList<Attendee> studentsRegistered) {
+		this.attendeesRegistered = studentsRegistered;
 	}
 
-	public ArrayList<Committee_Member> getCommitteeRegistered() {
+	public ArrayList<Committee> getCommitteeRegistered() {
 		return committeeRegistered;
 	}
 
-	public void setCommitteeRegistered(Committee_Member committeeMember) {
+	public void setCommitteeRegistered(Committee committeeMember) {
 		this.committeeRegistered.add(committeeMember);
 	}
 
