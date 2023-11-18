@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class DisplayApp {
 
-    // the method returns null either there is no camp or the user exits, therefore the main should go back.
+    // the method returns null either there is no camp or the user exits, therefore the com.example.cms.main should go back.
     public static ArrayList<Camp> viewAllCamp() {
         DisplayBySort aOb = new SortByName_Default();
         if (campData.getCampList().isEmpty()) {
