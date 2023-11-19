@@ -222,7 +222,7 @@ public class Student_User {
                 String[] enquirySubmittedArray = data[9].split("\\|");
                 for (String enquiry : enquirySubmittedArray) {
                     // Assuming Enquiry class has a static method to get an Enquiry instance by its subject
-                    Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
+                    Enquiry submittedEnquiry = Enquiry.getEnquiry_Subject(enquiry);
                     if (submittedEnquiry != null) {
                         enquirySubmitted.add(submittedEnquiry);
                     }

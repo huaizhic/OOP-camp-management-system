@@ -113,7 +113,9 @@ public class Enquiry {
         return enquiryHashMap;
     }
 
-    
+    private static void viewEnquiry(String studentID) {
+
+    }
     
 
     public static void makeEnquiry(String studentID) {
@@ -155,7 +157,7 @@ public class Enquiry {
 
                 // Create a new Enquiry and add it to the enquiries map
                 Enquiry newEnquiry = new Enquiry(studentID, studentName, campName, enquiry_Subject, content, dateSent);
-                enquiries.put(newEnquiry.getEnquiry_Subject(), newEnquiry);
+                Enquiries.put(newEnquiry.getEnquiry_Subject(), newEnquiry);
 
                 System.out.println("Enquiry sent successfully.");
                 break;
@@ -210,7 +212,9 @@ public class Enquiry {
             System.out.println("No enquiries found for student with ID: " + studentID);
         }
     }
-    
+
+
+
     /*************************FOR CAMP COMMITEE********************************/
 
     
