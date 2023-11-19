@@ -62,7 +62,7 @@ public class Suggestion {
 		return this.submitter;
 	}
 
-	public void setSubmitter(Committee_Member submitter) {
+	public void setSubmitter(Committee submitter) {
 		this.submitter = submitter;
 	}
 
