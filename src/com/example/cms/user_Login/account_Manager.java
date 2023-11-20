@@ -3,10 +3,12 @@ package com.example.cms.user_Login;
 import java.util.Scanner;
 import com.example.cms.staff_Account;
 import com.example.cms.Student.Student_Account;
+import com.example.cms.Student.Student_User;
 
 public class account_Manager {
     private Scanner scanner;
-
+    String userId = null;
+    
     public account_Manager(Scanner scanner) {
         this.scanner = scanner;
     }
@@ -18,19 +20,62 @@ public class account_Manager {
 
         if (userTypeChoice == 2) {
             System.out.print("Enter your staff ID: ");
-            String userId = scanner.next();
-            staff_Account staffAccount = new staff_Account(scanner, userId);
-            staffAccount.start();
+            userId = scanner.next();
+           // staff_Account staffAccount = new staff_Account(scanner, userId);
+           // staffAccount.start();
         } else if (userTypeChoice == 1) {
             System.out.print("Do you have an existing account? (1 for Yes, 0 for No): ");
             int accountChoice = scanner.nextInt();
 
             if (accountChoice == 1) {
-                System.out.print("Enter your student ID: ");
-                String userId = scanner.next();
-                Student_Account studentAccount = new Student_Account(userId);
-                studentAccount.start();
-            } else if (accountChoice == 0) {
+            	Student_User student_User = new Student_User();
+				student_User.loadStudentsFromCSV();
+            	
+            	boolean userFound = false;
+
+            	while (!userFound) {
+            	    System.out.print("Enter your student ID: ");
+            	    userId = scanner.next().toUpperCase().trim();
+            	    
+            	    System.out.println("This is the student id entered: " + userId);
+            	    // Check if the entered ID belongs to an existing student
+            	    Student_Account studentAccount = new Student_Account(userId, student_User.getExistingStudents());
+            	    //Student_Account studentAccount = new Student_Account(userId);
+
+            	    if (studentAccount.getStudentAccount(userId)) {
+            	        // Existing student found, start the student account
+            	        studentAccount.start();
+            	        userFound = true; // Set the flag to exit the loop
+            	    } else {
+            	        // Student not found, give options to try again or go to student registration
+            	        System.out.println("Student not found.");
+
+            	        int retryChoice;
+            	        do {
+            	            System.out.println("1. Try again");
+            	            System.out.println("2. Go to student registration");
+            	            System.out.print("Enter your choice: ");
+            	            retryChoice = scanner.nextInt();
+
+            	            switch (retryChoice) {
+            	                case 1:
+            	                    // Continue the loop
+            	                    break;
+            	                case 2:
+            	                    // Go to student registration (implement this)
+            	                    user_Registration.registerNewUser(scanner);
+            	                    userFound = true; // Set the flag to exit the loop
+            	                    break;
+            	                default:
+            	                    System.out.println("Invalid choice. Please enter 1 or 2.");
+            	                    break;
+            	            }
+            	        } while (retryChoice != 1 && retryChoice != 2);
+            	    }
+            	}
+            }
+            
+ else if (accountChoice == 0) {
                 // Redirect to the registration process (you need to implement this part)
                 user_Registration.registerNewUser(scanner);
             } else {
@@ -42,9 +87,9 @@ public class account_Manager {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        account_Manager accountManager = new account_Manager(scanner);
-        accountManager.start();
-        scanner.close();
+    	  Scanner scanner = new Scanner(System.in);
+          account_Manager accountManager = new account_Manager(scanner);
+          accountManager.start();
+          scanner.close();
     }
 }

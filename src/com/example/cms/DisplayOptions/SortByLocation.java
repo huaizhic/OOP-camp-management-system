@@ -4,30 +4,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 
-public class SortByLocation implements DisplayOption {
-	public void Sorting(ArrayList<Camp> campList) {
+public class SortByLocation extends DisplayBySort{
+	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
+	public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {
 		if(campList == null){
 			System.out.println("No camp available yet");
+			return null;
 		}else {
 			Collections.sort(campList, campLocationComparator.thenComparing(SortByName_Default.campNameComparator));
-
-			//Needs to find out how to sav2
-			// e potentially into csv format
-
-			for (Camp camp : campList) {
-				System.out.println(camp);
-				//Needs to find out how to print camp information, potentially direct from csv
+			campAfterSorting.clear();
+			campAfterSorting.addAll(campList);
+			return campAfterSorting;
 			}
-		}
-	}
-
-	public void SortSearchName(String location, ArrayList<Camp> campList){
-		Collections.sort(campList, campLocationComparator.thenComparing(SortByName_Default.campNameComparator));
-		for(Camp camp:campList){
-			if(camp.getLocation().contains(location)){
-				System.out.print(camp);
-			}
-		}
 	}
 
 	public static Comparator<Camp> campLocationComparator = new Comparator<>(){
