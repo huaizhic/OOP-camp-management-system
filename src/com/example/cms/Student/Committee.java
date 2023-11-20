@@ -62,7 +62,7 @@ public class Committee extends Student_User {
         this.registeredCamp = registeredCamp;
     }
 
-    public static void manageCamp(Committee committee) {
+    public static void manageCamp(String studentId) {
         boolean exit = false;
         do {
             System.out.println("Camp Management Menu:");
@@ -84,10 +84,10 @@ public class Committee extends Student_User {
 
                 switch (choice) {
                     case 1:
-                        viewAllCamp(committee);
+                        viewAllCamp(studentId);
                         break;
                     case 2:
-                        committee.generateReport(committee);
+                        studentId.generateReport(studentId);
                         break;
                  case 3:
                      exit = true;

@@ -94,5 +94,9 @@ public class Suggestion {
     public static HashMap<String, Suggestion> getSuggestionHashMap() {
         return suggestionHashMap;
     }
+    
+    public static Suggestion getSuggestionBySubject(String subject) {
+        return suggestionHashMap.get(subject);
+    }
 
   }

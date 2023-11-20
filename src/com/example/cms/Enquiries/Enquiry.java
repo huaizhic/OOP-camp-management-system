@@ -117,6 +117,10 @@ public class Enquiry {
 
     }
     
+    public static Enquiry getEnquiryBySubject(String enquiry) {
+        return enquiryHashMap.get(enquiry);
+    }
+    
 
     public static void makeEnquiry(String studentID) {
         Scanner scanner = new Scanner(System.in);

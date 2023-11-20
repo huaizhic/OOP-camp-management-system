@@ -1,4 +1,1 @@
-StudentID,Name,Password,UserGroup,Faculty,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted
-Yves0002,Samson,Samson270302,Attendee,EEE,EEE,false,,Food|Colour|Song,Macs|Blue|Starving,,
-StudentID,Name,Password,UserGroup,Faculty,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted
-Hello123,Hello,Hello2312,Attendee,EEE,EEE,false,,food|song|colour,macs|happy|blue,,
+YVES0002,SAMSON,Naruti91,ATTENDEE,EEE,EEE,false,,WHAT IS YOUR FAVOURITE BOOK|WHAT IS YOUR FAVOURITE SONG|WHAT IS YOUR FAVOURITE MOVIE,HARRY POTTER|STARVING|AVENGERS,,

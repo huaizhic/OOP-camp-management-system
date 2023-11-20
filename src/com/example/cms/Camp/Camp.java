@@ -9,9 +9,14 @@ import com.example.cms.Suggestions.Suggestion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Camp {
+	private static Map<String, Camp> campMap = new HashMap<>();
+	
 	private String campName;
+	private static ArrayList<Camp> campList= new ArrayList<>(); // to keep track of all of the camps
 	private ArrayList<LocalDate> campDates = new ArrayList<>();
 	private LocalDate regCloseDate;
 	private ArrayList<Faculty> userGroup = new ArrayList<>();
@@ -27,7 +32,7 @@ public class Camp {
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry = new ArrayList<>();
 	private ArrayList<Suggestion> suggestion = new ArrayList<>();
-	private static int counter = -1;
+	//private static int counter = -1;
 
 	public Camp(){
 
@@ -45,20 +50,24 @@ public class Camp {
 		remainingCommitteeSlots = committeeSlots;
 		staffInCharge = staff;
 		this.visibility = visibility;
-		counter ++;
+		//counter ++;
+		// Add the camp to the map when it is created
+        campMap.put(campName, this);
 	}
 
 
 
-	public static int getCounter() {
-		return counter;
-	}
+//	public static int getCounter() {
+//		return counter;
+//	}
+//
+//	public static void setCounter(int counter){
+//		Camp.counter = counter;
+//	}
 
-	public static void setCounter(int counter){
-		Camp.counter = counter;
-	}
-
-	public static void printAllCampInfo(Camp camp){
+	public static void printAllCampInfo(String campName){
+		Camp camp = campMap.get(campName);
+        if (camp != null) {
 		System.out.print("Camp: " + camp.getCampName() + " - ");
 		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
 		System.out.print("Reg close date: " + camp.getRegCloseDate());
@@ -69,6 +78,10 @@ public class Camp {
 		System.out.println("Description: " + camp.getDescription());
 		System.out.println();
 		System.out.println();
+        }
+        else {
+            System.out.println("Camp not found: " + campName);
+        }
 
 	}
 
@@ -196,4 +209,13 @@ public class Camp {
 	public void setSuggestion(ArrayList<Suggestion> suggestion) {
 		this.suggestion = suggestion;
 	}
+
+	public static Camp getCampByName(String campName) {
+        return campMap.get(campName);
+    }
+	
+	 // Add a method to get all camps in the map
+    public static Map<String, Camp> getAllCamps() {
+        return campMap;
+    }
 }

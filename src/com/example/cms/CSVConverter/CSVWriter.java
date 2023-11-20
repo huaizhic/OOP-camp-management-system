@@ -1,6 +1,7 @@
 package com.example.cms.CSVConverter;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ public class CSVWriter {
         String csvFilePath = "student.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath, true))) {
-        	// If appendHeader is true, add the CSV header
-            if (appendHeader) {
+            // Check if the CSV file is empty
+            if (isFileEmpty(csvFilePath)) {
+                // Add the CSV header
                 writer.write("StudentID,Name,Password,UserGroup,Faculty,CampAccessibility,CampCommittee,RegisteredCamps,"
                         + "SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted");
                 writer.newLine();
@@ -54,27 +56,27 @@ public class CSVWriter {
     }
 
     // Helper method to handle null check and conversion to array
-    private static CharSequence[] toArrayWithNullCheckCamp(ArrayList<Camp> arrayList) {
-        if (arrayList != null) {
-            return arrayList.toArray(new CharSequence[0]);
+    private static CharSequence[] toArrayWithNullCheckCamp(List<Camp> list) {
+        if (list != null) {
+            return list.toArray(new CharSequence[0]);
         } else {
             return new CharSequence[0];
         }
     }
     
     // Helper method to handle null check and conversion to array
-    private static CharSequence[] toArrayWithNullCheckEnquiry(ArrayList<Enquiry> arrayList) {
-        if (arrayList != null) {
-            return arrayList.toArray(new CharSequence[0]);
+    private static CharSequence[] toArrayWithNullCheckEnquiry(List<Enquiry> list) {
+        if (list != null) {
+            return list.toArray(new CharSequence[0]);
         } else {
             return new CharSequence[0];
         }
     }
     
  // Helper method to handle null check and conversion to array
-    private static CharSequence[] toArrayWithNullCheckSuggestion(ArrayList<Suggestion> arrayList) {
-        if (arrayList != null) {
-            return arrayList.toArray(new CharSequence[0]);
+    private static CharSequence[] toArrayWithNullCheckSuggestion(List<Suggestion> list) {
+        if (list != null) {
+            return list.toArray(new CharSequence[0]);
         } else {
             return new CharSequence[0];
         }
@@ -89,5 +91,12 @@ public class CSVWriter {
         }
     }
     
+    public static boolean isFileEmpty(String filePath) {
+        File file = new File(filePath);
+        return file.length() == 0;
+    }
+    
+    
+ 
     
 }

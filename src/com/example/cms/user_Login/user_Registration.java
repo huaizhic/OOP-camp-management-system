@@ -21,17 +21,17 @@ public class user_Registration {
 
 	    // Collect basic information
 	    System.out.print("Enter your student ID: ");
-	    String studentID = scanner.next();
+	    String studentID = scanner.next().toUpperCase().trim();
 
 	    // Check if the student already exists
-	    Student_User existingStudent = Student_User.getStudentById(studentID);
-	    if (existingStudent != null) {
+	    Student_User existingStudent = new Student_User();
+	    if (existingStudent.isStudentExist(studentID)) {
 	        System.out.println("This student already has an account.");
 	        return;
 	    }
 
 	    System.out.print("Enter your name: ");
-	    String name = scanner.next();
+	    String name = scanner.next().toUpperCase().trim();
 
 	    // Collect user group
 	    System.out.print("Enter your user group (1 for Attendee, 2 for Committee): ");
@@ -43,7 +43,7 @@ public class user_Registration {
 	        int userGroupChoice = scanner.nextInt();
 
 	        if (userGroupChoice == 1) {
-	            userGroup = Student_Role.Attendee;
+	            userGroup = Student_Role.ATTENDEE;
 	            System.out.println("You have selected 'Attendee'. Is this correct? (1 for Yes, 2 for No): ");
 	            int confirmationChoice = scanner.nextInt();
 
@@ -56,7 +56,7 @@ public class user_Registration {
 	                System.out.println("Invalid confirmation choice. Please enter '1' for Yes or '2' for No.");
 	            }
 	        } else if (userGroupChoice == 2) {
-	            userGroup = Student_Role.Committee;
+	            userGroup = Student_Role.COMMITTEE;
 	            System.out.println("You have selected 'Committee'. Is this correct? (1 for Yes, 2 for No): ");
 	            int confirmationChoice = scanner.nextInt();
 
@@ -137,7 +137,6 @@ public class user_Registration {
 	    System.out.println("17. WKWSCI");
 	    System.out.println("18. ALL");
 
-	    // Get faculty input as a number
 	    int facultyChoice;
 
 	    do {
@@ -147,8 +146,10 @@ public class user_Registration {
 	            scanner.next(); // consume the invalid input
 	        }
 	        facultyChoice = scanner.nextInt();
-	    } while (facultyChoice < 1 || facultyChoice > 18);
 
+	        // Consume the newline character
+	        scanner.nextLine();
+	    } while (facultyChoice < 1 || facultyChoice > 18);
 	    // Map the faculty choice to the actual faculty
 	    Faculty facultyInput = null ;
 	    switch (facultyChoice) {
@@ -239,15 +240,15 @@ public class user_Registration {
 	    confirmed = false;
 
 	    for (int i = 1; i <= numSecurityQuestions; i++) {
-	        System.out.print("Enter your security question " + i + ": ");
-	        String question = scanner.next();
-	        securityQuestions.add(question);
+            System.out.print("Enter your security question " + i + ": ");
+            String question = getUserInput(scanner);
+            securityQuestions.add(question);
 
-	        System.out.print("Enter your answer to the question '" + question + "': ");
-	        String answer = scanner.next();
-	        securityAnswers.add(answer);
-	    }
-
+            System.out.print("Enter your answer to the question '" + question + "': ");
+            String answer = getUserInput(scanner);
+            securityAnswers.add(answer);
+        }
+	    
 	    while (!confirmed) {
 	        // Display the collected security questions and answers for confirmation
 	        System.out.println("Please confirm your security questions and answers:");
@@ -303,6 +304,15 @@ public class user_Registration {
 	    account_Manager accountManager = new account_Manager(scanner);
 	    accountManager.start();
 	}
+	
+	  private static String getUserInput(Scanner scanner) {
+	        String input = scanner.nextLine().trim().toUpperCase();
+	        while (input.isEmpty()) {
+	            System.out.println("Input cannot be empty. Please try again.");
+	            input = scanner.nextLine().trim().toUpperCase();
+	        }
+	        return input;
+	    }
 	
 
 }
