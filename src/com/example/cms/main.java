@@ -49,7 +49,7 @@ public class main {
                         if (check(UserID, password, 1) == true)
                         {
                             access = true;
-                            User user = new User(UserID,password,);
+                            //User user = new User(UserID,password,);
                             menuChoice=Student.display(); //depending on type of student menu display differs
 
                             while (menuChoice != 8)
@@ -120,13 +120,13 @@ public class main {
     //for Excel sheet function
     private static boolean check(String UserID, String pw, int choice) throws IOException
     {
-        Filepath f = new Filepath();
+        FilePath f = new FilePath();
         String filename = null;
         switch (choice)
         {
             case 1: //Student login
             {
-                filename = f.getSTUDFILENAME();
+                filename = f.getUSERFILENAME();
                 break;
             }
             case 2: //Supervisor login
