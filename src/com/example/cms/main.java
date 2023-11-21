@@ -129,7 +129,7 @@ public class main {
                 filename = f.getUSERFILENAME();
                 break;
             }
-            case 2: //Supervisor login
+            case 2: //Staff login
             {
 
                 filename = f.getStaffFILENAME();
