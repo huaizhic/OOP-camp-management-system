@@ -50,7 +50,7 @@ public class main {
                         {
                             access = true;
                             //User user = new User(UserID,password,);
-                            menuChoice=Student.display(); //depending on type of student menu display differs
+                            //menuChoice=Student.display(); //depending on type of student menu display differs
 
                             while (menuChoice != 8)
                             {
@@ -126,13 +126,13 @@ public class main {
         {
             case 1: //Student login
             {
-                filename = f.getUSERFILENAME();
+                filename = f.getSTUDFILENAME();
                 break;
             }
             case 2: //Staff login
             {
 
-                filename = f.getStaffFILENAME();
+                filename = f.getSTAFFFILENAME();
                 break;
 
             }

@@ -1,9 +1,12 @@
 package com.example.cms;
 
 public class FilePath {
-    final String USERFILENAME = "D:\\GitHub\\OOP-camp-management-system\\student.csv";
-
-    public String getUSERFILENAME() {
-        return USERFILENAME;
+    final String STUDFILENAME = "D:\\GitHub\\OOP-camp-management-system\\student.csv";
+    final String STAFFFILENAME = "D:\\GitHub\\OOP-camp-management-system\\staff.csv";
+    public String getSTUDFILENAME() {
+        return STUDFILENAME;
+    }
+    public String getSTAFFFILENAME() {
+        return STAFFFILENAME;
     }
 }

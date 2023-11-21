@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="View Camp function separated as static">
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/FilePath.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/FilePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/FilePath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Student_Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/main.java" afterDir="false" />
     </list>
@@ -295,5 +296,21 @@
     <MESSAGE value="View Camp function separated as static" />
     <MESSAGE value="Implementing suggestion and some committee methods" />
     <option name="LAST_COMMIT_MESSAGE" value="Implementing suggestion and some committee methods" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/cms/main.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/example/cms/main.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

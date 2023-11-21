@@ -1,9 +1,9 @@
 package com.example.cms.Student;
 
+import com.example.cms.Student_Role;
+
 import java.util.Map;
 import java.util.Scanner;
-
-import com.example.cms.Student_Role;
 
 public class Student_Account {
     protected String userId; // Add a field to hold the student ID
@@ -97,7 +97,7 @@ public class Student_Account {
                         System.out.println("Welcome, Attendee " + studentName);
                         // Redirect to the attendee class here
                         
-                        attendee_Account attendee_Account = new attendee_Account(userId, existingStudent.getExistingStudents());
+                        Attendee_Account attendee_Account = new Attendee_Account(userId, existingStudent.getExistingStudents());
 						attendee_Account.start();
                     } else {
                         System.out.println("Invalid role. Please enter 'committee' or 'attendee'.");
@@ -124,12 +124,6 @@ public class Student_Account {
             } else {
                 System.out.println("User not found. Please enter a valid user ID.");
                 break;
-            }
-        }
-    }
-
-                    break;
-                }
             }
         }
     }
