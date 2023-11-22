@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="View Camp function separated as static">
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Committee, suggestion and Staff">
+      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/GenerateReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/StaffGenerateReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/FilePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/FilePath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Student_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Student_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -109,6 +114,7 @@
       <workItem from="1699882208477" duration="1958000" />
       <workItem from="1699936014676" duration="1703000" />
       <workItem from="1699939913791" duration="13979000" />
+      <workItem from="1700668384350" duration="7207000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />

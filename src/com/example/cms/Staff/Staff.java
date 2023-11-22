@@ -8,7 +8,6 @@ import com.example.cms.Faculty;
 import com.example.cms.Status;
 import com.example.cms.Suggestions.Suggestion;
 
-import java.text.Format;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -70,6 +69,21 @@ public class Staff {
 		boolean conti = true;
 		String ans;
 		ArrayList<Faculty> userGroups = new ArrayList<>();
+		System.out.println("Is the camp open to all NTU faculties?");
+		String allNTU = null;
+		do{
+			System.out.println("Enter 'Yes' or 'No' ");
+			allNTU = input.next();
+			if(allNTU.compareToIgnoreCase("Yes") ==0 ){
+				userGroups.add(Faculty.ALL);
+			}
+
+		}while(allNTU.compareTo("Yes") != 0 && allNTU.compareToIgnoreCase("No") != 0);
+
+		if(userGroups.contains(Faculty.ALL)){
+			System.out.println("The camp is open to all NTU schools");
+		}else {
+
 			do {
 				System.out.println("    Please insert the school/faculty that have access to the camp separated by space");
 				String userGroupString = input.nextLine();
@@ -97,10 +111,11 @@ public class Staff {
 					do {
 						System.out.println("Insert Yes or Re-enter");
 						ans = input.next();
-                        conti = ans.equals("Yes");
+						conti = ans.equals("Yes");
 					} while (!ans.equals("Yes") && !ans.equals("Re-enter"));
 				}
-			}while(!conti);
+			} while (!conti);
+		}
 
 			System.out.println("    Nearly there... Insert the location of the camp");
 			String location = input.nextLine();
@@ -122,10 +137,11 @@ public class Staff {
 			ArrayList<LocalDate> campDate = new ArrayList<>();
 			campDate.add(startDate);
 			campDate.add(endDate);
+			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility);
 
-			campData.setCampList(new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility));
-			campData.addCampToMap(campName, campData.getCampList().get(Camp.getCounter()));
-		((StaffMember) this).setCampsCreated(campData.getCampHashMap().get(campName));
+			campData.setCampList(newCamp);
+			campData.addCampToMap(campName, newCamp);
+		((StaffMember) this).setCampsCreated(newCamp);
 
 	}
 
@@ -143,7 +159,7 @@ public class Staff {
 					DisplayBySort aOb = new SortByName_Default();
 					ArrayList<Camp> sorted = aOb.Sorting(staff.getCampsCreated());
 					for (Camp camp : sorted) {
-						Camp.printAllCampInfo(camp);
+						Camp.printAllCampInfo(camp.getCampName());
 					}
 					break;
 				case (2):
@@ -154,7 +170,7 @@ public class Staff {
 							System.out.println("Please choose a correct option");
 						} else {
 							for (Camp camp : afterSearchCamp) {
-								Camp.printAllCampInfo(camp);
+								Camp.printAllCampInfo(camp.getCampName());
 							}
 						}
 					} while (afterSearchCamp == null);
@@ -166,7 +182,7 @@ public class Staff {
 							System.out.println("Please choose a correct option");
 						} else {
 							for (Camp camp : afterSortCamp) {
-								Camp.printAllCampInfo(camp);
+								Camp.printAllCampInfo(camp.getCampName());
 							}
 						}
 					} while (afterSortCamp == null);
@@ -353,8 +369,8 @@ public class Staff {
 						staff.getCampsCreated().remove(campToBeDeleted);
 						campData.getCampList().remove(campToBeDeleted);
 						campData.getCampHashMap().remove(campNameToDeleteStr);
-						int originalCounter = Camp.getCounter();
-						Camp.setCounter(originalCounter - 1);
+						//int originalCounter = Camp.getCounter();
+						//Camp.setCounter(originalCounter - 1);
 						return "Camp deletes successfully";
 					}
 					else{
@@ -375,7 +391,7 @@ public class Staff {
 			System.out.println("Action terminated");
 		}else{
 			for(Camp camp: campArrayList){
-				Camp.printAllCampInfo(camp);
+				Camp.printAllCampInfo(camp.getCampName());
 			}
 		}
 
@@ -510,22 +526,11 @@ public class Staff {
 		if(input.next().equalsIgnoreCase("confirm")){
 			suggestionToApprove.setStatus(response);
 			suggestionToApprove.setProcessed(true);
+			suggestionToApprove.getSubmitter().setPoints();
 			System.out.println("The suggestion has been processed and your response has been successfully recorded");
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
 		}
-	}
-
-
-	public void generateCampReport(Staff staff, int camp, Format format) {
-		// TODO - implement Staff.generateCampReport
-		throw new UnsupportedOperationException();
-	}
-
-
-	public void generateCommitteeReport(Staff staff, Camp camp, Format format) {
-		// TODO - implement Staff.generateCommitteeReport
-		throw new UnsupportedOperationException();
 	}
 
 

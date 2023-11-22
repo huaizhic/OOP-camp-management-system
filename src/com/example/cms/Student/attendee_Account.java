@@ -1,12 +1,13 @@
 package com.example.cms.Student;
+import java.util.Map;
 import java.util.Scanner;
 
-public class attendee_Account extends Student_Account {
+public class Attendee_Account extends Student_Account {
 
     private String studentID;
 
-    public attendee_Account(String studentID) {
-        super(studentID);
+    public Attendee_Account(String studentID, Map<String, Student_User> existingStudents) {
+        super(studentID, existingStudents);
         this.studentID = studentID;
     }
 

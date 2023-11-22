@@ -8,6 +8,7 @@ import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -218,4 +219,22 @@ public class Camp {
     public static Map<String, Camp> getAllCamps() {
         return campMap;
     }
+
+	public static void generateCampInfo(StringBuilder campContent, Camp camp){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		campContent.append("Camp Name, Start Date, End Date, Reg Close Date, Faculty, Location, remaining attendee slots, remaining committee slots, description, staff").append("\n");
+		campContent.append(camp.getCampName()).append(",");
+		campContent.append(camp.getCampDates().get(0).format(formatter)).append(",");
+		campContent.append(camp.getCampDates().get(1).format(formatter)).append(",");
+		campContent.append(camp.getRegCloseDate().format(formatter)).append(",");
+
+		String facultyString = String.join("|", camp.getUserGroup().stream().map(Enum::name).toArray(String[]::new));
+		campContent.append(facultyString).append(",");
+		campContent.append(camp.getLocation()).append(",");
+		campContent.append(camp.getRemainingSlots()).append(",");
+		campContent.append(camp.getRemainingCommitteeSlots()).append(",");
+		campContent.append(camp.getDescription()).append(",");
+		campContent.append(camp.getStaffInCharge().getName()).append("\n");
+		campContent.append("\n");
+	}
 }

@@ -3,7 +3,11 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Faculty;
+import com.example.cms.Format;
 import com.example.cms.Suggestions.Suggestion;
+import com.example.cms.generate_report.CommitteeGenerateReport;
+import com.example.cms.generate_report.GenerateReport;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -34,8 +38,8 @@ public class Committee extends Student_User {
         return points;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setPoints() {
+        this.points = this.points + 1;
     }
 
     public ArrayList<Suggestion> getSuggestions() {
@@ -62,7 +66,7 @@ public class Committee extends Student_User {
         this.registeredCamp = registeredCamp;
     }
 
-    public static void manageCamp(String studentId) {
+    public static void manageCamp(Committee committee) {
         boolean exit = false;
         do {
             System.out.println("Camp Management Menu:");
@@ -84,10 +88,10 @@ public class Committee extends Student_User {
 
                 switch (choice) {
                     case 1:
-                        viewAllCamp(studentId);
+                        viewAllCamp(committee);
                         break;
                     case 2:
-                        studentId.generateReport(studentId);
+                        committee.generateReport(committee);
                         break;
                  case 3:
                      exit = true;
@@ -103,7 +107,7 @@ public class Committee extends Student_User {
         ArrayList<Camp> eligibleCamp = new ArrayList<>();
         ArrayList<Camp> allCamp = campData.getCampList();
         for(Camp camp: allCamp){
-            if(camp.getVisibility() && camp.getUserGroup().contains(committee.getFaculty())){
+            if(camp.getVisibility() && (camp.getUserGroup().contains(committee.getFaculty()) || camp.getUserGroup().contains(Faculty.ALL))){
                 eligibleCamp.add(camp);
             }
         }
@@ -112,7 +116,7 @@ public class Committee extends Student_User {
             return;
         }
         for(Camp camp: eligibleCamp){
-            Camp.printAllCampInfo(camp);
+            Camp.printAllCampInfo(camp.getCampName());
         }
     }
 
@@ -208,8 +212,7 @@ public class Committee extends Student_User {
         if (input.next().equalsIgnoreCase("confirm")) {
             enquiryToBeAnswer.setReply(reply);
             enquiryToBeAnswer.setProcessed(true);
-            int originalPoints = this.getPoints();
-            this.setPoints(originalPoints + 1);
+            this.setPoints();
             System.out.println("Reply sent successfully");
             String ans;
             do {
@@ -460,6 +463,7 @@ public class Committee extends Student_User {
 
     public void generateReport(Committee committee) {
         Scanner scanner = new Scanner(System.in);
+        GenerateReport committeeGenerator = new CommitteeGenerateReport();
         boolean exit = false;
         do {
             System.out.println("Generate Report Menu:");
@@ -480,10 +484,32 @@ public class Committee extends Student_User {
             } while (choice != 1 && choice != 2 && choice != 3);
                 switch (choice) {
                     case 1:
-                        generateCommitteeList(committee);
+                        String format = null;
+                        do {
+                            System.out.println("What format do you want to use, CSV or TXT? Please enter CSV or TXT");
+                            format = scanner.next();
+                            if (format.equalsIgnoreCase("CSV")) {
+                                committeeGenerator.generateCommitteeList(committee.getRegisteredCamp(), Format.CSV);
+                            } else if (format.equalsIgnoreCase("TXT")) {
+                                committeeGenerator.generateCommitteeList(committee.getRegisteredCamp(), Format.TXT);
+                            } else {
+                                System.out.println("Only CSV and TXT are accepted");
+                            }
+                        }while(!format.equalsIgnoreCase("CSV") && !format.equalsIgnoreCase("TXT"));
                         break;
                     case 2:
-                        generateAttendeeList(committee);
+                        String format2 = null;
+                        do {
+                            System.out.println("What format do you want to use, CSV or TXT? Please enter CSV or TXT");
+                            format2 = scanner.next();
+                            if (format2.equalsIgnoreCase("CSV")) {
+                                committeeGenerator.generateAttendeeList(committee.getRegisteredCamp(), Format.CSV);
+                            } else if (format2.equalsIgnoreCase("TXT")) {
+                                committeeGenerator.generateAttendeeList(committee.getRegisteredCamp(), Format.CSV);
+                            } else {
+                                System.out.println("Only CSV and TXT are accepted");
+                            }
+                        }while(!format2.equalsIgnoreCase("CSV") && !format2.equalsIgnoreCase("TXT"));
                         break;
                     case 3:
                         exit = true;
@@ -495,30 +521,5 @@ public class Committee extends Student_User {
         }while(!exit);
     }
 
-    public void generateCommitteeList(Committee committee) {
-        Camp campOfList = committee.getRegisteredCamp();
-        Camp.printAllCampInfo(campOfList);
-        System.out.println("The committee of the above camp: ");
-        for(Committee committeeOfCamp : campOfList.getCommitteeRegistered()){
-            System.out.println("Name: " + committeeOfCamp.getName());
-            System.out.println("ID: " + committeeOfCamp.getStudentID());
-            System.out.println("Faculty: " + committeeOfCamp.getFaculty());
-            System.out.println();
-        }
 
-        // this should return a file in CSV or TXT format rather than printing
-    }
-
-    public void generateAttendeeList(Committee committee) {
-        Camp campOfList = committee.getRegisteredCamp();
-        Camp.printAllCampInfo(campOfList);
-        System.out.println("The attendee of the above camp: ");
-        for (Attendee attendee : campOfList.getAttendeesRegistered()) {
-            System.out.println("Name: " + attendee.getName());
-            System.out.println("ID: " + attendee.getStudentID());
-            System.out.println("Faculty: " + attendee.getFaculty());
-            System.out.println();
-        }
-        // this should return a file in CSV or TXT format rather than printing
-    }
 }
