@@ -18,10 +18,11 @@ public class CommitteeGenerateReport implements GenerateReport{
         Camp.generateCampInfo(attendeeContent, camp);
 
         // Append header for the attendee information
-        attendeeContent.append("Name, ID, Faculty\n");
+        attendeeContent.append("Role, Name, ID, Faculty\n");
 
         // Append attendee information
         for (Attendee attendee : camp.getAttendeesRegistered()) {
+            attendeeContent.append("Attendee").append(",");
             attendeeContent.append(attendee.getName()).append(",");
             attendeeContent.append(attendee.getStudentID()).append(",");
             attendeeContent.append(attendee.getFaculty()).append("\n");
@@ -60,10 +61,11 @@ public class CommitteeGenerateReport implements GenerateReport{
         Camp.printAllCampInfo(camp.getCampName());
 
         // Append header for the attendee information
-        committeeContent.append("Name, ID, Faculty\n");
+        committeeContent.append("Role, Name, ID, Faculty\n");
 
         // Append attendee information
         for (Committee committeeReg : camp.getCommitteeRegistered()) {
+            committeeContent.append("Committee").append(",");
             committeeContent.append(committeeReg.getName()).append(",");
             committeeContent.append(committeeReg.getStudentID()).append(",");
             committeeContent.append(committeeReg.getFaculty()).append("\n");
