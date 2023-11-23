@@ -55,11 +55,6 @@ public class CommitteeGenerateReport implements GenerateReport{
 
         Camp.generateCampInfo(committeeContent, camp);
 
-        System.out.println("This is the camp that the report will generate from.");
-
-        // Append camp information
-        Camp.printAllCampInfo(camp.getCampName());
-
         // Append header for the attendee information
         committeeContent.append("Role, Name, ID, Faculty\n");
 

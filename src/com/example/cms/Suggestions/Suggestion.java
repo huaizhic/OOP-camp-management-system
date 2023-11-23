@@ -4,6 +4,7 @@ import com.example.cms.Status;
 import com.example.cms.Student.Committee;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Suggestion {
@@ -17,6 +18,8 @@ public class Suggestion {
     // Use suggestion_Subject as the key for the HashMap
     private static HashMap<String, Suggestion> suggestionHashMap = new HashMap<>();
 
+    private static ArrayList<Suggestion> suggestionArrayList = new ArrayList<>();
+
     public Suggestion(String suggestion_Subject, Committee committee, String content, LocalDate dateSubmitted) {
         this.suggestion_Subject = suggestion_Subject;
         this.submitter = submitter;
@@ -29,7 +32,7 @@ public class Suggestion {
 
     public static void printSuggestionInfo(Suggestion suggestion){
         System.out.println("The subject: " + suggestion.getSuggestion_Subject());
-        System.out.println("The submitter: " + suggestion.getSubmitter());
+        System.out.println("The submitter: " + suggestion.getSubmitter().getName());
         System.out.println("The date submitted: " + suggestion.getDateSubmitted());
         System.out.println("The content: "+ suggestion.getContent());
         System.out.println("The status: " + suggestion.getStatus());
@@ -99,4 +102,11 @@ public class Suggestion {
         return suggestionHashMap.get(subject);
     }
 
-  }
+    public static ArrayList<Suggestion> getSuggestionArrayList() {
+        return suggestionArrayList;
+    }
+
+    public static void setSuggestionArrayList(ArrayList<Suggestion> suggestionArrayList) {
+        Suggestion.suggestionArrayList = suggestionArrayList;
+    }
+}

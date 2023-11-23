@@ -159,7 +159,7 @@ public class Staff {
 					DisplayBySort aOb = new SortByName_Default();
 					ArrayList<Camp> sorted = aOb.Sorting(staff.getCampsCreated());
 					for (Camp camp : sorted) {
-						Camp.printAllCampInfo(camp.getCampName());
+						Camp.printAllCampInfo(camp);
 					}
 					break;
 				case (2):
@@ -170,7 +170,7 @@ public class Staff {
 							System.out.println("Please choose a correct option");
 						} else {
 							for (Camp camp : afterSearchCamp) {
-								Camp.printAllCampInfo(camp.getCampName());
+								Camp.printAllCampInfo(camp);
 							}
 						}
 					} while (afterSearchCamp == null);
@@ -182,7 +182,7 @@ public class Staff {
 							System.out.println("Please choose a correct option");
 						} else {
 							for (Camp camp : afterSortCamp) {
-								Camp.printAllCampInfo(camp.getCampName());
+								Camp.printAllCampInfo(camp);
 							}
 						}
 					} while (afterSortCamp == null);
@@ -391,7 +391,7 @@ public class Staff {
 			System.out.println("Action terminated");
 		}else{
 			for(Camp camp: campArrayList){
-				Camp.printAllCampInfo(camp.getCampName());
+				Camp.printAllCampInfo(camp);
 			}
 		}
 

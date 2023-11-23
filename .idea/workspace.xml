@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Committee, suggestion and Staff">
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/GenerateReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/StaffGenerateReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Student_User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Student_User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cms/Camp/Camp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/cms/Camp/Camp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cms/Faculty.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/cms/Faculty.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,6 +119,10 @@
       <workItem from="1699936014676" duration="1703000" />
       <workItem from="1699939913791" duration="13979000" />
       <workItem from="1700668384350" duration="7207000" />
+      <workItem from="1700675623571" duration="1088000" />
+      <workItem from="1700714718749" duration="2092000" />
+      <workItem from="1700719798025" duration="2904000" />
+      <workItem from="1700722712958" duration="5647000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -268,7 +276,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699979232969</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Committee, suggestion and Staff">
+      <option name="closed" value="true" />
+      <created>1700676336586</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1700676336586</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Committee, suggestion and Staff">
+      <option name="closed" value="true" />
+      <created>1700676608285</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1700676608285</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,7 +325,8 @@
     <MESSAGE value="SearchApp for easier usage" />
     <MESSAGE value="View Camp function separated as static" />
     <MESSAGE value="Implementing suggestion and some committee methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing suggestion and some committee methods" />
+    <MESSAGE value="Committee, suggestion and Staff" />
+    <option name="LAST_COMMIT_MESSAGE" value="Committee, suggestion and Staff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -95,10 +95,6 @@ public class Student_User {
         this.userGroup = userGroup;
     }
 
-    public List<Camp> getRegisteredCamps() {
-        return this.registeredCamps;
-    }
-
     public void setRegisteredCamps(List<Camp> registeredCamps2) {
         this.registeredCamps = registeredCamps2;
     }
@@ -213,12 +209,13 @@ public class Student_User {
                     student.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
 
                     // Parse CampAccessibility from the CSV
+                    /*
                     List<String> campAccessibility = new ArrayList<>();
                     String[] campAccessibilityArray = data[5].split("\\|");
                     for (String camp : campAccessibilityArray) {
                         campAccessibility.add(camp);
                     }
-                    student.setCampAccessibility(campAccessibility);
+                    student.setCampAccessibility(campAccessibility);*/
 
                     // Parse CampCommittee from the CSV
                     boolean campCommittee = Boolean.parseBoolean(data[6]);
@@ -288,17 +285,18 @@ public class Student_User {
                         System.out.println("Faculty: " + Student.getFaculty());
 
                         // Print CampAccessibility
+                        /*
                         System.out.print("Camp Accessibility: ");
                         for (String camp : Student.getCampAccessibility()) {
                             System.out.print(camp + "|");
                         }
-                        System.out.println();
+                        System.out.println(); */
 
                         System.out.println("Camp Committee: " + Student.getCampCommittee());
 
                         // Print RegisteredCamps
                         System.out.print("Registered Camps: ");
-                        for (Camp camp : Student.getRegisteredCamps()) {
+                        for (Camp camp : Student.getRegisteredCamps) {
                             System.out.print(camp.getCampName() + "|");
                         }
                         System.out.println();

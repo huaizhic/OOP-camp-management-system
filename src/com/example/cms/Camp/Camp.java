@@ -66,8 +66,7 @@ public class Camp {
 //		Camp.counter = counter;
 //	}
 
-	public static void printAllCampInfo(String campName){
-		Camp camp = campMap.get(campName);
+	public static void printAllCampInfo(Camp camp){
         if (camp != null) {
 		System.out.print("Camp: " + camp.getCampName() + " - ");
 		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
@@ -81,7 +80,7 @@ public class Camp {
 		System.out.println();
         }
         else {
-            System.out.println("Camp not found: " + campName);
+            System.out.println("Camp not found: " + camp.getCampName());
         }
 
 	}
@@ -175,8 +174,8 @@ public class Camp {
 	}
 
 
-	public void setAttendeesRegistered(ArrayList<Attendee> studentsRegistered) {
-		this.attendeesRegistered = studentsRegistered;
+	public void setAttendeesRegistered(Attendee attendee) {
+		attendeesRegistered.add(attendee);
 	}
 
 	public ArrayList<Committee> getCommitteeRegistered() {
@@ -216,7 +215,7 @@ public class Camp {
     }
 	
 	 // Add a method to get all camps in the map
-    public static Map<String, Camp> getAllCamps() {
+    public static Map<String, Camp> getCampMap() {
         return campMap;
     }
 

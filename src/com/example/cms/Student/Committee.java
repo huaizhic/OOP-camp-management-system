@@ -1,7 +1,7 @@
 package com.example.cms.Student;
 
 import com.example.cms.Camp.Camp;
-import com.example.cms.Camp.campData;
+import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Format;
@@ -46,17 +46,8 @@ public class Committee extends Student_User {
         return suggestionsSubmitted;
     }
 
-    public ArrayList<Camp> getAccessibleCamp() {
-        return accessibleCamp;
-    }
+    public void setSuggestions(Suggestion suggestion) {this.suggestionsSubmitted.add(suggestion);};
 
-    public void setAccessibleCamp(ArrayList<Camp> campAccessibility) {
-        this.accessibleCamp = campAccessibility;
-    }
-
-    public void setSuggestions(ArrayList<Suggestion> suggestions) {
-        suggestionsSubmitted = suggestions;
-    }
 
     public Camp getRegisteredCamp() {
         return registeredCamp;
@@ -104,20 +95,25 @@ public class Committee extends Student_User {
     }
 
     public static void viewAllCamp(Committee committee) {
+        ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
+        if(campArrayList == null){
+            return;
+        }
         ArrayList<Camp> eligibleCamp = new ArrayList<>();
-        ArrayList<Camp> allCamp = campData.getCampList();
-        for(Camp camp: allCamp){
-            if(camp.getVisibility() && (camp.getUserGroup().contains(committee.getFaculty()) || camp.getUserGroup().contains(Faculty.ALL))){
+        for(Camp camp : campArrayList){
+            if(camp.getVisibility() && (camp.getUserGroup().contains(Faculty.ALL) || camp.getUserGroup().contains(committee.getFaculty()))){
                 eligibleCamp.add(camp);
             }
         }
         if(eligibleCamp.isEmpty()){
-            System.out.println("No camp available to view yet");
+            System.out.println("No camp available to view, exiting...");
             return;
         }
-        for(Camp camp: eligibleCamp){
-            Camp.printAllCampInfo(camp.getCampName());
+
+        for(Camp camp : eligibleCamp){
+            Camp.printAllCampInfo(camp);
         }
+
     }
 
     
@@ -290,7 +286,7 @@ public class Committee extends Student_User {
 
     public void submitSuggestion(Committee committee) {
         Scanner input = new Scanner(System.in);
-        System.out.println("You are about to submit a suggestion to the camp: " + committee.getRegisteredCamps());
+        System.out.println("You are about to submit a suggestion to the camp: " + committee.getRegisteredCamp());
         String subject;
         boolean uniqueSubject; // a do-while loop to make sure that the subject name is unique
         do {System.out.println("Insert an unique subject of the suggestion or \"exit\"  to exit");
@@ -317,6 +313,9 @@ public class Committee extends Student_User {
         System.out.println("Confirm to submit? Enter \"confirm\" to continue or any other key to cancel ");
         if(input.nextLine().equalsIgnoreCase("confirm")){
             Suggestion newSuggestion = new Suggestion(subject, this, content, todayDate);
+            committee.setSuggestions(newSuggestion);
+            Suggestion.getSuggestionHashMap().put(subject, newSuggestion);
+            Suggestion.getSuggestionArrayList().add(newSuggestion);
             System.out.println("Your suggestion has been successfully submitted");
         }else{
             System.out.println("Action terminated by the user, exiting...");
@@ -328,12 +327,13 @@ public class Committee extends Student_User {
         if(committee.getSuggestions().isEmpty()){
             System.out.println("No suggestion has been submitted");
             System.out.println("exiting...");
+            return;
         }
         viewSuggestions(committee);
         Suggestion suggestionToBeEdit;
         boolean exitSuggestionEdit = false;
             do {
-                System.out.println("Please select the suggestion that you want to delete by SUBJECT or enter exit in lower case to exit");
+                System.out.println("Please select the suggestion that you want to edit by SUBJECT or enter exit in lower case to exit");
                 String suggestionToBeEditStr = input.nextLine();
                 if (suggestionToBeEditStr.equals("exit")) {
                     System.out.println("Action terminated by user");
@@ -451,8 +451,10 @@ public class Committee extends Student_User {
             System.out.println("Do you confirm to delete the suggestion: " + suggestionToBeDel.getSuggestion_Subject());
             System.out.println("Enter \"confirm\" or any other key to cancel");
             if (input.nextLine().equalsIgnoreCase("confirm")) {
-                this.getSuggestions().remove(suggestionToBeDel);
-                Suggestion.getSuggestionHashMap().remove(suggestionToBeDel.getSuggestion_Subject());
+                committee.getSuggestions().remove(suggestionToBeDel); //delete in committee attribute
+                committee.getRegisteredCamp().getSuggestion().remove(suggestionToBeDel); // delete in camp suggestion
+                Suggestion.getSuggestionHashMap().remove(suggestionToBeDel.getSuggestion_Subject()); //delete in suggestion hashmap
+                Suggestion.getSuggestionArrayList().remove(suggestionToBeDel); // delete in suggestion arraylist
                 System.out.println("Suggestion deleted successfully, exiting...");
                 }
             else {
