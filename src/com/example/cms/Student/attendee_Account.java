@@ -11,7 +11,7 @@ public class Attendee_Account extends Student_Account {
         this.studentID = studentID;
     }
 
-    public void start(Attendee attendee) {
+    public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -28,13 +28,13 @@ public class Attendee_Account extends Student_Account {
 
             switch (choice) {
                 case 1:
-                	Attendee.displayRegisteredCamps(attendee);
+                	Attendee.displayRegisteredCamps(studentID);
                     break;
                 case 2:
-                    Attendee.manageCamp(attendee);
+                    Attendee.manageCamp(studentID);
                     break;
                 case 3:
-                	Attendee.manageEnquiries(attendee);
+                	Attendee.manageEnquiries(studentID);
                     break;
                 case 4:
                     running = false;
