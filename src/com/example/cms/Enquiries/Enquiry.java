@@ -3,6 +3,10 @@ package com.example.cms.Enquiries;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Student.Student_User;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -338,5 +342,24 @@ public class Enquiry {
 
         return campEnquiries;
     }
+
+    // save newly submitted enquiry to CSV containing all existing enquiries
+    public static void saveToCSV(Enquiry newEnquiry){
+         String file = "src\\Enquiries.csv";
+        try {
+            PrintWriter out = new PrintWriter(file);
+            // Since our CSV contains commas naturally, use regex instead of commas to separate the cells
+            out.println(newEnquiry.getEnquiry_Subject()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newEnquiry.getContent()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newEnquiry.getStudentName()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newEnquiry.getCampName()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newEnquiry.getDateSent() +",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newEnquiry.getReply()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)");
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

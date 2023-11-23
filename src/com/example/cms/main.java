@@ -1,111 +1,14 @@
 package com.example.cms;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-
-import com.example.cms.Staff.*;
-import com.example.cms.Student.*;
 public class main {
     public static void main(String[] args) throws FileNotFoundException, IOException
     {
 
-        int userInput;
 
-        int menuChoice;
-
-        boolean access = false;
-
-        String password;
-
-        String UserID=null;
-
-        System.out.println("Enter User type (-1 to quit) ");
-        System.out.println("1. Student");
-        System.out.println("2. Staff");
-
-        Scanner sc = new Scanner(System.in);
-        userInput = sc.nextInt();
-        sc.nextLine();  				//input buffer
-
-
-        while (userInput>0) {
-
-            switch(userInput)
-            {
-                case 1:
-                {
-                    while (access == false)
-                    {
-                        System.out.println("Please input Student UserID (-1 to quit) : ");
-                        UserID=sc.nextLine();
-                        if (UserID.equals("-1")) {
-                            break;
-                        }
-
-                        System.out.println("Please input password : ");
-                        password=sc.nextLine();
-                        if (check(UserID, password, 1) == true)
-                        {
-                            access = true;
-                            //User user = new User(UserID,password,);
-                            //menuChoice=Student.display(); //depending on type of student menu display differs
-
-                            while (menuChoice != 8)
-                            {
-                                StudentMenu.execution(menuChoice,s);
-                                if (menuChoice == 1) {
-                                    access=false;
-                                    break;
-                                }
-                                menuChoice=StudentMenu.display();
-                            }
-                        }
-                    }
-                    access=false;
-                    break;
-                }
-                case 2: {
-                    access = false;
-                    while (access == false) {
-                        System.out.println("Please input Staff UserID (-1 to quit): ");
-                        UserID = sc.nextLine();
-                        if (UserID.equals("-1")) {
-                            break;
-                        }
-
-                        System.out.println("Please input password : ");
-                        password = sc.nextLine();
-                        if (check(UserID, password, 2) == true) {
-                            access = true;
-                            StaffAcc sp = new StaffAcc(UserID, password);
-                            menuChoice = StaffMenu.display();
-
-                            while (menuChoice != 5) {
-                                StaffMenu.execution(menuChoice, sp);
-                                if (menuChoice == 1) {
-                                    access = false;
-                                    break;
-                                }
-                                menuChoice = StaffMenu.display();
-                            }
-                        }
-                    }
-                    access = false;
-                    break;
-                }
-                default:
-                    System.out.println("Invalid Choice");
-            }
-            System.out.println("Enter User type (-1 to quit) ");
-            System.out.println("1. Student");
-            System.out.println("2. Supervisor");
-            System.out.println("3. FYP Coordinator");
-            userInput = sc.nextInt();
-            sc.nextLine();   //input buffer
-        }
-        System.out.println("Thank you for using the program!");
     }
 
     /**

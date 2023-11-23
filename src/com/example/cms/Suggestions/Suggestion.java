@@ -3,6 +3,8 @@ package com.example.cms.Suggestions;
 import com.example.cms.Status;
 import com.example.cms.Student.Committee;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -97,6 +99,24 @@ public class Suggestion {
     
     public static Suggestion getSuggestionBySubject(String subject) {
         return suggestionHashMap.get(subject);
+    }
+
+    // save newly submitted suggestion to CSV containing all existing suggestions
+    public static void saveToCSV(Suggestion newSuggestion){
+        String file = "src\\Suggestions.csv";
+        try {
+            PrintWriter out = new PrintWriter(file);
+            // Since our CSV contains commas naturally, use regex instead of commas to separate the cells
+            out.println(newSuggestion.getSuggestion_Subject()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newSuggestion.getContent()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newSuggestion.getSubmitter()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newSuggestion.getProcessed()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newSuggestion.getDateSubmitted() +",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"
+                    +newSuggestion.getStatus()+",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)");
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
   }

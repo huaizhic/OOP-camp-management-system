@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Committee, suggestion and Staff">
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/GenerateReport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/StaffGenerateReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Enquiries.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Suggestions.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/attendee_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +63,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;huaizhi-experiment&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Huai Zhi/Downloads/OOP-camp-management-system&quot;,
@@ -302,21 +299,5 @@
     <MESSAGE value="View Camp function separated as static" />
     <MESSAGE value="Implementing suggestion and some committee methods" />
     <option name="LAST_COMMIT_MESSAGE" value="Implementing suggestion and some committee methods" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/example/cms/main.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/example/cms/main.java</url>
-          <line>141</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
