@@ -8,13 +8,13 @@ public class Committee_Account extends Student_Account {
         super(userId);
     }
 
-    public static void Start() {
+    public static void Start(Committee committee) {
         boolean exit = false;
 
         while (!exit) {
             // Display menu options for camp committee members
             System.out.println("Camp Committee Member Options:");
-            System.out.println("1. Manage Camps");
+            System.out.println("1. Manage Camps including generating reports");
             System.out.println("2. Manage Suggestions");
             System.out.println("3. Manage Enquiries");
             System.out.println("4. Logout");
@@ -25,13 +25,13 @@ public class Committee_Account extends Student_Account {
             // Perform actions based on user's choice
             switch (choice) {
                 case 1:
-                    Committee.manageCamp(userId);
+                    Committee.manageCamp(committee);
                     break;
                 case 2:
-                    Committee.manageSuggestions(userId);
+                    Committee.manageSuggestions(committee);
                     break;
                 case 3:
-                    Committee.manageEnquiries(userId);
+                    Committee.manageEnquiries(committee);
                     break;
                 case 4:
                 	exit = true;

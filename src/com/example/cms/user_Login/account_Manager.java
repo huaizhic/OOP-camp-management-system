@@ -3,6 +3,7 @@ package com.example.cms.user_Login;
 import java.util.Scanner;
 import com.example.cms.staff_Account;
 import com.example.cms.Student.Student_Account;
+import com.example.cms.Student.Student_User;
 
 public class account_Manager {
     private Scanner scanner;
@@ -27,17 +28,21 @@ public class account_Manager {
             int accountChoice = scanner.nextInt();
 
             if (accountChoice == 1) {
+            	Student_User student_User = new Student_User();
+				student_User.loadStudentsFromCSV();
             	
             	boolean userFound = false;
 
             	while (!userFound) {
             	    System.out.print("Enter your student ID: ");
-            	    userId = scanner.next();
-
+            	    userId = scanner.next().toUpperCase().trim();
+            	    
+            	    System.out.println("This is the student id entered: " + userId);
             	    // Check if the entered ID belongs to an existing student
-            	    Student_Account studentAccount = new Student_Account(userId);
+            	    Student_Account studentAccount = new Student_Account(userId, student_User.getExistingStudents());
+            	    //Student_Account studentAccount = new Student_Account(userId);
 
-            	    if (Student_Account.getStudentAccount(userId)!= null) {
+            	    if (studentAccount.getStudentAccount(userId)) {
             	        // Existing student found, start the student account
             	        studentAccount.start();
             	        userFound = true; // Set the flag to exit the loop

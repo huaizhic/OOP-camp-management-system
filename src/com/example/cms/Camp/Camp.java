@@ -1,15 +1,23 @@
 package com.example.cms.Camp;
-import com.example.cms.*;
-import com.example.cms.Student.Committee_Member;
-import com.example.cms.Student.Student_User;
+
+import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Staff.StaffMember;
-import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
+import com.example.cms.Suggestions.Suggestion;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Camp {
+	private static Map<String, Camp> campMap = new HashMap<>();
+	
 	private String campName;
+	private static ArrayList<Camp> campList= new ArrayList<>(); // to keep track of all of the camps
 	private ArrayList<LocalDate> campDates = new ArrayList<>();
 	private LocalDate regCloseDate;
 	private ArrayList<Faculty> userGroup = new ArrayList<>();
@@ -20,12 +28,12 @@ public class Camp {
 	private int remainingCommitteeSlots;
 	private String description;
 	private StaffMember staffInCharge;
-	private ArrayList<Student_User> studentsRegistered = new ArrayList<>();
-	private ArrayList<Committee_Member> committeeRegistered;
+	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
+	private ArrayList<Committee> committeeRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry = new ArrayList<>();
 	private ArrayList<Suggestion> suggestion = new ArrayList<>();
-	private static int counter = -1;
+	//private static int counter = -1;
 
 	public Camp(){
 
@@ -43,20 +51,24 @@ public class Camp {
 		remainingCommitteeSlots = committeeSlots;
 		staffInCharge = staff;
 		this.visibility = visibility;
-		counter ++;
+		//counter ++;
+		// Add the camp to the map when it is created
+        campMap.put(campName, this);
 	}
 
 
 
-	public static int getCounter() {
-		return counter;
-	}
+//	public static int getCounter() {
+//		return counter;
+//	}
+//
+//	public static void setCounter(int counter){
+//		Camp.counter = counter;
+//	}
 
-	public static void setCounter(int counter){
-		Camp.counter = counter;
-	}
-
-	public static void printAllCampInfo(Camp camp){
+	public static void printAllCampInfo(String campName){
+		Camp camp = campMap.get(campName);
+        if (camp != null) {
 		System.out.print("Camp: " + camp.getCampName() + " - ");
 		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
 		System.out.print("Reg close date: " + camp.getRegCloseDate());
@@ -67,6 +79,10 @@ public class Camp {
 		System.out.println("Description: " + camp.getDescription());
 		System.out.println();
 		System.out.println();
+        }
+        else {
+            System.out.println("Camp not found: " + campName);
+        }
 
 	}
 
@@ -154,20 +170,20 @@ public class Camp {
 		this.staffInCharge = staffInCharge;
 	}
 
-	public ArrayList<Student_User> getStudentsRegistered() {
-		return this.studentsRegistered;
+	public ArrayList<Attendee> getAttendeesRegistered() {
+		return this.attendeesRegistered;
 	}
 
 
-	public void setStudentsRegistered(ArrayList<Student_User> studentsRegistered) {
-		this.studentsRegistered = studentsRegistered;
+	public void setAttendeesRegistered(ArrayList<Attendee> studentsRegistered) {
+		this.attendeesRegistered = studentsRegistered;
 	}
 
-	public ArrayList<Committee_Member> getCommitteeRegistered() {
+	public ArrayList<Committee> getCommitteeRegistered() {
 		return committeeRegistered;
 	}
 
-	public void setCommitteeRegistered(Committee_Member committeeMember) {
+	public void setCommitteeRegistered(Committee committeeMember) {
 		this.committeeRegistered.add(committeeMember);
 	}
 
@@ -193,5 +209,32 @@ public class Camp {
 
 	public void setSuggestion(ArrayList<Suggestion> suggestion) {
 		this.suggestion = suggestion;
+	}
+
+	public static Camp getCampByName(String campName) {
+        return campMap.get(campName);
+    }
+	
+	 // Add a method to get all camps in the map
+    public static Map<String, Camp> getAllCamps() {
+        return campMap;
+    }
+
+	public static void generateCampInfo(StringBuilder campContent, Camp camp){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		campContent.append("Camp Name, Start Date, End Date, Reg Close Date, Faculty, Location, remaining attendee slots, remaining committee slots, description, staff").append("\n");
+		campContent.append(camp.getCampName()).append(",");
+		campContent.append(camp.getCampDates().get(0).format(formatter)).append(",");
+		campContent.append(camp.getCampDates().get(1).format(formatter)).append(",");
+		campContent.append(camp.getRegCloseDate().format(formatter)).append(",");
+
+		String facultyString = String.join("|", camp.getUserGroup().stream().map(Enum::name).toArray(String[]::new));
+		campContent.append(facultyString).append(",");
+		campContent.append(camp.getLocation()).append(",");
+		campContent.append(camp.getRemainingSlots()).append(",");
+		campContent.append(camp.getRemainingCommitteeSlots()).append(",");
+		campContent.append(camp.getDescription()).append(",");
+		campContent.append(camp.getStaffInCharge().getName()).append("\n");
+		campContent.append("\n");
 	}
 }

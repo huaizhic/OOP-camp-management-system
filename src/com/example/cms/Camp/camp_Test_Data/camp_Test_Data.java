@@ -2,9 +2,7 @@ package com.example.cms.Camp.camp_Test_Data;
 
 import com.example.cms.*;
 import com.example.cms.Student.Committee;
-import com.example.cms.Student.Committee_Member;
 import com.example.cms.Student.Student_User;
-import com.example.cms.Faculty;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Staff.StaffMember;
 import com.example.cms.Enquiries.Enquiry;
@@ -27,11 +25,13 @@ public class camp_Test_Data {
     private String description;
     private StaffMember staffInCharge;
     private ArrayList<Student_User> studentsRegistered = new ArrayList<>();
-    private ArrayList<Committee_Member> committeeRegistered;
+    private ArrayList<Committee> committeeRegistered;
     private boolean visibility;
     private ArrayList<Enquiry> enquiries = new ArrayList<>();
     private ArrayList<Suggestion> suggestions = new ArrayList<>();
 	private String camp_Test_DataName;
+	private Object enquiry;
+	private ArrayList<Suggestion> suggestion;
     private static int counter = -1;
 
     // HashMap to store instances of camp_Test_Data
@@ -96,20 +96,20 @@ public class camp_Test_Data {
 
             // Print committee members
             System.out.println("Committee Members:");
-            for (Committee_Member committeeMember : camp.getCommitteeRegistered()) {
-                System.out.println("Member ID: " + committeeMember.getUserID() + ", Name: " + committeeMember.getName());
+            for (Committee committeeMember : camp.getCommitteeRegistered()) {
+                System.out.println("Member ID: " + committeeMember.getStudentID() + ", Name: " + committeeMember.getName());
             }
 
             // Print enquiries
             System.out.println("Enquiries:");
             for (Enquiry enquiry : camp.getEnquiry()) {
-                System.out.println("Enquiry ID: " + enquiry.getEnquiryID() + ", Content: " + enquiry.getContent());
+                System.out.println("Enquiry Subject: " + enquiry.getEnquiry_Subject() + ", Content: " + enquiry.getContent());
             }
 
             // Print suggestions
             System.out.println("Suggestions:");
             for (Suggestion suggestion : camp.getSuggestion()) {
-                System.out.println("Suggestion ID: " + suggestion.getSuggestionID() + ", Content: " + suggestion.getContent());
+                System.out.println("Suggestion Subject: " + suggestion.getSubject() + ", Content: " + suggestion.getContent());
             }
         } else {
             System.out.println("Camp with name " + campName + " not found.");
@@ -141,20 +141,20 @@ public class camp_Test_Data {
 
             // Print committee members
             System.out.println("Committee Members:");
-            for (Committee_Member committeeMember : camp.getCommitteeRegistered()) {
-                System.out.println("Member ID: " + committeeMember.getUserID() + ", Name: " + committeeMember.getName());
+            for (Committee committeeMember : camp.getCommitteeRegistered()) {
+                System.out.println("Member ID: " + committeeMember.getStudentID() + ", Name: " + committeeMember.getName());
             }
 
             // Print enquiries
             System.out.println("Enquiries:");
             for (Enquiry enquiry : camp.getEnquiry()) {
-                System.out.println("Enquiry ID: " + enquiry.getEnquiryID() + ", Content: " + enquiry.getContent());
+                System.out.println("Enquiry Subject: " + enquiry.getEnquiry_Subject() + ", Content: " + enquiry.getContent());
             }
 
             // Print suggestions
             System.out.println("Suggestions:");
             for (Suggestion suggestion : camp.getSuggestion()) {
-                System.out.println("Suggestion ID: " + suggestion.getSuggestionID() + ", Content: " + suggestion.getContent());
+                System.out.println("Suggestion Subject: " + suggestion.getSubject() + ", Content: " + suggestion.getContent());
             }
         } else {
             System.out.println("Camp with name " + campName + " not found.");
@@ -497,11 +497,11 @@ public class camp_Test_Data {
 		this.studentsRegistered = studentsRegistered;
 	}
 
-	public ArrayList<Committee_Member> getCommitteeRegistered() {
+	public ArrayList<Committee> getCommitteeRegistered() {
 		return committeeRegistered;
 	}
 
-	public void setCommitteeRegistered(Committee_Member committeeMember) {
+	public void setCommitteeRegistered(Committee committeeMember) {
 		this.committeeRegistered.add(committeeMember);
 	}
 
@@ -514,15 +514,15 @@ public class camp_Test_Data {
 	}
 
 	public ArrayList<Enquiry> getEnquiry() {
-		return this.enquiry;
+		return this.getEnquiry();
 	}
 
 	public void setEnquiry(Enquiry enquiry) {
-		this.enquiry.add(enquiry);
+		this.enquiry = enquiry;
 	}
 
 	public ArrayList<Suggestion> getSuggestion() {
-		return this.suggestion;
+		return this.getSuggestion();
 	}
 
 	public void setSuggestion(ArrayList<Suggestion> suggestion) {

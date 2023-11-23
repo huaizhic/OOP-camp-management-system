@@ -10,20 +10,18 @@ public class Suggestion {
 	private String subject;
 	private String content;
 	private LocalDate dateSubmitted;
-	private Committee_Member submitter;
+	private Committee submitter;
 	private Status status;
 	private boolean processed = false;
 	private static HashMap<String, Suggestion> suggestionHashMap = new HashMap<>();
 	private static ArrayList<Suggestion> suggestionArrayList = new ArrayList<>();
-	private static int counter = -1;
 
-	public Suggestion(String subject, String content, LocalDate dateSubmitted, Committee_Member submitter){
+	public Suggestion(String subject, String content, LocalDate dateSubmitted, Committee submitter){
 		this.subject = subject;
 		this.content = content;
 		this.dateSubmitted = dateSubmitted;
 		this.submitter = submitter;
 		this.status = Status.Pending;
-		counter ++;
 	}
 
 	public static void printSuggestionInfo(Suggestion suggestion){
@@ -58,11 +56,11 @@ public class Suggestion {
 		this.dateSubmitted = dateSubmitted;
 	}
 
-	public Committee_Member getSubmitter() {
+	public Committee getSubmitter() {
 		return this.submitter;
 	}
 
-	public void setSubmitter(Committee_Member submitter) {
+	public void setSubmitter(Committee submitter) {
 		this.submitter = submitter;
 	}
 
@@ -98,11 +96,4 @@ public class Suggestion {
 		suggestionArrayList.add(suggestion);
 	}
 
-	public static int getCounter() {
-		return counter;
-	}
-
-	public static void setCounter(int counter) {
-		Suggestion.counter = counter;
-	}
 }
