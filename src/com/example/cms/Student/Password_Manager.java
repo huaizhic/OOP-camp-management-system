@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.example.cms.Student_Role;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.user_Login.account_Manager;
 
 public class Password_Manager {
 
@@ -15,7 +17,6 @@ public class Password_Manager {
 	        this.scanner = scanner;
 	        this.studentUser = studentUser;
 	    }
-
 
 	    public boolean checkPassword(String studentID, Student_Role roleChoice, String enteredPassword) {
 	        //System.out.println("Debugging - Before calling passwordManager.checkPassword");
@@ -68,7 +69,7 @@ public class Password_Manager {
                     student.existingStudents.put(student.getStudentID(), student);
 
                     // Update the CSV file
-                    student.updateCSVFile(userID);
+                    CSVDataManager.updateStudentCSVFile(student, userID);
                     
                     //student.loadStudentsFromCSV();
                     System.out.println("Password reset successful.");
@@ -105,25 +106,39 @@ public class Password_Manager {
             // Maximum wrong attempts allowed per question
             int maxWrongAttempts = 2;
             int correct = 0;
-            
-         // Consume the newline character
-	        scanner.nextLine();
-	        
+
+            // Consume the newline character
+            scanner.nextLine();
+
             for (int i = 0; i < securityQuestions.size(); i++) {
                 String securityQuestion = securityQuestions.get(i);
                 System.out.println("Security Question: " + securityQuestion);
-                System.out.print("Enter your answer: ");
-                String userAnswer = scanner.nextLine().toUpperCase().trim();
                 
-                
+                String userAnswer;
+                do {
+                    System.out.print("Enter your answer: ");
+                    userAnswer = scanner.nextLine().toUpperCase().trim();
+                    
+                    if (userAnswer.isEmpty()) {
+                        System.out.println("Invalid input. Please enter a non-empty value.");
+                    }
+                } while (userAnswer.isEmpty());
+
                 int wrongAttempts = 0;
 
                 // Allow a limited number of wrong attempts
                 while (!userAnswer.equals(securityAnswers.get(i)) && wrongAttempts < maxWrongAttempts) {
                     wrongAttempts++;
                     System.out.println("Wrong answer. Attempts left: " + (maxWrongAttempts - wrongAttempts));
-                    System.out.print("Try again: ");
-                    userAnswer = scanner.nextLine().toUpperCase().trim();
+                    
+                    do {
+                        System.out.print("Try again: ");
+                        userAnswer = scanner.nextLine().toUpperCase().trim();
+                        
+                        if (userAnswer.isEmpty()) {
+                            System.out.println("Invalid input. Please enter a non-empty value.");
+                        }
+                    } while (userAnswer.isEmpty());
                 }
 
                 if (userAnswer.equals(securityAnswers.get(i))) {
@@ -151,10 +166,11 @@ public class Password_Manager {
                     if (updatePassword(userID, newPassword)) {
                         System.out.println("Password reset successful. You can now log in with your new password.");
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
-                        Student_Account studentAccount = new  Student_Account(userID, studentUser.getExistingStudents());
-                        
-                        studentAccount.start();
-                        
+                        // Student_Account studentAccount = new  Student_Account(userID, studentUser.getExistingStudents());
+
+                        account_Manager account_Manager = new account_Manager(null);
+                        account_Manager.start();
+
                     } else {
                         System.out.println("Password does not meet the criteria. Please try again.");
                     }

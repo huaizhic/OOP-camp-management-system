@@ -1,19 +1,36 @@
 package com.example.cms.Student;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.example.cms.CSVConverter.CSVDataManager;
 
 public class Attendee_Account extends Student_Account {
 
     private String studentID;
+    private Map<String, Attendee> existingAttendees;
 
-    public Attendee_Account(String studentID, Map<String, Student_User> existingStudents) {
-        super(studentID, existingStudents);
+    public Attendee_Account(String studentID, Map<String, Student_User> existingAttendees) {
+        super(studentID, existingAttendees);
         this.studentID = studentID;
+        
+        // Create a new map and copy elements from existingAttendees
+        this.existingAttendees = new HashMap<>();
+        for (Map.Entry<String, Student_User> entry : existingAttendees.entrySet()) {
+            if (entry.getValue() instanceof Attendee) {
+                this.existingAttendees.put(entry.getKey(), (Attendee) entry.getValue());
+            }
+            // If you want to handle the case where an element is not an Attendee, add appropriate logic here
+        }
     }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        
+        Attendee attendee = (Attendee) existingAttendees.get(studentID);
+        CSVDataManager.loadAttendeeFromCSV(attendee);
 
         while (running) {
             System.out.println("Student Home Page");
@@ -22,19 +39,20 @@ public class Attendee_Account extends Student_Account {
             System.out.println("3. Manage Enquiries");
             System.out.println("4. Logout");
 
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline character
+            int choice = getUserChoice(scanner);
 
             switch (choice) {
                 case 1:
-                	Attendee.displayRegisteredCamps(studentID);
+                    // Use the Attendee class method to display registered camps
+                    Attendee.displayRegisteredCamps(attendee);
                     break;
                 case 2:
-                    Attendee.manageCamp(studentID);
+                    // Use the Attendee class method to manage camps
+                    Attendee.manageCamp(attendee);
                     break;
                 case 3:
-                	Attendee.manageEnquiries(studentID);
+                    // Use the Attendee class method to manage enquiries
+                    Attendee.manageEnquiries(attendee);
                     break;
                 case 4:
                     running = false;
@@ -45,7 +63,30 @@ public class Attendee_Account extends Student_Account {
                     break;
             }
         }
-    }
 
+    }
+    
+    public static int getUserChoice(Scanner scanner) {
+        int choice = -1;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                System.out.print("Enter your choice: ");
+                String inputLine = scanner.nextLine().trim();
+
+                if (inputLine.isEmpty()) {
+                    System.out.println("Invalid input. Please enter a number.");
+                } else {
+                    choice = Integer.parseInt(inputLine);
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        return choice;
+    }
 
 }

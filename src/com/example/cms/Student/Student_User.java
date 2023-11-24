@@ -11,6 +11,7 @@ import java.util.Map;
 
 import com.example.cms.Faculty;
 import com.example.cms.Student_Role;
+import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Suggestions.Suggestion;
@@ -22,6 +23,7 @@ public class Student_User {
     private String name;
     private Faculty faculty;
     private Student_Role userGroup;
+    private int points;
     protected static List<Camp> registeredCamps;
     public Map<String, Student_User> existingStudents = new HashMap<>(); // Use a HashMap instead of a List
     protected List<String> campAccessibility; // This indicates which camp the attendee can see
@@ -99,6 +101,11 @@ public class Student_User {
         this.registeredCamps = registeredCamps2;
     }
 
+    public List<Camp> getRegisteredCamps() {
+        return this.registeredCamps ;
+    }
+
+    
     public List<String> getCampAccessibility() {
         return this.campAccessibility;
     }
@@ -164,7 +171,7 @@ public class Student_User {
         System.out.println("Checking for student existence. Given ID: " + userID);
         
      // Load students from CSV before checking existence
-     //   loadStudentsFromCSV();
+        CSVDataManager.loadStudentsFromCSV(this);
 
         // Use the instance-specific existingStudents map
         for (String existingID : this.existingStudents.keySet()) {
@@ -184,164 +191,6 @@ public class Student_User {
         return (student != null) ? student.name : null;
     }
     
-    public void loadStudentsFromCSV() {
-        String csvFilePath = "student.csv";
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-            String line;
-            boolean firstLine = true; // flag  for header
-            
-            while ((line = reader.readLine()) != null) {
-            	if (firstLine) {
-                    firstLine = false;
-                    continue; // Skip the first line (headers)
-                }
-            	
-                String[] data = line.split(",", -1); // Use -1 to keep empty fields
-
-                if (data.length >= 12) {
-                    // Create a new Student_User instance and set its attributes
-                    Student_User student = new Student_User();
-                    student.setStudentID(data[0]);
-                    student.setName(data[1]);
-                    student.setPassword(data[2]);
-                    student.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
-                    student.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
-
-                    // Parse CampAccessibility from the CSV
-                    /*
-                    List<String> campAccessibility = new ArrayList<>();
-                    String[] campAccessibilityArray = data[5].split("\\|");
-                    for (String camp : campAccessibilityArray) {
-                        campAccessibility.add(camp);
-                    }
-                    student.setCampAccessibility(campAccessibility);*/
-
-                    // Parse CampCommittee from the CSV
-                    boolean campCommittee = Boolean.parseBoolean(data[6]);
-                    student.setCampCommittee(campCommittee);
-
-                    // Parse RegisteredCamps from the CSV
-                    List<Camp> registeredCamps = new ArrayList<>();
-                    String[] registeredCampsArray = data[7].split("\\|");
-                    for (String camp : registeredCampsArray) {
-                        // Assuming Camp class has a static method to get a Camp instance by its name
-                        Camp registeredCamp = Camp.getCampByName(camp);
-                        if (registeredCamp != null) {
-                            registeredCamps.add(registeredCamp);
-                        }
-                    }
-                    student.setRegisteredCamps(registeredCamps);
-
-                    // Parse SecurityQuestions from the CSV
-                    List<String> securityQuestions = new ArrayList<>();
-                    String[] securityQuestionsArray = data[8].split("\\|");
-                    for (String question : securityQuestionsArray) {
-                        securityQuestions.add(question);
-                    }
-                    student.setSecurityQuestions(securityQuestions);
-
-                    // Parse SecurityAnswers from the CSV
-                    List<String> securityAnswers = new ArrayList<>();
-                    String[] securityAnswersArray = data[9].split("\\|");
-                    for (String answer : securityAnswersArray) {
-                        securityAnswers.add(answer);
-                    }
-                    student.setSecurityAnswers(securityAnswers);
-
-                    // Parse EnquirySubmitted from the CSV
-                    List<Enquiry> enquirySubmitted = new ArrayList<>();
-                    String[] enquirySubmittedArray = data[10].split("\\|");
-                    for (String enquiry : enquirySubmittedArray) {
-                        // Assuming Enquiry class has a static method to get an Enquiry instance by its subject
-                        Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
-                        if (submittedEnquiry != null) {
-                            enquirySubmitted.add(submittedEnquiry);
-                        }
-                    }
-                    student.setEnquirySubmitted(enquirySubmitted);
-
-                    // Parse SuggestionSubmitted from the CSV
-                    List<Suggestion> suggestionSubmitted = new ArrayList<>();
-                    String[] suggestionSubmittedArray = data[11].split("\\|");
-                    for (String suggestion : suggestionSubmittedArray) {
-                        // Assuming Suggestion class has a static method to get a Suggestion instance by its subject
-                        Suggestion submittedSuggestion = Suggestion.getSuggestionBySubject(suggestion);
-                        if (submittedSuggestion != null) {
-                            suggestionSubmitted.add(submittedSuggestion);
-                        }
-                    }
-                    student.setSuggestionSubmitted(suggestionSubmitted);
-
-                    System.out.println("Student loaded successfully");
-
-                    existingStudents.put(student.getStudentID(), student);
-                    
-                    for (Student_User Student : existingStudents.values()) {
-                        System.out.println("Student ID: " + Student.getStudentID());
-                        System.out.println("Name: " + Student.getName());
-                        System.out.println("Password: " + Student.getPassword());
-                        System.out.println("User Group: " + Student.getUserGroup());
-                        System.out.println("Faculty: " + Student.getFaculty());
-
-                        // Print CampAccessibility
-                        /*
-                        System.out.print("Camp Accessibility: ");
-                        for (String camp : Student.getCampAccessibility()) {
-                            System.out.print(camp + "|");
-                        }
-                        System.out.println(); */
-
-                        System.out.println("Camp Committee: " + Student.getCampCommittee());
-
-                        // Print RegisteredCamps
-                        System.out.print("Registered Camps: ");
-                        for (Camp camp : Student.getRegisteredCamps) {
-                            System.out.print(camp.getCampName() + "|");
-                        }
-                        System.out.println();
-
-                        // Print SecurityQuestions
-                        System.out.print("Security Questions: ");
-                        for (String question : Student.getSecurityQuestion()) {
-                            System.out.print(question + "|");
-                        }
-                        System.out.println();
-
-                        // Print SecurityAnswers
-                        System.out.print("Security Answers: ");
-                        for (String answer : Student.getSecurityAnswers()) {
-                            System.out.print(answer + "|");
-                        }
-                        System.out.println();
-
-                        // Print EnquirySubmitted
-                        System.out.print("Enquiry Submitted: ");
-                        for (Enquiry enquiry : Student.getEnquirySubmitted()) {
-                            System.out.print(enquiry.getEnquiry_Subject() + "|");
-                        }
-                        System.out.println();
-
-                        // Print SuggestionSubmitted
-                        System.out.print("Suggestion Submitted: ");
-                        for (Suggestion suggestion : student.getSuggestionSubmitted()) {
-                            System.out.print(suggestion.getSuggestion_Subject() + "|");
-                        }
-                        System.out.println();
-
-                        System.out.println();
-                    }
-                } else {
-                    System.out.println("Incomplete data in the CSV line: " + line);
-                }
-            }
-            System.out.println("Students loaded from " + csvFilePath + " successfully.");
-
-        } catch (IOException e) {
-            System.out.println("An error occurred while reading from the CSV file.");
-            e.printStackTrace();
-        }
-    }
     
     public void updateCSVFile(String studentId) {
         // Get the path to the CSV file
@@ -381,6 +230,14 @@ public class Student_User {
             System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
         }
     }
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
 
    
 

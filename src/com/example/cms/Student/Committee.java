@@ -16,15 +16,12 @@ public class Committee extends Student_User {
 	private static Map<String, Committee> committeeMap = new HashMap<>();
     private Camp registeredCamp;
     private ArrayList<Camp> accessibleCamp;
-    private int points;
 
     // Add a list to store suggestions associated with the committee
     private ArrayList<Suggestion> suggestionsSubmitted;
 
-    public Committee(String studentID, Camp camp) {
+    public Committee() {
         super();
-        this.points = 0;
-        this.registeredCamp = camp;
         this.accessibleCamp = new ArrayList<>();
         this.suggestionsSubmitted = new ArrayList<>();
         committeeMap.put(studentID, this); // Use studentID as the key
@@ -34,14 +31,17 @@ public class Committee extends Student_User {
         return committeeMap;
     }
 
-    public int getPoints() {
-        return points;
+ // Method to add an attendee
+    public void addCommittee(Committee newCommittee) {
+        committeeMap.put(newCommittee.getStudentID(), newCommittee);
+        // You may want to save the updated attendeesMap to a file or perform other actions.
     }
 
-    public void setPoints() {
-        this.points = this.points + 1;
+    // Method to get existing attendees
+    public static Map<String, Committee> existingCommittee() {
+        return committeeMap;
     }
-
+    
     public ArrayList<Suggestion> getSuggestions() {
         return suggestionsSubmitted;
     }
@@ -208,7 +208,7 @@ public class Committee extends Student_User {
         if (input.next().equalsIgnoreCase("confirm")) {
             enquiryToBeAnswer.setReply(reply);
             enquiryToBeAnswer.setProcessed(true);
-            this.setPoints();
+           this.setPoints(this.getPoints() + 1);
             System.out.println("Reply sent successfully");
             String ans;
             do {

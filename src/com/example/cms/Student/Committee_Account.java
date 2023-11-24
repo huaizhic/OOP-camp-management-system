@@ -1,61 +1,86 @@
 package com.example.cms.Student;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import com.example.cms.CSVConverter.CSVDataManager;
+
 public class Committee_Account extends Student_Account {
+	
+	 private String studentID;
+	 private Map<String, Committee> existingCommittee;
 
-    public Committee_Account(String userId) {
-        super(userId);
-    }
+	    public Committee_Account(String studentID, Map<String, Student_User> existingCommittee) {
+	        super(studentID, existingCommittee);
+	        this.studentID = studentID;
+	        
+	        // Create a new map and copy elements from existingAttendees
+	        this.existingCommittee = new HashMap<>();
+	        for (Map.Entry<String, Student_User> entry : existingCommittee.entrySet()) {
+	            if (entry.getValue() instanceof Committee) {
+	                this.existingCommittee.put(entry.getKey(), (Committee) entry.getValue());
+	            }
+	            // If you want to handle the case where an element is not an Attendee, add appropriate logic here
+	        }
+	    }
 
-    public static void Start(Committee committee) {
-        boolean exit = false;
+	    public void start() {
+	        boolean exit = false;
 
-        while (!exit) {
-            // Display menu options for camp committee members
-            System.out.println("Camp Committee Member Options:");
-            System.out.println("1. Manage Camps including generating reports");
-            System.out.println("2. Manage Suggestions");
-            System.out.println("3. Manage Enquiries");
-            System.out.println("4. Logout");
+	        Committee committee = (Committee) existingCommittee.get(studentID);
+	        CSVDataManager.loadCommitteeFromCSV(committee);
 
-            // Read user's choice
-            int choice = getUserChoice();
+	        while (!exit) {
+	            // Display menu options for camp committee members
+	            System.out.println("Camp Committee Member Options:");
+	            System.out.println("1. Manage Camps including generating reports");
+	            System.out.println("2. Manage Suggestions");
+	            System.out.println("3. Manage Enquiries");
+	            System.out.println("4. Logout");
 
-            // Perform actions based on user's choice
-            switch (choice) {
-                case 1:
-                    Committee.manageCamp(committee);
-                    break;
-                case 2:
-                    Committee.manageSuggestions(committee);
-                    break;
-                case 3:
-                    Committee.manageEnquiries(committee);
-                    break;
-                case 4:
-                	exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please select a valid option.");
-                    break;
-            }
-        }
-    }
+	            // Read user's choice
+	            int choice = getUserChoiceWithExceptionHandling();
 
- // Utility method to get the user's choice
-    private static int getUserChoice() {
-        Scanner scanner = new Scanner(System.in);
+	            // Perform actions based on user's choice
+	            switch (choice) {
+	                case 1:
+	                    Committee.manageCamp(committee);
+	                    break;
+	                case 2:
+	                    Committee.manageSuggestions(committee);
+	                    break;
+	                case 3:
+	                    Committee.manageEnquiries(committee);
+	                    break;
+	                case 4:
+	                    exit = true;
+	                    break;
+	                default:
+	                    System.out.println("Invalid choice. Please select a valid option.");
+	                    break;
+	            }
+	        }
+	    }
+	    
+	 // Utility method to get the user's choice with exception handling
+	    private static int getUserChoiceWithExceptionHandling() {
+	        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter your choice: ");
-        while (!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a number.");
-            scanner.next(); // Consume the invalid input
-        }
+	        while (true) {
+	            try {
+	                System.out.print("Enter your choice: ");
+	                String input = scanner.nextLine().trim();
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+	                if (input.isEmpty()) {
+	                    System.out.println("Invalid input. Please enter a number.");
+	                    continue;
+	                }
 
-        return choice;
-    }
+	                return Integer.parseInt(input);
+	            } catch (NumberFormatException e) {
+	                System.out.println("Invalid input. Please enter a valid number.");
+	            }
+	        }
+	    }
 }

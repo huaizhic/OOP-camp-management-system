@@ -1,7 +1,9 @@
 package com.example.cms.Student;
 
 import com.example.cms.Student_Role;
+import com.example.cms.CSVConverter.CSVDataManager;
 
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -26,42 +28,21 @@ public class Student_Account {
         this.existingStudents = existingStudents;
         this.scanner = new Scanner(System.in); // Initialize the scanner here
     }
-    
-   
-
-    // Factory method to create a Student_Account instance
-//    public static boolean getStudentAccount(String userId) {
-//        Student_User existingStudent = new Student_User();
-//        // Check if the entered ID belongs to an existing student
-//        System.out.println("This is the student id passed: " + userId);
-//        if (existingStudent.isStudentExist(userId)) {
-//        	System.out.println("Student exists");
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 
     public void start() {
         int maxAttempts = 3; // Maximum allowed password attempts
         int attempts = 0; // Counter for password attempts
-
+        int roleChoice = 0; // Initialize to an invalid value
+        Student_Role role = null; // Declare the role variable here
+        
+        Student_User existingStudent = existingStudents.get(userId);
+        CSVDataManager.loadStudentsFromCSV(existingStudent);
+        
+        System.out.println("Welcome," + existingStudent.getName());
+        role = existingStudent.getUserGroup();
+        System.out.println("Role: ," + role);
+        
         while (attempts < maxAttempts) {
-            System.out.print("Enter your role (1 for Attendee or 2 for Committee): ");
-            int roleChoice = scanner.nextInt();
-
-            // Consume the newline character
-            scanner.nextLine();
-
-            Student_Role role = null;
-            if (roleChoice == 1) {
-                role = Student_Role.ATTENDEE;
-            } else if (roleChoice == 2) {
-                role = Student_Role.COMMITTEE;
-            } else {
-                System.out.println("Invalid role. Please enter '1' for Attendee or '2' for Committee.");
-                continue; // Retry if the role is invalid.
-            }
 
             System.out.print("Enter your password: ");
             String enteredPassword = scanner.next();
@@ -73,9 +54,7 @@ public class Student_Account {
             System.out.println("Debugging - Before passwordManager.checkPassword");
 
             // Use the existingStudents map to retrieve the student information
-            Student_User existingStudent = existingStudents.get(userId);
-            //
-            existingStudent.loadStudentsFromCSV();
+
 
             if (existingStudent != null) {
                 Password_Manager passwordManager = new Password_Manager(scanner, existingStudent);
@@ -91,7 +70,8 @@ public class Student_Account {
 
                     if ("COMMITTEE".equals(role.name())) {
                         System.out.println("Welcome, Committee Member " + studentName);
-
+                        Committee_Account committee_Account = new Committee_Account(userId, existingStudent.getExistingStudents());
+						committee_Account.start();
                         // Redirect to the committee class here
                     } else if ("ATTENDEE".equals(role.name())) {
                         System.out.println("Welcome, Attendee " + studentName);

@@ -24,10 +24,20 @@ public class Attendee extends Student_User {
 	        attendeesMap.put(this.getStudentID(), this);
 	    }
 
-        public static Map<String, Attendee> getAttendeesMap() {
+        public Map<String, Attendee> getAttendeesMap() {
 	        return attendeesMap;
 	    }
 
+        // Method to add an attendee
+        public void addAttendee(Attendee newAttendee) {
+            attendeesMap.put(newAttendee.getStudentID(), newAttendee);
+            // You may want to save the updated attendeesMap to a file or perform other actions.
+        }
+
+        // Method to get existing attendees
+        public static Map<String, Attendee> existingAttendees() {
+            return attendeesMap;
+        }
 
     public ArrayList<Camp> getRegisteredCamps() {
         return registeredCamps;
