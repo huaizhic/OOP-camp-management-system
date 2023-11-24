@@ -16,33 +16,38 @@ public class SortApp {
         System.out.println("5. Camp remaining attendee slots");
         System.out.println("6. Camp eligible user group");
         int option = input.nextInt();
+
+        DisplayBySort sorter;
+
         switch(option){
             case(1):
                 System.out.println("Sorting by camp location...");
-                DisplayBySort locationSorter = new SortByLocation();
-                return locationSorter.Sorting(campArrayList);
+                sorter = new SortByLocation();
+                break;
             case(2):
                 System.out.println("Sorting by camp starting date...");
-                DisplayBySort campStartDateSorter = new SortByCampDate();
-                return campStartDateSorter.Sorting(campArrayList);
+                sorter = new SortByCampDate();
+                break;
             case(3):
                 System.out.println("Sorting by camp registration close date...");
-                DisplayBySort regCloseDateSorter = new SortByRegCloseDate();
-                return regCloseDateSorter.Sorting(campArrayList);
+                sorter = new SortByRegCloseDate();
+                break;
             case(4):
                 System.out.println("Sorting by remaining committee slots...");
-                DisplayBySort committeeSlotSorter = new SortByCommitteeSlots();
-                return committeeSlotSorter.Sorting(campArrayList);
+                sorter = new SortByCommitteeSlots();
+                break;
             case(5):
                 System.out.println("Sorting by remaining attendee slots...");
-                DisplayBySort attendeeSlotsSorter = new SortByTotalSlots();
-                return attendeeSlotsSorter.Sorting(campArrayList);
+                sorter = new SortByTotalSlots();
+                break;
             case(6):
                 System.out.println("Sorting by eligible user group...");
-                DisplayBySort userGroupSorter = new SortByUserGroup();
-                return userGroupSorter.Sorting(campArrayList);
+                sorter = new SortByUserGroup();
+                break;
             default:
                 return null;
         }
+
+        return sorter.Sorting(campArrayList);
     }
 }
