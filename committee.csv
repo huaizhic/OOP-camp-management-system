@@ -1,0 +1,2 @@
+StudentID,Name,Password,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,SuggestionSubmitted
+STEVE005,STEVEN RIYADI,Steve12345,COMMITTEE,NBS,0,NBS,true,,FOOD|DRINK|BOOK,MACS|WATER|SPONGEBOB,

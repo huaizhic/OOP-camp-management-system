@@ -1,2 +1,2 @@
 StudentID,Name,Password,Salt,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted
-YVES0002,YVES SAMSON LI,Samsonli123,null,ATTENDEE,SPMS,0,SPMS,false,,FOOD|DRINK|BOOK,BURGER|WINE|HARRY POTTER,,
+YVES0002,YVES SAMSON LI,Hello123445,null,ATTENDEE,SPMS,0,SPMS,false,,FOOD|DRINK|BOOK,BURGER|WINE|HARRY POTTER,,
