@@ -23,7 +23,7 @@ public class CSVWriter {
             // Check if the CSV file is empty
             if (isFileEmpty(csvFilePath)) {
                 // Add the CSV header
-                writer.write("StudentID,Name,Password,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,"
+                writer.write("StudentID,Name,Password,Salt,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,"
                         + "SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted");
                 writer.newLine();
             }
@@ -38,6 +38,7 @@ public class CSVWriter {
             writer.write(student.getStudentID() + ","
                     + student.getName() + ","
                     + student.getPassword() + ","
+                    + student.getSalt() + ","        
                     + student.getUserGroup() + ","
                     + student.getFaculty() + ","
                     + student.getPoints() + ","

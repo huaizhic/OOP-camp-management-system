@@ -208,6 +208,8 @@ public class Attendee extends Student_User {
     
     public static void manageEnquiries(Attendee attendee) {
         boolean exit = false;
+        Scanner scanner = new Scanner(System.in);
+
         do {
             System.out.println("Camp Enquiries Menu:");
             System.out.println("1. View Enquiries");
@@ -216,37 +218,60 @@ public class Attendee extends Student_User {
             System.out.println("4. Delete Enquiries");
             System.out.println("5. Back to Main Menu");
 
-            System.out.print("Enter your choice: ");
-            Scanner scanner = null;
-            int choice = scanner.nextInt();
+            int choice = getUserChoiceWithExceptionHandling(scanner);
 
             switch (choice) {
-                case (1):
+                case 1:
                     // Delegate to specific functionality in the Attendee class
                     Attendee.viewEnquiry(attendee);
                     break;
-                case (2):
+                case 2:
                     // Delegate to specific functionality in the Attendee class
                     Attendee.makeEnquiry(attendee);
                     break;
-                case (3):
+                case 3:
                     Attendee.editEnquiry(attendee);
                     break;
-                case (4):
+                case 4:
                     // Delegate to specific functionality in the Attendee class
                     Attendee.deleteEnquiry(attendee);
                     break;
-                case (5):
-                    // Back to the com.example.cms.main menu
+                case 5:
+                    // Back to the main menu
                     exit = true;
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        }while(!exit);
+        } while (!exit);
     }
 
+    private static int getUserChoiceWithExceptionHandling(Scanner scanner) {
+        int choice = -1;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                System.out.print("Enter your choice: ");
+                String input = scanner.nextLine().trim();
+
+                if (input.isEmpty()) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    continue;
+                }
+
+                choice = Integer.parseInt(input);
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        return choice;
+    }
+
+    
     public static void viewEnquiry(Attendee attendee) {
         if(attendee.getEnquirySubmitted().isEmpty()){
             System.out.println("No enquiry has been submitted");

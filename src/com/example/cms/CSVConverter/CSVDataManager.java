@@ -34,31 +34,32 @@ public class CSVDataManager {
 
                 String[] data = line.split(",", -1); // Use -1 to keep empty fields
 
-                if (data.length >= 13) {
+                if (data.length >= 14) {
                     // Create a new Student_User instance and set its attributes
                     Student_User student = new Student_User();
                     student.setStudentID(data[0]);
                     student.setName(data[1]);
                     student.setPassword(data[2]);
-                    student.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
-                    student.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
-                    student.setPoints(Integer.parseInt(data[5]));
+                    student.setSalt(data[3]);
+                    student.setUserGroup(Student_Role.valueOf(data[4])); // Assuming Student_Role values are in the CSV
+                    student.setFaculty(Faculty.valueOf(data[5])); // Assuming Faculty values are in the CSV
+                    student.setPoints(Integer.parseInt(data[6]));
                     
                     // Parse CampAccessibility from the CSV
                     List<String> campAccessibility = new ArrayList<>();
-                    String[] campAccessibilityArray = data[6].split("\\|");
+                    String[] campAccessibilityArray = data[7].split("\\|");
                     for (String camp : campAccessibilityArray) {
                         campAccessibility.add(camp);
                     }
                     student.setCampAccessibility(campAccessibility);
 
                     // Parse CampCommittee from the CSV
-                    boolean campCommittee = Boolean.parseBoolean(data[7]);
+                    boolean campCommittee = Boolean.parseBoolean(data[8]);
                     student.setCampCommittee(campCommittee);
 
                     // Parse RegisteredCamps from the CSV
                     List<Camp> registeredCamps = new ArrayList<>();
-                    String[] registeredCampsArray = data[8].split("\\|");
+                    String[] registeredCampsArray = data[9].split("\\|");
                     for (String camp : registeredCampsArray) {
                         Camp registeredCamp = Camp.getCampByName(camp);
                         if (registeredCamp != null) {
@@ -69,7 +70,7 @@ public class CSVDataManager {
 
                     // Parse SecurityQuestions from the CSV
                     List<String> securityQuestions = new ArrayList<>();
-                    String[] securityQuestionsArray = data[9].split("\\|");
+                    String[] securityQuestionsArray = data[10].split("\\|");
                     for (String question : securityQuestionsArray) {
                         securityQuestions.add(question);
                     }
@@ -77,7 +78,7 @@ public class CSVDataManager {
 
                     // Parse SecurityAnswers from the CSV
                     List<String> securityAnswers = new ArrayList<>();
-                    String[] securityAnswersArray = data[10].split("\\|");
+                    String[] securityAnswersArray = data[11].split("\\|");
                     for (String answer : securityAnswersArray) {
                         securityAnswers.add(answer);
                     }
@@ -85,7 +86,7 @@ public class CSVDataManager {
 
                     // Parse EnquirySubmitted from the CSV
                     List<Enquiry> enquirySubmitted = new ArrayList<>();
-                    String[] enquirySubmittedArray = data[11].split("\\|");
+                    String[] enquirySubmittedArray = data[12].split("\\|");
                     for (String enquiry : enquirySubmittedArray) {
                         Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
                         if (submittedEnquiry != null) {
@@ -96,7 +97,7 @@ public class CSVDataManager {
 
                     // Parse SuggestionSubmitted from the CSV
                     List<Suggestion> suggestionSubmitted = new ArrayList<>();
-                    String[] suggestionSubmittedArray = data[12].split("\\|");
+                    String[] suggestionSubmittedArray = data[13].split("\\|");
                     for (String suggestion : suggestionSubmittedArray) {
                         Suggestion submittedSuggestion = Suggestion.getSuggestionBySubject(suggestion);
                         if (submittedSuggestion != null) {
@@ -113,6 +114,7 @@ public class CSVDataManager {
                     System.out.println("Student ID: " + student.getStudentID());
                     System.out.println("Name: " + student.getName());
                     System.out.println("Password: " + student.getPassword());
+                    System.out.println("Password: " + student.getSalt());
                     System.out.println("User Group: " + student.getUserGroup());
                     System.out.println("Faculty: " + student.getFaculty());
                     System.out.println("Point: " + student.getPoints());
@@ -207,6 +209,7 @@ public class CSVDataManager {
             updatedContent.append(student.getStudentID()).append(",");
             updatedContent.append(student.getName()).append(",");
             updatedContent.append(student.getPassword()).append(",");
+            updatedContent.append(student.getSalt()).append(",");
             updatedContent.append(student.getUserGroup()).append(",");
             updatedContent.append(student.getFaculty()).append(",");
             updatedContent.append(student.getPoints()).append(",");

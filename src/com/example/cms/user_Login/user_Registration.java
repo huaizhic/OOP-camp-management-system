@@ -12,7 +12,8 @@ import java.util.Scanner;
 import com.example.cms.Faculty;
 import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVWriter;
-import com.example.cms.Student.Password_Manager;
+import com.example.cms.Password.Password_Hasher;
+import com.example.cms.Password.Password_Manager;
 import com.example.cms.Student.Student_User;
 
 public class user_Registration {
@@ -66,6 +67,7 @@ public class user_Registration {
 	        newStudent.setName(studentName);
 	        newStudent.setUserGroup(userGroup);
 	        newStudent.setPassword(password);
+	        //newStudent.setSalt(Password_Hasher.generateSalt());
 	        newStudent.setFaculty(facultyInput);
 	        newStudent.setPoints(points);
 	        newStudent.setCampAccessibility(campAccessibility);
@@ -108,6 +110,7 @@ public class user_Registration {
 	        newStudent.setName(studentName);
 	        newStudent.setUserGroup(userGroup);
 	        newStudent.setPassword(password);
+	        //newStudent.setSalt(Password_Hasher.generateSalt());
 	        newStudent.setFaculty(facultyInput);
 	        newStudent.setPoints(points);
 	        newStudent.setCampAccessibility(campAccessibility);
