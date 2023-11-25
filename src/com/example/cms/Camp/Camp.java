@@ -51,7 +51,7 @@ public class Camp {
 	 * @param userGroup Schools for which students can join the camp
 	 * @param location Location of camp
 	 * @param totalSlots Total number of attendees that can participate in the camp
-	 * @param staff Staff-in-charge of the camp
+	 * @param staffName Staff-in-charge of the camp
 	 * @param visibility Camp visibility to students
 	 */
 
@@ -227,7 +227,7 @@ public class Camp {
 	 * Note that only 1 staff can be in charge of a camp
 	 * @return Designated Staff-in-charge of the camp
 	 */
-	public Staff getStaffInCharge() {
+	public String getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
@@ -235,7 +235,7 @@ public class Camp {
 	 * Sets Staff-in-charge of the camp.
 	 * @param staffInCharge Intended Staff-in-charge of the camp
 	 */
-	public void setStaffInCharge(Staff staffInCharge) {
+	public void setStaffInCharge(String staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 
