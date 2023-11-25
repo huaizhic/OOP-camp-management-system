@@ -5,6 +5,7 @@ import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Format;
+import com.example.cms.Status;
 import com.example.cms.Suggestions.Suggestion;
 import com.example.cms.generate_report.CommitteeGenerateReport;
 import com.example.cms.generate_report.GenerateReport;
@@ -20,11 +21,21 @@ public class Committee extends Student_User {
     // Add a list to store suggestions associated with the committee
     private ArrayList<Suggestion> suggestionsSubmitted;
 
+    private static HashMap<String, Committee> CommitteeNameMap = new HashMap<>();
+
     public Committee() {
         super();
         this.accessibleCamp = new ArrayList<>();
         this.suggestionsSubmitted = new ArrayList<>();
         committeeMap.put(studentID, this); // Use studentID as the key
+    }
+
+    public static void setCommitteeNameMap(HashMap<String, Committee> committeeNameMap) {
+        CommitteeNameMap = committeeNameMap;
+    }
+
+    public static HashMap<String, Committee> getCommitteeNameMap() {
+        return CommitteeNameMap;
     }
 
     public static Map<String, Committee> getCommitteeMap() {
@@ -312,7 +323,7 @@ public class Committee extends Student_User {
         LocalDate todayDate = LocalDate.now();
         System.out.println("Confirm to submit? Enter \"confirm\" to continue or any other key to cancel ");
         if(input.nextLine().equalsIgnoreCase("confirm")){
-            Suggestion newSuggestion = new Suggestion(subject, this, content, todayDate);
+            Suggestion newSuggestion = new Suggestion(subject, this, content, todayDate, Status.Pending, false);
             committee.setSuggestions(newSuggestion);
             Suggestion.getSuggestionHashMap().put(subject, newSuggestion);
             Suggestion.getSuggestionArrayList().add(newSuggestion);
