@@ -2,7 +2,7 @@ package com.example.cms.Camp;
 
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
-import com.example.cms.Staff.StaffMember;
+import com.example.cms.Staff.Staff;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
@@ -27,7 +27,7 @@ public class Camp {
 	private int committeeSlots;
 	private int remainingCommitteeSlots;
 	private String description;
-	private StaffMember staffInCharge;
+	private Staff staffInCharge;
 	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
 	private ArrayList<Committee> committeeRegistered;
 	private boolean visibility;
@@ -39,7 +39,7 @@ public class Camp {
 
 	}
 
-	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, StaffMember staff, boolean visibility){
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, Staff staff, boolean visibility){
 		this.campName = campName;
 		this.campDates = campDate;
 		this.regCloseDate = regCloseDate;
@@ -161,11 +161,11 @@ public class Camp {
 		this.description = description;
 	}
 
-	public StaffMember getStaffInCharge() {
+	public Staff getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
-	public void setStaffInCharge(StaffMember staffInCharge) {
+	public void setStaffInCharge(Staff staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 

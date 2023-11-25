@@ -1,20 +1,18 @@
 package com.example.cms.Student;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Faculty;
+import com.example.cms.Student_Role;
+import com.example.cms.Suggestions.Suggestion;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.example.cms.Faculty;
-import com.example.cms.Student_Role;
-import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Suggestions.Suggestion;
 
 public class Student_User {
 
@@ -51,8 +49,6 @@ public class Student_User {
         this.securityQuestion = new ArrayList<>();
         this.securityAnswers = new ArrayList<>();
         this.enquirySubmitted = new ArrayList<>();
-        this.existingStudents = new HashMap<>(); // Initialize the map in the constructor
-        
     }
 
     public String getStudentID() {
