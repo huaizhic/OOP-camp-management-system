@@ -27,7 +27,7 @@ public class Student_User {
     private Student_Role userGroup;
     private int points;
     protected static List<Camp> registeredCamps;
-    public Map<String, Student_User> existingStudents = new HashMap<>(); // Use a HashMap instead of a List
+    public static Map<String, Student_User> existingStudents = new HashMap<>(); // Use a HashMap instead of a List
     protected List<String> campAccessibility; // This indicates which camp the attendee can see
     private boolean campCommittee;
     private ArrayList<String> securityQuestion;

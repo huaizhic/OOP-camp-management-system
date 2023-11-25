@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Attendee extends Student_User {
 
-	 public Map<String, Attendee> attendeesMap = new HashMap<>();
+	 public static Map<String, Attendee> attendeesMap = new HashMap<>();
      private ArrayList<Camp> registeredCamps;
 
      private ArrayList<Enquiry> enquirySubmitted;
@@ -47,6 +47,16 @@ public class Attendee extends Student_User {
     	        System.out.println("Failed to add attendee. The provided attendee is null.");
     	    }
     	}
+     
+  // Method to get an Attendee by ID
+     public Attendee getAttendeeByID(String attendeeID) {
+         if (attendeesMap.containsKey(attendeeID)) {
+             return attendeesMap.get(attendeeID);
+         } else {
+             System.out.println("Attendee with ID " + attendeeID + " not found.");
+             return null;
+         }
+     }
      
      // Method to get existing attendees
      public Map<String, Attendee> existingAttendees() {
