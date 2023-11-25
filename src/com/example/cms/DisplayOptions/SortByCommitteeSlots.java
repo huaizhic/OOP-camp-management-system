@@ -3,6 +3,10 @@ import com.example.cms.Camp.Camp;
 import java.util.Comparator;
 import java.util.Collections;
 import java.util.ArrayList;
+
+/**
+ * Implements specific sort method via total number of committee slots per camp. Sorts from smallest to largest number (TO BE CONFIRMED).
+ */
 public class SortByCommitteeSlots extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 
@@ -16,8 +20,8 @@ public class SortByCommitteeSlots extends DisplayBySort{
 			campAfterSorting.clear();
 			campAfterSorting.addAll(campList);
 			return campAfterSorting;
-			}
 		}
+	}
 
 
 

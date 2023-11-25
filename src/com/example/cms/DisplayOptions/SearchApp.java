@@ -6,8 +6,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Enables functionality to search for camps based on specific criteria (ie types and keywords) from user input.
+ */
 public class SearchApp {
+    /**
+     * Implements functionality to search for camps based on specific types and keywords from user input.
+     * via a menu, combining all the different searching methods
+     * @param campArrayList
+     * @return customised list of camps according to user search input
+     */
     public static ArrayList<Camp> startSearch(ArrayList<Camp> campArrayList){
         Scanner input = new Scanner(System.in);
         System.out.println("=== what camp feature would you like to search for?");
@@ -18,8 +26,20 @@ public class SearchApp {
         System.out.println("5. Camp remaining committee slots");
         System.out.println("6. Camp remaining attendee slots");
         System.out.println("7. Camp eligible user group");
-        int option = input.nextInt();
-        switch(option) {
+        int choice;
+        boolean valid;
+
+        do{
+            choice = input.nextInt();
+            if(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7){
+                System.out.println("Invalid input, please enter a valid option (1-7)");
+                valid = false;
+            }else{
+                valid = true;
+            }
+        }while(!valid);
+
+        switch(choice) {
             case (1):
                 System.out.println("Insert keywords for camp name");
                 String nameSearch = input.nextLine();

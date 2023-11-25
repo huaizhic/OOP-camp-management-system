@@ -1,9 +1,16 @@
 package com.example.cms.Password;
 
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Student_User;
+import com.example.cms.Student_Role;
+import com.example.cms.user_Login.account_Manager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
 
 import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVDataManager;
@@ -12,7 +19,10 @@ import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.user_Login.account_Manager;
 
-
+/**
+ * Controller class to handle passwords for logging in
+ * Includes all the standard features such as forgot password, reset password, etc.
+ */
 public class Password_Manager {
 
 	 private Scanner scanner; // Add a Scanner field

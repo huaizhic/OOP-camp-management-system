@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="Committee, suggestion and Staff">
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Student_User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Student_User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/generate_report/CommitteeGenerateReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cms/Camp/Camp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/cms/Camp/Camp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cms/Faculty.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/cms/Faculty.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,6 +112,8 @@
       <workItem from="1700714718749" duration="2092000" />
       <workItem from="1700719798025" duration="2904000" />
       <workItem from="1700722712958" duration="5647000" />
+      <workItem from="1700848427940" duration="1432000" />
+      <workItem from="1700884344246" duration="4805000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -292,7 +283,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700676608285</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="minor change">
+      <option name="closed" value="true" />
+      <created>1700849681283</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1700849681283</updated>
+    </task>
+    <task id="LOCAL-00023" summary="minor change">
+      <option name="closed" value="true" />
+      <created>1700882504015</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1700882504015</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +333,8 @@
     <MESSAGE value="View Camp function separated as static" />
     <MESSAGE value="Implementing suggestion and some committee methods" />
     <MESSAGE value="Committee, suggestion and Staff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Committee, suggestion and Staff" />
+    <MESSAGE value="minor change" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -14,11 +14,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+/**
+ * When the Staff user chooses an option from the menu, they will be directed to this class to complete the required functions.
+ */
+public class Staff extends Staff_User{
 
-public class Staff {
+	public Staff(String staffID, String name, Faculty userGroup, String securityQuestion, String securityAns){
+		super(staffID, name, userGroup, securityQuestion, securityAns);
+		existingStaff.put(staffID, this);
+	}
+
 	private Scanner input;
 
-	public void createCamp() {
+	protected void createCamp() {
 		input = new Scanner(System.in);
 		System.out.println("===== Creating a New Camp =====");
 		boolean uniqueCampName = true;
@@ -70,7 +78,7 @@ public class Staff {
 		String ans;
 		ArrayList<Faculty> userGroups = new ArrayList<>();
 		System.out.println("Is the camp open to all NTU faculties?");
-		String allNTU = null;
+		String allNTU;
 		do{
 			System.out.println("Enter 'Yes' or 'No' ");
 			allNTU = input.next();
@@ -137,15 +145,15 @@ public class Staff {
 			ArrayList<LocalDate> campDate = new ArrayList<>();
 			campDate.add(startDate);
 			campDate.add(endDate);
-			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, (StaffMember) this, visibility);
+			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots,this, visibility);
 
 			campData.setCampList(newCamp);
 			campData.addCampToMap(campName, newCamp);
-		((StaffMember) this).setCampsCreated(newCamp);
+			this.setCampsCreated(newCamp);
 
 	}
 
-	private void viewCampCreated(StaffMember staff){
+	protected void viewCampCreated(Staff staff){
 		if(staff.getCampsCreated().isEmpty()){
 			System.out.println("No camp has been created, please create one before editing");
 		}else {
@@ -191,7 +199,7 @@ public class Staff {
 	}
 	private Camp selectCamp(ArrayList<Camp> campArrayList){
 		String campToBeSelectedStr;
-		Camp campToBeSelected = null;
+		Camp campToBeSelected;
 		do{System.out.println("Please insert the camp name or enter exit to cancel in lower case");
 			campToBeSelectedStr = input.nextLine();
 			if(campToBeSelectedStr.equals("exit")){
@@ -208,7 +216,7 @@ public class Staff {
 	}
 
 
-	public String editCamp(StaffMember staff) {
+	public String editCamp(Staff staff) {
 		viewCampCreated(staff);
 			boolean completedEditing = false;
 			do {
@@ -351,7 +359,7 @@ public class Staff {
 		}
 
 
-	public String deleteCamp(StaffMember staff) {
+	public String deleteCamp(Staff staff) {
 		if(staff.getCampsCreated().isEmpty()){
 			System.out.println("No camp has been created");
 			return "exiting...";
@@ -385,7 +393,7 @@ public class Staff {
 		}
 	}
 
-	public void viewAllCamps() {
+	protected void viewAllCamps() {
 		ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
 		if(campArrayList == null){
 			System.out.println("Action terminated");
@@ -397,7 +405,7 @@ public class Staff {
 
 	}
 
-	public void viewEnquiry(StaffMember staff) {
+	protected void viewEnquiry(Staff staff) {
 		viewCampCreated(staff);
 		Camp campNameToViewEnquiry = selectCamp(staff.getCampsCreated());
 		if(campNameToViewEnquiry == null){
@@ -414,7 +422,7 @@ public class Staff {
 		}
 	}
 
-	public void replyEnquiry(StaffMember staff) {
+	public void replyEnquiry(Staff staff) {
 		Scanner input = new Scanner(System.in);
 		viewCampCreated(staff);
 		Enquiry enquiryToReply = null;
@@ -456,7 +464,7 @@ public class Staff {
 		}
 	}
 
-	public void viewSuggestion(StaffMember staff) {
+	public void viewSuggestion(Staff staff) {
 		viewCampCreated(staff);
 		Camp toView = selectCamp(staff.getCampsCreated());
 		if(toView == null){
@@ -473,7 +481,7 @@ public class Staff {
 	}
 
 
-	public void approveSuggestion(StaffMember staff) {
+	public void approveSuggestion(Staff staff) {
 		viewSuggestion(staff);
 		Suggestion suggestionToApprove;
 		do{
@@ -526,7 +534,8 @@ public class Staff {
 		if(input.next().equalsIgnoreCase("confirm")){
 			suggestionToApprove.setStatus(response);
 			suggestionToApprove.setProcessed(true);
-			suggestionToApprove.getSubmitter().setPoints();
+			int points = suggestionToApprove.getSubmitter().getPoints();
+			suggestionToApprove.getSubmitter().setPoints(points + 1);
 			System.out.println("The suggestion has been processed and your response has been successfully recorded");
 		}else{
 			System.out.println("Action terminated by the user, exiting...");

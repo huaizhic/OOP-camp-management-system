@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * This class is a Controller class to load and update CSVs (data) of different classes such as Students, Attendees, Committee etc.
+ */
 public class CSVDataManager {
 
 	// Load students from CSV

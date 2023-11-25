@@ -1,27 +1,29 @@
 package com.example.cms.Student;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Faculty;
+import com.example.cms.Student_Role;
+import com.example.cms.Suggestions.Suggestion;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.example.cms.Faculty;
-import com.example.cms.Student_Role;
-import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Password.Password_Hasher;
-import com.example.cms.Suggestions.Suggestion;
-
+/**
+ * Entity class, provides information about the Student User regardless of Camp Attendee or committee member.
+ * Routed from account_Manager
+ * As part of Open-Closed Principle, we close this class to modification,
+ * but open it to extension to different student types,
+ * in this case, Camp Attendee and Camp Committee
+ */
 public class Student_User {
 
     protected String studentID;
     private String password = "password";
-    public String salt; // Store the salt
     private String name;
     private Faculty faculty;
     private Student_Role userGroup;
@@ -44,7 +46,6 @@ public class Student_User {
         
         this.studentID = null; // You can set an initial value or leave it empty
         this.password = "password";
-        this.salt = null;        // Generate a random salt and store it
         this.name = "";
         this.faculty = Faculty.NIL; // Set a default faculty or choose based on your requirements
         this.userGroup = Student_Role.NIL; // Set a default role or choose based on your requirements
@@ -72,10 +73,7 @@ public class Student_User {
 
     // Setter for password
     public void setPassword(String newPassword) {
-    	//this.salt = Password_Hasher.generateSalt();
-    	//System.out.println("The salt, salt in setPassword " + Password_Hasher.generateSalt() );
-       // this.password = Password_Hasher.hashPassword(newPassword, this.salt);
-    	this.password = newPassword;
+        this.password = newPassword;
     }
 
     public String getName() {
@@ -197,7 +195,44 @@ public class Student_User {
     }
     
     
-   
+    public void updateCSVFile(String studentId) {
+        // Get the path to the CSV file
+        String csvFilePath = "student.csv";
+
+        // Create a StringBuilder to store the updated content
+        StringBuilder updatedContent = new StringBuilder();
+
+        // Find the student based on the provided studentId
+        Student_User student = existingStudents.get(studentId);
+
+        // Check if the student exists
+        if (student != null) {
+            // Append the information for the specific student to the StringBuilder
+            updatedContent.append(student.getStudentID()).append(",");
+            updatedContent.append(student.getName()).append(",");
+            updatedContent.append(student.getPassword()).append(",");
+            updatedContent.append(student.getUserGroup()).append(",");
+            updatedContent.append(student.getFaculty()).append(",");
+            updatedContent.append(String.join("|", student.getCampAccessibility())).append(",");
+            updatedContent.append(student.getCampCommittee()).append(",");
+            updatedContent.append(String.join("|", student.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+            updatedContent.append(String.join("|", student.getSecurityQuestion())).append(",");
+            updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
+            updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+            updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+
+            // Write the updated content to the CSV file
+            try (FileWriter writer = new FileWriter(csvFilePath)) {
+                writer.write(updatedContent.toString());
+                System.out.println("CSV file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while updating the CSV file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
+        }
+    }
 
 	public int getPoints() {
 		return points;
@@ -205,14 +240,6 @@ public class Student_User {
 
 	public void setPoints(int points) {
 		this.points = points;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 
    

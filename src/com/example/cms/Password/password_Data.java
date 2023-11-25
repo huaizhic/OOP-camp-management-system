@@ -1,5 +1,8 @@
 package com.example.cms.Password;
 
+/**
+ * Entity class to provide information for password salting before hashing
+ */
 public class password_Data {
     private final String password;
     private final String salt;

@@ -5,8 +5,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Implements specific sort method via camp date. Sorts from earliest to latest camp starting date (TO BE CONFIRMED).
+ */
 public class SortByCampDate extends DisplayBySort{
     private ArrayList<Camp> campAfterSorting = new ArrayList<>();
+
+    /**
+     *
+     * @param campList
+     * @return
+     */
     public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {
         if (campList.isEmpty()) {
             System.out.println("No camp available yet");
@@ -16,8 +25,8 @@ public class SortByCampDate extends DisplayBySort{
             campAfterSorting.clear();
             campAfterSorting.addAll(campList);
             return campAfterSorting;
-            }
         }
+    }
 
     public static Comparator<Camp> campDateComparator = new Comparator<>(){
         public int compare(Camp c1, Camp c2){

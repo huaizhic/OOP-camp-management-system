@@ -1,21 +1,19 @@
 package com.example.cms.user_Login;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.example.cms.CSVConverter.CSVWriter;
+import com.example.cms.Faculty;
+import com.example.cms.Password.Password_Manager;
+import com.example.cms.Student.Student_User;
+import com.example.cms.Student_Role;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-
-import com.example.cms.Faculty;
-import com.example.cms.Student_Role;
-import com.example.cms.CSVConverter.CSVWriter;
-import com.example.cms.Password.Password_Hasher;
-import com.example.cms.Password.Password_Manager;
-import com.example.cms.Student.Student_User;
-
+/**
+ * Controller class to handle and process registration of new users
+ * Routed from account_Manager
+ */
 public class user_Registration {
 	private Scanner scanner;
 	String studentID = null;

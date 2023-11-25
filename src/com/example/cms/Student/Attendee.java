@@ -3,7 +3,6 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.user_Login.account_Manager;
 import com.example.cms.Faculty;
 
 import java.time.LocalDate;
@@ -11,7 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+/**
+ * When the Camp Attendee user chooses an option from the menu, they will be directed to this class to complete the required functions.
+ */
 public class Attendee extends Student_User {
 
 	 public static Map<String, Attendee> attendeesMap = new HashMap<>();
