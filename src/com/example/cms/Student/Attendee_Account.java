@@ -5,32 +5,51 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.user_Login.account_Manager;
 
 public class Attendee_Account extends Student_Account {
 
     private String studentID;
     private Map<String, Attendee> existingAttendees;
-
-    public Attendee_Account(String studentID, Map<String, Student_User> existingAttendees) {
-        super(studentID, existingAttendees);
+    
+    public boolean getAttendeeAccount(String studentID) {
+        // Use the existingStudents map to check if the student exists
+        return existingAttendees.containsKey(studentID);
+    }
+    
+    public Attendee_Account(String studentID, Map<String, Student_User> existingStudent) {
+        super(studentID, existingStudent);
         this.studentID = studentID;
-        
-        // Create a new map and copy elements from existingAttendees
+
+        // Initialize existingAttendees by filtering Attendee objects
         this.existingAttendees = new HashMap<>();
-        for (Map.Entry<String, Student_User> entry : existingAttendees.entrySet()) {
+        for (Map.Entry<String, Student_User> entry : existingStudent.entrySet()) {
             if (entry.getValue() instanceof Attendee) {
                 this.existingAttendees.put(entry.getKey(), (Attendee) entry.getValue());
             }
-            // If you want to handle the case where an element is not an Attendee, add appropriate logic here
+            // Handle other cases if needed
         }
     }
 
-    public void start() {
+
+	public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
-        
-        Attendee attendee = (Attendee) existingAttendees.get(studentID);
-        CSVDataManager.loadAttendeeFromCSV(attendee);
+
+        System.out.println("Default Student ID: " + studentID);
+
+        Attendee attendee = CSVDataManager.loadAttendeeFromCSV(existingAttendees.get(studentID));
+
+        if (attendee != null) {
+            System.out.println("Attendee in attendee account:");
+            System.out.println("Student ID: " + attendee.getStudentID());
+            System.out.println("Name: " + attendee.getName());  // Assuming you have a getName method in Attendee
+        } else {
+            System.out.println("Attendee not found. Logging out.");
+            running = false;
+            account_Manager account_Manager = new account_Manager(scanner);
+			account_Manager.start();
+        }
 
         while (running) {
             System.out.println("Student Home Page");
@@ -57,13 +76,15 @@ public class Attendee_Account extends Student_Account {
                 case 4:
                     running = false;
                     System.out.println("Logging out.");
+                    
+                    account_Manager account_Manager = new account_Manager(scanner);
+                    account_Manager.start();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
         }
-
     }
     
     public static int getUserChoice(Scanner scanner) {

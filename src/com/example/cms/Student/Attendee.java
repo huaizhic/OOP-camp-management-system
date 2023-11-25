@@ -3,6 +3,7 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.user_Login.account_Manager;
 import com.example.cms.Faculty;
 
 import java.time.LocalDate;
@@ -13,32 +14,45 @@ import java.util.Scanner;
 
 public class Attendee extends Student_User {
 
-	 private static Map<String, Attendee> attendeesMap = new HashMap<>();
+	 public Map<String, Attendee> attendeesMap = new HashMap<>();
      private ArrayList<Camp> registeredCamps;
 
      private ArrayList<Enquiry> enquirySubmitted;
 
-	    public Attendee() {
-	        super();
-	        this.registeredCamps = new ArrayList<>();
-	        attendeesMap.put(this.getStudentID(), this);
-	    }
+     public Attendee() {
+         super();
+         this.registeredCamps = new ArrayList<>();
+         this.enquirySubmitted = new ArrayList<>();
+         
+         // Initialize the map only if it's null
+         if (attendeesMap == null) {
+             attendeesMap = new HashMap<>();
+         }
+     }
 
-        public Map<String, Attendee> getAttendeesMap() {
-	        return attendeesMap;
-	    }
+     // Method to add an attendee
+     public void addAttendee(Attendee newAttendee) {
+    	    if (newAttendee != null) {
+    	        attendeesMap.put(newAttendee.getStudentID(), newAttendee);
 
-        // Method to add an attendee
-        public void addAttendee(Attendee newAttendee) {
-            attendeesMap.put(newAttendee.getStudentID(), newAttendee);
-            // You may want to save the updated attendeesMap to a file or perform other actions.
-        }
+    	        // Print success message and details about the added attendee
+    	        System.out.println("New Attendee added successfully  in add attendee method:");
+    	        System.out.println("Student ID: " + newAttendee.getStudentID());
+    	        System.out.println("Name: " + newAttendee.getName());  // Assuming you have a getName method in Attendee
 
-        // Method to get existing attendees
-        public static Map<String, Attendee> existingAttendees() {
-            return attendeesMap;
-        }
+    	        // You can add more details based on your Attendee class properties
 
+    	        // You may want to save the updated attendeesMap to a file or perform other actions.
+    	    } else {
+    	        System.out.println("Failed to add attendee. The provided attendee is null.");
+    	    }
+    	}
+     
+     // Method to get existing attendees
+     public Map<String, Attendee> existingAttendees() {
+         return attendeesMap;
+     }
+     
     public ArrayList<Camp> getRegisteredCamps() {
         return registeredCamps;
     }
@@ -69,140 +83,241 @@ public class Attendee extends Student_User {
 	    
 
     public static void manageCamp(Attendee attendee) {
-            boolean exit = false;
-            do {
-                System.out.println("Camp Enquiries Menu:");
-                System.out.println("1. View Camps");
-                System.out.println("2. Register for a Camp. Note: if you do not know the camp name, please select view camps to check the camp name first");
-                System.out.println("3. Withdraw from a Camp");
-                System.out.println("4. Back to Main Menu");
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
 
-                System.out.print("Enter your choice: ");
-                Scanner scanner = null;
-                int choice = scanner.nextInt();
+        do {
+            System.out.println("Camp Enquiries Menu:");
+            System.out.println("1. View Camps");
+            System.out.println("2. Register for a Camp. Note: if you do not know the camp name, please select view camps to check the camp name first");
+            System.out.println("3. Withdraw from a Camp");
+            System.out.println("4. Back to Main Menu");
 
-                switch (choice) {
-                    case 1:
-                        // Delegate to specific functionality in the Attendee class
-                        viewCamp(attendee);
-                        break;
-                    case 2:
-                        // Delegate to specific functionality in the Attendee class
-                        registerForCamp(attendee);
-                        break;
-                    case 3:
-                        // Delegate to specific functionality in the Attendee class
-                        withdrawFromCamp(attendee);
-                        break;
-                    case 4:
-                        exit = true;
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a valid option.");
-                        break;
-                }
-            }while(!exit);
+            int choice = getNumericInput(scanner);
+
+            switch (choice) {
+                case 1:
+                    // Delegate to specific functionality in the Attendee class
+                    viewCamp(attendee);
+                    break;
+                case 2:
+                    // Delegate to specific functionality in the Attendee class
+                    registerForCamp(attendee);
+                    break;
+                case 3:
+                    // Delegate to specific functionality in the Attendee class
+                    withdrawFromCamp(attendee);
+                    break;
+                case 4:
+                    exit = true;
+                    Attendee_Account attendee_Account = new Attendee_Account(attendee.studentID, attendee.existingStudents);
+                    
+                    attendee_Account.start();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+                    break;
+            }
+        } while (!exit);
     }
-    
-   
 
-    public static void viewCamp(Attendee attendee) {
-        ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
-        if(campArrayList == null){
-            return;
-        }
-        ArrayList<Camp> eligibleCamp = new ArrayList<>();
-        for(Camp camp : campArrayList){
-            if(camp.getVisibility() && (camp.getUserGroup().contains(Faculty.ALL) || camp.getUserGroup().contains(attendee.getFaculty()))){
-                eligibleCamp.add(camp);
+   
+    public static int getNumericInput(Scanner scanner) {
+        int input = 0;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                System.out.print("Enter your choice: ");
+                String inputLine = scanner.nextLine().trim();
+
+                if (inputLine.isEmpty()) {
+                    System.out.println("Invalid input. Please enter a valid number.");
+                } else {
+                    input = Integer.parseInt(inputLine);
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
             }
         }
-        if(eligibleCamp.isEmpty()){
-            System.out.println("No camp available to view, exiting...");
-            return;
-        }
 
-        for(Camp camp : eligibleCamp){
-            Camp.printAllCampInfo(camp);
-        }
+        return input;
+    }
 
+
+    public static void viewCamp(Attendee attendee) {
+        try {
+            ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
+
+            if (campArrayList == null || campArrayList.isEmpty()) {
+                System.out.println("No camp available to view");
+                manageCamp(attendee);
+                return; // Return to avoid further execution
+            }
+
+            ArrayList<Camp> eligibleCamp = new ArrayList<>();
+            for (Camp camp : campArrayList) {
+                if (camp != null && camp.getVisibility() && (camp.getUserGroup().contains(Faculty.ALL) || camp.getUserGroup().contains(attendee.getFaculty()))) {
+                    eligibleCamp.add(camp);
+                }
+            }
+
+            if (eligibleCamp.isEmpty()) {
+                System.out.println("No eligible camp available to view, exiting...");
+                manageCamp(attendee);
+                return; // Return to avoid further execution
+            }
+
+            for (Camp camp : eligibleCamp) {
+                Camp.printAllCampInfo(camp);
+            }
+            // You can add more code here if needed
+        } catch (NullPointerException e) {
+            System.out.println("An error occurred while retrieving camp data. Exiting to main menu.");
+            manageCamp(attendee);
+        }
     }
 
 
 
     public static void registerForCamp(Attendee attendee) {
         Scanner input = new Scanner(System.in);
+
         System.out.println("Do you know the camp name of the camp that you want to register for?");
         System.out.println("Enter \"Yes\" or any other key for no");
-        String campNameKnown = input.next();
-        if(!campNameKnown.equalsIgnoreCase("Yes")){
-            System.out.println("Please view all camps to check the camp name first");
+
+        try {
+            String campNameKnown = input.next().toUpperCase().trim(); // Convert input to uppercase
+
+            switch (campNameKnown) {
+                case "YES":
+                    // Continue with registration process
+                    Camp campToRegister;
+
+                    do {
+                        System.out.println("Please enter the camp name EXACTLY as it is displayed, or enter \" exit \" to go back");
+                        String campName = input.nextLine();
+
+                        if (campName.equalsIgnoreCase("exit")) {
+                            System.out.println("Action terminated by the user, exiting...");
+                            manageCamp(attendee);
+                            return;
+                        }
+
+                        campToRegister = Camp.getCampByName(campName);
+
+                        if (campToRegister == null) {
+                            System.out.println("Camp not found, please check the camp name");
+                        } else {
+                            System.out.println("Enter \"confirm\" to register or enter \"0\" to cancel");
+                            String confirm = input.next();
+
+                            if (confirm.equalsIgnoreCase("confirm") || confirm.equals("1")) {
+                                attendee.setRegisteredCamps(campToRegister);
+                                campToRegister.setAttendeesRegistered(attendee);
+                                int originalSlot = campToRegister.getRemainingSlots();
+                                campToRegister.setRemainingSlots(originalSlot - 1);
+                                System.out.println("Camp registration successful");
+                            } else {
+                                System.out.println("Action canceled by the user, exiting...");
+                                manageCamp(attendee);
+                                return;
+                            }
+                        }
+                    } while (campToRegister == null);
+
+                    break;
+                default:
+                    System.out.println("Please view all camps to check the camp name first");
+                    manageCamp(attendee);
+                    return;
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while processing your input. Exiting...");
+            manageCamp(attendee);
             return;
         }
-        Camp campToRegister;
-        do {
-            System.out.println("Please enter the camp name EXACTLY as it is displayed, or enter \" exit \" to go back");
-            String campName = input.nextLine();
-            if(campName.equalsIgnoreCase("exit")){
-                System.out.println("Action terminated by the user, exiting...");
-                return;
-            }
-            campToRegister = Camp.getCampByName(campName);
-            if(campToRegister == null){
-                System.out.println("Camp not found, please check the camp name");
-            }else{
-                System.out.println("Enter \"confirm\" to register or any key to go back");
-                String confirm = input.next();
-                if(!confirm.equalsIgnoreCase("confirm")){
-                    System.out.println("Action terminated by the user, exiting...");
-                    return;
-                }
-                attendee.setRegisteredCamps(campToRegister);
-                campToRegister.setAttendeesRegistered(attendee);
-                int originalSlot = campToRegister.getRemainingSlots();
-                campToRegister.setRemainingSlots(originalSlot - 1);
-                System.out.println("Camp registeration successful");
-            }
-        }while(campToRegister == null);
     }
+
+    public static int getConfirmationInput(Scanner scanner) {
+        int input = -1;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                System.out.print("Enter your choice (1 to confirm, 0 to cancel): ");
+                input = Integer.parseInt(scanner.nextLine().trim());
+
+                if (input == 0 || input == 1) {
+                    validInput = true;
+                } else {
+                    System.out.println("Invalid input. Please enter either 1 to confirm or 0 to cancel.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        return input;
+    }
+
 
     public static void withdrawFromCamp(Attendee attendee) {
         Scanner input = new Scanner(System.in);
-        if(attendee.getRegisteredCamps().isEmpty()){
-            System.out.println("You have not registered any camp, cannot withdraw. Exiting...");
-            return;
-        }
-        for(Camp camp: attendee.getRegisteredCamps()){
-            Camp.printAllCampInfo(camp);
-        }
 
-        System.out.println("Which camp do you want to withdraw from?");
-        Camp campToWithdraw;
-        do {
-            System.out.println("Please enter the camp name EXACTLY as it is displayed, or enter \" exit \" to go back");
-            String campName = input.nextLine();
-            if(campName.equalsIgnoreCase("exit")){
-                System.out.println("Action terminated by the user, exiting...");
+        try {
+            if (attendee.getRegisteredCamps().isEmpty()) {
+                System.out.println("You have not registered any camp, cannot withdraw. Exiting...");
+                manageCamp(attendee);
                 return;
             }
-            campToWithdraw = Camp.getCampByName(campName);
-            if(campToWithdraw == null){
-                System.out.println("Camp not found, please check the camp name");
-            }else{
-                System.out.println("Enter \"confirm\" to withdraw or any key to go back");
-                String confirm = input.next();
-                if(!confirm.equalsIgnoreCase("confirm")){
+
+            for (Camp camp : attendee.getRegisteredCamps()) {
+                Camp.printAllCampInfo(camp);
+            }
+
+            System.out.println("Which camp do you want to withdraw from?");
+            Camp campToWithdraw;
+
+            do {
+                System.out.println("Please enter the camp name EXACTLY as it is displayed, or enter \"exit\" to go back");
+                String campName = input.nextLine().trim().toUpperCase(); // Trim and convert input to uppercase
+
+                if (campName.equalsIgnoreCase("exit")) {
                     System.out.println("Action terminated by the user, exiting...");
+                    manageCamp(attendee);
                     return;
                 }
-                attendee.getRegisteredCamps().remove(campToWithdraw);
-                campToWithdraw.getAttendeesRegistered().remove(attendee);
-                int originalSlot = campToWithdraw.getRemainingSlots();
-                campToWithdraw.setRemainingSlots(originalSlot + 1);
-                System.out.println("Camp withdrawn successful");
-            }
-        }while(campToWithdraw == null);
+
+                campToWithdraw = Camp.getCampByName(campName);
+
+                if (campToWithdraw == null) {
+                    System.out.println("Camp not found, please check the camp name");
+                } else {
+                    System.out.println("Enter \"confirm\" to withdraw or enter any key to go back");
+                    String confirm = input.next().trim().toUpperCase(); // Trim and convert input to uppercase
+
+                    if (confirm.equals("CONFIRM")) {
+                        attendee.getRegisteredCamps().remove(campToWithdraw);
+                        campToWithdraw.getAttendeesRegistered().remove(attendee);
+                        int originalSlot = campToWithdraw.getRemainingSlots();
+                        campToWithdraw.setRemainingSlots(originalSlot + 1);
+                        System.out.println("Camp withdrawal successful");
+                    } else {
+                        System.out.println("Action terminated by the user, exiting...");
+                        manageCamp(attendee);
+                        return;
+                    }
+                }
+            } while (campToWithdraw == null);
+        } catch (Exception e) {
+            System.out.println("An error occurred while processing your input. Exiting...");
+            manageCamp(attendee);
+            return;
+        }
     }
+
 
     /**************** FOR ENQUIRIES ***********************************/
     
@@ -275,12 +390,15 @@ public class Attendee extends Student_User {
     public static void viewEnquiry(Attendee attendee) {
         if(attendee.getEnquirySubmitted().isEmpty()){
             System.out.println("No enquiry has been submitted");
+            manageEnquiries(attendee);
             return;
         }
 
         for(Enquiry enquiry : attendee.getEnquirySubmitted()){
             Enquiry.printAllEnquiryInfo(enquiry);
         }
+        
+        manageEnquiries(attendee);
     }
 
     public static void makeEnquiry(Attendee attendee){
@@ -288,6 +406,7 @@ public class Attendee extends Student_User {
         System.out.println("Please note down the camp name of the interested camp");
         ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
         if(campArrayList == null){
+        	manageEnquiries(attendee);
             return;
         }
         ArrayList<Camp> eligibleCamp = new ArrayList<>();
@@ -298,6 +417,7 @@ public class Attendee extends Student_User {
         }
         if(eligibleCamp.isEmpty()){
             System.out.println("No camp available to view, exiting...");
+            manageEnquiries(attendee);
             return;
         }
 
@@ -313,6 +433,7 @@ public class Attendee extends Student_User {
             String campName = input.nextLine();
             if(campName.equalsIgnoreCase("exit")){
                 System.out.println("Action terminated by the user, exiting...");
+                manageEnquiries(attendee);
                 return;
             }
             campToEnquire = Camp.getCampByName(campName);
@@ -323,6 +444,7 @@ public class Attendee extends Student_User {
                 String confirm = input.next();
                 if(!confirm.equalsIgnoreCase("confirm")){
                     System.out.println("Action terminated by the user, exiting...");
+                    manageEnquiries(attendee);
                     return;
                 }
                 System.out.println("you are about to submit an enquiry for the camp: " + campName);
@@ -335,6 +457,7 @@ public class Attendee extends Student_User {
             subject = input.nextLine();
             if(subject.equals("exit")){
                 System.out.println("Action terminated by the user, exiting...");
+                manageEnquiries(attendee);
                 return;
             }
             if(Enquiry.getEnquiryHashMap().containsKey(subject)){
@@ -349,6 +472,7 @@ public class Attendee extends Student_User {
         String content = input.nextLine();
         if(content.equalsIgnoreCase("exit")){
             System.out.println("Action terminated by the user..., exiting");
+            manageEnquiries(attendee);
             return;
         }
         LocalDate todayDate = LocalDate.now();
@@ -359,6 +483,7 @@ public class Attendee extends Student_User {
         attendee.setEnquirySubmitted(newEnquiry); //add enquiry to the attendee
         campToEnquire.setEnquiry(newEnquiry); // add enquiry to the camp
         System.out.println("The enquiry has been sent successfully");
+        manageEnquiries(attendee);
     }
 
     public static void editEnquiry(Attendee attendee){
@@ -367,6 +492,7 @@ public class Attendee extends Student_User {
         if(attendee.getEnquirySubmitted().isEmpty()){
             System.out.println("No enquiry has been submitted");
             System.out.println("exiting...");
+            manageEnquiries(attendee);
             return;
         }
         //print all submitted enquiry.
@@ -386,6 +512,7 @@ public class Attendee extends Student_User {
             if (enquiryToBeEditStr.equalsIgnoreCase("exit")) {
                 System.out.println("Action terminated by user");
                 System.out.println("exiting...");
+                manageEnquiries(attendee);
                 return;
             }
             enquiryToBeEdit = Enquiry.getEnquiryBySubject(enquiryToBeEditStr);
@@ -397,6 +524,7 @@ public class Attendee extends Student_User {
         if (enquiryToBeEdit.isProcessed()) {
             System.out.println("Cannot be edited, the enquiry has been processed");
             System.out.println("exiting...");
+            manageEnquiries(attendee);
             return;
         }
 
@@ -468,59 +596,75 @@ public class Attendee extends Student_User {
         } while (!exitEditing);
     }
 
-    public static void deleteEnquiry(Attendee attendee){
+    public static void deleteEnquiry(Attendee attendee) {
         Scanner input = new Scanner(System.in);
-        // if no enquiry has been submitted, exit.
-        if(attendee.getEnquirySubmitted().isEmpty()){
-            System.out.println("No enquiry has been submitted");
-            System.out.println("exiting...");
-            return;
-        }
-        //print all submitted enquiry.
-        System.out.println("These are the enquiries that are yet to be processed");
-        for(Enquiry enquiry : attendee.getEnquirySubmitted()){
-            if(!enquiry.isProcessed()){
-                Enquiry.printAllEnquiryInfo(enquiry);
-            }
-        }
 
-        Enquiry enquiryToDelete;
-
-        do {
-            System.out.println("Please select the enquiry that you want to delete by SUBJECT or enter \"exit\" to go back");
-            String enquiryToBeDelStr = input.nextLine();
-            if (enquiryToBeDelStr.equals("exit")) {
-                System.out.println("Action terminated by user, exiting...");
+        try {
+            // if no enquiry has been submitted, exit.
+            if (attendee.getEnquirySubmitted().isEmpty()) {
+                System.out.println("No enquiry has been submitted");
+                System.out.println("Exiting...");
+                manageEnquiries(attendee);
                 return;
             }
-            enquiryToDelete = Enquiry.getEnquiryHashMap().get(enquiryToBeDelStr);
-            if (enquiryToDelete == null) {
-                System.out.println("Please insert the correct subject name");
-            }
-        } while (enquiryToDelete == null);
 
-        if (enquiryToDelete.isProcessed()) {
-            System.out.println("Cannot be deleted, the suggestion has been processed. Exiting...");
-            return;
-        }
-
-        System.out.println("Do you confirm to delete the suggestion: " + enquiryToDelete.getEnquiry_Subject());
-        System.out.println("Enter \"confirm\" or any other key to cancel");
-        if (input.nextLine().equalsIgnoreCase("confirm")) {
-            attendee.getEnquirySubmitted().remove(enquiryToDelete); // delete in attribute
-            Enquiry.getEnquiryArrayList().remove(enquiryToDelete); // delete in arraylist
-            Enquiry.getEnquiryHashMap().remove(enquiryToDelete.getEnquiry_Subject()); // delete in hashmap
-
-            for(Camp camp:attendee.getRegisteredCamps()){
-                if(camp.getEnquiry().contains(enquiryToDelete)){
-                    camp.getEnquiry().remove(enquiryToDelete);
+            // Print all submitted enquiries.
+            System.out.println("These are the enquiries that are yet to be processed");
+            for (Enquiry enquiry : attendee.getEnquirySubmitted()) {
+                if (!enquiry.isProcessed()) {
+                    Enquiry.printAllEnquiryInfo(enquiry);
                 }
-            } // delete in the camp that has it
-            System.out.println("Enquiry deleted successfully, exiting...");
-        }
-        else {
-            System.out.println("Action terminated by user, exiting");
+            }
+
+            Enquiry enquiryToDelete;
+
+            do {
+                System.out.println("Please select the enquiry that you want to delete by SUBJECT or enter \"exit\" to go back");
+                String enquiryToBeDelStr = input.nextLine();
+                if (enquiryToBeDelStr.equals("exit")) {
+                    System.out.println("Action terminated by user, exiting...");
+                    manageEnquiries(attendee);
+                    return;
+                }
+
+                enquiryToDelete = Enquiry.getEnquiryHashMap().get(enquiryToBeDelStr);
+
+                if (enquiryToDelete == null) {
+                    System.out.println("Please insert the correct subject name");
+                }
+            } while (enquiryToDelete == null);
+
+            if (enquiryToDelete.isProcessed()) {
+                System.out.println("Cannot be deleted, the suggestion has been processed. Exiting...");
+                manageEnquiries(attendee);
+                return;
+            }
+
+            System.out.println("Do you confirm to delete the suggestion: " + enquiryToDelete.getEnquiry_Subject());
+            System.out.println("Enter \"confirm\" or any other key to cancel");
+
+            if (input.nextLine().equalsIgnoreCase("confirm")) {
+                attendee.getEnquirySubmitted().remove(enquiryToDelete); // delete in attribute
+                Enquiry.getEnquiryArrayList().remove(enquiryToDelete); // delete in arraylist
+                Enquiry.getEnquiryHashMap().remove(enquiryToDelete.getEnquiry_Subject()); // delete in hashmap
+
+                for (Camp camp : attendee.getRegisteredCamps()) {
+                    if (camp.getEnquiry().contains(enquiryToDelete)) {
+                        camp.getEnquiry().remove(enquiryToDelete);
+                    }
+                } // delete in the camp that has it
+
+                System.out.println("Enquiry deleted successfully, exiting...");
+                manageEnquiries(attendee);
+            } else {
+                System.out.println("Action terminated by user, exiting");
+                manageEnquiries(attendee);
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while processing your input. Exiting...");
+            manageEnquiries(attendee);
         }
     }
+
 
     }

@@ -30,7 +30,9 @@ public class Committee_Account extends Student_Account {
 
 	        Committee committee = (Committee) existingCommittee.get(studentID);
 	        CSVDataManager.loadCommitteeFromCSV(committee);
-
+	        
+	        System.out.println("Welcome," + committee.getName());
+	        
 	        while (!exit) {
 	            // Display menu options for camp committee members
 	            System.out.println("Camp Committee Member Options:");

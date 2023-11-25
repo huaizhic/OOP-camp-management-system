@@ -1,2 +1,1 @@
 StudentID,Name,Password,Salt,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted
-JOHN005,JOHNNY SIMS,Jsims12345,null,ATTENDEE,MSE,0,MSE,false,,FAVOURIE DRINK|FAVOURITE FOOD|FAVOURITE SNACK,WATER|RICE|CHEETOS,,

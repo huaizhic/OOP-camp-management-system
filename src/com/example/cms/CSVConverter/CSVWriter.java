@@ -88,6 +88,8 @@ public class CSVWriter {
                     + String.join("|", student.getSecurityAnswers()) + ","
                     + String.join("|", enquirySubmittedArray));
             writer.newLine();
+            
+          
 
             System.out.println("Attendee information written to " + csvFilePath + " successfully.");
         } catch (IOException e) {
