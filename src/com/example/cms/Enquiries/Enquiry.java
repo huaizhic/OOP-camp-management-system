@@ -5,7 +5,10 @@ import com.example.cms.Student.Attendee;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Entity class to handle each enquiry of a camp.
+ * Has get and set methods for information about each enquiry, as well as a method to print all the information about the enquiry.
+ */
 public class Enquiry {
     private String enquiry_Subject; 
     private Attendee submitter;

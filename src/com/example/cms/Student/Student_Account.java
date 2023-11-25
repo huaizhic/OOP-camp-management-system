@@ -1,13 +1,17 @@
 package com.example.cms.Student;
 
-import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Password.Password_Manager;
+import com.example.cms.Student_Role;
 
-import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
-
+/**
+ * This class deals more with logging in features, regardless of whether it is camp attendee or committee member.
+ * As part of Open-Closed Principle, we close this class to modification,
+ * but open it to extension to different student types,
+ * in this case, Attendee_Account and Committee_Account
+ */
 public class Student_Account {
     protected String userId; // Add a field to hold the student ID
     private Scanner scanner;

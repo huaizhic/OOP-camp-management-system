@@ -2,7 +2,9 @@ package com.example.cms.Staff;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ * When a Staff logs in, they will first see the menu provided by this class.
+ */
 public class Staff_Account {
     protected void start(Staff staff){
         Scanner input = new Scanner(System.in);

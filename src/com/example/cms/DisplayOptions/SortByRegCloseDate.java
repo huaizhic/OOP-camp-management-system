@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Implements specific sort method via camp registration closing date. Sorts from earliest to latest date (TO BE CONFIRMED).
+ */
 public class SortByRegCloseDate extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 

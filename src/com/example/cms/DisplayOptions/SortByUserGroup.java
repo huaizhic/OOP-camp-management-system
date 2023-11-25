@@ -5,6 +5,10 @@ import com.example.cms.Camp.Camp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+/**
+ * Implements specific sorting method via user group. ie, which school(s) the camp belong to. Sorts from smallest to largest starting Alphabet (TO BE CONFIRMED).
+ */
 public class SortByUserGroup extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 
@@ -18,7 +22,7 @@ public class SortByUserGroup extends DisplayBySort{
 			campAfterSorting.clear();
 			campAfterSorting.addAll(campList);
 			return campAfterSorting;
-			}
+		}
 	}
 
 

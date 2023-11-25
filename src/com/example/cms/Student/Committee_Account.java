@@ -1,11 +1,13 @@
 package com.example.cms.Student;
 
+import com.example.cms.CSVConverter.CSVDataManager;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import com.example.cms.CSVConverter.CSVDataManager;
-
+/**
+ * When a Camp committee member logs in, they will first see the menu provided by this class.
+ */
 public class Committee_Account extends Student_Account {
 	
 	 private String studentID;

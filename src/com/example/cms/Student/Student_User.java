@@ -1,21 +1,25 @@
 package com.example.cms.Student;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Faculty;
+import com.example.cms.Student_Role;
+import com.example.cms.Suggestions.Suggestion;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.example.cms.Faculty;
-import com.example.cms.Student_Role;
-import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Suggestions.Suggestion;
-
+/**
+ * Entity class, provides information about the Student User regardless of Camp Attendee or committee member.
+ * Routed from account_Manager
+ * As part of Open-Closed Principle, we close this class to modification,
+ * but open it to extension to different student types,
+ * in this case, Camp Attendee and Camp Committee
+ */
 public class Student_User {
 
     protected String studentID;

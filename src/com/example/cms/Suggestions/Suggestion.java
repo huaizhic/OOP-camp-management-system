@@ -6,7 +6,10 @@ import com.example.cms.Student.Committee;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Entity class to handle each suggestion of a camp.
+ * Has get and set methods for information about each suggestion, as well as a method to print all the information about the suggestion.
+ */
 public class Suggestion {
     private String suggestion_Subject;
     private Committee submitter;
