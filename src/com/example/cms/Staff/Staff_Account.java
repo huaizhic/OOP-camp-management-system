@@ -3,6 +3,9 @@ package com.example.cms.Staff;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * When a Staff logs in, they will first see the menu provided by this class.
+ */
 public class Staff_Account {
     protected void start(Staff staff){
         Scanner input = new Scanner(System.in);
@@ -59,7 +62,7 @@ public class Staff_Account {
         do {
             System.out.println("Camp Management Menu:");
             System.out.println("1. Create New Camp");
-            System.out.println("2. Edit Exiting Camp");
+            System.out.println("2. Edit Existing Camp");
             System.out.println("3. Delete Existing Camp");
             System.out.println("4. View All Camp");
             System.out.println("5. View Camp Created");

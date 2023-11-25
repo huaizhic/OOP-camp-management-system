@@ -12,6 +12,9 @@ import com.example.cms.generate_report.GenerateReport;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * When the Camp committee member chooses an option from the menu, they will be directed to this class to complete the required functions.
+ */
 public class Committee extends Student_User {
 	private static Map<String, Committee> committeeMap = new HashMap<>();
     private Camp registeredCamp;

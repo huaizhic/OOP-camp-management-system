@@ -13,6 +13,9 @@ import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Suggestions.Suggestion;
 
+/**
+ * Controller class to write new information for the first time to CSV (data) of several classes, such as Student User, Attendee, Committee, etc.
+ */
 public class CSVWriter {
 
     // Method to write user information to a CSV file

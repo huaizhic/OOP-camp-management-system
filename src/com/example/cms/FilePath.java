@@ -1,5 +1,8 @@
 package com.example.cms;
 
+/**
+ * Entity class to handle information on CSV data file paths
+ */
 public class FilePath {
     final String STUDFILENAME = "D:\\GitHub\\OOP-camp-management-system\\student.csv";
     final String STAFFFILENAME = "D:\\GitHub\\OOP-camp-management-system\\staff.csv";

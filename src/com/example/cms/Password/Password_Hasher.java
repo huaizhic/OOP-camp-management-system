@@ -1,12 +1,15 @@
 package com.example.cms.Password;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.util.Base64;
 
+/**
+ * Class to provide password encrypting functionality
+ */
 public class Password_Hasher {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;

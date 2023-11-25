@@ -1,12 +1,16 @@
 package com.example.cms.user_Login;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import com.example.cms.staff_Account;
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Student.Student_Account;
 import com.example.cms.Student.Student_User;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+/**
+ * Controller class to route to either student_account, staff_account or user_registration depending on user
+ * Menu provided by this class is the first line of interaction between user and the program.
+ */
 public class account_Manager {
     private Scanner scanner;
     String userId = null;

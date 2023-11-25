@@ -6,9 +6,18 @@ import com.example.cms.Camp.campData;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Boundary class to display camps
+ */
 public class DisplayApp {
 
     // the method returns null either there is no camp or the user exits, therefore the com.example.cms.main should go back.
+
+    /**
+     * Asks user how they want to view list of camps. Returns customised ArrayList of camps according to user preference.
+     * the method returns null either there is no camp or the user exits, therefore the com.example.cms.main should go back.
+     * @return list of camps according to user preference
+     */
     public static ArrayList<Camp> viewAllCamp() {
         DisplayBySort aOb = new SortByName_Default();
         if (campData.getCampList().isEmpty()) {

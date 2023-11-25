@@ -5,7 +5,16 @@ import com.example.cms.Camp.Camp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Enables functionality to sort camps based on specific criteria from user input.
+ */
 public class SortApp {
+    /**
+     * Implements functionality to sort camps based on specific criteria from user input.
+     * via a menu, combining all the different sorting methods
+     * @param campArrayList
+     * @return customised list of camps according to user specified sorting
+     */
     public static ArrayList<Camp> startSorting(ArrayList<Camp> campArrayList){
         Scanner input = new Scanner(System.in);
         System.out.println("=== what camp feature would you like to sort for?");

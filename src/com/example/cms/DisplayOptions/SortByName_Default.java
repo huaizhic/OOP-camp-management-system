@@ -3,6 +3,10 @@ import com.example.cms.Camp.Camp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+/**
+ * Implements specific sort method via camp name. Sorts from smallest to largest starting Alphabet (TO BE CONFIRMED).
+ */
 public class SortByName_Default extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 	public ArrayList<Camp> Sorting(ArrayList<Camp> campList){

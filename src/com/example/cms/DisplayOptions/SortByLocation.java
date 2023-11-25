@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
 
+/**
+ * Implements specific sort method via location of camp. Sorts from smallest to largest starting Alphabet (TO BE CONFIRMED).
+ */
 public class SortByLocation extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 	public ArrayList<Camp> Sorting(ArrayList<Camp> campList) {

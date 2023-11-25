@@ -15,6 +15,10 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * When the Staff user chooses an option from the menu, they will be directed to this class to complete the required functions.
+ */
+
 public class Staff extends Staff_User{
 
 	public Staff(String staffID, String name, Faculty userGroup, String securityQuestion, String securityAns){
