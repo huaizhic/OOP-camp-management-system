@@ -15,11 +15,17 @@ public class SortApp {
         System.out.println("4. Camp remaining committee slots");
         System.out.println("5. Camp remaining attendee slots");
         System.out.println("6. Camp eligible user group");
-        int option = input.nextInt();
+        int choice;
+        do{
+            choice = input.nextInt();
+            if(choice != 1 && choice != 2 && choice != 3){
+                System.out.println("Invalid input, please enter a valid option (1, 2, 3)");
+            }
+        }while(choice != 1 && choice != 2 && choice != 3);
 
         DisplayBySort sorter;
 
-        switch(option){
+        switch(choice){
             case(1):
                 System.out.println("Sorting by camp location...");
                 sorter = new SortByLocation();

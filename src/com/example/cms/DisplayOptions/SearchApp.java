@@ -18,8 +18,20 @@ public class SearchApp {
         System.out.println("5. Camp remaining committee slots");
         System.out.println("6. Camp remaining attendee slots");
         System.out.println("7. Camp eligible user group");
-        int option = input.nextInt();
-        switch(option) {
+        int choice;
+        boolean valid;
+
+        do{
+            choice = input.nextInt();
+            if(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7){
+                System.out.println("Invalid input, please enter a valid option (1-7)");
+                valid = false;
+            }else{
+                valid = true;
+            }
+        }while(!valid);
+
+        switch(choice) {
             case (1):
                 System.out.println("Insert keywords for camp name");
                 String nameSearch = input.nextLine();
