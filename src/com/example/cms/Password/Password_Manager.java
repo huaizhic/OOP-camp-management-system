@@ -1,11 +1,13 @@
-package com.example.cms.Student;
+package com.example.cms.Password;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Student.Student_User;
 import com.example.cms.user_Login.account_Manager;
+
 
 public class Password_Manager {
 
@@ -44,7 +46,7 @@ public class Password_Manager {
 	                return true;
 	            }
 	        } else {
-	            System.out.println("Debugging - student_Information is null");
+	            //System.out.println("Debugging - student_Information is null");
 	        }
 
 	        return false;
@@ -211,3 +213,4 @@ public class Password_Manager {
         return containsDigit && containsUpperCase && containsLowerCase;
     }
 }
+

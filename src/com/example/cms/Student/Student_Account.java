@@ -2,6 +2,7 @@ package com.example.cms.Student;
 
 import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Password.Password_Manager;
 
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class Student_Account {
                 Password_Manager passwordManager = new Password_Manager(scanner, existingStudent);
 
                 // Debugging information
-                System.out.println("Debugging - Before calling passwordManager.checkPassword");
+               // System.out.println("Debugging - Before calling passwordManager.checkPassword");
 
                 // Check the password and get the student's name
                 System.out.println("Your password is, " + enteredPassword);
