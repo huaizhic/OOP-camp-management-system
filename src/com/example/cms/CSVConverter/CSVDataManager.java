@@ -208,21 +208,33 @@ public class CSVDataManager {
                 updatedContent.append(existingLines.get(0)).append("\n");
             }
 
-            // Append the information for the specific student to the StringBuilder
-            updatedContent.append(student.getStudentID()).append(",");
-            updatedContent.append(student.getName()).append(",");
-            updatedContent.append(student.getPassword()).append(",");
-            updatedContent.append(student.getSalt()).append(",");
-            updatedContent.append(student.getUserGroup()).append(",");
-            updatedContent.append(student.getFaculty()).append(",");
-            updatedContent.append(student.getPoints()).append(",");
-            updatedContent.append(String.join("|", student.getCampAccessibility())).append(",");
-            updatedContent.append(student.getCampCommittee()).append(",");
-            updatedContent.append(String.join("|", student.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", student.getSecurityQuestion())).append(",");
-            updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
-            updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+            // Iterate through each line in the existing content
+            for (String existingLine : existingLines) {
+                // Split the line into fields
+                String[] fields = existingLine.split(",", -1); // Use -1 to keep empty fields
+
+                // Check if the first field (student ID) matches the target student ID
+                if (fields.length > 0 && fields[0].equals(studentId)) {
+                    // Append the updated information for the specific student to the StringBuilder
+                    updatedContent.append(studentId).append(",");
+                    updatedContent.append(student.getName()).append(",");
+                    updatedContent.append(student.getPassword()).append(",");
+                    updatedContent.append(student.getSalt()).append(",");
+                    updatedContent.append(student.getUserGroup()).append(",");
+                    updatedContent.append(student.getFaculty()).append(",");
+                    updatedContent.append(student.getPoints()).append(",");
+                    updatedContent.append(String.join("|", student.getCampAccessibility())).append(",");
+                    updatedContent.append(student.getCampCommittee()).append(",");
+                    updatedContent.append(String.join("|", student.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                    updatedContent.append(String.join("|", student.getSecurityQuestion())).append(",");
+                    updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
+                    updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+                    updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+                } else {
+                    // Append the unchanged line to the StringBuilder
+                    updatedContent.append(existingLine).append("\n");
+                }
+            }
 
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {

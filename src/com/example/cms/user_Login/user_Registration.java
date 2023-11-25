@@ -30,6 +30,7 @@ public class user_Registration {
 	 
 	public void start() {
 	    // Collect user information for registration
+		Scanner scanner = new Scanner(System.in);
 	    System.out.println("Student Registration:");
 
 	    studentID = getStudentId();

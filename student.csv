@@ -1,2 +1,2 @@
 StudentID,Name,Password,Salt,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted
-YVES0002,YVES SAMSON LI,Hello123445,null,ATTENDEE,SPMS,0,SPMS,false,,FOOD|DRINK|BOOK,BURGER|WINE|HARRY POTTER,,
+STEVE005,STEVEN TAN,Steven111,null,ATTENDEE,CEE,0,CEE,false,,WHAT IS YOUR SPIRIT ANIMAL?|WHAT IS YOUR FAVOURITE CUISINE?|WHAT IS YOUR FAVOURITE COLOUR?,TURTLE|JAPANESE|BLUE,,
