@@ -205,12 +205,13 @@ public class CSVDataManager {
 
         // Check if the student exists
         if (student != null) {
-            // Append the header to the StringBuilder if the existing content is not empty
-            if (!existingLines.isEmpty()) {
-                updatedContent.append(existingLines.get(0)).append("\n");
+            // Append the header to the StringBuilder if the existing content is empty
+            if (existingLines.isEmpty()) {
+                updatedContent.append("StudentID,Name,Password,Salt,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted,SuggestionSubmitted\n");
             }
 
             // Iterate through each line in the existing content
+            boolean studentIdFound = false;
             for (String existingLine : existingLines) {
                 // Split the line into fields
                 String[] fields = existingLine.split(",", -1); // Use -1 to keep empty fields
@@ -232,16 +233,36 @@ public class CSVDataManager {
                     updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
                     updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
                     updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+
+                    studentIdFound = true;
                 } else {
                     // Append the unchanged line to the StringBuilder
                     updatedContent.append(existingLine).append("\n");
                 }
             }
 
+            // If the student ID was not found, add a new line for the student
+            if (!studentIdFound) {
+                updatedContent.append(studentId).append(",");
+                updatedContent.append(student.getName()).append(",");
+                updatedContent.append(student.getPassword()).append(",");
+                updatedContent.append(student.getSalt()).append(",");
+                updatedContent.append(student.getUserGroup()).append(",");
+                updatedContent.append(student.getFaculty()).append(",");
+                updatedContent.append(student.getPoints()).append(",");
+                updatedContent.append(String.join("|", student.getCampAccessibility())).append(",");
+                updatedContent.append(student.getCampCommittee()).append(",");
+                updatedContent.append(String.join("|", student.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                updatedContent.append(String.join("|", student.getSecurityQuestion())).append(",");
+                updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
+                updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+                updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+            }
+
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(updatedContent.toString());
-                System.out.println("CSV file updated successfully.");
+                System.out.println("Student user CSV file updated successfully.");
             } catch (IOException e) {
                 System.out.println("An error occurred while updating the CSV file.");
                 e.printStackTrace();
@@ -250,6 +271,7 @@ public class CSVDataManager {
             System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
         }
     }
+
 
 /**********************************ATTENDEE********************************************/    
  // Load Attendee from CSV
@@ -480,154 +502,9 @@ public class CSVDataManager {
     }
 
 
-
-    
-    
-    // Load Attendee from CSV
-//    public static void loadAttendeeFromCSV(Attendee attendee) {
-//        String csvFilePath = "attendee.csv";
-//
-//        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
-//            String line;
-//            boolean firstLine = true; // flag for header
-//
-//            while ((line = reader.readLine()) != null) {
-//                if (firstLine) {
-//                    firstLine = false;
-//                    continue; // Skip the first line (headers)
-//                }
-//
-//                String[] data = line.split(",", -1); // Use -1 to keep empty fields
-//
-//                if (data.length >= 12) {
-//                    // Create a new Student_User instance and set its attributes
-//                    Attendee attendee1 = new Attendee();
-//                    attendee1.setStudentID(data[0]);
-//                    attendee1.setName(data[1]);
-//                    attendee1.setPassword(data[2]);
-//                    attendee1.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
-//                    attendee1.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
-//
-//                    // Parse CampAccessibility from the CSV
-//                    List<String> campAccessibility = new ArrayList<>();
-//                    String[] campAccessibilityArray = data[5].split("\\|");
-//                    for (String camp : campAccessibilityArray) {
-//                        campAccessibility.add(camp);
-//                    }
-//                    attendee1.setCampAccessibility(campAccessibility);
-//
-//                    // Parse CampCommittee from the CSV
-//                    boolean campCommittee = Boolean.parseBoolean(data[6]);
-//                    attendee1.setCampCommittee(campCommittee);
-//
-//                    List<Camp> registeredCamps = new ArrayList<>();
-//                    if (!data[7].isEmpty()) {
-//                        String[] registeredCampsArray = data[7].split("\\|");
-//                        for (String camp : registeredCampsArray) {
-//                            Camp registeredCamp = Camp.getCampByName(camp);
-//                            if (registeredCamp != null) {
-//                                registeredCamps.add(registeredCamp);
-//                            }
-//                        }
-//                    }
-//                    attendee1.setRegisteredCamps(registeredCamps);
-//                    
-//                    // Parse SecurityQuestions from the CSV
-//                    List<String> securityQuestions = new ArrayList<>();
-//                    String[] securityQuestionsArray = data[8].split("\\|");
-//                    for (String question : securityQuestionsArray) {
-//                        securityQuestions.add(question);
-//                    }
-//                    attendee1.setSecurityQuestions(securityQuestions);
-//
-//                 // Parse SecurityAnswers from the CSV
-//                    List<String> securityAnswers = new ArrayList<>();
-//                    String[] securityAnswersArray = data[9].split("\\|");
-//                    for (String answer : securityAnswersArray) {
-//                        securityAnswers.add(answer);
-//                    }
-//                    attendee1.setSecurityAnswers(securityAnswers);
-//                   
-//                    // Parse EnquirySubmitted from the CSV
-//                    List<Enquiry> enquirySubmitted = new ArrayList<>();
-//                    if (!data[10].isEmpty()) {
-//                        String[] enquirySubmittedArray = data[10].split("\\|");
-//                        for (String enquiry : enquirySubmittedArray) {
-//                            Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
-//                            if (submittedEnquiry != null) {
-//                                enquirySubmitted.add(submittedEnquiry);
-//                            }
-//                        }
-//                    }
-//                    attendee1.setEnquirySubmitted(enquirySubmitted);
-//
-//                 // Add the current attendee to the attendeesMap
-//                    attendee.addAttendee(attendee1);
-//                    
-//                    // Print the loaded student details
-//                    System.out.println("Student ID: " + attendee1.getStudentID());
-//                    System.out.println("Name: " + attendee1.getName());
-//                    System.out.println("Password: " + attendee1.getPassword());
-//                    System.out.println("User Group: " + attendee1.getUserGroup());
-//                    System.out.println("Faculty: " + attendee1.getFaculty());
-//
-//                    // Print CampAccessibility
-//                    System.out.print("Camp Accessibility: ");
-//                    for (String camp : attendee1.getCampAccessibility()) {
-//                        System.out.print(camp + "|");
-//                    }
-//                    System.out.println();
-//
-//                    System.out.println("Camp Committee: " + attendee1.getCampCommittee());
-//
-//                    // Print RegisteredCamps
-//                    System.out.print("Registered Camps: ");
-//                    for (Camp camp : attendee1.getRegisteredCamps()) {
-//                        System.out.print(camp.getCampName() + "|");
-//                    }
-//                    System.out.println();
-//
-//                    // Print SecurityQuestions
-//                    System.out.print("Security Questions: ");
-//                    for (String question : attendee1.getSecurityQuestion()) {
-//                        System.out.print(question + "|");
-//                    }
-//                    System.out.println();
-//
-//                    // Print SecurityAnswers
-//                    System.out.print("Security Answers: ");
-//                    for (String answer : attendee1.getSecurityAnswers()) {
-//                        System.out.print(answer + "|");
-//                    }
-//                    System.out.println();
-//
-//                    // Print EnquirySubmitted
-//                    System.out.print("Enquiry Submitted: ");
-//                    for (Enquiry enquiry : attendee1.getEnquirySubmitted()) {
-//                        System.out.print(enquiry.getEnquiry_Subject() + "|");
-//                    }
-//                    System.out.println();
-//
-//                    System.out.println("Student details printed successfully.");
-//
-//                } else {
-//                    System.out.println("Incomplete data in the CSV line: " + line);
-//                }
-//            }
-//        } catch (IOException e) {
-//            System.out.println("An error occurred while reading from the CSV file.");
-//            e.printStackTrace();
-//        }
-//    }
-
-    public static void updateAttendeeCSVFile(Attendee attendees) {
+    public static void updateAttendeeCSVFile(Attendee attendee) {
         // Get the path to the CSV file
         String csvFilePath = "attendee.csv";
-        
-     // If the attendee is null, create a new one
-        if (attendees == null) {
-            attendees = new Attendee();
-        }
 
         // Read the existing content of the CSV file
         List<String> existingLines = new ArrayList<>();
@@ -645,39 +522,70 @@ public class CSVDataManager {
         // Create a StringBuilder to store the updated content
         StringBuilder updatedContent = new StringBuilder();
 
-
-        // Check if the student exists
-        if (attendees != null) {
-            // Append the header to the StringBuilder if the existing content is not empty
-            if (!existingLines.isEmpty()) {
-                updatedContent.append(existingLines.get(0)).append("\n");
+        // Check if the attendee exists
+        if (attendee != null) {
+            // Append the header to the StringBuilder if the existing content is empty
+            if (existingLines.isEmpty()) {
+                updatedContent.append("StudentID,Name,Password,UserGroup,Faculty,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,EnquirySubmitted\n");
             }
 
-            // Append the information for the specific student to the StringBuilder
-            updatedContent.append(attendees.getStudentID()).append(",");
-            updatedContent.append(attendees.getName()).append(",");
-            updatedContent.append(attendees.getPassword()).append(",");
-            updatedContent.append(attendees.getUserGroup()).append(",");
-            updatedContent.append(attendees.getFaculty()).append(",");
-            updatedContent.append(String.join("|", attendees.getCampAccessibility())).append(",");
-            updatedContent.append(attendees.getCampCommittee()).append(",");
-            updatedContent.append(String.join("|", attendees.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", attendees.getSecurityQuestion())).append(",");
-            updatedContent.append(String.join("|", attendees.getSecurityAnswers())).append(",");
-            updatedContent.append(String.join("|", attendees.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+            // Iterate through each line in the existing content
+            boolean attendeeIdFound = false;
+            for (String existingLine : existingLines) {
+                // Split the line into fields
+                String[] fields = existingLine.split(",", -1); // Use -1 to keep empty fields
+
+                // Check if the first field (attendee ID) matches the target attendee ID
+                if (fields.length > 0 && fields[0].equals(attendee.getStudentID())) {
+                    // Append the updated information for the specific attendee to the StringBuilder
+                    updatedContent.append(attendee.getStudentID()).append(",");
+                    updatedContent.append(attendee.getName()).append(",");
+                    updatedContent.append(attendee.getPassword()).append(",");
+                    updatedContent.append(attendee.getUserGroup()).append(",");
+                    updatedContent.append(attendee.getFaculty()).append(",");
+                    updatedContent.append(String.join("|", attendee.getCampAccessibility())).append(",");
+                    updatedContent.append(attendee.getCampCommittee()).append(",");
+                    updatedContent.append(String.join("|", attendee.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                    updatedContent.append(String.join("|", attendee.getSecurityQuestion())).append(",");
+                    updatedContent.append(String.join("|", attendee.getSecurityAnswers())).append(",");
+                    updatedContent.append(String.join("|", attendee.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+                    
+                    attendeeIdFound = true;
+                } else {
+                    // Append the unchanged line to the StringBuilder
+                    updatedContent.append(existingLine).append("\n");
+                }
+            }
+
+            // If the attendee ID was not found, add a new line for the attendee
+            if (!attendeeIdFound) {
+                updatedContent.append(attendee.getStudentID()).append(",");
+                updatedContent.append(attendee.getName()).append(",");
+                updatedContent.append(attendee.getPassword()).append(",");
+                updatedContent.append(attendee.getUserGroup()).append(",");
+                updatedContent.append(attendee.getFaculty()).append(",");
+                updatedContent.append(String.join("|", attendee.getCampAccessibility())).append(",");
+                updatedContent.append(attendee.getCampCommittee()).append(",");
+                updatedContent.append(String.join("|", attendee.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                updatedContent.append(String.join("|", attendee.getSecurityQuestion())).append(",");
+                updatedContent.append(String.join("|", attendee.getSecurityAnswers())).append(",");
+                updatedContent.append(String.join("|", attendee.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+            }
 
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(updatedContent.toString());
-                System.out.println("CSV file updated successfully.");
+                System.out.println("Attendee CSV file updated successfully.");
             } catch (IOException e) {
                 System.out.println("An error occurred while updating the CSV file.");
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Student with ID " + attendees.getStudentID() + " not found. CSV file not updated.");
+            System.out.println("Attendee is null. CSV file not updated.");
         }
     }
+
+
 
  
 /********************************COMMITTEE*********************************************/
@@ -822,16 +730,10 @@ public class CSVDataManager {
         }
         return committee;
     }
-
-    public static void updateCommitteeCSVFile(Committee committees) {
+  
+    public static void updateCommitteeCSVFile(Committee committee) {
         // Get the path to the CSV file
         String csvFilePath = "committee.csv";
-        
-        // If the committee is null, create a new one
-        if (committees == null) {
-        	committees = new Committee();
-        }
-
 
         // Read the existing content of the CSV file
         List<String> existingLines = new ArrayList<>();
@@ -849,39 +751,71 @@ public class CSVDataManager {
         // Create a StringBuilder to store the updated content
         StringBuilder updatedContent = new StringBuilder();
 
-        // Check if the student exists
-        if (committees != null) {
-            // Append the header to the StringBuilder if the existing content is not empty
-            if (!existingLines.isEmpty()) {
-                updatedContent.append(existingLines.get(0)).append("\n");
+        // Check if the committee exists
+        if (committee != null) {
+            // Append the header to the StringBuilder if the existing content is empty
+            if (existingLines.isEmpty()) {
+                updatedContent.append("StudentID,Name,Password,UserGroup,Faculty,Points,CampAccessibility,CampCommittee,RegisteredCamps,SecurityQuestion,SecurityAnswers,SuggestionSubmitted\n");
             }
 
-            // Append the information for the specific student to the StringBuilder
-            updatedContent.append(committees.getStudentID()).append(",");
-            updatedContent.append(committees.getName()).append(",");
-            updatedContent.append(committees.getPassword()).append(",");
-            updatedContent.append(committees.getUserGroup()).append(",");
-            updatedContent.append(committees.getFaculty()).append(",");
-            updatedContent.append(committees.getPoints()).append(",");
-            updatedContent.append(String.join("|", committees.getCampAccessibility())).append(",");
-            updatedContent.append(committees.getCampCommittee()).append(",");
-            updatedContent.append(String.join("|", committees.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", committees.getSecurityQuestion())).append(",");
-            updatedContent.append(String.join("|", committees.getSecurityAnswers())).append(",");
-            updatedContent.append(String.join("|", committees.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+            // Iterate through each line in the existing content
+            boolean committeeIdFound = false;
+            for (String existingLine : existingLines) {
+                // Split the line into fields
+                String[] fields = existingLine.split(",", -1); // Use -1 to keep empty fields
+
+                // Check if the first field (student ID) matches the target committee's ID
+                if (fields.length > 0 && fields[0].equals(committee.getStudentID())) {
+                    // Append the updated information for the specific committee to the StringBuilder
+                    updatedContent.append(committee.getStudentID()).append(",");
+                    updatedContent.append(committee.getName()).append(",");
+                    updatedContent.append(committee.getPassword()).append(",");
+                    updatedContent.append(committee.getUserGroup()).append(",");
+                    updatedContent.append(committee.getFaculty()).append(",");
+                    updatedContent.append(committee.getPoints()).append(",");
+                    updatedContent.append(String.join("|", committee.getCampAccessibility())).append(",");
+                    updatedContent.append(committee.getCampCommittee()).append(",");
+                    updatedContent.append(String.join("|", committee.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                    updatedContent.append(String.join("|", committee.getSecurityQuestion())).append(",");
+                    updatedContent.append(String.join("|", committee.getSecurityAnswers())).append(",");
+                    updatedContent.append(String.join("|", committee.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append(",");
+
+                    committeeIdFound = true;
+                } else {
+                    // Append the unchanged line to the StringBuilder
+                    updatedContent.append(existingLine).append("\n");
+                }
+            }
+
+            // If the committee ID was not found, add a new line for the committee
+            if (!committeeIdFound) {
+                updatedContent.append(committee.getStudentID()).append(",");
+                updatedContent.append(committee.getName()).append(",");
+                updatedContent.append(committee.getPassword()).append(",");
+                updatedContent.append(committee.getUserGroup()).append(",");
+                updatedContent.append(committee.getFaculty()).append(",");
+                updatedContent.append(committee.getPoints()).append(",");
+                updatedContent.append(String.join("|", committee.getCampAccessibility())).append(",");
+                updatedContent.append(committee.getCampCommittee()).append(",");
+                updatedContent.append(String.join("|", committee.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                updatedContent.append(String.join("|", committee.getSecurityQuestion())).append(",");
+                updatedContent.append(String.join("|", committee.getSecurityAnswers())).append(",");
+                updatedContent.append(String.join("|", committee.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append(",");
+            }
 
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(updatedContent.toString());
-                System.out.println("CSV file updated successfully.");
+                System.out.println("Committee CSV file updated successfully.");
             } catch (IOException e) {
                 System.out.println("An error occurred while updating the CSV file.");
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Student with ID " + committees.getStudentID() + " not found. CSV file not updated.");
+            System.out.println("Committee is null. CSV file not updated.");
         }
     }
 
- 
+
+
 }

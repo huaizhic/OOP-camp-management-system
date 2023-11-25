@@ -44,11 +44,14 @@ public class Committee extends Student_User {
         return committeeMap;
     }
     
-    public ArrayList<Suggestion> getSuggestions() {
+    @Override
+    public ArrayList<Suggestion> getSuggestionSubmitted() {
         return suggestionsSubmitted;
     }
 
-    public void setSuggestions(Suggestion suggestion) {this.suggestionsSubmitted.add(suggestion);};
+    public void setSuggestions(Suggestion suggestion) {
+    	this.suggestionsSubmitted.add(suggestion);
+    	}
 
 
     public Camp getRegisteredCamp() {
@@ -372,10 +375,10 @@ public class Committee extends Student_User {
     }
 
     public static void viewSuggestions(Committee committee) {
-        if(committee.getSuggestions().isEmpty()){
+        if(committee.getSuggestionSubmitted().isEmpty()){
             System.out.println("No suggestion has been submitted");
         }else {
-            for (Suggestion suggestion : committee.getSuggestions()) {
+            for (Suggestion suggestion : committee.getSuggestionSubmitted()) {
                 Suggestion.printSuggestionInfo(suggestion);
             }
         }
@@ -447,7 +450,7 @@ public class Committee extends Student_User {
         Scanner input = new Scanner(System.in);
 
         try {
-            if (committee.getSuggestions().isEmpty()) {
+            if (committee.getSuggestionSubmitted().isEmpty()) {
                 System.out.println("No suggestion has been submitted");
                 System.out.println("Exiting...");
                 return;
@@ -580,12 +583,12 @@ public class Committee extends Student_User {
         Scanner input = new Scanner(System.in);
 
         try {
-            if (committee.getSuggestions().isEmpty()) {
+            if (committee.getSuggestionSubmitted().isEmpty()) {
                 System.out.println("No suggestion has been submitted");
                 return;
             }
 
-            for (Suggestion suggestion : committee.getSuggestions()) {
+            for (Suggestion suggestion : committee.getSuggestionSubmitted()) {
                 Suggestion.printSuggestionInfo(suggestion);
             }
 
@@ -616,7 +619,7 @@ public class Committee extends Student_User {
             System.out.println("Enter \"confirm\" or any other key to cancel");
 
             if (input.nextLine().equalsIgnoreCase("confirm")) {
-                committee.getSuggestions().remove(suggestionToBeDel); // delete in committee attribute
+                committee.getSuggestionSubmitted().remove(suggestionToBeDel); // delete in committee attribute
                 committee.getRegisteredCamp().getSuggestion().remove(suggestionToBeDel); // delete in camp suggestion
                 Suggestion.getSuggestionHashMap().remove(suggestionToBeDel.getSuggestion_Subject()); // delete in suggestion hashmap
                 Suggestion.getSuggestionArrayList().remove(suggestionToBeDel); // delete in suggestion arraylist

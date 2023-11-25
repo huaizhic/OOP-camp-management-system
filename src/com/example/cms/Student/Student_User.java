@@ -24,6 +24,7 @@ public class Student_User {
 
     protected String studentID;
     private String password = "password";
+    private String salt;
     private String name;
     private Faculty faculty;
     private Student_Role userGroup;
@@ -46,6 +47,7 @@ public class Student_User {
         
         this.studentID = null; // You can set an initial value or leave it empty
         this.password = "password";
+        this.salt = null;
         this.name = "";
         this.faculty = Faculty.NIL; // Set a default faculty or choose based on your requirements
         this.userGroup = Student_Role.NIL; // Set a default role or choose based on your requirements
@@ -195,44 +197,44 @@ public class Student_User {
     }
     
     
-    public void updateCSVFile(String studentId) {
-        // Get the path to the CSV file
-        String csvFilePath = "student.csv";
-
-        // Create a StringBuilder to store the updated content
-        StringBuilder updatedContent = new StringBuilder();
-
-        // Find the student based on the provided studentId
-        Student_User student = existingStudents.get(studentId);
-
-        // Check if the student exists
-        if (student != null) {
-            // Append the information for the specific student to the StringBuilder
-            updatedContent.append(student.getStudentID()).append(",");
-            updatedContent.append(student.getName()).append(",");
-            updatedContent.append(student.getPassword()).append(",");
-            updatedContent.append(student.getUserGroup()).append(",");
-            updatedContent.append(student.getFaculty()).append(",");
-            updatedContent.append(String.join("|", student.getCampAccessibility())).append(",");
-            updatedContent.append(student.getCampCommittee()).append(",");
-            updatedContent.append(String.join("|", student.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", student.getSecurityQuestion())).append(",");
-            updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
-            updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
-
-            // Write the updated content to the CSV file
-            try (FileWriter writer = new FileWriter(csvFilePath)) {
-                writer.write(updatedContent.toString());
-                System.out.println("CSV file updated successfully.");
-            } catch (IOException e) {
-                System.out.println("An error occurred while updating the CSV file.");
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
-        }
-    }
+//    public void updateCSVFile(String studentId) {
+//        // Get the path to the CSV file
+//        String csvFilePath = "student.csv";
+//
+//        // Create a StringBuilder to store the updated content
+//        StringBuilder updatedContent = new StringBuilder();
+//
+//        // Find the student based on the provided studentId
+//        Student_User student = existingStudents.get(studentId);
+//
+//        // Check if the student exists
+//        if (student != null) {
+//            // Append the information for the specific student to the StringBuilder
+//            updatedContent.append(student.getStudentID()).append(",");
+//            updatedContent.append(student.getName()).append(",");
+//            updatedContent.append(student.getPassword()).append(",");
+//            updatedContent.append(student.getUserGroup()).append(",");
+//            updatedContent.append(student.getFaculty()).append(",");
+//            updatedContent.append(String.join("|", student.getCampAccessibility())).append(",");
+//            updatedContent.append(student.getCampCommittee()).append(",");
+//            updatedContent.append(String.join("|", student.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+//            updatedContent.append(String.join("|", student.getSecurityQuestion())).append(",");
+//            updatedContent.append(String.join("|", student.getSecurityAnswers())).append(",");
+//            updatedContent.append(String.join("|", student.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+//            updatedContent.append(String.join("|", student.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+//
+//            // Write the updated content to the CSV file
+//            try (FileWriter writer = new FileWriter(csvFilePath)) {
+//                writer.write(updatedContent.toString());
+//                System.out.println("CSV file updated successfully.");
+//            } catch (IOException e) {
+//                System.out.println("An error occurred while updating the CSV file.");
+//                e.printStackTrace();
+//            }
+//        } else {
+//            System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
+//        }
+//    }
 
 	public int getPoints() {
 		return points;
@@ -240,6 +242,14 @@ public class Student_User {
 
 	public void setPoints(int points) {
 		this.points = points;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
    

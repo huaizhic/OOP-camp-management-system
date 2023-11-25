@@ -48,7 +48,7 @@ public class Password_Manager {
 	            // Assuming the roleChoice is stored in the user group.
 	            Student_Role studentRoleChoice = student_Information.getUserGroup();
 	            String storedPassword = student_Information.getPassword();
-
+	            String storedSalt = student_Information.getSalt();
 //	            System.out.println("Entered Role: " + roleChoice);
 //	            System.out.println("Entered Password: " + enteredPassword);
 //	            System.out.println("Stored Role: " + studentRoleChoice);
@@ -56,12 +56,12 @@ public class Password_Manager {
 
 	            // Debugging statement to check equality
 	           // System.out.println("Role Equality: " + roleChoice.equals(studentRoleChoice));
+	         // Check if the entered password matches the stored hashed password
+	            String enteredPasswordHashed = Password_Hasher.hashPassword(enteredPassword, storedSalt);
 
-	            if (enteredPassword.equals(storedPassword) && roleChoice.equals(studentRoleChoice)) {
+	            if (enteredPasswordHashed != null && enteredPasswordHashed.equals(storedPassword) && roleChoice.equals(studentRoleChoice)) {
 	                return true;
 	            }
-	        } else {
-	            //System.out.println("Debugging - student_Information is null");
 	        }
 
 	        return false;
@@ -73,43 +73,39 @@ public class Password_Manager {
 	        this.existingAttendees = new HashMap<>();
 	        this.existingCommittee  = new HashMap<>();
 	        Student_User student = studentUser.getStudentById(userID);
-	        
+
 	        if (student != null) {
-	            String oldPassword = student.getPassword();
+	            String oldPasswordHash = student.getPassword();
+	            String oldSalt = student.getSalt();
+	            
 
 	            // Check if the updatedPassword is different from the old password
-	            if (!updatedPassword.equals(oldPassword)) {
+	            if (!updatedPassword.equals(oldPasswordHash)) {
 	                // Check if the updatedPassword meets criteria (8 characters, alphanumeric, and mixed case)
 	                if (isValidPassword(updatedPassword)) {
-	                    // Update the password in the Student_User instance
-	                    student.setPassword(updatedPassword);
+	                    // Generate a new salt
+	                    String newSalt = Password_Hasher.generateSalt();
+
+	                    // Hash the updated password with the new salt
+	                    String newPasswordHash = Password_Hasher.hashPassword(updatedPassword, newSalt);
+
+	                    // Update the passwordHash and salt in the Student_User instance
+	                    student.setPassword(newPasswordHash);
+	                    student.setSalt(newSalt);
 
 	                    // Check if student_Role is equal to attendee
 	                    if (student.getUserGroup().equals(Student_Role.ATTENDEE)) {
-	                    	Attendee attendee = CSVDataManager.loadAttendeeFromCSV(existingAttendees.get(student.getStudentID()));
-	                        // Update the password in the Attendee instance
-	                        attendee.setPassword(updatedPassword);
+	                        Attendee attendee = CSVDataManager.loadAttendeeFromCSV(existingAttendees.get(student.getStudentID()));
+	                        // Update the passwordHash and salt in the Attendee instance
+	                        attendee.setPassword(newPasswordHash);
 	                        // Update the CSV file for attendee
 	                        CSVDataManager.updateAttendeeCSVFile(attendee);
-	                        
-	                     // Update the existingStudents map with the modified Student_User object
-		                    student.existingStudents.put(student.getStudentID(), student);
-
-		                    // Update the CSV file for student
-		                    CSVDataManager.updateStudentCSVFile(student, userID);
-	                    }
-	                    else {
-	                    	Committee committee = CSVDataManager.loadCommitteeFromCSV(existingCommittee.get(student.getStudentID()));
-	                        // Update the password in the Attendee instance
-	                        committee.setPassword(updatedPassword);
-	                        // Update the CSV file for attendee
+	                    } else {
+	                        Committee committee = CSVDataManager.loadCommitteeFromCSV(existingCommittee.get(student.getStudentID()));
+	                        // Update the passwordHash and salt in the Committee instance
+	                        committee.setPassword(newPasswordHash);
+	                        // Update the CSV file for committee
 	                        CSVDataManager.updateCommitteeCSVFile(committee);
-	                        
-	                     // Update the existingStudents map with the modified Student_User object
-		                    student.existingStudents.put(student.getStudentID(), student);
-
-		                    // Update the CSV file for student
-		                    CSVDataManager.updateStudentCSVFile(student, userID);
 	                    }
 
 	                    // Update the existingStudents map with the modified Student_User object
@@ -140,7 +136,7 @@ public class Password_Manager {
 
 
     public void forgotPassword(String userID) {
-    	Scanner scanner = new Scanner(System.in);
+    	
         // First, retrieve the student based on the userID
         Student_User student = studentUser.getStudentById(userID);
 
@@ -207,11 +203,15 @@ public class Password_Manager {
                     String newPassword = scanner.next();
 
                     if (newPassword.equals("1")) {
+                    	Scanner scanner = new Scanner(System.in);
                         System.out.println("Password reset canceled.");
+                        account_Manager account_Manager = new account_Manager(scanner);
+                        account_Manager.start();
                         break; // Exit the loop if the user chooses to cancel
                     }
 
                     if (updatePassword(userID, newPassword)) {
+                    	Scanner scanner = new Scanner(System.in);
                         System.out.println("Password reset successful. You can now log in with your new password.");
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
                         // Student_Account studentAccount = new  Student_Account(userID, studentUser.getExistingStudents());
