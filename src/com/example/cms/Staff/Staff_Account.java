@@ -3,9 +3,86 @@ package com.example.cms.Staff;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Staff_Account {
-    protected void start(Staff staff){
-        Scanner input = new Scanner(System.in);
+public class Staff_Account{
+
+    public void start(Staff staff){
+        Scanner scanner = new Scanner(System.in);
+        int maxAttempts = 3; // Maximum allowed password attempts
+        int remainingAttempts = 3; // Counter for password attempts
+        int roleChoice = 0; // Initialize to an invalid value
+
+        System.out.println("Welcome," + staff.getName());
+
+        while (remainingAttempts > 0) {
+
+            System.out.print("Enter your password: ");
+            String enteredPassword = scanner.next();
+
+            // Consume the newline character
+            scanner.nextLine();
+            if(enteredPassword.equals(staff.getPassword())){
+                System.out.println("Verification completed");
+                remainingAttempts = 3;
+                break;
+            }else{
+                System.out.println("Verification failed, remaining attempts: " + remainingAttempts);
+            }
+            remainingAttempts --;
+            }
+
+            // Debugging information
+            //System.out.println("Debugging - Before passwordManager.checkPassword");
+
+            // Use the existingStudents map to retrieve the student information
+
+
+           // Password_Manager passwordManager = new Password_Manager(scanner, existingStudent);
+
+            // Debugging information
+            // System.out.println("Debugging - Before calling passwordManager.checkPassword");
+
+            // Check the password and get the student's name
+            //System.out.println("Your password is, " + enteredPassword);
+           /* if (passwordManager.checkPassword(userId, role, enteredPassword)) {
+                System.out.println("This is check password manager");
+                String studentName = existingStudent.getName();
+
+                if ("COMMITTEE".equals(role.name())) {
+                    System.out.println("Welcome, Committee Member " + studentName);
+                    Committee_Account committee_Account = new Committee_Account(userId, existingStudent.getExistingStudents());
+                    committee_Account.start();
+                    // Redirect to the committee class here
+                } else if ("ATTENDEE".equals(role.name())) {
+                    System.out.println("Welcome, Attendee " + studentName);
+                    // Redirect to the attendee class here
+
+                    Attendee_Account attendee_Account = new Attendee_Account(userId, existingStudent.getExistingStudents());
+                    attendee_Account.start();
+                } else {
+                    System.out.println("Invalid role. Please enter 'committee' or 'attendee'.");
+                }
+
+
+                // Successful login, reset the attempts counter
+
+                break;
+            } else {
+                attempts++;
+
+                if (attempts == maxAttempts) {
+                    System.out.print("Forgot password (1 for Yes, 0 for No): ");
+                    int forgotPasswordChoice = scanner.nextInt();
+
+                    if (forgotPasswordChoice == 1) {
+                        // Implement the logic for password reset here
+                        passwordManager.forgotPassword(userId);
+                    }
+
+                    break;
+                }
+            }
+*/
+            Scanner input = new Scanner(System.in);
         boolean exit = false;
 
         do{

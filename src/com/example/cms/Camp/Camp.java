@@ -2,7 +2,6 @@ package com.example.cms.Camp;
 
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
-import com.example.cms.Staff.Staff;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
@@ -27,7 +26,7 @@ public class Camp {
 	private int committeeSlots;
 	private int remainingCommitteeSlots;
 	private String description;
-	private Staff staffInCharge;
+	private String staffInCharge;
 	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
 	private ArrayList<Committee> committeeRegistered;
 	private boolean visibility;
@@ -39,17 +38,17 @@ public class Camp {
 
 	}
 
-	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, Staff staff, boolean visibility){
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, int remainingSlots, int remainingCommitteeSlots, String staffName, boolean visibility){
 		this.campName = campName;
 		this.campDates = campDate;
 		this.regCloseDate = regCloseDate;
 		this.userGroup = userGroup;
 		this.location = location;
 		this.totalSlots = totalSlots;
-		remainingSlots = totalSlots;
+		this.remainingSlots = remainingSlots;
 		committeeSlots = 10;
-		remainingCommitteeSlots = committeeSlots;
-		staffInCharge = staff;
+		this.remainingCommitteeSlots = remainingCommitteeSlots;
+		this.staffInCharge = staffName;
 		this.visibility = visibility;
 		//counter ++;
 		// Add the camp to the map when it is created
@@ -161,11 +160,11 @@ public class Camp {
 		this.description = description;
 	}
 
-	public Staff getStaffInCharge() {
+	public String getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
-	public void setStaffInCharge(Staff staffInCharge) {
+	public void setStaffInCharge(String staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 
@@ -233,7 +232,7 @@ public class Camp {
 		campContent.append(camp.getRemainingSlots()).append(",");
 		campContent.append(camp.getRemainingCommitteeSlots()).append(",");
 		campContent.append(camp.getDescription()).append(",");
-		campContent.append(camp.getStaffInCharge().getName()).append("\n");
+		campContent.append(camp.getStaffInCharge()).append("\n");
 		campContent.append("\n");
 	}
 }

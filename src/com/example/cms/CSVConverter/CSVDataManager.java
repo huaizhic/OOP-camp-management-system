@@ -1,18 +1,23 @@
 package com.example.cms.CSVConverter;
 
-import com.example.cms.Faculty;
-import com.example.cms.Student_Role;
 import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.campData;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Faculty;
+import com.example.cms.Staff.Staff;
+import com.example.cms.Status;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
+import com.example.cms.Student_Role;
 import com.example.cms.Suggestions.Suggestion;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +47,7 @@ public class CSVDataManager {
                     student.setStudentID(data[0]);
                     student.setName(data[1]);
                     student.setPassword(data[2]);
-                    student.setSalt(data[3]);
+                    //student.setSalt(data[3]);
                     student.setUserGroup(Student_Role.valueOf(data[4])); // Assuming Student_Role values are in the CSV
                     student.setFaculty(Faculty.valueOf(data[5])); // Assuming Faculty values are in the CSV
                     student.setPoints(Integer.parseInt(data[6]));
@@ -116,7 +121,7 @@ public class CSVDataManager {
                     System.out.println("Student ID: " + student.getStudentID());
                     System.out.println("Name: " + student.getName());
                     System.out.println("Password: " + student.getPassword());
-                    System.out.println("Password: " + student.getSalt());
+                    //System.out.println("Password: " + student.getSalt());
                     System.out.println("User Group: " + student.getUserGroup());
                     System.out.println("Faculty: " + student.getFaculty());
                     System.out.println("Point: " + student.getPoints());
@@ -212,7 +217,7 @@ public class CSVDataManager {
             updatedContent.append(student.getStudentID()).append(",");
             updatedContent.append(student.getName()).append(",");
             updatedContent.append(student.getPassword()).append(",");
-            updatedContent.append(student.getSalt()).append(",");
+          //  updatedContent.append(student.getSalt()).append(",");
             updatedContent.append(student.getUserGroup()).append(",");
             updatedContent.append(student.getFaculty()).append(",");
             updatedContent.append(student.getPoints()).append(",");
@@ -376,7 +381,7 @@ public class CSVDataManager {
                     attendee.setStudentID(data[0]);
                     attendee.setName(data[1]);
                     attendee.setPassword(data[2]);
-                    attendee.setSalt(null);
+                   // attendee.setSalt(null);
                     attendee.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
                     attendee.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
                     attendee.setPoints(0);
@@ -863,5 +868,409 @@ public class CSVDataManager {
         }
     }
 
- 
+    /********************************Staff*********************************************/
+
+    public static void loadStaffsFromCSV() {
+        String csvFilePath = "staff.csv";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            boolean firstLine = true; // flag for header
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip the first line (headers)
+                }
+
+                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                if (data.length >= 8) {
+                    Staff newStaff = new Staff(data[0], data[1], Faculty.valueOf(data[3]), data[5], data[6]);
+                    newStaff.setPassword(data[3]);
+
+
+                    String[] createdCampsArray = data[4].split("\\|");
+                    for (String camp : createdCampsArray) {
+                        Camp camp1 = Camp.getCampByName(camp);
+                            newStaff.setCampsCreated(camp1);
+                    }
+
+                    Staff.getExistingStaff().put(newStaff.getStaffID(), newStaff);
+                    Staff.getStaffByNameMap().put(newStaff.getName(), newStaff);
+
+                    System.out.println("Incomplete data in the CSV line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from the CSV file.");
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void updateStaffCSVFile(Staff staff, String studentId) {
+        // Get the path to the CSV file
+        String csvFilePath = "staff.csv";
+
+        // Read the existing content of the CSV file
+        List<String> existingLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                existingLines.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the existing CSV file content.");
+            e.printStackTrace();
+            return;  // Exit the method if an error occurs while reading the existing content
+        }
+
+        // Create a StringBuilder to store the updated content
+        StringBuilder updatedContent = new StringBuilder();
+
+        // Check if the student exists
+        if (staff != null) {
+            // Append the header to the StringBuilder if the existing content is not empty
+            if (!existingLines.isEmpty()) {
+                updatedContent.append(existingLines.get(0)).append("\n");
+            }
+
+            // Append the information for the specific student to the StringBuilder
+            updatedContent.append(staff.getStaffID()).append(",");
+            updatedContent.append(staff.getName()).append(",");
+            updatedContent.append(staff.getPassword()).append(",");
+            updatedContent.append(staff.getUserGroup()).append(",");
+            updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+            updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
+            updatedContent.append(String.join("|", staff.getSecurityAns())).append(",");
+
+            // Write the updated content to the CSV file
+            try (FileWriter writer = new FileWriter(csvFilePath)) {
+                writer.write(updatedContent.toString());
+                System.out.println("CSV file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while updating the CSV file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Staff not found. CSV file not updated.");
+        }
+    }
+
+    /********************************Camp*********************************************/
+
+    public static void loadCampsFromCSV() {
+        String csvFilePath = "camp.csv";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            boolean firstLine = true; // flag for header
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip the first line (headers)
+                }
+
+                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                if (data.length >= 12) {
+
+                    Camp camp = new Camp(
+                            data[0], // Camp Name
+                            parseDatesFromString(data[1]), // Start and End Dates
+                            LocalDate.parse(data[2]), // Reg Close Date
+                            null, //user group
+                            data[4], // Location
+                            Integer.parseInt(data[5]), // Total Slots
+                            Integer.parseInt(data[6]), // remaining slots
+                            Integer.parseInt(data[8]),
+                            data[9], // Staff in Charge
+                            Boolean.parseBoolean(data[10]) // Visibility
+                    );
+
+
+                    String[] UserGroupArray = data[3].split("\\|");
+                    ArrayList<Faculty> userGroupList = new ArrayList<>();
+                    for (String userGroupStr : UserGroupArray) {
+                        Faculty userGroup = Faculty.valueOf(userGroupStr);
+                        userGroupList.add(userGroup);
+                    }
+                    camp.setUserGroup(userGroupList);
+
+                    campData.addCampToMap(camp.getCampName(), camp);
+                    campData.getCampList().add(camp);
+
+
+                } else {
+                    System.out.println("Incomplete data in the CSV line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from the CSV file.");
+            e.printStackTrace();
+        }
+    }
+
+
+    private static ArrayList<LocalDate> parseDatesFromString(String input) {
+        String[] dateStrings = input.split("\\|");
+        ArrayList<LocalDate> dates = new ArrayList<>();
+        for (String dateString : dateStrings) {
+            dates.add(LocalDate.parse(dateString));
+        }
+        return dates;
+    }
+
+
+    public static void updateCampCSVFile(Camp camp) {
+        // Get the path to the CSV file
+        String csvFilePath = "camp.csv";
+
+        // Read the existing content of the CSV file
+        List<String> existingLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                existingLines.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the existing CSV file content.");
+            e.printStackTrace();
+            return;  // Exit the method if an error occurs while reading the existing content
+        }
+
+        // Create a StringBuilder to store the updated content
+        StringBuilder campContent = new StringBuilder();
+
+        // Check if the student exists
+        if (camp != null) {
+            // Append the header to the StringBuilder if the existing content is not empty
+            if (!existingLines.isEmpty()) {
+                campContent.append(existingLines.get(0)).append("\n");
+            }
+
+            // Append the information for the specific student to the StringBuilder
+            campContent.append(camp.getCampName()).append(",");
+            campContent.append(formatDates(camp.getCampDates())).append(",");
+            campContent.append(camp.getRegCloseDate()).append(",");
+            campContent.append(String.join("|", camp.getUserGroup().stream().map(Faculty::name).toArray(String[]::new))).append(",");
+            campContent.append(camp.getLocation()).append(",");
+            campContent.append(camp.getTotalSlots()).append(",");
+            campContent.append(camp.getRemainingSlots()).append(",");
+            campContent.append(camp.getCommitteeSlots()).append(",");
+            campContent.append(camp.getRemainingCommitteeSlots()).append(",");
+            campContent.append(camp.getStaffInCharge()).append(",");
+            campContent.append(camp.getVisibility()).append("\n");
+
+            // Write the updated content to the CSV file
+            try (FileWriter writer = new FileWriter(csvFilePath)) {
+                writer.write(campContent.toString());
+                System.out.println("CSV file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while updating the CSV file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Staff not found. CSV file not updated.");
+        }
+    }
+
+    private static String formatDates(ArrayList<LocalDate> dates) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return dates.get(0).format(formatter) + "|" + dates.get(1).format(formatter);
+    }
+
+    /********************************Suggestions*********************************************/
+
+    public static void loadSuggestionFromCSV() {
+        String csvFilePath = "suggestion.csv";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            boolean firstLine = true; // flag for header
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip the first line (headers)
+                }
+
+                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                if (data.length >= 6) {
+
+                    Suggestion newSuggestion = new Suggestion(
+                            data[0], // Camp Name
+                            Committee.getCommitteeNameMap().get(data[1]), // Start and End Dates
+                            data[2], // content
+                            LocalDate.parse(data[3], formatter),
+                            Status.valueOf(data[4]),
+                            false // Total Slots
+                    );
+
+                    boolean processed;
+
+                    processed = data[5].equals("true");
+
+                    newSuggestion.setProcessed(processed);
+
+                    Suggestion.getSuggestionArrayList().add(newSuggestion);
+                    Suggestion.getSuggestionHashMap().put(newSuggestion.getSuggestion_Subject(), newSuggestion);
+
+                } else {
+                    System.out.println("Incomplete data in the CSV line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from the CSV file.");
+            e.printStackTrace();
+        }
+    }
+    public static void updateSuggestionCSVFile(Suggestion suggestion) {
+        // Get the path to the CSV file
+        String csvFilePath = "camp.csv";
+
+        // Read the existing content of the CSV file
+        List<String> existingLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                existingLines.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the existing CSV file content.");
+            e.printStackTrace();
+            return;  // Exit the method if an error occurs while reading the existing content
+        }
+
+        // Create a StringBuilder to store the updated content
+        StringBuilder campContent = new StringBuilder();
+
+        // Check if the student exists
+        if (suggestion != null) {
+            // Append the header to the StringBuilder if the existing content is not empty
+            if (!existingLines.isEmpty()) {
+                campContent.append(existingLines.get(0)).append("\n");
+            }
+
+            // Append the information for the specific student to the StringBuilder
+            campContent.append(suggestion.getSuggestion_Subject()).append(",");
+            campContent.append(suggestion.getSubmitter().getName()).append(",");
+            campContent.append(suggestion.getContent()).append(",");
+            campContent.append(suggestion.getDateSubmitted()).append(",");
+            campContent.append(suggestion.getStatus()).append(",");
+            campContent.append(suggestion.getProcessed()).append("\n");
+
+            // Write the updated content to the CSV file
+            try (FileWriter writer = new FileWriter(csvFilePath)) {
+                writer.write(campContent.toString());
+                System.out.println("CSV file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while updating the CSV file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Suggestion not found. CSV file not updated.");
+        }
+    }
+
+    /********************************Enquirys*********************************************/
+
+    public static void loadEnquiryFromCSV() {
+        String csvFilePath = "enquiry.csv";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            boolean firstLine = true; // flag for header
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip the first line (headers)
+                }
+
+                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                if (data.length >= 6) {
+
+                    Enquiry newEnquiry = new Enquiry(
+                            data[0], // Camp Name
+                            data[1], // Start and End Dates
+                            LocalDate.parse(data[2], formatter), // content
+                            data[3],
+                            data[4],
+                            false // Total Slots
+                    );
+
+                    boolean processed;
+
+                    processed = data[5].equals("true");
+
+                    newEnquiry.setProcessed(processed);
+
+                    Enquiry.getEnquiryHashMap().put(newEnquiry.getEnquiry_Subject(), newEnquiry);
+                    Enquiry.getEnquiryArrayList().add(newEnquiry);
+
+                } else {
+                    System.out.println("Incomplete data in the CSV line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from the CSV file.");
+            e.printStackTrace();
+        }
+    }
+    public static void updateEnquiryCSVFile(Enquiry enquiry) {
+        // Get the path to the CSV file
+        String csvFilePath = "enquiry.csv";
+
+        // Read the existing content of the CSV file
+        List<String> existingLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                existingLines.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the existing CSV file content.");
+            e.printStackTrace();
+            return;  // Exit the method if an error occurs while reading the existing content
+        }
+
+        // Create a StringBuilder to store the updated content
+        StringBuilder enquiryContent = new StringBuilder();
+
+        // Check if the student exists
+        if (enquiry != null) {
+            // Append the header to the StringBuilder if the existing content is not empty
+            if (!existingLines.isEmpty()) {
+                enquiryContent.append(existingLines.get(0)).append("\n");
+            }
+
+            // Append the information for the specific student to the StringBuilder
+            enquiryContent.append(enquiry.getContent()).append(",");
+            enquiryContent.append(enquiry.getContent()).append(",");
+            enquiryContent.append(enquiry.getDateSent()).append(","); //date
+            enquiryContent.append(enquiry.getSubmitter()).append(",");
+            enquiryContent.append(enquiry.getReply()).append(",");
+            enquiryContent.append(enquiry.isProcessed()).append("\n");
+
+            // Write the updated content to the CSV file
+            try (FileWriter writer = new FileWriter(csvFilePath)) {
+                writer.write(enquiryContent.toString());
+                System.out.println("CSV file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while updating the CSV file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Suggestion not found. CSV file not updated.");
+        }
+    }
 }

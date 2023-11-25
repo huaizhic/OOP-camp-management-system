@@ -1,17 +1,15 @@
 package com.example.cms.CSVConverter;
 
+import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Student.Student_User;
+import com.example.cms.Suggestions.Suggestion;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Student.Attendee;
-import com.example.cms.Student.Student_User;
-import com.example.cms.Suggestions.Suggestion;
 
 public class CSVWriter {
 
@@ -38,7 +36,7 @@ public class CSVWriter {
             writer.write(student.getStudentID() + ","
                     + student.getName() + ","
                     + student.getPassword() + ","
-                    + student.getSalt() + ","        
+                 //   + student.getSalt() + ","
                     + student.getUserGroup() + ","
                     + student.getFaculty() + ","
                     + student.getPoints() + ","

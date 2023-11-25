@@ -3,7 +3,6 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.user_Login.account_Manager;
 import com.example.cms.Faculty;
 
 import java.time.LocalDate;
@@ -486,7 +485,7 @@ public class Attendee extends Student_User {
             return;
         }
         LocalDate todayDate = LocalDate.now();
-        Enquiry newEnquiry = new Enquiry(subject, content, todayDate, attendee);
+        Enquiry newEnquiry = new Enquiry(subject, content, todayDate, attendee.getName(), null, false);
 
         Enquiry.getEnquiryHashMap().put(subject, newEnquiry); //add enquiry to hashmap
         Enquiry.setEnquiryArrayList(newEnquiry); //add enquiry to the total enquiry

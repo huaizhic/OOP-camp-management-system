@@ -1,15 +1,17 @@
 package com.example.cms.Student;
 
+import com.example.cms.CSVConverter.CSVDataManager;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import com.example.cms.CSVConverter.CSVDataManager;
-
 public class Committee_Account extends Student_Account {
 	
 	 private String studentID;
-	 private Map<String, Committee> existingCommittee;
+
+
+	 private HashMap<String, Committee> committeeNameHashMap;
 
 	    public Committee_Account(String studentID, Map<String, Student_User> existingCommittee) {
 	        super(studentID, existingCommittee);

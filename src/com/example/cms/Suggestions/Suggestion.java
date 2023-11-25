@@ -20,14 +20,14 @@ public class Suggestion {
 
     private static ArrayList<Suggestion> suggestionArrayList = new ArrayList<>();
 
-    public Suggestion(String suggestion_Subject, Committee committee, String content, LocalDate dateSubmitted) {
+    public Suggestion(String suggestion_Subject, Committee committee, String content, LocalDate dateSubmitted, Status status, boolean processed) {
         this.suggestion_Subject = suggestion_Subject;
         this.submitter = submitter;
         this.content = content;
         this.dateSubmitted = dateSubmitted;
-        this.status = Status.Pending;
+        this.status = status;
+        this.processed = processed;
         // Add the suggestion to the HashMap using suggestion_Subject as the key
-        suggestionHashMap.put(suggestion_Subject, this);
     }
 
     public static void printSuggestionInfo(Suggestion suggestion){

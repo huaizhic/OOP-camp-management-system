@@ -1,11 +1,13 @@
 package com.example.cms.user_Login;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import com.example.cms.staff_Account;
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Staff.Staff;
+import com.example.cms.Staff.Staff_Account;
 import com.example.cms.Student.Student_Account;
 import com.example.cms.Student.Student_User;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class account_Manager {
     private Scanner scanner;
@@ -20,63 +22,83 @@ public class account_Manager {
 
         int userTypeChoice = getUserTypeChoice();
         user_Registration user_Registration = new user_Registration(scanner);
+
         if (userTypeChoice == 2) {
-            getStaffId();
-            // staff_Account staffAccount = new staff_Account(scanner, userId);
-            // staffAccount.start();
-        } else if (userTypeChoice == 1) {
-            int accountChoice = getAccountChoice();
 
-            if (accountChoice == 1) {
-                Student_User student_User = new Student_User();
-                CSVDataManager.loadStudentsFromCSV(student_User);
+            Staff currentStaff;
+            CSVDataManager.loadStaffsFromCSV();
 
-                boolean userFound = false;
+            boolean userFound = false;
+            String staffID;
 
-                while (!userFound) {
-                    userId = getStudentId();
+            do {
+                staffID = getStaffId();
+                System.out.println("This is the staff id entered: " + staffID);
+                Staff_Account staffAccount = new Staff_Account();
+                currentStaff = Staff.getStaffByID(staffID);
 
-                    System.out.println("This is the student id entered: " + userId);
-
-                    Student_Account studentAccount = new Student_Account(userId, student_User.getExistingStudents());
-
-                    if (studentAccount.getStudentAccount(userId)) {
-                        studentAccount.start();
-                        userFound = true;
-                    } else {
-                    	
-                        System.out.println("Student not found.");
-
-                        int retryChoice;
-                        do {
-                            retryChoice = getRetryChoice();
-
-                            switch (retryChoice) {
-                                case 1:
-                                    // Continue the loop
-                                    break;
-                                case 2:
-                                	
-                                    user_Registration.start();
-                                    userFound = true;
-                                    break;
-                                default:
-                                    System.out.println("Invalid choice. Please enter 1 or 2.");
-                                    break;
-                            }
-                        } while (retryChoice != 1 && retryChoice != 2);
-                    }
+                if (currentStaff != null) {
+                    staffAccount.start(currentStaff);
+                    userFound = true;
+                } else {
+                    System.out.println("Staff not found.");
                 }
-            } else if (accountChoice == 0) {
-                
-				user_Registration.start();
-            } else {
-                System.out.println("Invalid choice. Please enter '1' for Yes or '0' for No.");
-            }
-        } else {
-            System.out.println("Invalid user type. Please enter '1' for student or '2' for staff.");
+            }while(!userFound);
         }
-    }
+
+        else if (userTypeChoice == 1) {
+                int accountChoice = getAccountChoice();
+
+                if (accountChoice == 1) {
+                    Student_User student_User = new Student_User();
+                    CSVDataManager.loadStudentsFromCSV(student_User);
+
+                    boolean userFound = false;
+
+                    while (!userFound) {
+                        userId = getStudentId();
+
+                        System.out.println("This is the student id entered: " + userId);
+
+                        Student_Account studentAccount = new Student_Account(userId, student_User.getExistingStudents());
+
+                        if (studentAccount.getStudentAccount(userId)) {
+                            studentAccount.start();
+                            userFound = true;
+                        } else {
+
+                            System.out.println("Student not found.");
+
+                            int retryChoice;
+                            do {
+                                retryChoice = getRetryChoice();
+
+                                switch (retryChoice) {
+                                    case 1:
+                                        // Continue the loop
+                                        break;
+                                    case 2:
+
+                                        user_Registration.start();
+                                        userFound = true;
+                                        break;
+                                    default:
+                                        System.out.println("Invalid choice. Please enter 1 or 2.");
+                                        break;
+                                }
+                            } while (retryChoice != 1 && retryChoice != 2);
+                        }
+                    }
+                } else if (accountChoice == 0) {
+
+                    user_Registration.start();
+                } else {
+                    System.out.println("Invalid choice. Please enter '1' for Yes or '0' for No.");
+                }
+            } else {
+                System.out.println("Invalid user type. Please enter '1' for student or '2' for staff.");
+            }
+        }
 
     private int getUserTypeChoice() {
         int userTypeChoice = 0;
@@ -108,7 +130,7 @@ public class account_Manager {
         return userTypeChoice;
     }
 
-    private void getStaffId() {
+    private String getStaffId() {
         String specialCharacters = "[!@#$%^&*(),.?\":{}|<>]"; // Define a regex for special characters
         String staffId = null;
         
@@ -128,8 +150,8 @@ public class account_Manager {
                     System.out.println("Invalid input. Please enter a staff ID without special characters.");
                     continue; // Restart the loop if the input contains special characters
                 }
-
-                break; // Exit the loop if the input is not empty and doesn't contain special characters
+                return staffId;
+                 // Exit the loop if the input is not empty and doesn't contain special characters
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid staff ID.");
                 scanner.nextLine(); // Consume the invalid input
