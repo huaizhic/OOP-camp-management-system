@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+/**
+ * When the Camp Attendee user chooses an option from the menu, they will be directed to this class to complete the required functions.
+ */
 public class Attendee extends Student_User {
 
 	 public static Map<String, Attendee> attendeesMap = new HashMap<>();

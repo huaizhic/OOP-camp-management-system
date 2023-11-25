@@ -1,20 +1,34 @@
 package com.example.cms.Password;
 
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Student_User;
+import com.example.cms.Student_Role;
+import com.example.cms.user_Login.account_Manager;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
 
 import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.user_Login.account_Manager;
 
-
+/**
+ * Controller class to handle passwords for logging in
+ * Includes all the standard features such as forgot password, reset password, etc.
+ */
 public class Password_Manager {
 
 	 private Scanner scanner; // Add a Scanner field
 	 private Student_User studentUser; // Add a field to hold the Student_User instance
-	 private Attendee attendeeUser;
+	 private Map<String, Attendee> existingAttendees;
+	 private Map<String, Committee> existingCommittee;
 	    // Constructor to initialize the Scanner
 	    public Password_Manager(Scanner scanner, Student_User studentUser) {
 	        this.scanner = scanner;
@@ -54,52 +68,79 @@ public class Password_Manager {
 	    }
 
 	    
-    public boolean updatePassword(String userID, String updatedPassword) {
-        // Find the student based on the userID (you need to implement this part)
-        Student_User student = studentUser.getStudentById(userID);
-        Attendee attendee = attendeeUser.getAttendeeByID(userID);
-        
-        
-        System.out.println("Print attendee ID " + attendee.getName());
-        
-        if (student != null) {
-            String oldPassword = student.getPassword();
+	    public boolean updatePassword(String userID, String updatedPassword) {
+	        // Find the student based on the userID (you need to implement this part)
+	        this.existingAttendees = new HashMap<>();
+	        this.existingCommittee  = new HashMap<>();
+	        Student_User student = studentUser.getStudentById(userID);
+	        
+	        if (student != null) {
+	            String oldPassword = student.getPassword();
 
-            // Check if the updatedPassword is different from the old password
-            if (!updatedPassword.equals(oldPassword)) {
-                // Check if the updatedPassword meets criteria (8 characters, alphanumeric, and mixed case)
-                if (isValidPassword(updatedPassword)) {
-                	 // Update the password in the Student_User instance
-                    student.setPassword(updatedPassword);
-                    
-                 // Update the existingStudents map with the modified Student_User object
-                    student.existingStudents.put(student.getStudentID(), student);
+	            // Check if the updatedPassword is different from the old password
+	            if (!updatedPassword.equals(oldPassword)) {
+	                // Check if the updatedPassword meets criteria (8 characters, alphanumeric, and mixed case)
+	                if (isValidPassword(updatedPassword)) {
+	                    // Update the password in the Student_User instance
+	                    student.setPassword(updatedPassword);
 
-                    // Update the CSV file
-                    CSVDataManager.updateStudentCSVFile(student, userID);
-                    
-                    //student.loadStudentsFromCSV();
-                    System.out.println("Password reset successful.");
-                    // Return true to indicate success
-                    return true;
-                } else {
-                    System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
-                    // Return false to indicate that the password doesn't meet criteria
-                    return false;
-                }
-            } else {
-                System.out.println("New password is the same as the old one. Please choose a different password.");
-                // Return false to indicate that the new password is the same as the old one
-                return false;
-            }
-        } else {
-            System.out.println("User not found. Password reset failed.");
-            // Return false to indicate failure (user not found)
-            return false;
-        }
-    }
+	                    // Check if student_Role is equal to attendee
+	                    if (student.getUserGroup().equals(Student_Role.ATTENDEE)) {
+	                    	Attendee attendee = CSVDataManager.loadAttendeeFromCSV(existingAttendees.get(student.getStudentID()));
+	                        // Update the password in the Attendee instance
+	                        attendee.setPassword(updatedPassword);
+	                        // Update the CSV file for attendee
+	                        CSVDataManager.updateAttendeeCSVFile(attendee);
+	                        
+	                     // Update the existingStudents map with the modified Student_User object
+		                    student.existingStudents.put(student.getStudentID(), student);
+
+		                    // Update the CSV file for student
+		                    CSVDataManager.updateStudentCSVFile(student, userID);
+	                    }
+	                    else {
+	                    	Committee committee = CSVDataManager.loadCommitteeFromCSV(existingCommittee.get(student.getStudentID()));
+	                        // Update the password in the Attendee instance
+	                        committee.setPassword(updatedPassword);
+	                        // Update the CSV file for attendee
+	                        CSVDataManager.updateCommitteeCSVFile(committee);
+	                        
+	                     // Update the existingStudents map with the modified Student_User object
+		                    student.existingStudents.put(student.getStudentID(), student);
+
+		                    // Update the CSV file for student
+		                    CSVDataManager.updateStudentCSVFile(student, userID);
+	                    }
+
+	                    // Update the existingStudents map with the modified Student_User object
+	                    student.existingStudents.put(student.getStudentID(), student);
+
+	                    // Update the CSV file for student
+	                    CSVDataManager.updateStudentCSVFile(student, userID);
+
+	                    System.out.println("Password reset successful.");
+	                    // Return true to indicate success
+	                    return true;
+	                } else {
+	                    System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
+	                    // Return false to indicate that the password doesn't meet criteria
+	                    return false;
+	                }
+	            } else {
+	                System.out.println("New password is the same as the old one. Please choose a different password.");
+	                // Return false to indicate that the new password is the same as the old one
+	                return false;
+	            }
+	        } else {
+	            System.out.println("User not found. Password reset failed.");
+	            // Return false to indicate failure (user not found)
+	            return false;
+	        }
+	    }
+
 
     public void forgotPassword(String userID) {
+    	Scanner scanner = new Scanner(System.in);
         // First, retrieve the student based on the userID
         Student_User student = studentUser.getStudentById(userID);
 
@@ -175,7 +216,7 @@ public class Password_Manager {
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
                         // Student_Account studentAccount = new  Student_Account(userID, studentUser.getExistingStudents());
 
-                        account_Manager account_Manager = new account_Manager(null);
+                        account_Manager account_Manager = new account_Manager(scanner);
                         account_Manager.start();
 
                     } else {

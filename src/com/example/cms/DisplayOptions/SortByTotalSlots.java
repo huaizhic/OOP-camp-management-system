@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Implements specific sort method via total number of attendee slots per camp. Sorts from smallest to largest number (TO BE CONFIRMED).
+ */
 public class SortByTotalSlots extends DisplayBySort{
 	private ArrayList<Camp> campAfterSorting = new ArrayList<>();
 
@@ -18,7 +21,7 @@ public class SortByTotalSlots extends DisplayBySort{
 			campAfterSorting.clear();
 			campAfterSorting.addAll(campList);
 			return campAfterSorting;
-			}
+		}
 
 	}
 

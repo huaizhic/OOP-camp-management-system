@@ -1,15 +1,15 @@
 package com.example.cms.CSVConverter;
 
-import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
-import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Staff.Staff;
 import com.example.cms.Status;
+import com.example.cms.Student_Role;
+import com.example.cms.Camp.Camp;
+import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
-import com.example.cms.Student_Role;
 import com.example.cms.Suggestions.Suggestion;
 
 import java.io.BufferedReader;
@@ -47,7 +47,7 @@ public class CSVDataManager {
                     student.setStudentID(data[0]);
                     student.setName(data[1]);
                     student.setPassword(data[2]);
-                    //student.setSalt(data[3]);
+                    student.setSalt(data[3]);
                     student.setUserGroup(Student_Role.valueOf(data[4])); // Assuming Student_Role values are in the CSV
                     student.setFaculty(Faculty.valueOf(data[5])); // Assuming Faculty values are in the CSV
                     student.setPoints(Integer.parseInt(data[6]));
@@ -121,7 +121,7 @@ public class CSVDataManager {
                     System.out.println("Student ID: " + student.getStudentID());
                     System.out.println("Name: " + student.getName());
                     System.out.println("Password: " + student.getPassword());
-                    //System.out.println("Password: " + student.getSalt());
+                    System.out.println("Password: " + student.getSalt());
                     System.out.println("User Group: " + student.getUserGroup());
                     System.out.println("Faculty: " + student.getFaculty());
                     System.out.println("Point: " + student.getPoints());
@@ -217,7 +217,7 @@ public class CSVDataManager {
             updatedContent.append(student.getStudentID()).append(",");
             updatedContent.append(student.getName()).append(",");
             updatedContent.append(student.getPassword()).append(",");
-          //  updatedContent.append(student.getSalt()).append(",");
+            updatedContent.append(student.getSalt()).append(",");
             updatedContent.append(student.getUserGroup()).append(",");
             updatedContent.append(student.getFaculty()).append(",");
             updatedContent.append(student.getPoints()).append(",");
@@ -381,7 +381,7 @@ public class CSVDataManager {
                     attendee.setStudentID(data[0]);
                     attendee.setName(data[1]);
                     attendee.setPassword(data[2]);
-                   // attendee.setSalt(null);
+                    attendee.setSalt(null);
                     attendee.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
                     attendee.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
                     attendee.setPoints(0);
@@ -893,7 +893,7 @@ public class CSVDataManager {
                     String[] createdCampsArray = data[4].split("\\|");
                     for (String camp : createdCampsArray) {
                         Camp camp1 = Camp.getCampByName(camp);
-                            newStaff.setCampsCreated(camp1);
+                        newStaff.setCampsCreated(camp1);
                     }
 
                     Staff.getExistingStaff().put(newStaff.getStaffID(), newStaff);
@@ -1274,3 +1274,4 @@ public class CSVDataManager {
         }
     }
 }
+

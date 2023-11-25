@@ -1,12 +1,14 @@
 package com.example.cms.Student;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.user_Login.account_Manager;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+/**
+ * When a Camp Attendee logs in, they will first see the menu provided by this class.
+ */
 public class Attendee_Account extends Student_Account {
 
     private String studentID;

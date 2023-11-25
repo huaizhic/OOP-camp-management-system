@@ -7,7 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * Entity class, provides basic functionality to get and set information about the Staff
+ * Routed from account_Manager
+ * As part of Open-Closed Principle, we close this class to modification,
+ * but open it to extension to Staff class
+ */
 public class Staff_User {
     private String staffID;
 
