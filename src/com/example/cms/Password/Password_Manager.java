@@ -140,6 +140,7 @@ public class Password_Manager {
 
 
     public void forgotPassword(String userID) {
+    	Scanner scanner = new Scanner(System.in);
         // First, retrieve the student based on the userID
         Student_User student = studentUser.getStudentById(userID);
 
@@ -215,7 +216,7 @@ public class Password_Manager {
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
                         // Student_Account studentAccount = new  Student_Account(userID, studentUser.getExistingStudents());
 
-                        account_Manager account_Manager = new account_Manager(null);
+                        account_Manager account_Manager = new account_Manager(scanner);
                         account_Manager.start();
 
                     } else {
