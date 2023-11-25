@@ -608,9 +608,14 @@ public class CSVDataManager {
 //        }
 //    }
 
-    public static void updateAttendeeCSVFile(Attendee attendees, String studentId) {
+    public static void updateAttendeeCSVFile(Attendee attendees) {
         // Get the path to the CSV file
         String csvFilePath = "attendee.csv";
+        
+     // If the attendee is null, create a new one
+        if (attendees == null) {
+            attendees = new Attendee();
+        }
 
         // Read the existing content of the CSV file
         List<String> existingLines = new ArrayList<>();
@@ -628,29 +633,26 @@ public class CSVDataManager {
         // Create a StringBuilder to store the updated content
         StringBuilder updatedContent = new StringBuilder();
 
-        // Find the student based on the provided studentId from studentUser
-        Attendee attendee = new Attendee();
-       attendee = attendee.existingAttendees().get(studentId);
 
         // Check if the student exists
-        if (attendee != null) {
+        if (attendees != null) {
             // Append the header to the StringBuilder if the existing content is not empty
             if (!existingLines.isEmpty()) {
                 updatedContent.append(existingLines.get(0)).append("\n");
             }
 
             // Append the information for the specific student to the StringBuilder
-            updatedContent.append(attendee.getStudentID()).append(",");
-            updatedContent.append(attendee.getName()).append(",");
-            updatedContent.append(attendee.getPassword()).append(",");
-            updatedContent.append(attendee.getUserGroup()).append(",");
-            updatedContent.append(attendee.getFaculty()).append(",");
-            updatedContent.append(String.join("|", attendee.getCampAccessibility())).append(",");
-            updatedContent.append(attendee.getCampCommittee()).append(",");
-            updatedContent.append(String.join("|", attendee.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", attendee.getSecurityQuestion())).append(",");
-            updatedContent.append(String.join("|", attendee.getSecurityAnswers())).append(",");
-            updatedContent.append(String.join("|", attendee.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
+            updatedContent.append(attendees.getStudentID()).append(",");
+            updatedContent.append(attendees.getName()).append(",");
+            updatedContent.append(attendees.getPassword()).append(",");
+            updatedContent.append(attendees.getUserGroup()).append(",");
+            updatedContent.append(attendees.getFaculty()).append(",");
+            updatedContent.append(String.join("|", attendees.getCampAccessibility())).append(",");
+            updatedContent.append(attendees.getCampCommittee()).append(",");
+            updatedContent.append(String.join("|", attendees.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+            updatedContent.append(String.join("|", attendees.getSecurityQuestion())).append(",");
+            updatedContent.append(String.join("|", attendees.getSecurityAnswers())).append(",");
+            updatedContent.append(String.join("|", attendees.getEnquirySubmitted().stream().map(Enquiry::getEnquiry_Subject).toArray(String[]::new))).append(",");
 
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
@@ -661,14 +663,14 @@ public class CSVDataManager {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
+            System.out.println("Student with ID " + attendees.getStudentID() + " not found. CSV file not updated.");
         }
     }
 
  
 /********************************COMMITTEE*********************************************/
  // Load Attendee from CSV
-    public static void loadCommitteeFromCSV(Committee committee) {
+    public static Committee loadCommitteeFromCSV(Committee committee) {
         String csvFilePath = "committee.csv";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -806,11 +808,18 @@ public class CSVDataManager {
             System.out.println("An error occurred while reading from the CSV file.");
             e.printStackTrace();
         }
+        return committee;
     }
 
-    public static void updateCommitteeCSVFile(Committee committees, String studentId) {
+    public static void updateCommitteeCSVFile(Committee committees) {
         // Get the path to the CSV file
         String csvFilePath = "committee.csv";
+        
+        // If the committee is null, create a new one
+        if (committees == null) {
+        	committees = new Committee();
+        }
+
 
         // Read the existing content of the CSV file
         List<String> existingLines = new ArrayList<>();
@@ -828,29 +837,26 @@ public class CSVDataManager {
         // Create a StringBuilder to store the updated content
         StringBuilder updatedContent = new StringBuilder();
 
-        // Find the student based on the provided studentId from studentUser
-        Committee committee = Committee.existingCommittee().get(studentId);
-
         // Check if the student exists
-        if (committee != null) {
+        if (committees != null) {
             // Append the header to the StringBuilder if the existing content is not empty
             if (!existingLines.isEmpty()) {
                 updatedContent.append(existingLines.get(0)).append("\n");
             }
 
             // Append the information for the specific student to the StringBuilder
-            updatedContent.append(committee.getStudentID()).append(",");
-            updatedContent.append(committee.getName()).append(",");
-            updatedContent.append(committee.getPassword()).append(",");
-            updatedContent.append(committee.getUserGroup()).append(",");
-            updatedContent.append(committee.getFaculty()).append(",");
-            updatedContent.append(committee.getPoints()).append(",");
-            updatedContent.append(String.join("|", committee.getCampAccessibility())).append(",");
-            updatedContent.append(committee.getCampCommittee()).append(",");
-            updatedContent.append(String.join("|", committee.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
-            updatedContent.append(String.join("|", committee.getSecurityQuestion())).append(",");
-            updatedContent.append(String.join("|", committee.getSecurityAnswers())).append(",");
-            updatedContent.append(String.join("|", committee.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
+            updatedContent.append(committees.getStudentID()).append(",");
+            updatedContent.append(committees.getName()).append(",");
+            updatedContent.append(committees.getPassword()).append(",");
+            updatedContent.append(committees.getUserGroup()).append(",");
+            updatedContent.append(committees.getFaculty()).append(",");
+            updatedContent.append(committees.getPoints()).append(",");
+            updatedContent.append(String.join("|", committees.getCampAccessibility())).append(",");
+            updatedContent.append(committees.getCampCommittee()).append(",");
+            updatedContent.append(String.join("|", committees.getRegisteredCamps().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+            updatedContent.append(String.join("|", committees.getSecurityQuestion())).append(",");
+            updatedContent.append(String.join("|", committees.getSecurityAnswers())).append(",");
+            updatedContent.append(String.join("|", committees.getSuggestionSubmitted().stream().map(Suggestion::getSuggestion_Subject).toArray(String[]::new))).append("\n");
 
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
@@ -861,7 +867,7 @@ public class CSVDataManager {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Student with ID " + studentId + " not found. CSV file not updated.");
+            System.out.println("Student with ID " + committees.getStudentID() + " not found. CSV file not updated.");
         }
     }
 

@@ -5,6 +5,9 @@ import com.example.cms.CSVConverter.CSVDataManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.user_Login.account_Manager;
+
 /**
  * When a Camp committee member logs in, they will first see the menu provided by this class.
  */
@@ -13,13 +16,13 @@ public class Committee_Account extends Student_Account {
 	 private String studentID;
 	 private Map<String, Committee> existingCommittee;
 
-	    public Committee_Account(String studentID, Map<String, Student_User> existingCommittee) {
-	        super(studentID, existingCommittee);
+	    public Committee_Account(String studentID, Map<String, Student_User> existingStudent) {
+	        super(studentID, existingStudent);
 	        this.studentID = studentID;
 	        
 	        // Create a new map and copy elements from existingAttendees
 	        this.existingCommittee = new HashMap<>();
-	        for (Map.Entry<String, Student_User> entry : existingCommittee.entrySet()) {
+	        for (Map.Entry<String, Student_User> entry : existingStudent.entrySet()) {
 	            if (entry.getValue() instanceof Committee) {
 	                this.existingCommittee.put(entry.getKey(), (Committee) entry.getValue());
 	            }
@@ -28,11 +31,10 @@ public class Committee_Account extends Student_Account {
 	    }
 
 	    public void start() {
+	    	Scanner scanner = new Scanner(System.in);
 	        boolean exit = false;
+	        Committee committee = CSVDataManager.loadCommitteeFromCSV(existingCommittee.get(studentID));
 
-	        Committee committee = (Committee) existingCommittee.get(studentID);
-	        CSVDataManager.loadCommitteeFromCSV(committee);
-	        
 	        System.out.println("Welcome," + committee.getName());
 	        
 	        while (!exit) {
@@ -59,6 +61,10 @@ public class Committee_Account extends Student_Account {
 	                    break;
 	                case 4:
 	                    exit = true;
+	                    System.out.println("Logging out.");
+	                    
+	                    account_Manager account_Manager = new account_Manager(scanner);
+	                    account_Manager.start();
 	                    break;
 	                default:
 	                    System.out.println("Invalid choice. Please select a valid option.");
