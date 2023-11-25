@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.example.cms.Student_Role;
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.user_Login.account_Manager;
 
@@ -13,7 +14,7 @@ public class Password_Manager {
 
 	 private Scanner scanner; // Add a Scanner field
 	 private Student_User studentUser; // Add a field to hold the Student_User instance
-
+	 private Attendee attendeeUser;
 	    // Constructor to initialize the Scanner
 	    public Password_Manager(Scanner scanner, Student_User studentUser) {
 	        this.scanner = scanner;
@@ -56,7 +57,11 @@ public class Password_Manager {
     public boolean updatePassword(String userID, String updatedPassword) {
         // Find the student based on the userID (you need to implement this part)
         Student_User student = studentUser.getStudentById(userID);
-
+        Attendee attendee = attendeeUser.getAttendeeByID(userID);
+        
+        
+        System.out.println("Print attendee ID " + attendee.getName());
+        
         if (student != null) {
             String oldPassword = student.getPassword();
 
