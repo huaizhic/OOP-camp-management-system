@@ -51,8 +51,7 @@ public class Student_User {
         this.securityQuestion = new ArrayList<>();
         this.securityAnswers = new ArrayList<>();
         this.enquirySubmitted = new ArrayList<>();
-        this.existingStudents = new HashMap<>(); // Initialize the map in the constructor
-        
+  
     }
 
     public String getStudentID() {

@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CSVDataManager {
@@ -37,6 +38,7 @@ public class CSVDataManager {
                 if (data.length >= 14) {
                     // Create a new Student_User instance and set its attributes
                     Student_User student = new Student_User();
+                    
                     student.setStudentID(data[0]);
                     student.setName(data[1]);
                     student.setPassword(data[2]);
@@ -167,6 +169,7 @@ public class CSVDataManager {
 
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
+                    
                 }
             }
         } catch (IOException e) {
@@ -236,8 +239,125 @@ public class CSVDataManager {
 
 /**********************************ATTENDEE********************************************/    
  // Load Attendee from CSV
-    public static void loadAttendeeFromCSV(Attendee attendee) {
+//    public static void loadAttendeeFromCSV(Attendee attendees) {
+//        String csvFilePath = "attendee.csv";
+//        
+//        if (attendees == null) {
+//          // If the attendee is null, create a new one
+//          attendees = new Attendee();
+//        }
+//        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+//            String line;
+//            boolean firstLine = true; // flag for header
+//
+//            while ((line = reader.readLine()) != null) {
+//                if (firstLine) {
+//                    firstLine = false;
+//                    continue; // Skip the first line (headers)
+//                }
+//
+//                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+//
+//                if (data.length >= 11) {
+//                    // Create a new Attendee instance and set its attributes
+//                    Attendee attendee = new Attendee();
+//
+//                    attendee.setStudentID(data[0]);
+//                    attendee.setName(data[1]);
+//                    attendee.setPassword(data[2]);
+//                    attendee.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
+//                    attendee.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
+//                    attendee.setPoints(0);
+//
+//                    // Parse CampAccessibility from the CSV
+//                    List<String> campAccessibility = new ArrayList<>();
+//                    if (!data[5].isEmpty()) {
+//                        String[] campAccessibilityArray = data[5].split("\\|");
+//                        campAccessibility.addAll(Arrays.asList(campAccessibilityArray));
+//                    }
+//                    attendee.setCampAccessibility(campAccessibility);
+//
+//                    // Parse CampCommittee from the CSV
+//                    boolean campCommittee = Boolean.parseBoolean(data[6]);
+//                    attendee.setCampCommittee(campCommittee);
+//
+//                    // Parse RegisteredCamps from the CSV
+//                    List<Camp> registeredCamps = new ArrayList<>();
+//                    if (!data[7].isEmpty()) {
+//                        String[] registeredCampsArray = data[7].split("\\|");
+//                        for (String camp : registeredCampsArray) {
+//                            Camp registeredCamp = Camp.getCampByName(camp);
+//                            if (registeredCamp != null) {
+//                                registeredCamps.add(registeredCamp);
+//                            }
+//                        }
+//                    }
+//                    attendee.setRegisteredCamps(registeredCamps);
+//
+//                    // Parse SecurityQuestions from the CSV
+//                    List<String> securityQuestions = new ArrayList<>();
+//                    if (!data[8].isEmpty()) {
+//                        String[] securityQuestionsArray = data[8].split("\\|");
+//                        securityQuestions.addAll(Arrays.asList(securityQuestionsArray));
+//                    }
+//                    attendee.setSecurityQuestions(securityQuestions);
+//
+//                    // Parse SecurityAnswers from the CSV
+//                    List<String> securityAnswers = new ArrayList<>();
+//                    if (!data[9].isEmpty()) {
+//                        String[] securityAnswersArray = data[9].split("\\|");
+//                        securityAnswers.addAll(Arrays.asList(securityAnswersArray));
+//                    }
+//                    attendee.setSecurityAnswers(securityAnswers);
+//
+//                    // Parse EnquirySubmitted from the CSV
+//                    List<Enquiry> enquirySubmitted = new ArrayList<>();
+//                    if (!data[10].isEmpty()) {
+//                        String[] enquirySubmittedArray = data[10].split("\\|");
+//                        for (String enquiry : enquirySubmittedArray) {
+//                            Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
+//                            if (submittedEnquiry != null) {
+//                                enquirySubmitted.add(submittedEnquiry);
+//                            }
+//                        }
+//                    }
+//                    attendee.setEnquirySubmitted(enquirySubmitted);
+//
+//                    // Set SuggestionSubmitted to null (assuming this field is not present in the CSV)
+//                    attendee.setSuggestionSubmitted(null);
+//
+//                    System.out.println("Attendee.csv loaded successfully in loadcsvmethod:");
+//
+//                    // Print the loaded attendee details
+//                    System.out.println("Student ID: " + attendee.getStudentID());
+//                    System.out.println("Name: " + attendee.getName());
+//                    // Add more details based on your Attendee class properties
+//
+//                    // Add the loaded attendee to the attendeesMap
+//                    attendee.addAttendee(attendee);
+//
+//                    // Print additional details if needed
+//                    System.out.println("Attendee details printed successfully.");
+//
+//                } else {
+//                    System.out.println("Incomplete data in the CSV line: " + line);
+//                    System.out.println("Number of fields: " + data.length);
+//                    System.out.println("Data: " + Arrays.toString(data));
+//                }
+//            }
+//        } catch (IOException e) {
+//            System.out.println("An error occurred while reading from the CSV file.");
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static Attendee loadAttendeeFromCSV(Attendee attendee) {
         String csvFilePath = "attendee.csv";
+        
+     // If the attendee is null, create a new one
+        if (attendee == null) {
+            attendee = new Attendee();
+        }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -251,123 +371,240 @@ public class CSVDataManager {
 
                 String[] data = line.split(",", -1); // Use -1 to keep empty fields
 
-                if (data.length >= 12) {
-                    // Create a new Student_User instance and set its attributes
-                    Attendee attendee1 = new Attendee();
-                    attendee1.setStudentID(data[0]);
-                    attendee1.setName(data[1]);
-                    attendee1.setPassword(data[2]);
-                    attendee1.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
-                    attendee1.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
+                if (data.length >= 11) {
+                    // Set the attributes of the existing Attendee instead of creating a new one
+                    attendee.setStudentID(data[0]);
+                    attendee.setName(data[1]);
+                    attendee.setPassword(data[2]);
+                    attendee.setSalt(null);
+                    attendee.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
+                    attendee.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
+                    attendee.setPoints(0);
 
                     // Parse CampAccessibility from the CSV
                     List<String> campAccessibility = new ArrayList<>();
-                    String[] campAccessibilityArray = data[5].split("\\|");
-                    for (String camp : campAccessibilityArray) {
-                        campAccessibility.add(camp);
+                    if (!data[5].isEmpty()) {
+                        String[] campAccessibilityArray = data[5].split("\\|");
+                        for (String camp : campAccessibilityArray) {
+                            campAccessibility.add(camp);
+                        }
                     }
-                    attendee1.setCampAccessibility(campAccessibility);
+                    attendee.setCampAccessibility(campAccessibility);
 
                     // Parse CampCommittee from the CSV
                     boolean campCommittee = Boolean.parseBoolean(data[6]);
-                    attendee1.setCampCommittee(campCommittee);
+                    attendee.setCampCommittee(campCommittee);
 
                     // Parse RegisteredCamps from the CSV
                     List<Camp> registeredCamps = new ArrayList<>();
-                    String[] registeredCampsArray = data[7].split("\\|");
-                    for (String camp : registeredCampsArray) {
-                        Camp registeredCamp = Camp.getCampByName(camp);
-                        if (registeredCamp != null) {
-                            registeredCamps.add(registeredCamp);
+                    if (!data[7].isEmpty()) {
+                        String[] registeredCampsArray = data[7].split("\\|");
+                        for (String camp : registeredCampsArray) {
+                            Camp registeredCamp = Camp.getCampByName(camp);
+                            if (registeredCamp != null) {
+                                registeredCamps.add(registeredCamp);
+                            }
                         }
                     }
-                    attendee1.setRegisteredCamps(registeredCamps);
+                    attendee.setRegisteredCamps(registeredCamps);
 
                     // Parse SecurityQuestions from the CSV
                     List<String> securityQuestions = new ArrayList<>();
-                    String[] securityQuestionsArray = data[8].split("\\|");
-                    for (String question : securityQuestionsArray) {
-                        securityQuestions.add(question);
+                    if (!data[8].isEmpty()) {
+                        String[] securityQuestionsArray = data[8].split("\\|");
+                        for (String question : securityQuestionsArray) {
+                            securityQuestions.add(question);
+                        }
                     }
-                    attendee1.setSecurityQuestions(securityQuestions);
+                    attendee.setSecurityQuestions(securityQuestions);
 
                     // Parse SecurityAnswers from the CSV
                     List<String> securityAnswers = new ArrayList<>();
-                    String[] securityAnswersArray = data[9].split("\\|");
-                    for (String answer : securityAnswersArray) {
-                        securityAnswers.add(answer);
+                    if (!data[9].isEmpty()) {
+                        String[] securityAnswersArray = data[9].split("\\|");
+                        for (String answer : securityAnswersArray) {
+                            securityAnswers.add(answer);
+                        }
                     }
-                    attendee1.setSecurityAnswers(securityAnswers);
+                    attendee.setSecurityAnswers(securityAnswers);
 
                     // Parse EnquirySubmitted from the CSV
                     List<Enquiry> enquirySubmitted = new ArrayList<>();
-                    String[] enquirySubmittedArray = data[10].split("\\|");
-                    for (String enquiry : enquirySubmittedArray) {
-                        Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
-                        if (submittedEnquiry != null) {
-                            enquirySubmitted.add(submittedEnquiry);
+                    if (!data[10].isEmpty()) {
+                        String[] enquirySubmittedArray = data[10].split("\\|");
+                        for (String enquiry : enquirySubmittedArray) {
+                            Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
+                            if (submittedEnquiry != null) {
+                                enquirySubmitted.add(submittedEnquiry);
+                            }
                         }
                     }
-                    attendee1.setEnquirySubmitted(enquirySubmitted);
+                    attendee.setEnquirySubmitted(enquirySubmitted);
 
-                 // Add the current attendee to the attendeesMap
-                    attendee.addStudent(attendee1);
+                    // Set SuggestionSubmitted to null (assuming this field is not present in the CSV)
+                    attendee.setSuggestionSubmitted(null);
 
-                    // Print the loaded student details
-                    System.out.println("Student ID: " + attendee1.getStudentID());
-                    System.out.println("Name: " + attendee1.getName());
-                    System.out.println("Password: " + attendee1.getPassword());
-                    System.out.println("User Group: " + attendee1.getUserGroup());
-                    System.out.println("Faculty: " + attendee1.getFaculty());
+                    // Print success message and details about the loaded attendee
+                    System.out.println("Attendee loaded successfully:");
+                    System.out.println("Student ID: " + attendee.getStudentID());
+                    System.out.println("Name: " + attendee.getName());
 
-                    // Print CampAccessibility
-                    System.out.print("Camp Accessibility: ");
-                    for (String camp : attendee1.getCampAccessibility()) {
-                        System.out.print(camp + "|");
-                    }
-                    System.out.println();
-
-                    System.out.println("Camp Committee: " + attendee1.getCampCommittee());
-
-                    // Print RegisteredCamps
-                    System.out.print("Registered Camps: ");
-                    for (Camp camp : attendee1.getRegisteredCamps()) {
-                        System.out.print(camp.getCampName() + "|");
-                    }
-                    System.out.println();
-
-                    // Print SecurityQuestions
-                    System.out.print("Security Questions: ");
-                    for (String question : attendee1.getSecurityQuestion()) {
-                        System.out.print(question + "|");
-                    }
-                    System.out.println();
-
-                    // Print SecurityAnswers
-                    System.out.print("Security Answers: ");
-                    for (String answer : attendee1.getSecurityAnswers()) {
-                        System.out.print(answer + "|");
-                    }
-                    System.out.println();
-
-                    // Print EnquirySubmitted
-                    System.out.print("Enquiry Submitted: ");
-                    for (Enquiry enquiry : attendee1.getEnquirySubmitted()) {
-                        System.out.print(enquiry.getEnquiry_Subject() + "|");
-                    }
-                    System.out.println();
-
-                    System.out.println("Student details printed successfully.");
+                    // You may want to save the updated attendee to a file or perform other actions.
 
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
+                    System.out.println("Number of fields: " + data.length);
+                    System.out.println("Data: " + Arrays.toString(data));
                 }
             }
         } catch (IOException e) {
             System.out.println("An error occurred while reading from the CSV file.");
             e.printStackTrace();
         }
+
+        return attendee;
     }
+
+
+
+    
+    
+    // Load Attendee from CSV
+//    public static void loadAttendeeFromCSV(Attendee attendee) {
+//        String csvFilePath = "attendee.csv";
+//
+//        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+//            String line;
+//            boolean firstLine = true; // flag for header
+//
+//            while ((line = reader.readLine()) != null) {
+//                if (firstLine) {
+//                    firstLine = false;
+//                    continue; // Skip the first line (headers)
+//                }
+//
+//                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+//
+//                if (data.length >= 12) {
+//                    // Create a new Student_User instance and set its attributes
+//                    Attendee attendee1 = new Attendee();
+//                    attendee1.setStudentID(data[0]);
+//                    attendee1.setName(data[1]);
+//                    attendee1.setPassword(data[2]);
+//                    attendee1.setUserGroup(Student_Role.valueOf(data[3])); // Assuming Student_Role values are in the CSV
+//                    attendee1.setFaculty(Faculty.valueOf(data[4])); // Assuming Faculty values are in the CSV
+//
+//                    // Parse CampAccessibility from the CSV
+//                    List<String> campAccessibility = new ArrayList<>();
+//                    String[] campAccessibilityArray = data[5].split("\\|");
+//                    for (String camp : campAccessibilityArray) {
+//                        campAccessibility.add(camp);
+//                    }
+//                    attendee1.setCampAccessibility(campAccessibility);
+//
+//                    // Parse CampCommittee from the CSV
+//                    boolean campCommittee = Boolean.parseBoolean(data[6]);
+//                    attendee1.setCampCommittee(campCommittee);
+//
+//                    List<Camp> registeredCamps = new ArrayList<>();
+//                    if (!data[7].isEmpty()) {
+//                        String[] registeredCampsArray = data[7].split("\\|");
+//                        for (String camp : registeredCampsArray) {
+//                            Camp registeredCamp = Camp.getCampByName(camp);
+//                            if (registeredCamp != null) {
+//                                registeredCamps.add(registeredCamp);
+//                            }
+//                        }
+//                    }
+//                    attendee1.setRegisteredCamps(registeredCamps);
+//                    
+//                    // Parse SecurityQuestions from the CSV
+//                    List<String> securityQuestions = new ArrayList<>();
+//                    String[] securityQuestionsArray = data[8].split("\\|");
+//                    for (String question : securityQuestionsArray) {
+//                        securityQuestions.add(question);
+//                    }
+//                    attendee1.setSecurityQuestions(securityQuestions);
+//
+//                 // Parse SecurityAnswers from the CSV
+//                    List<String> securityAnswers = new ArrayList<>();
+//                    String[] securityAnswersArray = data[9].split("\\|");
+//                    for (String answer : securityAnswersArray) {
+//                        securityAnswers.add(answer);
+//                    }
+//                    attendee1.setSecurityAnswers(securityAnswers);
+//                   
+//                    // Parse EnquirySubmitted from the CSV
+//                    List<Enquiry> enquirySubmitted = new ArrayList<>();
+//                    if (!data[10].isEmpty()) {
+//                        String[] enquirySubmittedArray = data[10].split("\\|");
+//                        for (String enquiry : enquirySubmittedArray) {
+//                            Enquiry submittedEnquiry = Enquiry.getEnquiryBySubject(enquiry);
+//                            if (submittedEnquiry != null) {
+//                                enquirySubmitted.add(submittedEnquiry);
+//                            }
+//                        }
+//                    }
+//                    attendee1.setEnquirySubmitted(enquirySubmitted);
+//
+//                 // Add the current attendee to the attendeesMap
+//                    attendee.addAttendee(attendee1);
+//                    
+//                    // Print the loaded student details
+//                    System.out.println("Student ID: " + attendee1.getStudentID());
+//                    System.out.println("Name: " + attendee1.getName());
+//                    System.out.println("Password: " + attendee1.getPassword());
+//                    System.out.println("User Group: " + attendee1.getUserGroup());
+//                    System.out.println("Faculty: " + attendee1.getFaculty());
+//
+//                    // Print CampAccessibility
+//                    System.out.print("Camp Accessibility: ");
+//                    for (String camp : attendee1.getCampAccessibility()) {
+//                        System.out.print(camp + "|");
+//                    }
+//                    System.out.println();
+//
+//                    System.out.println("Camp Committee: " + attendee1.getCampCommittee());
+//
+//                    // Print RegisteredCamps
+//                    System.out.print("Registered Camps: ");
+//                    for (Camp camp : attendee1.getRegisteredCamps()) {
+//                        System.out.print(camp.getCampName() + "|");
+//                    }
+//                    System.out.println();
+//
+//                    // Print SecurityQuestions
+//                    System.out.print("Security Questions: ");
+//                    for (String question : attendee1.getSecurityQuestion()) {
+//                        System.out.print(question + "|");
+//                    }
+//                    System.out.println();
+//
+//                    // Print SecurityAnswers
+//                    System.out.print("Security Answers: ");
+//                    for (String answer : attendee1.getSecurityAnswers()) {
+//                        System.out.print(answer + "|");
+//                    }
+//                    System.out.println();
+//
+//                    // Print EnquirySubmitted
+//                    System.out.print("Enquiry Submitted: ");
+//                    for (Enquiry enquiry : attendee1.getEnquirySubmitted()) {
+//                        System.out.print(enquiry.getEnquiry_Subject() + "|");
+//                    }
+//                    System.out.println();
+//
+//                    System.out.println("Student details printed successfully.");
+//
+//                } else {
+//                    System.out.println("Incomplete data in the CSV line: " + line);
+//                }
+//            }
+//        } catch (IOException e) {
+//            System.out.println("An error occurred while reading from the CSV file.");
+//            e.printStackTrace();
+//        }
+//    }
 
     public static void updateAttendeeCSVFile(Attendee attendees, String studentId) {
         // Get the path to the CSV file
@@ -390,7 +627,8 @@ public class CSVDataManager {
         StringBuilder updatedContent = new StringBuilder();
 
         // Find the student based on the provided studentId from studentUser
-        Attendee attendee = Attendee.existingAttendees().get(studentId);
+        Attendee attendee = new Attendee();
+       attendee = attendee.existingAttendees().get(studentId);
 
         // Check if the student exists
         if (attendee != null) {
