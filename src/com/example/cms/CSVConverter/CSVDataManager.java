@@ -22,6 +22,10 @@ import java.util.List;
  */
 public class CSVDataManager {
 
+    /**
+     * Loads student details from CSV, upon specification of Student_User in the parameter.
+     * @param studentUser Inputted Student User
+     */
 	// Load students from CSV
     public static void loadStudentsFromCSV(Student_User studentUser) {
         String csvFilePath = "student.csv";
@@ -181,6 +185,11 @@ public class CSVDataManager {
         }
     }
 
+    /**
+     * Updates details of student in CSV
+     * @param studentUser Specified Student User object containing the updated information
+     * @param studentId Student ID to identify the Student User
+     */
     public static void updateStudentCSVFile(Student_User studentUser, String studentId) {
         // Get the path to the CSV file
         String csvFilePath = "student.csv";
@@ -388,6 +397,12 @@ public class CSVDataManager {
 //        }
 //    }
 
+    /**
+     * Loads attendee details from CSV, upon specification of attendee in the parameter.
+     * Parameter attendee object is mostly empty at this point, hence this function is required to fill in the rest of the relevant information about the specified attendee.
+     * @param attendee Specified attendee object with just userID attribute
+     * @return Same attendee object, with all the attributes filled with information from the CSV
+     */
     public static Attendee loadAttendeeFromCSV(Attendee attendee) {
         String csvFilePath = "attendee.csv";
         
@@ -502,7 +517,10 @@ public class CSVDataManager {
         return attendee;
     }
 
-
+    /**
+     * Update attendee details in the CSV
+     * @param attendee attendee object with updated information
+     */
     public static void updateAttendeeCSVFile(Attendee attendee) {
         // Get the path to the CSV file
         String csvFilePath = "attendee.csv";
@@ -590,7 +608,13 @@ public class CSVDataManager {
 
  
 /********************************COMMITTEE*********************************************/
- // Load Committee from CSV
+ // Load Attendee from CSV
+
+    /**
+     * Loads committee member details from CSV, upon specification of committee member object in the parameter.
+     * @param committee Specified committee member object with just userID attribute
+     * @return Same committee member object, with all the attributes filled with information from the CSV
+     */
     public static Committee loadCommitteeFromCSV(Committee committee) {
         String csvFilePath = "committee.csv";
 
@@ -732,7 +756,11 @@ public class CSVDataManager {
         }
         return committee;
     }
-  
+
+    /**
+     * Update committee member details in the CSV
+     * @param committee Committee member object with updated information
+     */
     public static void updateCommitteeCSVFile(Committee committee) {
         // Get the path to the CSV file
         String csvFilePath = "committee.csv";
@@ -819,13 +847,9 @@ public class CSVDataManager {
     }
 
 /*************************STAFF****************************************/
-    public static Staff_User loadStaffFromCSV(Staff_User staff) {
+    public static void loadStaffFromCSV() {
         String csvFilePath = "staff.csv";
         
-        // If the attendee is null, create a new one
-        if (staff == null) {
-            staff = new Staff_User();
-        }
 
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -850,9 +874,16 @@ public class CSVDataManager {
                     staffs.setSalt(data[3]);
                     staffs.setFaculty(Faculty.valueOf(data[4]));
 
-                    // Parse campsCreated from the CSV
-                    Camp campCreated = Camp.getCampByName(data[5]);
-                    staffs.setCampsCreated(campCreated);
+                    String[] campNames = data[5].split("\\|");
+                    for (String campName : campNames) {
+                        Camp campCreated = Camp.getCampByName(campName);
+                        if (campCreated != null) {
+                            staffs.setCampsCreated(campCreated);
+                        } else {
+                            System.out.println("Camp not found for name: " + campName);
+                        }
+                    }
+
 
                     // Parse SecurityQuestions from the CSV
                     List<String> securityQuestions = new ArrayList<>();
@@ -869,12 +900,10 @@ public class CSVDataManager {
                         securityAnswers.add(answer);
                     }
                     staffs.setSecurityAnswers(securityAnswers);
-
+                    
+                    Staff_User.existingStaff.put(staffs.getStaffID(), staffs);
                     // Check if staff is null and instantiate it if needed
  
-//
-//                    // Add the current staff to the existingStaff map
-//                    staff.addStaff(staffs);
 
                     // Print details about the loaded staff
                     System.out.println("Staff ID: " + staffs.getStaffID());
@@ -884,7 +913,7 @@ public class CSVDataManager {
 
                     // Print campCreated if not null
                     if (staffs.getCampsCreated() != null) {
-                        System.out.println("Created Camp: " + staffs.getCampsCreated().getCampName());
+                    	System.out.println("Created Camp: " + staffs.getCampsCreated().get(0).getCampName());
                     } else {
                         System.out.println("Created Camp: null");
                     }
@@ -915,8 +944,6 @@ public class CSVDataManager {
             e.printStackTrace();
         }
 
-        // Return the newly created staff instance or the existing one
-        return staff;
     }
 
     
@@ -956,11 +983,16 @@ public class CSVDataManager {
                 // Check if the first field (attendee ID) matches the target attendee ID
                 if (fields.length > 0 && fields[0].equals(staff.getStaffID())) {
                     // Append the updated information for the specific attendee to the StringBuilder
+                    updatedContent.append(staff.getStaffID()).append(",");
                     updatedContent.append(staff.getName()).append(",");
                     updatedContent.append(staff.getPassword()).append(",");
                     updatedContent.append(staff.getSalt()).append(",");
                     updatedContent.append(staff.getFaculty()).append(",");
-                    updatedContent.append(staff.getCampsCreated().getCampName()).append(",");  // Assuming getCampName() returns the camp name
+                    if (staff.getCampsCreated() != null) {
+                        updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                    } else {
+                        updatedContent.append(",");
+                    }
                     updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
                     updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
                     
@@ -972,16 +1004,25 @@ public class CSVDataManager {
             }
 
             // If the attendee ID was not found, add a new line for the attendee
+            // If the attendee ID was not found, add a new line for the attendee
             if (!staffIdFound) {
-            	updatedContent.append(staff.getName()).append(",");
+                updatedContent.append(staff.getStaffID()).append(",");
+                updatedContent.append(staff.getName()).append(",");
                 updatedContent.append(staff.getPassword()).append(",");
                 updatedContent.append(staff.getSalt()).append(",");
                 updatedContent.append(staff.getFaculty()).append(",");
-                updatedContent.append(staff.getCampsCreated().getCampName()).append(",");  // Assuming getCampName() returns the camp name
+
+                // Check if getCampsCreated() is not null before accessing the stream
+                if (staff.getCampsCreated() != null) {
+                    updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                } else {
+                    updatedContent.append(",");
+                }
+
                 updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
                 updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
-                            }
-
+            }
+            
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(updatedContent.toString());

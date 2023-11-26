@@ -36,10 +36,9 @@ public class Staff_Setup {
           System.out.print("Enter Staff ID: ");
           String staffID = scanner.nextLine().trim().toUpperCase();
           System.out.println("Staff id inputted: " + staffID);
+          CSVDataManager.loadStaffFromCSV();           // Check if staff ID already exists
+          Staff_User staff = Staff_User.getExistingStaff().get(staffID);
           
-           // Check if staff ID already exists
-          Staff_User staff = CSVDataManager.loadStaffFromCSV(getExistingStaff.get(staffID));
-          System.out.println("Prove that staff exist: " + staff.getStaffID());
           // Check if staff is not null and staffID is not null
           if (staff != null && staff.getStaffID() != null && staff.getStaffID().equals(staffID)) {
               System.out.println("Staff ID already exists. Do you want to update your account? (yes/no)");
@@ -54,10 +53,34 @@ public class Staff_Setup {
                   staff_Login.start();
               }
           } else {
-              // Staff ID doesn't exist, proceed with setup
-              System.out.println("Staff ID does not exist");
-              setupNewStaffAccount(staffID);
-          }
+        	    // Staff ID doesn't exist
+        	    System.out.println("Staff ID does not exist.");
+        	    
+        	    Student_User studentUser = new Student_User();
+                CSVDataManager.loadStudentsFromCSV(studentUser);
+                
+        	    // Check if the ID is not from a student
+        	    if (!studentUser.getExistingStudents().containsKey(staffID)) {
+        	        System.out.println("The entered ID is not associated with a student account.");
+
+        	        System.out.print("Do you want to create a new account? (yes/no): ");
+        	        String createNewAccountChoice = scanner.nextLine().toLowerCase();
+
+        	        if ("yes".equals(createNewAccountChoice)) {
+        	            setupNewStaffAccount(staffID);
+        	        } else {
+        	            System.out.println("Redirecting to account manager.");
+        	            
+        	            account_Manager accountManager = new account_Manager(scanner);
+        	            accountManager.start();
+        	        }
+        	    } else {
+        	        // The entered ID is associated with a student account
+        	        System.out.println("The entered ID belongs to a student. Redirecting to account Manager.");
+        	        account_Manager accountManager = new account_Manager(scanner);
+    	            accountManager.start();;
+        	    }
+        	}
       }
 
     private void setupNewStaffAccount(String staffID) {
@@ -406,10 +429,12 @@ public class Staff_Setup {
 
 
 	private void updateAccount(String staffID) {
+		
+		Scanner scanner = new Scanner(System.in);
 	    // Get current staff information
-	    this.getExistingStaff = new HashMap<>();
-	    Staff_User staff = CSVDataManager.loadStaffFromCSV(getExistingStaff.get(staffID));
-	    
+	    //this.getExistingStaff = new HashMap<>();
+	    //Staff_User staff = CSVDataManager.loadStaffFromCSV(getExistingStaff.get(staffID));
+		Staff_User staff = Staff_User.getExistingStaff().get(staffID);
 	    // Display current information
 	    System.out.println("Current Faculty: " + staff.getFaculty());
 	    System.out.println("Current Password: " + staff.getPassword());
@@ -452,6 +477,9 @@ public class Staff_Setup {
 	    CSVDataManager.updateStaffCSVFile(staff);
 
 	    System.out.println("Staff account updated successfully. Redirecting to staff login.");
+	    
+	    account_Manager accountManager = new account_Manager(scanner);
+	    accountManager.start();
 	    // Redirect to staff login logic
 	    // staffLogin();
 	}

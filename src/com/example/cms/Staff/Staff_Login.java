@@ -25,7 +25,7 @@ public class Staff_Login {
     public void start() {
         int maxAttempts = 3;
         int attempts = 0;
-
+        CSVDataManager.loadStaffFromCSV();   
         while (attempts < maxAttempts) {
             try {
                 System.out.print("Enter your password: ");
@@ -37,10 +37,8 @@ public class Staff_Login {
                 if (enteredPassword.isEmpty()) {
                     throw new InputMismatchException("Password cannot be empty.");
                 }
-
-                Staff_User existingStaffMember = existingStaff.get(staffID);
-                CSVDataManager.loadStaffFromCSV(existingStaffMember);
-
+                Staff_User existingStaffMember = Staff_User.getExistingStaff().get(staffID);
+                
                 // Debugging information
                 System.out.println("Debugging - Before passwordManager.checkPassword");
 
