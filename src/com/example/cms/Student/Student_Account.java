@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class Student_Account {
     protected String userId; // Add a field to hold the student ID
     private Scanner scanner;
-    private Map<String, Student_User> existingStudents;
+    private Map<String, com.example.cms.Student.Student_User> existingStudents;
 
-    public Student_Account(Map<String, Student_User> existingStudents) {
+    public Student_Account(Map<String, com.example.cms.Student.Student_User> existingStudents) {
         this.existingStudents = existingStudents;
     }
 
@@ -28,7 +28,7 @@ public class Student_Account {
 
     // Constructor to initialize the scanner
  // Constructor to initialize the scanner
-    public Student_Account(String userId, Map<String, Student_User> existingStudents) {
+    public Student_Account(String userId, Map<String, com.example.cms.Student.Student_User> existingStudents) {
         this.userId = userId;
         this.existingStudents = existingStudents;
         this.scanner = new Scanner(System.in); // Initialize the scanner here
@@ -40,7 +40,7 @@ public class Student_Account {
         int roleChoice = 0; // Initialize to an invalid value
         Student_Role role = null; // Declare the role variable here
         
-        Student_User existingStudent = existingStudents.get(userId);
+        com.example.cms.Student.Student_User existingStudent = existingStudents.get(userId);
         CSVDataManager.loadStudentsFromCSV(existingStudent);
         
         System.out.println("Welcome," + existingStudent.getName());
@@ -75,14 +75,14 @@ public class Student_Account {
 
                     if ("COMMITTEE".equals(role.name())) {
                         System.out.println("Welcome, Committee Member " + studentName);
-                        Committee_Account committee_Account = new Committee_Account(userId, existingStudent.getExistingStudents());
+                        com.example.cms.Student.Committee_Account committee_Account = new com.example.cms.Student.Committee_Account(userId, existingStudent.getExistingStudents());
 						committee_Account.start();
                         // Redirect to the committee class here
                     } else if ("ATTENDEE".equals(role.name())) {
                         System.out.println("Welcome, Attendee " + studentName);
                         // Redirect to the attendee class here
                         
-                        Attendee_Account attendee_Account = new Attendee_Account(userId, existingStudent.getExistingStudents());
+                        com.example.cms.Student.Attendee_Account attendee_Account = new com.example.cms.Student.Attendee_Account(userId, existingStudent.getExistingStudents());
 						attendee_Account.start();
                     } else {
                         System.out.println("Invalid role. Please enter 'committee' or 'attendee'.");
