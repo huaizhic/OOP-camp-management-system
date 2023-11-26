@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor change">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVDataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Enquiries/Enquiry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Suggestions/Suggestion.java" afterDir="false" />
-    </list>
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor bug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -314,7 +305,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700983266361</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Load and saving committed">
+      <option name="closed" value="true" />
+      <created>1700988206158</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1700988206158</updated>
+    </task>
+    <task id="LOCAL-00026" summary="minor bug">
+      <option name="closed" value="true" />
+      <created>1700988369786</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1700988369786</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,7 +356,9 @@
     <MESSAGE value="Implementing suggestion and some committee methods" />
     <MESSAGE value="Committee, suggestion and Staff" />
     <MESSAGE value="minor change" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor change" />
+    <MESSAGE value="Load and saving committed" />
+    <MESSAGE value="minor bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

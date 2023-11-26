@@ -1,7 +1,6 @@
 package com.example.cms.user_Login;
 
 import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Staff.Staff_Account;
 import com.example.cms.Staff.Staff_Setup;
 import com.example.cms.Student.Student_Account;
 import com.example.cms.Student.Student_User;
@@ -34,14 +33,23 @@ public class account_Manager {
         if (userTypeChoice == 2) {
             staffId = getStaffId();
             System.out.println("This is the staff id entered: " + staffId);
-
             // Create Staff_Account instance and start staff account functionality
+            CSVDataManager.loadStaffFromCSV();
+            CSVDataManager.loadCampsFromCSV();
+            CSVDataManager.loadSuggestionFromCSV();
+            CSVDataManager.loadCommitteeFromCSV();
+            CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadAttendeeFromCSV();
             Staff_Setup staff_Setup = new Staff_Setup();
             staff_Setup.start();
         }
         // For Student User
         else if (userTypeChoice == 1) {
-            // Get account choice (existing student or new registration)
+            CSVDataManager.loadCampsFromCSV();
+            CSVDataManager.loadSuggestionFromCSV();
+            CSVDataManager.loadCommitteeFromCSV();
+            CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadAttendeeFromCSV();
             int accountChoice = getAccountChoice();
 
             // Existing Student Account
