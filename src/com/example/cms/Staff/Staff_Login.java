@@ -1,28 +1,17 @@
 package com.example.cms.Staff;
 
 import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Password.Password_Manager;
 import com.example.cms.Password.Password_Manager_Staff;
-import com.example.cms.Faculty;
 
 import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Staff_Login {
-    private String staffID;
-    private Scanner scanner;
-    private Staff staff;
-    private Map<String, Staff_User> existingStaff;
+	Scanner scanner = new Scanner(System.in);
 
-    public Staff_Login(String staffID, Map<String, Staff_User> existingStaff) {
-        this.staffID = staffID;
-        this.existingStaff = existingStaff;
-        this.scanner = new Scanner(System.in);
-    }
-
-    public void start() {
+    public void start(String staffID) {
+        Staff staff = Staff.existingStaff.get(staffID);
         int maxAttempts = 3;
         int attempts = 0;
         CSVDataManager.loadStaffFromCSV();   
