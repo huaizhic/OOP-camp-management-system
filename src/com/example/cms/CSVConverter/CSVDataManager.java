@@ -4,6 +4,7 @@ import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
+import com.example.cms.Staff.Staff;
 import com.example.cms.Staff.Staff_User;
 import com.example.cms.Status;
 import com.example.cms.Student.Attendee;
@@ -861,7 +862,7 @@ public class CSVDataManager {
 
                 if (data.length >= 8) {
                     // Create a new Staff_User instance and set its attributes
-                    Staff_User staffs = new Staff_User();
+                    Staff staffs = new Staff(null,null,null,null,null);
 
                     staffs.setStaffID(data[0]);
                     staffs.setName(data[1]);
@@ -1031,10 +1032,8 @@ public class CSVDataManager {
         }
     }
 
-<<<<<<< HEAD
 /*********************************************CAMP************************************/
-=======
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
+
     public static void loadCampsFromCSV() {
         String csvFilePath = "camp.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -1055,10 +1054,7 @@ public class CSVDataManager {
                             data[4], // Location
                             Integer.parseInt(data[5]), // Total Slots
                             Integer.parseInt(data[6]), // remaining slots
-<<<<<<< HEAD
-=======
                             10,
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
                             Integer.parseInt(data[8]), //
                             data[9], // Staff in Charge
                             Boolean.parseBoolean(data[10]) // Visibility

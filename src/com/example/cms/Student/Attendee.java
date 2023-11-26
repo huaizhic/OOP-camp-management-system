@@ -1,11 +1,11 @@
 package com.example.cms.Student;
 
+import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.campData;
 import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Staff.Staff_User;
 import com.example.cms.Faculty;
-import com.example.cms.CSVConverter.CSVDataManager;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -537,6 +537,9 @@ public class Attendee extends Student_User {
         attendee.setEnquirySubmitted(newEnquiry); //add enquiry to the attendee
         campToEnquire.setEnquiry(newEnquiry); // add enquiry to the camp
         System.out.println("The enquiry has been sent successfully");
+        CSVDataManager.updateEnquiryCSVFile(newEnquiry);
+        CSVDataManager.updateAttendeeCSVFile(Attendee.attendeeToNameMap.get(newEnquiry.getSubmitter()));
+        CSVDataManager.updateCampCSVFile(campToEnquire);
         manageEnquiries(attendee);
     }
 
@@ -614,9 +617,25 @@ public class Attendee extends Student_User {
                     System.out.println("Your new subject is: " + newSubject);
                     System.out.println("Enter confirm or any other key to cancel");
                     if (input.nextLine().equalsIgnoreCase("confirm")) {
+                       Camp campofEnquiry = null;
+
+                        for(Camp camp: campData.getCampList()){
+                            for(Enquiry enquiry : camp.getEnquiry()){
+                                if(enquiry.getEnquiry_Subject().equals(enquiryToBeEdit.getEnquiry_Subject())){
+                                    campofEnquiry = camp;
+                                    break;
+                                }
+                            }
+                            if(campofEnquiry != null) break;
+                        }
+
                         Enquiry.getEnquiryHashMap().remove(enquiryToBeEdit.getEnquiry_Subject());
+
                         enquiryToBeEdit.setEnquiry_Subject(newSubject);
                         Enquiry.getEnquiryHashMap().put(newSubject, enquiryToBeEdit);
+                        CSVDataManager.updateEnquiryCSVFile(enquiryToBeEdit);
+                        CSVDataManager.updateCampCSVFile(campofEnquiry);
+
                         System.out.println("Suggestion subject edited successfully");
                     } else {
                         System.out.println("Action terminated by user");
@@ -632,6 +651,7 @@ public class Attendee extends Student_User {
                     System.out.println("Enter confirm or any other key to cancel");
                     if (input.nextLine().equalsIgnoreCase("confirm")) {
                         enquiryToBeEdit.setContent(newContent);
+                        CSVDataManager.updateEnquiryCSVFile(enquiryToBeEdit);
                         System.out.println("Enquiry content edited successfully");
                     } else {
                         System.out.println("Action terminated by user");
@@ -702,9 +722,15 @@ public class Attendee extends Student_User {
                 Enquiry.getEnquiryArrayList().remove(enquiryToDelete); // delete in arraylist
                 Enquiry.getEnquiryHashMap().remove(enquiryToDelete.getEnquiry_Subject()); // delete in hashmap
 
+                CSVDataManager.updateAttendeeCSVFile(attendee);
+                for(Enquiry enquiry : Enquiry.getEnquiryArrayList()){
+                    CSVDataManager.updateEnquiryCSVFile(enquiry);
+                }
+
                 for (Camp camp : attendee.getRegisteredCamps()) {
                     if (camp.getEnquiry().contains(enquiryToDelete)) {
                         camp.getEnquiry().remove(enquiryToDelete);
+                        CSVDataManager.updateCampCSVFile(camp);
                     }
                 } // delete in the camp that has it
 

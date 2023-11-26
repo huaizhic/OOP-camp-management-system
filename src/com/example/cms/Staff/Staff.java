@@ -6,9 +6,12 @@ import com.example.cms.Camp.campData;
 import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
+import com.example.cms.Format;
 import com.example.cms.Status;
 import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
+import com.example.cms.generate_report.GenerateReport;
+import com.example.cms.generate_report.StaffGenerateReport;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -147,11 +150,9 @@ public class Staff extends Staff_User{
 			ArrayList<LocalDate> campDate = new ArrayList<>();
 			campDate.add(startDate);
 			campDate.add(endDate);
-<<<<<<< HEAD
-			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, slots, 10, this.getName(), visibility);
-=======
-			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, slots, 10, 10, this.getName(), visibility);
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
+
+		Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, slots, 10, 10, this.getName(), visibility);
+
 
 			campData.setCampList(newCamp);
 			campData.addCampToMap(campName, newCamp);
@@ -547,15 +548,74 @@ public class Staff extends Staff_User{
 			Committee submitter = Committee.committeeNameMap.get(suggestionToApprove.getSubmitter());
 			int points = submitter.getPoints();
 			submitter.setPoints(points + 1);
-<<<<<<< HEAD
-=======
 			CSVDataManager.updateSuggestionCSVFile(suggestionToApprove);
 			CSVDataManager.updateCommitteeCSVFile(submitter);
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
 			System.out.println("The suggestion has been processed and your response has been successfully recorded");
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
 		}
+	}
+
+	public void generateReport(Staff staff) {
+		viewCampCreated(staff);
+		Camp campToReport = selectCamp(staff.getCampsCreated());
+		Scanner scanner = new Scanner(System.in);
+		GenerateReport staffGenerator = new StaffGenerateReport();
+		boolean exit = false;
+		do {
+			System.out.println("Generate Report Menu:");
+			System.out.println("1. View Camp Committee Reports");
+			System.out.println("2. View Camp Attendee Reports");
+			System.out.println("3. Back to Main Menu");
+
+			int choice;
+			do {
+				try {
+					System.out.print("Enter your choice: ");
+					choice = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("Invalid input. Please enter a valid integer.");
+					scanner.nextLine(); // Consume the invalid input
+					choice = -1; // Set a default value or use a flag to handle the loop
+				}
+			} while (choice != 1 && choice != 2 && choice != 3);
+			switch (choice) {
+				case 1:
+					String format = null;
+					do {
+						System.out.println("What format do you want to use, CSV or TXT? Please enter CSV or TXT");
+						format = scanner.next();
+						if (format.equalsIgnoreCase("CSV")) {
+							staffGenerator.generateCommitteeList(campToReport, Format.CSV);
+						} else if (format.equalsIgnoreCase("TXT")) {
+							staffGenerator.generateCommitteeList(campToReport, Format.TXT);
+						} else {
+							System.out.println("Only CSV and TXT are accepted");
+						}
+					}while(!format.equalsIgnoreCase("CSV") && !format.equalsIgnoreCase("TXT"));
+					break;
+				case 2:
+					String format2 = null;
+					do {
+						System.out.println("What format do you want to use, CSV or TXT? Please enter CSV or TXT");
+						format2 = scanner.next();
+						if (format2.equalsIgnoreCase("CSV")) {
+							staffGenerator.generateAttendeeList(campToReport, Format.CSV);
+						} else if (format2.equalsIgnoreCase("TXT")) {
+							staffGenerator.generateAttendeeList(campToReport, Format.CSV);
+						} else {
+							System.out.println("Only CSV and TXT are accepted");
+						}
+					}while(!format2.equalsIgnoreCase("CSV") && !format2.equalsIgnoreCase("TXT"));
+					break;
+				case 3:
+					exit = true;
+					break;
+				default:
+					System.out.println("Invalid choice. Please enter a valid option.");
+					break;
+			}
+		}while(!exit);
 	}
 
 

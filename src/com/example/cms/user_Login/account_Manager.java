@@ -38,7 +38,6 @@ public class account_Manager {
 
         // For Staff User
         if (userTypeChoice == 2) {
-<<<<<<< HEAD
             // Print a header for Staff Login
             System.out.println("\n===== Staff Login =====");
 
@@ -48,19 +47,13 @@ public class account_Manager {
             CSVDataManager.loadSuggestionFromCSV();
             CSVDataManager.loadEnquiryFromCSV();
             CSVDataManager.loadCampsFromCSV();
-=======
             staffId = getStaffId();
             System.out.println("This is the staff id entered: " + staffId);
             // Create Staff_Account instance and start staff account functionality
-            CSVDataManager.loadSuggestionFromCSV();
-            CSVDataManager.loadEnquiryFromCSV();
-            CSVDataManager.loadCampsFromCSV(); // all attendee and committee name are placed in the hashmap
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
-            CSVDataManager.loadStaffFromCSV();
+             CSVDataManager.loadStaffFromCSV();
             CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadAttendeeFromCSV();
 
-<<<<<<< HEAD
             // Populate camp data with registered attendees and committee members
             System.out.println("Processing data...");
 
@@ -69,140 +62,116 @@ public class account_Manager {
                     Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
                     camp.setAttendeesRegistered(registeredAttendee);
                 }
-
-                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
-=======
-            for(Camp camp : campData.getCampList()){
-                for(String string : registeredAttendeeToCampNameMap.get(camp)){
-                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
-                    camp.setAttendeesRegistered(registeredAttendee);
-                }
             }
 
-            for(Camp camp : campData.getCampList()){
-                for(String string : registeredCommitteeToCampNameMap.get(camp)){
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
+            for (Camp camp : campData.getCampList()) {
+                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
                     Committee registeredCommittee = Committee.committeeNameMap.get(string);
                     camp.setCommitteeRegistered(registeredCommittee);
                 }
             }
 
-<<<<<<< HEAD
-            // Start Staff Setup functionality
-            System.out.println("Data loaded successfully!\n");
-=======
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
-            Staff_Setup staff_Setup = new Staff_Setup();
-            staff_Setup.start();
+                    // Start Staff Setup functionality
+                    System.out.println("Data loaded successfully!\n");
 
-        }
-        // For Student User
+                    Staff_Setup staff_Setup = new Staff_Setup();
+                    staff_Setup.start();
+
+                }
+                // For Student User
         else if (userTypeChoice == 1) {
-<<<<<<< HEAD
-            // Print a header for Student Login
-            System.out.println("\n===== Student Login =====");
 
-            // Load necessary data from CSV files
-            System.out.println("Loading data, please wait...");
+                    // Print a header for Student Login
+                    System.out.println("\n===== Student Login =====");
 
-=======
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
-            CSVDataManager.loadEnquiryFromCSV();
-            CSVDataManager.loadSuggestionFromCSV();
-            CSVDataManager.loadCampsFromCSV();
-            CSVDataManager.loadCommitteeFromCSV();
-            CSVDataManager.loadAttendeeFromCSV();
+                    // Load necessary data from CSV files
+                    System.out.println("Loading data, please wait...");
 
-<<<<<<< HEAD
-            // Populate camp data with registered attendees and committee members
-            System.out.println("Processing data...");
+                    CSVDataManager.loadEnquiryFromCSV();
+                    CSVDataManager.loadSuggestionFromCSV();
+                    CSVDataManager.loadCampsFromCSV();
+                    CSVDataManager.loadCommitteeFromCSV();
+                    CSVDataManager.loadAttendeeFromCSV();
 
-            
-            for (Camp camp : campData.getCampList()) {
-                for (String string : registeredAttendeeToCampNameMap.get(camp)) {
-                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
-                    camp.setAttendeesRegistered(registeredAttendee);
-                }
+                    // Populate camp data with registered attendees and committee members
+                    System.out.println("Processing data...");
 
-                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
-=======
-            for(Camp camp : campData.getCampList()){
-                for(String string : registeredAttendeeToCampNameMap.get(camp)){
-                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
-                    camp.setAttendeesRegistered(registeredAttendee);
-                }
-            }
 
-            for(Camp camp : campData.getCampList()){
-                for(String string : registeredCommitteeToCampNameMap.get(camp)){
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
-                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
-                    camp.setCommitteeRegistered(registeredCommittee);
-                }
-            }
-
-<<<<<<< HEAD
-            // Get account choice (existing student or new registration)
-=======
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
-            int accountChoice = getAccountChoice();
-
-            // Existing Student Account
-            if (accountChoice == 1) {
-                // Create Student_User instance and load student data from CSV
-                System.out.println("Loading student data, please wait...");
-                Student_User studentUser = new Student_User();
-                CSVDataManager.loadStudentsFromCSV(studentUser);
-
-                boolean userFound = false;
-
-                // Loop until a valid student is found or user chooses to retry or register
-                while (!userFound) {
-                    userId = getStudentId();
-                    System.out.println("This is the student id entered: " + userId);
-
-                    // Create Student_Account instance and check if the student exists
-                    Student_Account studentAccount = new Student_Account(userId, studentUser.getExistingStudents());
-
-                    // If student exists, start student account functionality
-                    if (studentAccount.getStudentAccount(userId)) {
-                        studentAccount.start();
-                        userFound = true;
-                    } else {
-                        System.out.println("Student not found.");
-
-                        int retryChoice;
-                        do {
-                            // Prompt user to retry or register
-                            retryChoice = getRetryChoice();
-
-                            switch (retryChoice) {
-                                case 1:
-                                    // Continue the loop to retry
-                                    break;
-                                case 2:
-                                    // Start user registration and exit loop
-                                    userRegistration.start();
-                                    userFound = true;
-                                    break;
-                                default:
-                                    System.out.println("Invalid choice. Please enter 1 or 2.");
-                                    break;
-                            }
-                        } while (retryChoice != 1 && retryChoice != 2);
+                    for (Camp camp : campData.getCampList()) {
+                        for (String string : registeredAttendeeToCampNameMap.get(camp)) {
+                            Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                            camp.setAttendeesRegistered(registeredAttendee);
+                        }
                     }
-                }
-            }
-            // New Student Registration
-            else if (accountChoice == 0) {
-                userRegistration.start();
-            } else {
-                System.out.println("Invalid choice. Please enter '1' for Yes or '0' for No.");
-            }
-        } else {
-            System.out.println("Invalid user type. Please enter '1' for student or '2' for staff.");
-        }
-    }
+
+                    for (Camp camp : campData.getCampList()) {
+                        for (String string : registeredCommitteeToCampNameMap.get(camp)) {
+                            Committee registeredCommittee = Committee.committeeNameMap.get(string);
+                            camp.setCommitteeRegistered(registeredCommittee);
+                        }
+                    }
+
+                            // Get account choice (existing student or new registration)
+
+                            int accountChoice = getAccountChoice();
+
+                            // Existing Student Account
+                            if (accountChoice == 1) {
+                                // Create Student_User instance and load student data from CSV
+                                System.out.println("Loading student data, please wait...");
+                                Student_User studentUser = new Student_User();
+                                CSVDataManager.loadStudentsFromCSV(studentUser);
+
+                                boolean userFound = false;
+
+                                // Loop until a valid student is found or user chooses to retry or register
+                                while (!userFound) {
+                                    userId = getStudentId();
+                                    System.out.println("This is the student id entered: " + userId);
+
+                                    // Create Student_Account instance and check if the student exists
+                                    Student_Account studentAccount = new Student_Account(userId, studentUser.getExistingStudents());
+
+                                    // If student exists, start student account functionality
+                                    if (studentAccount.getStudentAccount(userId)) {
+                                        studentAccount.start();
+                                        userFound = true;
+                                    } else {
+                                        System.out.println("Student not found.");
+
+                                        int retryChoice;
+                                        do {
+                                            // Prompt user to retry or register
+                                            retryChoice = getRetryChoice();
+
+                                            switch (retryChoice) {
+                                                case 1:
+                                                    // Continue the loop to retry
+                                                    break;
+                                                case 2:
+                                                    // Start user registration and exit loop
+                                                    userRegistration.start();
+                                                    userFound = true;
+                                                    break;
+                                                default:
+                                                    System.out.println("Invalid choice. Please enter 1 or 2.");
+                                                    break;
+                                            }
+                                        } while (retryChoice != 1 && retryChoice != 2);
+                                    }
+                                }
+                            }
+                            // New Student Registration
+                            else if (accountChoice == 0) {
+                                userRegistration.start();
+                            } else {
+                                System.out.println("Invalid choice. Please enter '1' for Yes or '0' for No.");
+                            }
+                        } else{
+                            System.out.println("Invalid user type. Please enter '1' for student or '2' for staff.");
+                        }
+                    }
+
 
 
  // Method to get user type choice (staff or student)

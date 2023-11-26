@@ -22,7 +22,7 @@ public class Staff_User {
     private ArrayList<String> securityAnswers;
 	private Scanner input;
 
-    public static Map<String, Staff_User> existingStaff = new HashMap<>();
+    public static Map<String, Staff> existingStaff = new HashMap<>();
 
     public Staff_User(){
         this.staffID = null;
@@ -107,12 +107,12 @@ public class Staff_User {
         this.securityAnswers = new ArrayList<>(securityAnswers);
     }
 
-    public static Map<String, Staff_User> getExistingStaff() {
+    public static Map<String, Staff> getExistingStaff() {
         return existingStaff;
     }
    
     
-    public void addStaff(Staff_User newStaff) {
+    public void addStaff(Staff newStaff) {
     	 if (newStaff != null) {
  	        existingStaff.put(newStaff.getStaffID(),newStaff);
 

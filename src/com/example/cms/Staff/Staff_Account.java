@@ -66,7 +66,8 @@ public class Staff_Account {
             System.out.println("3. Delete Existing Camp");
             System.out.println("4. View All Camp");
             System.out.println("5. View Camp Created");
-            System.out.println("6. Back To the Main Page");
+            System.out.println("6. Generate Camp Report");
+            System.out.println("7. Back To the Main Page");
 
             System.out.print("Enter your choice: ");
             Scanner scanner = null;
@@ -100,6 +101,8 @@ public class Staff_Account {
                 case (5):
                     existingStaffMember.viewCampCreated(existingStaffMember);
                 case(6):
+                    existingStaffMember.generateReport(existingStaffMember);
+                case(7):
                     exit = true;
                     break;
                 default:
