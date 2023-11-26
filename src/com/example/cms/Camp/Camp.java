@@ -62,7 +62,7 @@ public class Camp {
 	 * @param visibility Camp visibility to students
 	 */
 
-	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, int remainingSlots, int remainingCommitteeSlots, String staff, boolean visibility){
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, int remainingSlots, int committeeSlots, int remainingCommitteeSlots, String staff, boolean visibility){
 		this.campName = campName;
 		this.campDates = campDate;
 		this.regCloseDate = regCloseDate;
@@ -70,7 +70,7 @@ public class Camp {
 		this.location = location;
 		this.totalSlots = totalSlots;
 		this.remainingSlots = remainingSlots;
-		committeeSlots = 10;
+		this.committeeSlots = committeeSlots;
 		this.remainingCommitteeSlots = remainingCommitteeSlots;
 		staffInCharge = staff;
 		this.visibility = visibility;

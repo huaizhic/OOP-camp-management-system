@@ -1051,6 +1051,7 @@ public class CSVDataManager {
                             data[4], // Location
                             Integer.parseInt(data[5]), // Total Slots
                             Integer.parseInt(data[6]), // remaining slots
+                            10,
                             Integer.parseInt(data[8]), //
                             data[9], // Staff in Charge
                             Boolean.parseBoolean(data[10]) // Visibility
