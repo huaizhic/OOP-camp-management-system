@@ -878,9 +878,16 @@ public class CSVDataManager {
                     staffs.setSalt(data[3]);
                     staffs.setFaculty(Faculty.valueOf(data[4]));
 
-                    // Parse campsCreated from the CSV
-                    Camp campCreated = Camp.getCampByName(data[5]);
-                    staffs.setCampsCreated(campCreated);
+                    String[] campNames = data[5].split("\\|");
+                    for (String campName : campNames) {
+                        Camp campCreated = Camp.getCampByName(campName);
+                        if (campCreated != null) {
+                            staffs.setCampsCreated(campCreated);
+                        } else {
+                            System.out.println("Camp not found for name: " + campName);
+                        }
+                    }
+
 
                     // Parse SecurityQuestions from the CSV
                     List<String> securityQuestions = new ArrayList<>();
@@ -984,11 +991,12 @@ public class CSVDataManager {
                 // Check if the first field (attendee ID) matches the target attendee ID
                 if (fields.length > 0 && fields[0].equals(staff.getStaffID())) {
                     // Append the updated information for the specific attendee to the StringBuilder
+                    updatedContent.append(staff.getStaffID()).append(",");
                     updatedContent.append(staff.getName()).append(",");
                     updatedContent.append(staff.getPassword()).append(",");
                     updatedContent.append(staff.getSalt()).append(",");
                     updatedContent.append(staff.getFaculty()).append(",");
-                    updatedContent.append(staff.getCampsCreated().getCampName()).append(",");  // Assuming getCampName() returns the camp name
+                    updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
                     updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
                     updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
                     
@@ -1001,11 +1009,12 @@ public class CSVDataManager {
 
             // If the attendee ID was not found, add a new line for the attendee
             if (!staffIdFound) {
+                updatedContent.append(staff.getStaffID()).append(",");
             	updatedContent.append(staff.getName()).append(",");
                 updatedContent.append(staff.getPassword()).append(",");
                 updatedContent.append(staff.getSalt()).append(",");
                 updatedContent.append(staff.getFaculty()).append(",");
-                updatedContent.append(staff.getCampsCreated().getCampName()).append(",");  // Assuming getCampName() returns the camp name
+                updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");  // Assuming getCampName() returns the camp name
                 updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
                 updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
                             }
