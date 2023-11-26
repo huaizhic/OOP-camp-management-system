@@ -145,7 +145,7 @@ public class Staff extends Staff_User{
 			ArrayList<LocalDate> campDate = new ArrayList<>();
 			campDate.add(startDate);
 			campDate.add(endDate);
-			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, slots, 10, this.getName(), visibility);
+			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots,this, visibility);
 
 			campData.setCampList(newCamp);
 			campData.addCampToMap(campName, newCamp);

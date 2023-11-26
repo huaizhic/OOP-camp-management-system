@@ -487,7 +487,7 @@ public class Attendee extends Student_User {
             return;
         }
         LocalDate todayDate = LocalDate.now();
-        Enquiry newEnquiry = new Enquiry(subject, content, todayDate, attendee.getName(), null, false);
+        Enquiry newEnquiry = new Enquiry(subject, content, todayDate, attendee);
 
         Enquiry.getEnquiryHashMap().put(subject, newEnquiry); //add enquiry to hashmap
         Enquiry.setEnquiryArrayList(newEnquiry); //add enquiry to the total enquiry

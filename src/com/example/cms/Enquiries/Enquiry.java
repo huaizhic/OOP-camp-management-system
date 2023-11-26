@@ -1,5 +1,7 @@
 package com.example.cms.Enquiries;
 
+import com.example.cms.Student.Attendee;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +11,7 @@ import java.util.HashMap;
  */
 public class Enquiry {
     private String enquiry_Subject; 
-    private String submitter;
+    private Attendee submitter;
     private String content;
     private LocalDate dateSent;
     private String reply;
@@ -21,7 +23,7 @@ public class Enquiry {
     private static ArrayList<Enquiry> enquiryArrayList = new ArrayList<>();
 
     public static void printAllEnquiryInfo(Enquiry enquiry) {
-        System.out.println("Submitted by: " + enquiry.getSubmitter());
+        System.out.println("Submitted by: " + enquiry.getSubmitter().getName());
         System.out.println("Date sent: " + enquiry.getDateSent().toString());
         System.out.println("Enquiry content: " + enquiry.getContent());
         System.out.println("Processed: " + enquiry.isProcessed());
@@ -30,20 +32,20 @@ public class Enquiry {
         }
     }
 
-    public Enquiry(String enquiry_Subject, String content, LocalDate dateSent, String submitter, String reply, boolean processed) {
+    public Enquiry(String enquiry_Subject, String content, LocalDate dateSent, Attendee submitter) {
         this.enquiry_Subject = enquiry_Subject;
         this.content = content;
         this.dateSent = dateSent;
         this.submitter = submitter;
-        this.reply = reply;
-        this.processed = processed;
+        this.reply = null;
+        this.processed = false;
     }
 
-    public String getSubmitter() {
+    public Attendee getSubmitter() {
         return submitter;
     }
 
-    public void setSubmitter(String submitter) {
+    public void setSubmitter(Attendee submitter) {
         this.submitter = submitter;
     }
 

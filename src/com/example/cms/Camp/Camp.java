@@ -2,6 +2,7 @@ package com.example.cms.Camp;
 
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
+import com.example.cms.Staff.Staff;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
@@ -12,14 +13,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  *  Camp class is to represent a camp.
  *  Includes information on the camp and methods to get and modify camp info
  */
 
+
 public class Camp {
 	private static Map<String, Camp> campMap = new HashMap<>();
-	
+
 	private String campName;
 	private static ArrayList<Camp> campList= new ArrayList<>(); // to keep track of all of the camps
 	private ArrayList<LocalDate> campDates = new ArrayList<>();
@@ -31,7 +34,7 @@ public class Camp {
 	private int committeeSlots;
 	private int remainingCommitteeSlots;
 	private String description;
-	private String staffInCharge;
+	private Staff staffInCharge;
 	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
 	private ArrayList<Committee> committeeRegistered;
 	private boolean visibility;
@@ -40,7 +43,7 @@ public class Camp {
 	//private static int counter = -1;
 
 	/**
-	 * Creates a new Camp without setting any specific info/data
+	 * Creates a new Camp without setting any specific info
 	 */
 
 	public Camp(){
@@ -50,31 +53,31 @@ public class Camp {
 	/**
 	 * Creates a new Camp with all the specified info
 	 *
-	 * @param campName Name of camp
-	 * @param campDate Dates for which the camp take place
-	 * @param regCloseDate Registration closing date of camp
-	 * @param userGroup Schools for which students can join the camp
-	 * @param location Location of camp
-	 * @param totalSlots Total number of attendees that can participate in the camp
-	 * @param staffName Staff-in-charge of the camp
-	 * @param visibility Camp visibility to students
+	 * @param campName
+	 * @param campDate
+	 * @param regCloseDate
+	 * @param userGroup
+	 * @param location
+	 * @param totalSlots
+	 * @param staff
+	 * @param visibility
 	 */
 
-	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, int remainingSlots, int remainingCommitteeSlots, String staffName, boolean visibility){
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, Staff staff, boolean visibility){
 		this.campName = campName;
 		this.campDates = campDate;
 		this.regCloseDate = regCloseDate;
 		this.userGroup = userGroup;
 		this.location = location;
 		this.totalSlots = totalSlots;
-		this.remainingSlots = remainingSlots;
+		remainingSlots = totalSlots;
 		committeeSlots = 10;
-		this.remainingCommitteeSlots = remainingCommitteeSlots;
-		this.staffInCharge = staffName;
+		remainingCommitteeSlots = committeeSlots;
+		staffInCharge = staff;
 		this.visibility = visibility;
 		//counter ++;
 		// Add the camp to the map when it is created
-        campMap.put(campName, this);
+		campMap.put(campName, this);
 	}
 
 
@@ -89,42 +92,45 @@ public class Camp {
 
 	/**
 	 * Prints out all relevant information about the camp.
-	 * @param camp Camp specified
+	 * @param camp
 	 */
 
 	public static void printAllCampInfo(Camp camp){
-        if (camp != null) {
-		System.out.print("Camp: " + camp.getCampName() + " - ");
-		System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
-		System.out.print("Reg close date: " + camp.getRegCloseDate());
-		System.out.print("Eligible group: " + camp.getUserGroup());
-		System.out.print("location: " + camp.getLocation());
-		System.out.print("Remaining slot: " + camp.getRemainingSlots());
-		System.out.print("Staff: " + camp.getStaffInCharge());
-		System.out.println("Description: " + camp.getDescription());
-		System.out.println();
-		System.out.println();
-        }
-        else {
-            System.out.println("Camp not found: " + camp.getCampName());
-        }
+		if (camp != null) {
+			System.out.print("Camp: " + camp.getCampName() + " - ");
+			System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
+			System.out.print("Reg close date: " + camp.getRegCloseDate());
+			System.out.print("Eligible group: " + camp.getUserGroup());
+			System.out.print("location: " + camp.getLocation());
+			System.out.print("Remaining slot: " + camp.getRemainingSlots());
+			System.out.print("Staff: " + camp.getStaffInCharge());
+			System.out.println("Description: " + camp.getDescription());
+			System.out.println();
+			System.out.println();
+		}
+		else {
+			System.out.println("Camp not found: " + camp.getCampName());
+		}
 
 	}
+
 	/**
 	 * Gets name of the camp.
 	 * @return Name of the camp.
 	 */
+
 	public String getCampName() {
 		return this.campName;
 	}
 
 	/**
 	 * Changes/sets name of Camp.
-	 * @param campName Intended name of camp
+	 * @param campName
 	 */
 	public void setCampName(String campName) {
 		this.campName = campName;
 	}
+
 	/**
 	 * Gets dates for which the camp takes place.
 	 * @return Dates for which the camp takes place.
@@ -135,11 +141,12 @@ public class Camp {
 
 	/**
 	 * Sets dates for which the camp takes place.
-	 * @param dates List of dates involving the camp
+	 * @param dates
 	 */
 	public void setCampDates(ArrayList<LocalDate> dates) {
 		campDates = dates;
 	}
+
 	/**
 	 * Gets registration closing date of Camp
 	 * @return Registration closing date of Camp
@@ -150,11 +157,12 @@ public class Camp {
 
 	/**
 	 * Sets registration closing date of Camp
-	 * @param regCloseDate Intended registration closing date
+	 * @param regCloseDate
 	 */
 	public void setRegCloseDate(LocalDate regCloseDate) {
 		this.regCloseDate = regCloseDate;
 	}
+
 	/**
 	 * User group that the camp belongs to. Can be either own school, or whole University.
 	 * If whole university, it is represented as an ArrayList of ALL schools.
@@ -166,11 +174,12 @@ public class Camp {
 
 	/**
 	 * Sets schools that the camp is involved with.
-	 * @param userGroup Intended userGroups
+	 * @param userGroup
 	 */
 	public void setUserGroup(ArrayList<Faculty> userGroup) {
 		this.userGroup = userGroup;
 	}
+
 	/**
 	 * Gets location of the camp.
 	 * @return Location of the camp
@@ -181,11 +190,12 @@ public class Camp {
 
 	/**
 	 * Sets location of the camp.
-	 * @param location Intended location
+	 * @param location
 	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	/**
 	 * Get total numbers of slots of the camp.
 	 * @return total number of slots of camp
@@ -196,11 +206,12 @@ public class Camp {
 
 	/**
 	 * Sets total number of slots of the camp.
-	 * @param totalSlots Intended total number of slots
+	 * @param totalSlots
 	 */
 	public void setTotalSlots(int totalSlots) {
 		this.totalSlots = totalSlots;
 	}
+
 	/**
 	 * Get remaining numbers of slots of the camp.
 	 * @return remaining numbers of slots of the camp.
@@ -209,9 +220,10 @@ public class Camp {
 
 	/**
 	 * Sets remaining number of slots for a camp.
-	 * @param remainingSlots Intended remaining number of slots
+	 * @param remainingSlots
 	 */
 	public void setRemainingSlots(int remainingSlots){this.remainingSlots = remainingSlots;}
+
 	/**
 	 * Gets total number of slots for the committee of a camp.
 	 * @return total number of slots for the committee of a camp
@@ -222,11 +234,12 @@ public class Camp {
 
 	/**
 	 * Sets total number of slots for the committee of a camp.
-	 * @param committeeSlots Intended total number for committee slots
+	 * @param committeeSlots
 	 */
 	public void setCommitteeSlots(int committeeSlots) {
 		this.committeeSlots = committeeSlots;
 	}
+
 	/**
 	 * Gets remaining number of slots for the committee of a camp.
 	 * @return remaining number of slots for the committee of a camp
@@ -237,11 +250,12 @@ public class Camp {
 
 	/**
 	 * Sets remaining number of slots for the committee of a camp.
-	 * @param remainingCommitteeSlots Intended remaining number of slots for a camp
+	 * @param remainingCommitteeSlots
 	 */
 	public void setRemainingCommitteeSlots(int remainingCommitteeSlots){
 		this.remainingCommitteeSlots = remainingCommitteeSlots;
 	}
+
 	/**
 	 * Gets description of the camp.
 	 * @return description of the camp
@@ -252,7 +266,7 @@ public class Camp {
 
 	/**
 	 * Sets description of the camp.
-	 * @param description Intended description for the camp
+	 * @param description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -261,19 +275,20 @@ public class Camp {
 	/**
 	 * Gets Staff-in-charge of the camp.
 	 * Note that only 1 staff can be in charge of a camp
-	 * @return Designated Staff-in-charge of the camp
+	 * @return Staff-in-charge of the camp
 	 */
-	public String getStaffInCharge() {
+	public Staff getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
 	/**
 	 * Sets Staff-in-charge of the camp.
-	 * @param staffInCharge Intended Staff-in-charge of the camp
+	 * @param staffInCharge
 	 */
-	public void setStaffInCharge(String staffInCharge) {
+	public void setStaffInCharge(Staff staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
+
 	/**
 	 * Gets all the attendees registered for the camp, in the form of an ArrayList.
 	 * @return all the attendees registered for the camp
@@ -284,12 +299,12 @@ public class Camp {
 
 	/**
 	 * Adds one new attendee to existing ArrayList of attendees
-	 * @param attendee New attendee
+	 * @param attendee
 	 */
-
 	public void setAttendeesRegistered(Attendee attendee) {
 		attendeesRegistered.add(attendee);
 	}
+
 	/**
 	 * Get list of committee members registered for a camp
 	 * @return list of committee members registered for a camp
@@ -300,11 +315,12 @@ public class Camp {
 
 	/**
 	 * Adds new committee member to existing ArrayList of committee members of a camp
-	 * @param committeeMember New committee member
+	 * @param committeeMember
 	 */
 	public void setCommitteeRegistered(Committee committeeMember) {
 		this.committeeRegistered.add(committeeMember);
 	}
+
 	/**
 	 * Get visibility of camp. If FALSE, visibility is toggled off, meaning students cannot see it.
 	 * Controlled by staff-in-charge of the camp.
@@ -316,7 +332,7 @@ public class Camp {
 
 	/**
 	 * Sets visibility of camp, to either on or off (true or false)
-	 * @param visibility Desired visibility to set
+	 * @param visibility
 	 */
 	public void setVisibility(boolean visibility) {
 		this.visibility = visibility;
@@ -325,7 +341,7 @@ public class Camp {
 	/**
 	 * Gets list of enquiries for a camp.
 	 * Note that Enquiries can only be made by Camp attendees.
-	 * @return list of all enquiries for a camp
+	 * @return list of enquiries for a camp
 	 */
 	public ArrayList<Enquiry> getEnquiry() {
 		return this.enquiry;
@@ -334,7 +350,7 @@ public class Camp {
 	/**
 	 * Adds new enquiry to existing list of enquiries for a camp.
 	 * Note that Enquiries can only be made by Camp attendees.
-	 * @param enquiry New enquiry
+	 * @param enquiry
 	 */
 	public void setEnquiry(Enquiry enquiry) {
 		this.enquiry.add(enquiry);
@@ -343,7 +359,7 @@ public class Camp {
 	/**
 	 * Gets list of suggestions for a camp.
 	 * Note that Suggestions can only be made by Camp committee members.
-	 * @return List of all suggestions for a camp.
+	 * @return
 	 */
 	public ArrayList<Suggestion> getSuggestion() {
 		return this.suggestion;
@@ -351,7 +367,7 @@ public class Camp {
 
 	/**
 	 * Sets ArrayList of suggestions based on data from CSV (TO BE CONFIRMED).
-	 * @param suggestion ArrayList of suggestions provided
+	 * @param suggestion
 	 */
 	public void setSuggestion(ArrayList<Suggestion> suggestion) {
 		this.suggestion = suggestion;
@@ -359,17 +375,16 @@ public class Camp {
 
 	/**
 	 * Gets specified Camp object based on user input of name of camp into the hashmap
-	 * @param campName Name of camp specified by user input
+	 * @param campName
 	 * @return specified Camp object based on user input of name of camp
 	 */
 	public static Camp getCampByName(String campName) {
-        return campMap.get(campName);
-    }
-	
+		return campMap.get(campName);
+	}
 
 	/**
-	 * Get hashmap containing names matched with corresponding camp objects
-	 * @return hashmap containing names matched with corresponding camp objects
+	 * Gets hashmap of all camps. Key value pair: <Name of Camp, Camp object>.
+	 * @return hashmap of all camps
 	 */
 	// Add a method to get all camps in the map
 	public static Map<String, Camp> getCampMap() {
@@ -377,9 +392,9 @@ public class Camp {
 	}
 
 	/**
-	 * Takes all the relevant information on a camp, combines them into a type of string that is readable like a CSV
-	 * @param campContent Mutable string containing all relevant information on the camp
-	 * @param camp The specific camp provided
+	 * Writes camp info of newly created camp to CSV (TO BE CONFIRMED)
+	 * @param campContent
+	 * @param camp
 	 */
 	public static void generateCampInfo(StringBuilder campContent, Camp camp){
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -395,7 +410,7 @@ public class Camp {
 		campContent.append(camp.getRemainingSlots()).append(",");
 		campContent.append(camp.getRemainingCommitteeSlots()).append(",");
 		campContent.append(camp.getDescription()).append(",");
-		campContent.append(camp.getStaffInCharge()).append("\n");
+		campContent.append(camp.getStaffInCharge().getName()).append("\n");
 		campContent.append("\n");
 	}
 }
