@@ -20,7 +20,7 @@ public class Staff_Setup {
     }
 
     public void start() {
-    	  System.out.println("=== Staff Setup ===");
+    	System.out.println("==========STAFF=========");
     	  
           // Get staff ID from the staff
           System.out.print("Enter Staff ID: ");

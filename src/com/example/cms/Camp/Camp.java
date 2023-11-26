@@ -94,24 +94,42 @@ public class Camp {
 	 * @param camp Camp specified
 	 */
 
-	public static void printAllCampInfo(Camp camp){
-		if (camp != null) {
-			System.out.print("Camp: " + camp.getCampName() + " - ");
-			System.out.print("Date: " + camp.getCampDates().get(0) + " to " + camp.getCampDates().get(1));
-			System.out.print("Reg close date: " + camp.getRegCloseDate());
-			System.out.print("Eligible group: " + camp.getUserGroup());
-			System.out.print("location: " + camp.getLocation());
-			System.out.print("Remaining slot: " + camp.getRemainingSlots());
-			System.out.print("Staff: " + camp.getStaffInCharge());
-			System.out.println("Description: " + camp.getDescription());
-			System.out.println();
-			System.out.println();
-		}
-		else {
-			System.out.println("Camp not found: " + camp.getCampName());
-		}
+	public static void printAllCampInfo(Camp camp) {
+	    if (camp != null) {
+	        // Print table border
+	        printTableBorder();
 
+	        // Print table headers
+	        System.out.printf("| %-20s | %-15s | %-15s | %-25s | %-20s | %-15s | %-20s | %-20s |%n",
+	                "Camp Name", "Start Date", "End Date", "Reg Close Date", "Eligible Faculty/s", "Location", "Remaining Slot", "Staff In Charge", "Description");
+
+	        // Print table border
+	        printTableBorder();
+
+	        // Print camp information
+	        System.out.printf("| %-20s | %-15s | %-15s | %-25s | %-20s | %-15s | %-20s | %-20s |%n",
+	                camp.getCampName(),
+	                camp.getCampDates().get(0),
+	                camp.getCampDates().get(1),
+	                camp.getRegCloseDate(),
+	                String.join(", ", camp.getUserGroup().stream().map(Enum::name).toArray(String[]::new)),
+	                camp.getLocation(),
+	                camp.getRemainingSlots(),
+	                camp.getStaffInCharge(),
+	                camp.getDescription());
+
+	        // Print table border
+	        printTableBorder();
+	        System.out.println(); // Add an empty line for better readability
+	    } else {
+	        System.out.println("Camp not found.");
+	    }
 	}
+
+	private static void printTableBorder() {
+	    System.out.println("+---------------------+-----------------+-----------------+-------------------------+----------------------+-----------------+----------------------+----------------------+");
+	}
+
 
 	/**
 	 * Gets name of the camp.

@@ -91,6 +91,23 @@ public class Attendee extends Student_User {
 
  // New method to display registered camps for a specific student
     public static void displayRegisteredCamps(Attendee attendee) {
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================DISPLAY REGISTERED CAMPS================");
+
+    	
         if (attendee.getRegisteredCamps().isEmpty()) {
             // Print a message when the attendee has not registered for any camps
             System.out.println("You have not registered for any camps.");
@@ -111,9 +128,21 @@ public class Attendee extends Student_User {
         boolean exit = false;
 
         do {
-            // Decorative header for the Manage Camp Menu
-            System.out.println("-------------- Attendee: " + attendee.getName() + " --------------");
-            System.out.println("-------- Welcome to Manage Camp Menu --------");
+        	int borderLength = 53;  // Adjust the border length based on your preference
+
+        	// Print the decorative border
+        	System.out.println("=".repeat(borderLength));
+
+        	// Print the STAFF header
+        	System.out.println("                        STUDENT                       ");
+
+        	// Print staff information
+        	System.out.println("               Name: " + attendee.getName());
+        	System.out.println("               ID: " + attendee.getStudentID());
+
+        	// Print the decorative border again
+        	System.out.println("=".repeat(borderLength));
+        	System.out.println("================MANAGE CAMPS MENU===============");
 
             // Display menu options
             System.out.println("1. View Camps");
@@ -176,6 +205,22 @@ public class Attendee extends Student_User {
 
 
     public static void viewCamp(Attendee attendee) {
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================VIEW ALL CAMP================");
+
         try {
             ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
 

@@ -56,7 +56,7 @@ public class Student_Account {
             scanner.nextLine();
 
             // Debugging information
-            System.out.println("Debugging - Before passwordManager.checkPassword");
+           // System.out.println("Debugging - Before passwordManager.checkPassword");
 
             // Use the existingStudents map to retrieve the student information
 

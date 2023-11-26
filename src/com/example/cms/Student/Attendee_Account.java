@@ -36,23 +36,26 @@ public class Attendee_Account extends Student_Account {
 	public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        
+        
 
-        System.out.println("Default Student ID: " + studentID);
+        //System.out.println("Default Student ID: " + studentID);
 
         Attendee attendee = Attendee.attendeesMap.get(studentID);
 
         if (attendee != null) {
-            System.out.println("Attendee in attendee account:");
-            System.out.println("Student ID: " + attendee.getStudentID());
-            System.out.println("Name: " + attendee.getName());  // Assuming you have a getName method in Attendee
+        //    System.out.println("Attendee in attendee account:");
+        //    System.out.println("Student ID: " + attendee.getStudentID());
+        //    System.out.println("Name: " + attendee.getName());  // Assuming you have a getName method in Attendee
         } else {
-            System.out.println("Attendee not found. Logging out.");
+       //     System.out.println("Attendee not found. Logging out.");
             running = false;
             account_Manager account_Manager = new account_Manager(scanner);
 			account_Manager.start();
         }
 
         while (running) {
+        	
             System.out.println("Student Home Page");
             System.out.println("1. Display Registered Camps");
             System.out.println("2. Manage Camp");

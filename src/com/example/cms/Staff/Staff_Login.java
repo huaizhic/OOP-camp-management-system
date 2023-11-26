@@ -10,76 +10,102 @@ import java.util.Scanner;
 public class Staff_Login {
 	Scanner scanner = new Scanner(System.in);
 
-    public void start(String staffID) {
-        Staff staff = Staff.existingStaff.get(staffID);
-        int maxAttempts = 3;
-        int attempts = 0;
-        CSVDataManager.loadStaffFromCSV();   
-        while (attempts < maxAttempts) {
-            try {
-                System.out.print("Enter your password: ");
-                String enteredPassword = scanner.next();
+	public void start(String staffID) {
+	    // Print header for staff information
+	    System.out.println("=================STAFF=================");
 
-                // Consume the newline character
-                scanner.nextLine();
+	    // Load existing staff data from CSV
+	    CSVDataManager.loadStaffFromCSV();
 
-                if (enteredPassword.isEmpty()) {
-                    throw new InputMismatchException("Password cannot be empty.");
-                }
-                Staff_User existingStaffMember = Staff_User.getExistingStaff().get(staffID);
-                
-                // Debugging information
-                System.out.println("Debugging - Before passwordManager.checkPassword");
+	    // Retrieve staff information based on staffID
+	    Staff staff = Staff.existingStaff.get(staffID);
 
-                if (existingStaffMember != null) {
-                    Password_Manager_Staff passwordManager = new Password_Manager_Staff(scanner, existingStaffMember);
+	    // Initialize login attempts variables
+	    int maxAttempts = 3;
+	    int attempts = 0;
 
-                    // Debugging information
-                    // System.out.println("Debugging - Before calling passwordManager.checkPassword");
+	    // Continue login attempts until maxAttempts is reached
+	    while (attempts < maxAttempts) {
+	        try {
+	            // Prompt for password
+	            System.out.print("Enter your password: ");
+	            String enteredPassword = scanner.next();
 
-                    // Check the password
-                    System.out.println("Your password is, " + enteredPassword);
-                    if (passwordManager.checkPassword(staffID, enteredPassword)) {
-                        System.out.println("Successful login. Welcome, " + existingStaffMember.getName());
-                        
-                        Staff_Account staff_Account = new Staff_Account();
-						staff_Account.start(staff);
+	            // Consume the newline character
+	            scanner.nextLine();
 
-                        // Reset the attempts counter
-                        attempts = 0;
-                        // You can add logic here to redirect to staff-specific functionality
-                        // For example, creating an instance of Staff_Account and calling its start() method.
-                        // Staff_Account staffAccount = new Staff_Account(staffID, existingStaff);
-                        // staffAccount.start();
-                        break;
-                    } else {
-                        attempts++;
+	            // Validate entered password
+	            if (enteredPassword.isEmpty()) {
+	                throw new InputMismatchException("Password cannot be empty.");
+	            }
 
-                        if (attempts == maxAttempts) {
-                            System.out.print("Forgot password (1 for Yes, 0 for No): ");
-                            int forgotPasswordChoice = scanner.nextInt();
+	            // Retrieve existing staff member
+	            Staff_User existingStaffMember = Staff_User.getExistingStaff().get(staffID);
 
-                            if (forgotPasswordChoice == 1) {
-                                // Implement the logic for password reset here
-                                passwordManager.forgotPassword(staffID);
-                            }
+	            // Check if staff member exists
+	            if (existingStaffMember != null) {
+	                // Initialize password manager
+	                Password_Manager_Staff passwordManager = new Password_Manager_Staff(scanner, existingStaffMember);
 
-                            break;
-                        }
-                    }
-                } else {
-                    System.out.println("Staff member not found. Please enter a valid staff ID.");
-                    break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. " + e.getMessage());
-                // Consume the invalid input
-                scanner.nextLine();
-            } catch (NoSuchElementException e) {
-                System.out.println("Invalid input. Please enter a password.");
-                // Consume the invalid input
-                scanner.nextLine();
-            }
-        }
-    }
+	                // Check the password
+	                System.out.println("Your password is, " + enteredPassword);
+	                if (passwordManager.checkPassword(staffID, enteredPassword)) {
+	                    // Successful login
+	                	String welcomeMessage = "=== Successful login. Welcome ===";
+	                	int borderLength = welcomeMessage.length() + 20;  // Adjust the border length based on your preference
+	                	System.out.println(borderLength);
+	                	// Print the decorative border
+	                	System.out.println("=".repeat(borderLength));
+
+	                	// Print the welcome message
+	                	System.out.println(welcomeMessage);
+
+	                	// Print the decorative border again
+	                	System.out.println("=".repeat(borderLength));
+	                	
+	                	// Add new lines for the appearance of entering a new page
+	                	System.out.println("\n".repeat(10));  // Adjust the number of new lines as needed
+	                	
+	                    // Create and start staff account
+	                    Staff_Account staff_Account = new Staff_Account();
+	                    staff_Account.start(staff);
+
+	                    // Reset the attempts counter
+	                    attempts = 0;
+	                    break;
+	                } else {
+	                    // Incorrect password, increment attempts
+	                    attempts++;
+
+	                    if (attempts == maxAttempts) {
+	                        // Max attempts reached, prompt for password reset
+	                        System.out.print("Forgot password (1 for Yes, 0 for No): ");
+	                        int forgotPasswordChoice = scanner.nextInt();
+
+	                        if (forgotPasswordChoice == 1) {
+	                            // Implement the logic for password reset here
+	                            passwordManager.forgotPassword(staffID);
+	                        }
+
+	                        break;
+	                    }
+	                }
+	            } else {
+	                // Staff member not found
+	                System.out.println("Staff member not found. Please enter a valid staff ID.");
+	                break;
+	            }
+	        } catch (InputMismatchException e) {
+	            // Invalid input exception
+	            System.out.println("Invalid input. " + e.getMessage());
+	            // Consume the invalid input
+	            scanner.nextLine();
+	        } catch (NoSuchElementException e) {
+	            // Invalid input exception
+	            System.out.println("Invalid input. Please enter a password.");
+	            // Consume the invalid input
+	            scanner.nextLine();
+	        }
+	    }
+	}
 }
