@@ -5,6 +5,7 @@ import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Format;
+import com.example.cms.Status;
 import com.example.cms.Suggestions.Suggestion;
 import com.example.cms.generate_report.CommitteeGenerateReport;
 import com.example.cms.generate_report.GenerateReport;
@@ -16,6 +17,7 @@ import java.util.*;
  */
 public class Committee extends Student_User {
 	public static Map<String, Committee> committeeMap = new HashMap<>();
+    public static HashMap<String, Committee> committeeNameMap = new HashMap<>();
     private Camp registeredCamp;
     private ArrayList<Camp> accessibleCamp;
 
@@ -33,7 +35,12 @@ public class Committee extends Student_User {
         return committeeMap;
     }
 
- // Method to add an attendee
+    public static HashMap<String, Committee> getCommitteeNameMap() {
+        return committeeNameMap;
+    }
+
+
+    // Method to add an attendee
     public void addCommittee(Committee newCommittee) {
         committeeMap.put(newCommittee.getStudentID(), newCommittee);
         // You may want to save the updated attendeesMap to a file or perform other actions.
@@ -423,7 +430,7 @@ public class Committee extends Student_User {
 
             System.out.println("Confirm to submit? Enter \"confirm\" to continue or any other key to cancel ");
             if (input.nextLine().equalsIgnoreCase("confirm")) {
-                Suggestion newSuggestion = new Suggestion(subject, this, content, todayDate);
+                Suggestion newSuggestion = new Suggestion(subject, this.getName(), content, todayDate, Status.Pending, false);
                 committee.setSuggestions(newSuggestion);
                 Suggestion.getSuggestionHashMap().put(subject, newSuggestion);
                 Suggestion.getSuggestionArrayList().add(newSuggestion);
