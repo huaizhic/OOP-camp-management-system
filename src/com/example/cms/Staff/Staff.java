@@ -6,6 +6,7 @@ import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Status;
+import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
 
 import java.time.LocalDate;
@@ -534,8 +535,9 @@ public class Staff extends Staff_User{
 		if(input.next().equalsIgnoreCase("confirm")){
 			suggestionToApprove.setStatus(response);
 			suggestionToApprove.setProcessed(true);
-			int points = suggestionToApprove.getSubmitter().getPoints();
-			suggestionToApprove.getSubmitter().setPoints(points + 1);
+			Committee submitter = Committee.committeeNameMap.get(suggestionToApprove.getSubmitter());
+			int points = submitter.getPoints();
+			submitter.setPoints(points + 1);
 			System.out.println("The suggestion has been processed and your response has been successfully recorded");
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
