@@ -1045,7 +1045,7 @@ public class CSVDataManager {
                     continue; // Skip the first line (headers)
                 }
                 String[] data = line.split(",", -1); // Use -1 to keep empty fields
-                if (data.length >= 13) {
+                if (data.length >= 12) {
                     Camp camp = new Camp(
                             data[0], // Camp Name
                             parseDatesFromString(data[1]), // Start and End Dates
@@ -1089,81 +1089,7 @@ public class CSVDataManager {
                     campData.addCampToMap(camp.getCampName(), camp);
                     campData.getCampList().add(camp);
 
-                }
-                else if (data.length >= 12) {
-                    Camp camp = new Camp(
-                            data[0], // Camp Name
-                            parseDatesFromString(data[1]), // Start and End Dates
-                            LocalDate.parse(data[2]), // Reg Close Date
-                            null, //user group
-                            data[4], // Location
-                            Integer.parseInt(data[5]), // Total Slots
-                            Integer.parseInt(data[6]), // remaining slots
-                            10,
-                            Integer.parseInt(data[8]), //
-                            data[9], // Staff in Charge
-                            Boolean.parseBoolean(data[10]) // Visibility
-                    );
-                    if (data[11] == null || data[11].isEmpty()) {
-                        String[] registeredCommitteeArray = data[12].split("\\|");
-
-                        ArrayList<String> registeredCommitteeName = new ArrayList<>();
-                        for (String committeeName : registeredCommitteeArray) {
-                            registeredCommitteeName.add(committeeName);
-                        }
-                        account_Manager.registeredCommitteeToCampNameMap.put(camp, registeredCommitteeName);
-                    }else{
-                        String[] registeredAttendeeArray = data[11].split("\\|");
-
-                        ArrayList<String> registeredAttendeeName = new ArrayList<>();
-                        for (String attendeeName : registeredAttendeeArray) {
-                            registeredAttendeeName.add(attendeeName);
-                        }
-
-                        account_Manager.registeredAttendeeToCampNameMap.put(camp, registeredAttendeeName);
-                    }
-
-                    String[] UserGroupArray = data[3].split("\\|");
-
-                    ArrayList<Faculty> userGroupList = new ArrayList<>();
-                    for (String userGroupStr : UserGroupArray) {
-                        Faculty userGroup = Faculty.valueOf(userGroupStr);
-                        userGroupList.add(userGroup);
-                    }
-
-                    camp.setUserGroup(userGroupList);
-                    campData.addCampToMap(camp.getCampName(), camp);
-                    campData.getCampList().add(camp);
-
-                }else if (data.length >= 11) {
-                    Camp camp = new Camp(
-                            data[0], // Camp Name
-                            parseDatesFromString(data[1]), // Start and End Dates
-                            LocalDate.parse(data[2]), // Reg Close Date
-                            null, //user group
-                            data[4], // Location
-                            Integer.parseInt(data[5]), // Total Slots
-                            Integer.parseInt(data[6]), // remaining slots
-                            10,
-                            Integer.parseInt(data[8]), //
-                            data[9], // Staff in Charge
-                            Boolean.parseBoolean(data[10]) // Visibility
-                    );
-
-                    String[] UserGroupArray = data[3].split("\\|");
-
-                    ArrayList<Faculty> userGroupList = new ArrayList<>();
-                    for (String userGroupStr : UserGroupArray) {
-                        Faculty userGroup = Faculty.valueOf(userGroupStr);
-                        userGroupList.add(userGroup);
-                    }
-
-                    camp.setUserGroup(userGroupList);
-                    campData.addCampToMap(camp.getCampName(), camp);
-                    campData.getCampList().add(camp);
-
-                }
-                else {
+                } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
                 }
             }
