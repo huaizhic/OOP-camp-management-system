@@ -847,13 +847,9 @@ public class CSVDataManager {
     }
 
 /*************************STAFF****************************************/
-    public static Staff_User loadStaffFromCSV(Staff_User staff) {
+    public static void loadStaffFromCSV() {
         String csvFilePath = "staff.csv";
         
-        // If the attendee is null, create a new one
-        if (staff == null) {
-            staff = new Staff_User();
-        }
 
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -904,12 +900,10 @@ public class CSVDataManager {
                         securityAnswers.add(answer);
                     }
                     staffs.setSecurityAnswers(securityAnswers);
-
+                    
+                    Staff_User.existingStaff.put(staffs.getStaffID(), staffs);
                     // Check if staff is null and instantiate it if needed
  
-//
-//                    // Add the current staff to the existingStaff map
-//                    staff.addStaff(staffs);
 
                     // Print details about the loaded staff
                     System.out.println("Staff ID: " + staffs.getStaffID());
@@ -919,7 +913,7 @@ public class CSVDataManager {
 
                     // Print campCreated if not null
                     if (staffs.getCampsCreated() != null) {
-                        System.out.println("Created Camp: " + staffs.getCampsCreated().getCampName());
+                    	System.out.println("Created Camp: " + staffs.getCampsCreated().get(0).getCampName());
                     } else {
                         System.out.println("Created Camp: null");
                     }
@@ -950,8 +944,6 @@ public class CSVDataManager {
             e.printStackTrace();
         }
 
-        // Return the newly created staff instance or the existing one
-        return staff;
     }
 
     
@@ -996,7 +988,11 @@ public class CSVDataManager {
                     updatedContent.append(staff.getPassword()).append(",");
                     updatedContent.append(staff.getSalt()).append(",");
                     updatedContent.append(staff.getFaculty()).append(",");
-                    updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                    if (staff.getCampsCreated() != null) {
+                        updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                    } else {
+                        updatedContent.append(",");
+                    }
                     updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
                     updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
                     
@@ -1008,17 +1004,25 @@ public class CSVDataManager {
             }
 
             // If the attendee ID was not found, add a new line for the attendee
+            // If the attendee ID was not found, add a new line for the attendee
             if (!staffIdFound) {
                 updatedContent.append(staff.getStaffID()).append(",");
-            	updatedContent.append(staff.getName()).append(",");
+                updatedContent.append(staff.getName()).append(",");
                 updatedContent.append(staff.getPassword()).append(",");
                 updatedContent.append(staff.getSalt()).append(",");
                 updatedContent.append(staff.getFaculty()).append(",");
-                updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");  // Assuming getCampName() returns the camp name
+
+                // Check if getCampsCreated() is not null before accessing the stream
+                if (staff.getCampsCreated() != null) {
+                    updatedContent.append(String.join("|", staff.getCampsCreated().stream().map(Camp::getCampName).toArray(String[]::new))).append(",");
+                } else {
+                    updatedContent.append(",");
+                }
+
                 updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
                 updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
-                            }
-
+            }
+            
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(updatedContent.toString());

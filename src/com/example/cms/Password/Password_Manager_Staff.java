@@ -61,9 +61,10 @@ public class Password_Manager_Staff {
 	    public boolean updatePassword(String userID, String updatedPassword) {
 	        // Find the student based on the userID (you need to implement this part)
 	        this.existingStaff= new HashMap<>();
+	        CSVDataManager.loadStaffFromCSV();
 	        
-	        Staff_User staff = CSVDataManager.loadStaffFromCSV(existingStaff.get(userID));
-
+	        Staff_User staff = Staff_User.getExistingStaff().get(userID);
+            
 	        if (staff != null) {
 	            String oldPasswordHash = staff.getPassword();
 	            String oldSalt = staff.getSalt();
@@ -82,8 +83,6 @@ public class Password_Manager_Staff {
 	                    staff.setPassword(newPasswordHash);
 	                    staff.setSalt(newSalt);
 
-	                    // Update the existingStaff map with the modified Staff_User object
-	                    Staff_User.getExistingStaff().put(staff.getStaffID(), (Staff) staff);
 
 	                    // Update the CSV file for staff
 	                    CSVDataManager.updateStaffCSVFile(staff);
@@ -113,12 +112,11 @@ public class Password_Manager_Staff {
     public void forgotPassword(String userID) {
     	
         // First, retrieve the staff based on the userID
+    	CSVDataManager.loadStaffFromCSV();
     	
-    	this.existingStaff= new HashMap<>();
+    
+        Staff_User staff = Staff_User.getExistingStaff().get(userID);
         
-        Staff_User staff = CSVDataManager.loadStaffFromCSV(existingStaff.get(userID));
-
-   
 
         if (staff != null) {
             System.out.println("Password recovery for " + staff.getName());
