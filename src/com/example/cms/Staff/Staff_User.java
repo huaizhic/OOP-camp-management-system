@@ -1,30 +1,9 @@
 package com.example.cms.Staff;
 
 import com.example.cms.Camp.Camp;
-import com.example.cms.Camp.campData;
-import com.example.cms.DisplayOptions.DisplayApp;
-import com.example.cms.DisplayOptions.DisplayBySort;
-import com.example.cms.DisplayOptions.SearchApp;
-import com.example.cms.DisplayOptions.SortApp;
-import com.example.cms.DisplayOptions.SortByName_Default;
-import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Student.Attendee;
-import com.example.cms.Student.Student_User;
-import com.example.cms.Suggestions.Suggestion;
 import com.example.cms.Faculty;
-import com.example.cms.Status;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 /**
  * Entity class, provides basic functionality to get and set information about the Staff
  * Routed from account_Manager
@@ -37,7 +16,8 @@ public class Staff_User {
     private String salt;
     private String name;
     private Faculty faculty;
-    protected static  Camp campsCreated;
+
+    protected ArrayList<Camp> campsCreated ;
     private ArrayList<String> securityQuestion;
     private ArrayList<String> securityAnswers;
 	private Scanner input;
@@ -50,7 +30,7 @@ public class Staff_User {
         this.password = "password";
         this.salt = null;
         this.faculty = null;
-        Staff_User.campsCreated = null;
+        this.campsCreated = null;
         this.securityQuestion = new ArrayList<>();
         this.securityAnswers = new ArrayList<>();
         
@@ -102,12 +82,12 @@ public class Staff_User {
         this.faculty = faculty;
     }
 
-    public Camp getCampsCreated() {
+    public ArrayList<Camp> getCampsCreated() {
         return this.campsCreated;
     }
 
-    public void setCampsCreated(Camp newCamp) {
-    	this.campsCreated = newCamp;
+    public void setCampsCreated(Camp camp) {
+    	campsCreated.add(camp);
     	}
 
 

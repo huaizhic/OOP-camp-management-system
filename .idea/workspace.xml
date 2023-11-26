@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cms/Camp/Camp.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +114,7 @@
       <workItem from="1700722712958" duration="5647000" />
       <workItem from="1700848427940" duration="1432000" />
       <workItem from="1700884344246" duration="4805000" />
+      <workItem from="1700982381514" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
