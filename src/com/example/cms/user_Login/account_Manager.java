@@ -1,10 +1,16 @@
 package com.example.cms.user_Login;
 
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.campData;
 import com.example.cms.Staff.Staff_Setup;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_Account;
 import com.example.cms.Student.Student_User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -15,7 +21,8 @@ public class account_Manager {
     private Scanner scanner;
     String userId = null;
     String staffId  = null;
-
+    public static HashMap<Camp, ArrayList<String>> registeredAttendeeToCampNameMap = new HashMap<>();
+    public static HashMap<Camp, ArrayList<String>> registeredCommitteeToCampNameMap = new HashMap<>();
     // Constructor to initialize the AccountManager with a Scanner
     public account_Manager(Scanner scanner) {
         this.scanner = scanner;
@@ -34,22 +41,52 @@ public class account_Manager {
             staffId = getStaffId();
             System.out.println("This is the staff id entered: " + staffId);
             // Create Staff_Account instance and start staff account functionality
-            CSVDataManager.loadStaffFromCSV();
-            CSVDataManager.loadCampsFromCSV();
             CSVDataManager.loadSuggestionFromCSV();
-            CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadCampsFromCSV(); // all attendee and committee name are placed in the hashmap
+            CSVDataManager.loadStaffFromCSV();
+            CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadAttendeeFromCSV();
+
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredAttendeeToCampNameMap.get(camp)){
+                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                    camp.setAttendeesRegistered(registeredAttendee);
+                }
+            }
+
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredCommitteeToCampNameMap.get(camp)){
+                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
+                    camp.setCommitteeRegistered(registeredCommittee);
+                }
+            }
+
             Staff_Setup staff_Setup = new Staff_Setup();
             staff_Setup.start();
         }
         // For Student User
         else if (userTypeChoice == 1) {
-            CSVDataManager.loadCampsFromCSV();
-            CSVDataManager.loadSuggestionFromCSV();
-            CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadSuggestionFromCSV();
+            CSVDataManager.loadCampsFromCSV();
+            CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadAttendeeFromCSV();
+
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredAttendeeToCampNameMap.get(camp)){
+                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                    camp.setAttendeesRegistered(registeredAttendee);
+                }
+            }
+
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredCommitteeToCampNameMap.get(camp)){
+                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
+                    camp.setCommitteeRegistered(registeredCommittee);
+                }
+            }
+
             int accountChoice = getAccountChoice();
 
             // Existing Student Account

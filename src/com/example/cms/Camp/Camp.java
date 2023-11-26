@@ -35,7 +35,7 @@ public class Camp {
 	private String description;
 	private String staffInCharge;
 	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
-	private ArrayList<Committee> committeeRegistered;
+	private ArrayList<Committee> committeeRegistered = new ArrayList<>();
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry = new ArrayList<>();
 	private ArrayList<Suggestion> suggestion = new ArrayList<>();
@@ -74,8 +74,6 @@ public class Camp {
 		this.remainingCommitteeSlots = remainingCommitteeSlots;
 		staffInCharge = staff;
 		this.visibility = visibility;
-		//counter ++;
-		// Add the camp to the map when it is created
 		campMap.put(campName, this);
 	}
 

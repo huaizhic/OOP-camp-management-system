@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor bug" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor update in Attendee and Committee load">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Password/Password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Password/Password_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/user_Login/account_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/user_Login/account_Manager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -321,7 +331,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700988369786</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="minor bug">
+      <option name="closed" value="true" />
+      <created>1700988703579</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1700988703579</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +376,8 @@
     <MESSAGE value="minor change" />
     <MESSAGE value="Load and saving committed" />
     <MESSAGE value="minor bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor bug" />
+    <MESSAGE value="minor update in Attendee and Committee load" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor update in Attendee and Committee load" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

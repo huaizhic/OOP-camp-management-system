@@ -11,6 +11,7 @@ import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Student_Role;
 import com.example.cms.Suggestions.Suggestion;
+import com.example.cms.user_Login.account_Manager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -404,16 +405,13 @@ public class CSVDataManager {
     /**
      * Loads attendee details from CSV, upon specification of attendee in the parameter.
      * Parameter attendee object is mostly empty at this point, hence this function is required to fill in the rest of the relevant information about the specified attendee.
-     * @param attendee Specified attendee object with just userID attribute
      * @return Same attendee object, with all the attributes filled with information from the CSV
      */
-    public static Attendee loadAttendeeFromCSV(Attendee attendee) {
+    public static void loadAttendeeFromCSV() {
         String csvFilePath = "attendee.csv";
         
      // If the attendee is null, create a new one
-        if (attendee == null) {
-            attendee = new Attendee();
-        }
+    Attendee attendee =  new Attendee();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -505,6 +503,9 @@ public class CSVDataManager {
                     System.out.println("Student ID: " + attendee.getStudentID());
                     System.out.println("Name: " + attendee.getName());
 
+                    Attendee.attendeesMap.put(attendee.getStudentID(), attendee);
+                    Attendee.attendeeToNameMap.put(attendee.getName(), attendee);
+
                     // You may want to save the updated attendee to a file or perform other actions.
 
                 } else {
@@ -517,8 +518,6 @@ public class CSVDataManager {
             System.out.println("An error occurred while reading from the CSV file.");
             e.printStackTrace();
         }
-
-        return attendee;
     }
 
     /**
@@ -616,11 +615,11 @@ public class CSVDataManager {
 
     /**
      * Loads committee member details from CSV, upon specification of committee member object in the parameter.
-     * @param committee Specified committee member object with just userID attribute
      * @return Same committee member object, with all the attributes filled with information from the CSV
      */
-    public static Committee loadCommitteeFromCSV(Committee committee) {
+    public static void loadCommitteeFromCSV() {
         String csvFilePath = "committee.csv";
+        Committee committee1 = new Committee();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -636,8 +635,6 @@ public class CSVDataManager {
 
                 if (data.length >= 12) {
                     // Create a new Student_User instance and set its attributes
-                    Committee committee1 = new Committee();
-                    
                     committee1.setStudentID(data[0]);
                     committee1.setName(data[1]);
                     committee1.setPassword(data[2]);
@@ -694,14 +691,9 @@ public class CSVDataManager {
                         }
                     }
                     committee1.setSuggestionSubmitted(suggestionSubmitted);
-                    
-                    // Check if committee is null and instantiate it if needed
-                    if (committee == null) {
-                        committee = new Committee();
-                    }
-                    
-                 // Add the current attendee to the attendeesMap
-                    committee.addCommittee(committee1);
+
+                    Committee.getCommitteeMap().put(committee1.getStudentID(), committee1);
+                    Committee.getCommitteeNameMap().put(committee1.getName(), committee1);
 
                     // Print the loaded student details
                     System.out.println("Student ID: " + committee1.getStudentID());
@@ -758,7 +750,6 @@ public class CSVDataManager {
             System.out.println("An error occurred while reading from the CSV file.");
             e.printStackTrace();
         }
-        return committee;
     }
 
     /**
@@ -1073,9 +1064,27 @@ public class CSVDataManager {
                         userGroupList.add(userGroup);
                     }
 
+                    String[] registeredAttendeeArray = data[11].split("\\|");
+
+                    ArrayList<String> registeredAttendeeName = new ArrayList<>();
+                    for (String attendeeName : registeredAttendeeArray) {
+                        registeredAttendeeName.add(attendeeName);
+                    }
+
+                    account_Manager.registeredAttendeeToCampNameMap.put(camp, registeredAttendeeName);
+
+                    String[] registeredCommitteeArray = data[12].split("\\|");
+
+                    ArrayList<String> registeredCommitteeName = new ArrayList<>();
+                    for (String committeeName : registeredCommitteeArray) {
+                        registeredCommitteeName.add(committeeName);
+                    }
+                    account_Manager.registeredCommitteeToCampNameMap.put(camp, registeredCommitteeName);
+
                     camp.setUserGroup(userGroupList);
                     campData.addCampToMap(camp.getCampName(), camp);
                     campData.getCampList().add(camp);
+
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
                 }
@@ -1128,6 +1137,8 @@ public class CSVDataManager {
             campContent.append(camp.getRemainingCommitteeSlots()).append(",");
             campContent.append(camp.getStaffInCharge()).append(",");
             campContent.append(camp.getVisibility()).append("\n");
+            campContent.append(String.join("|", camp.getAttendeesRegistered().stream().map(Attendee::getName).toArray(String[]::new))).append(",");
+            campContent.append(String.join("|", camp.getCommitteeRegistered().stream().map(Committee::getName).toArray(String[]::new))).append(",");
             // Write the updated content to the CSV file
             try (FileWriter writer = new FileWriter(csvFilePath)) {
                 writer.write(campContent.toString());

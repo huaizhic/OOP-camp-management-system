@@ -15,7 +15,8 @@ import java.util.Scanner;
  */
 public class Attendee extends Student_User {
 
-	 public static Map<String, Attendee> attendeesMap = new HashMap<>();
+	 public static Map<String, Attendee> attendeesMap = new HashMap<>(); //student ID
+    public static HashMap<String, Attendee> attendeeToNameMap = new HashMap<>();
      private ArrayList<Camp> registeredCamps;
 
      private ArrayList<Enquiry> enquirySubmitted;
