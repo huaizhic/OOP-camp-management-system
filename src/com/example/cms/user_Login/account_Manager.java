@@ -1,16 +1,9 @@
 package com.example.cms.user_Login;
 
 import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Camp.Camp;
-import com.example.cms.Camp.campData;
-import com.example.cms.Staff.Staff_Setup;
-import com.example.cms.Student.Attendee;
-import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_Account;
 import com.example.cms.Student.Student_User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -20,208 +13,110 @@ import java.util.Scanner;
 public class account_Manager {
     private Scanner scanner;
     String userId = null;
-    String staffId  = null;
-    public static HashMap<Camp, ArrayList<String>> registeredAttendeeToCampNameMap = new HashMap<>();
-    public static HashMap<Camp, ArrayList<String>> registeredCommitteeToCampNameMap = new HashMap<>();
-    // Constructor to initialize the AccountManager with a Scanner
+    
     public account_Manager(Scanner scanner) {
         this.scanner = scanner;
     }
 
- // Method to start the Account Manager application
     public void start() {
         System.out.println("Welcome to the Account Manager");
 
-        // Get user type choice (student or staff)
         int userTypeChoice = getUserTypeChoice();
-        user_Registration userRegistration = new user_Registration(scanner);
-
-        // For Staff User
+        user_Registration user_Registration = new user_Registration(scanner);
         if (userTypeChoice == 2) {
-            // Print a header for Staff Login
-            System.out.println("\n===== Staff Login =====");
+            getStaffId();
+            // staff_Account staffAccount = new staff_Account(scanner, userId);
+            // staffAccount.start();
+        } else if (userTypeChoice == 1) {
+            int accountChoice = getAccountChoice();
 
-            // Load necessary data from CSV files
-            System.out.println("Loading data, please wait...");
+            if (accountChoice == 1) {
+                Student_User student_User = new Student_User();
+                CSVDataManager.loadStudentsFromCSV(student_User);
 
-            CSVDataManager.loadSuggestionFromCSV();
-            CSVDataManager.loadEnquiryFromCSV();
-            CSVDataManager.loadCampsFromCSV();
-            staffId = getStaffId();
-            System.out.println("This is the staff id entered: " + staffId);
-            // Create Staff_Account instance and start staff account functionality
-             CSVDataManager.loadStaffFromCSV();
-            CSVDataManager.loadCommitteeFromCSV();
-            CSVDataManager.loadAttendeeFromCSV();
+                boolean userFound = false;
 
-            // Populate camp data with registered attendees and committee members
-            System.out.println("Processing data...");
+                while (!userFound) {
+                    userId = getStudentId();
 
-            for (Camp camp : campData.getCampList()) {
-                for (String string : registeredAttendeeToCampNameMap.get(camp)) {
-                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
-                    camp.setAttendeesRegistered(registeredAttendee);
-                }
-            }
+                    System.out.println("This is the student id entered: " + userId);
 
-            for (Camp camp : campData.getCampList()) {
-                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
-                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
-                    camp.setCommitteeRegistered(registeredCommittee);
-                }
-            }
+                    Student_Account studentAccount = new Student_Account(userId, student_User.getExistingStudents());
 
-                    // Start Staff Setup functionality
-                    System.out.println("Data loaded successfully!\n");
+                    if (studentAccount.getStudentAccount(userId)) {
+                        studentAccount.start();
+                        userFound = true;
+                    } else {
+                    	
+                        System.out.println("Student not found.");
 
-                    Staff_Setup staff_Setup = new Staff_Setup();
-                    staff_Setup.start();
+                        int retryChoice;
+                        do {
+                            retryChoice = getRetryChoice();
 
-                }
-                // For Student User
-        else if (userTypeChoice == 1) {
-
-                    // Print a header for Student Login
-                    System.out.println("\n===== Student Login =====");
-
-                    // Load necessary data from CSV files
-                    System.out.println("Loading data, please wait...");
-
-                    CSVDataManager.loadEnquiryFromCSV();
-                    CSVDataManager.loadSuggestionFromCSV();
-                    CSVDataManager.loadCampsFromCSV();
-                    CSVDataManager.loadCommitteeFromCSV();
-                    CSVDataManager.loadAttendeeFromCSV();
-
-                    // Populate camp data with registered attendees and committee members
-                    System.out.println("Processing data...");
-
-
-                    for (Camp camp : campData.getCampList()) {
-                        for (String string : registeredAttendeeToCampNameMap.get(camp)) {
-                            Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
-                            camp.setAttendeesRegistered(registeredAttendee);
-                        }
-                    }
-
-                    for (Camp camp : campData.getCampList()) {
-                        for (String string : registeredCommitteeToCampNameMap.get(camp)) {
-                            Committee registeredCommittee = Committee.committeeNameMap.get(string);
-                            camp.setCommitteeRegistered(registeredCommittee);
-                        }
-                    }
-
-                            // Get account choice (existing student or new registration)
-
-                            int accountChoice = getAccountChoice();
-
-                            // Existing Student Account
-                            if (accountChoice == 1) {
-                                // Create Student_User instance and load student data from CSV
-                                System.out.println("Loading student data, please wait...");
-                                Student_User studentUser = new Student_User();
-                                CSVDataManager.loadStudentsFromCSV(studentUser);
-
-                                boolean userFound = false;
-
-                                // Loop until a valid student is found or user chooses to retry or register
-                                while (!userFound) {
-                                    userId = getStudentId();
-                                    System.out.println("This is the student id entered: " + userId);
-
-                                    // Create Student_Account instance and check if the student exists
-                                    Student_Account studentAccount = new Student_Account(userId, studentUser.getExistingStudents());
-
-                                    // If student exists, start student account functionality
-                                    if (studentAccount.getStudentAccount(userId)) {
-                                        studentAccount.start();
-                                        userFound = true;
-                                    } else {
-                                        System.out.println("Student not found.");
-
-                                        int retryChoice;
-                                        do {
-                                            // Prompt user to retry or register
-                                            retryChoice = getRetryChoice();
-
-                                            switch (retryChoice) {
-                                                case 1:
-                                                    // Continue the loop to retry
-                                                    break;
-                                                case 2:
-                                                    // Start user registration and exit loop
-                                                    userRegistration.start();
-                                                    userFound = true;
-                                                    break;
-                                                default:
-                                                    System.out.println("Invalid choice. Please enter 1 or 2.");
-                                                    break;
-                                            }
-                                        } while (retryChoice != 1 && retryChoice != 2);
-                                    }
-                                }
+                            switch (retryChoice) {
+                                case 1:
+                                    // Continue the loop
+                                    break;
+                                case 2:
+                                	
+                                    user_Registration.start();
+                                    userFound = true;
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice. Please enter 1 or 2.");
+                                    break;
                             }
-                            // New Student Registration
-                            else if (accountChoice == 0) {
-                                userRegistration.start();
-                            } else {
-                                System.out.println("Invalid choice. Please enter '1' for Yes or '0' for No.");
-                            }
-                        } else{
-                            System.out.println("Invalid user type. Please enter '1' for student or '2' for staff.");
-                        }
+                        } while (retryChoice != 1 && retryChoice != 2);
                     }
+                }
+            } else if (accountChoice == 0) {
+                
+				user_Registration.start();
+            } else {
+                System.out.println("Invalid choice. Please enter '1' for Yes or '0' for No.");
+            }
+        } else {
+            System.out.println("Invalid user type. Please enter '1' for student or '2' for staff.");
+        }
+    }
 
-
-
- // Method to get user type choice (staff or student)
     private int getUserTypeChoice() {
         int userTypeChoice = 0;
 
         while (true) {
             try {
-                // Prompt the user to enter '1' for student or '2' for staff
-                System.out.print("Select your role:\n1. Student\n2. Staff\nEnter the corresponding number: ");
-
-                // Read the input as a string and trim leading/trailing spaces
-                String input = scanner.nextLine().trim();
-
+                System.out.print("Are you a staff or a student? (Enter '1' for student or '2' for staff): ");
+                String input = scanner.nextLine().trim(); // Read the input as a string and trim leading/trailing spaces
+                
                 // Check if the input is empty
                 if (input.isEmpty()) {
                     System.out.println("Invalid input. Please enter '1' or '2'.");
                     continue; // Restart the loop if the input is empty
                 }
 
-                // Parse the input as an integer
-                userTypeChoice = Integer.parseInt(input);
-
-                // Check if the input is within the valid range (1 for student, 2 for staff)
+                userTypeChoice = Integer.parseInt(input); // Parse the input as an integer
+                
+                // Check if the input is within the valid range
                 if (userTypeChoice == 1 || userTypeChoice == 2) {
                     break; // Exit the loop only if the input is valid
                 } else {
                     System.out.println("Invalid input. Please enter '1' or '2'.");
                 }
             } catch (NumberFormatException e) {
-                // Handle the exception if the input is not a valid integer
                 System.out.println("Invalid input. Please enter a number.");
             }
         }
 
-        // Return the user type choice
         return userTypeChoice;
     }
 
-
- // Method to get and validate staff ID input
-    private String getStaffId() {
-        // Define a regex for special characters
-        String specialCharacters = "[!@#$%^&*(),.?\":{}|<>]";
+    private void getStaffId() {
+        String specialCharacters = "[!@#$%^&*(),.?\":{}|<>]"; // Define a regex for special characters
         String staffId = null;
-
-        // Continue looping until a valid staff ID is entered
+        
         while (true) {
             try {
-                // Prompt the user to enter their staff ID
                 System.out.print("Enter your staff ID: ");
                 staffId = scanner.nextLine();
 
@@ -237,28 +132,20 @@ public class account_Manager {
                     continue; // Restart the loop if the input contains special characters
                 }
 
-                // Exit the loop if the input is not empty and doesn't contain special characters
-                break;
+                break; // Exit the loop if the input is not empty and doesn't contain special characters
             } catch (InputMismatchException e) {
-                // Handle the exception if the input is not of the expected type (String)
                 System.out.println("Invalid input. Please enter a valid staff ID.");
                 scanner.nextLine(); // Consume the invalid input
             }
         }
-
-        // Return the valid staff ID
-        return staffId;
     }
 
 
- // Method to get and validate user's choice for existing account
     private int getAccountChoice() {
         int accountChoice = 0;
 
-        // Continue looping until a valid choice is entered
         while (true) {
             try {
-                // Prompt the user to enter '1' for existing account or '0' for new account
                 System.out.print("Do you have an existing account? (1 for Yes, 0 for No): ");
                 String input = scanner.nextLine().trim(); // Read the input as a string and trim leading/trailing spaces
 
@@ -268,38 +155,30 @@ public class account_Manager {
                     continue; // Restart the loop if the input is empty
                 }
 
-                // Parse the input as an integer
-                accountChoice = Integer.parseInt(input);
+                accountChoice = Integer.parseInt(input); // Parse the input as an integer
 
-                // Check if the input is within the valid range (0 for No, 1 for Yes)
+                // Check if the input is within the valid range
                 if (accountChoice == 0 || accountChoice == 1) {
                     break; // Exit the loop only if the input is valid
                 } else {
                     System.out.println("Invalid input. Please enter '1' or '0'.");
                 }
             } catch (NumberFormatException e) {
-                // Handle the exception if the input is not a valid integer
                 System.out.println("Invalid input. Please enter a number.");
             }
         }
 
-        // Return the user's choice for existing account
         return accountChoice;
     }
 
 
- // Method to get and validate student ID input
     private String getStudentId() {
         String studentId = null;
-        // Define a regex for special characters
-        String specialCharacters = "[!@#$%^&*(),.?\":{}|<>]";
+        String specialCharacters = "[!@#$%^&*(),.?\":{}|<>]"; // Define a regex for special characters
 
-        // Continue looping until a valid student ID is entered
         while (true) {
             try {
-                // Prompt the user to enter their student ID
                 System.out.print("Enter your student ID: ");
-                // Read the input as a string, convert to uppercase, and trim leading/trailing spaces
                 studentId = scanner.nextLine().toUpperCase().trim();
 
                 // Check if the input is empty
@@ -314,34 +193,26 @@ public class account_Manager {
                     continue; // Restart the loop if the input contains special characters
                 }
 
-                // Exit the loop if the input is not empty and doesn't contain special characters
-                break;
+                break; // Exit the loop if the input is not empty and doesn't contain special characters
             } catch (InputMismatchException e) {
-                // Handle the exception if the input is not of the expected type (String)
                 System.out.println("Invalid input. Please enter a valid student ID.");
                 scanner.nextLine(); // Consume the invalid input
             }
         }
 
-        // Return the valid student ID
         return studentId;
     }
 
 
- // Method to get and validate user's choice for retrying or going to student registration
     private int getRetryChoice() {
         int retryChoice = 0;
 
-        // Continue looping until a valid choice is entered
         while (true) {
             try {
-                // Display options for the user
                 System.out.println("1. Try again");
                 System.out.println("2. Go to student registration");
                 System.out.print("Enter your choice: ");
-                
-                // Read the input as a string and trim leading/trailing spaces
-                String input = scanner.nextLine().trim();
+                String input = scanner.nextLine().trim(); // Read the input as a string and trim leading/trailing spaces
 
                 // Check if the input is empty
                 if (input.isEmpty()) {
@@ -349,38 +220,27 @@ public class account_Manager {
                     continue; // Restart the loop if the input is empty
                 }
 
-                // Parse the input as an integer
-                retryChoice = Integer.parseInt(input);
+                retryChoice = Integer.parseInt(input); // Parse the input as an integer
 
-                // Check if the input is within the valid range (1 for Try again, 2 for Student Registration)
+                // Check if the input is within the valid range
                 if (retryChoice == 1 || retryChoice == 2) {
                     break; // Exit the loop only if the input is valid
                 } else {
                     System.out.println("Invalid input. Please enter '1' or '2'.");
                 }
             } catch (NumberFormatException e) {
-                // Handle the exception if the input is not a valid integer
                 System.out.println("Invalid input. Please enter a number.");
             }
         }
 
-        // Return the user's choice for retrying or going to student registration
         return retryChoice;
     }
 
 
     public static void main(String[] args) {
-        // Create a Scanner object to read input from the console
-        Scanner scanner = new Scanner(System.in);
-
-        // Create an instance of the AccountManager with the Scanner
-        account_Manager accountManager = new account_Manager(scanner);
-
-        // Start the Account Manager application
-        accountManager.start();
-
-        // Close the Scanner to release resources
-        scanner.close();
+    	  Scanner scanner = new Scanner(System.in);
+          account_Manager accountManager = new account_Manager(scanner);
+          accountManager.start();
+          scanner.close();
     }
-
 }

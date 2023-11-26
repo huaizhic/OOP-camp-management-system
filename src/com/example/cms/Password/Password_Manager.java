@@ -2,7 +2,6 @@ package com.example.cms.Password;
 
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Student.Attendee;
-import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Student_Role;
 import com.example.cms.user_Login.account_Manager;
@@ -11,6 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+
+import com.example.cms.Student_Role;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
+import com.example.cms.Student.Student_User;
+import com.example.cms.user_Login.account_Manager;
 
 /**
  * Controller class to handle passwords for logging in
@@ -88,13 +95,13 @@ public class Password_Manager {
 
 	                    // Check if student_Role is equal to attendee
 	                    if (student.getUserGroup().equals(Student_Role.ATTENDEE)) {
-	                        Attendee attendee = Attendee.attendeesMap.get(student.getStudentID());
+	                        Attendee attendee = CSVDataManager.loadAttendeeFromCSV(existingAttendees.get(student.getStudentID()));
 	                        // Update the passwordHash and salt in the Attendee instance
 	                        attendee.setPassword(newPasswordHash);
 	                        // Update the CSV file for attendee
 	                        CSVDataManager.updateAttendeeCSVFile(attendee);
 	                    } else {
-                            Committee committee = Committee.getCommitteeMap().get(student.getStudentID());
+	                        Committee committee = CSVDataManager.loadCommitteeFromCSV(existingCommittee.get(student.getStudentID()));
 	                        // Update the passwordHash and salt in the Committee instance
 	                        committee.setPassword(newPasswordHash);
 	                        // Update the CSV file for committee

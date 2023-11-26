@@ -2,6 +2,7 @@ package com.example.cms.Camp;
 
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
+import com.example.cms.Staff.Staff;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
@@ -33,9 +34,9 @@ public class Camp {
 	private int committeeSlots;
 	private int remainingCommitteeSlots;
 	private String description;
-	private String staffInCharge;
+	private Staff staffInCharge;
 	private ArrayList<Attendee> attendeesRegistered = new ArrayList<>();
-	private ArrayList<Committee> committeeRegistered = new ArrayList<>();
+	private ArrayList<Committee> committeeRegistered;
 	private boolean visibility;
 	private ArrayList<Enquiry> enquiry = new ArrayList<>();
 	private ArrayList<Suggestion> suggestion = new ArrayList<>();
@@ -62,20 +63,20 @@ public class Camp {
 	 * @param visibility Camp visibility to students
 	 */
 
-
-	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, int remainingSlots, int committeeSlots, int remainingCommitteeSlots, String staff, boolean visibility){
+	public Camp(String campName, ArrayList<LocalDate> campDate, LocalDate regCloseDate, ArrayList<Faculty> userGroup, String location, int totalSlots, Staff staff, boolean visibility){
 		this.campName = campName;
 		this.campDates = campDate;
 		this.regCloseDate = regCloseDate;
 		this.userGroup = userGroup;
 		this.location = location;
 		this.totalSlots = totalSlots;
-		this.remainingSlots = remainingSlots;
+		remainingSlots = totalSlots;
 		committeeSlots = 10;
-		this.committeeSlots = committeeSlots;
-		this.remainingCommitteeSlots = remainingCommitteeSlots;
+		remainingCommitteeSlots = committeeSlots;
 		staffInCharge = staff;
 		this.visibility = visibility;
+		//counter ++;
+		// Add the camp to the map when it is created
 		campMap.put(campName, this);
 	}
 
@@ -276,7 +277,7 @@ public class Camp {
 	 * Note that only 1 staff can be in charge of a camp
 	 * @return Designated Staff-in-charge of the camp
 	 */
-	public String getStaffInCharge() {
+	public Staff getStaffInCharge() {
 		return this.staffInCharge;
 	}
 
@@ -284,7 +285,7 @@ public class Camp {
 	 * Sets Staff-in-charge of the camp.
 	 * @param staffInCharge Intended Staff-in-charge of the camp
 	 */
-	public void setStaffInCharge(String staffInCharge) {
+	public void setStaffInCharge(Staff staffInCharge) {
 		this.staffInCharge = staffInCharge;
 	}
 
@@ -409,7 +410,7 @@ public class Camp {
 		campContent.append(camp.getRemainingSlots()).append(",");
 		campContent.append(camp.getRemainingCommitteeSlots()).append(",");
 		campContent.append(camp.getDescription()).append(",");
-		campContent.append(camp.getStaffInCharge()).append("\n");
+		campContent.append(camp.getStaffInCharge().getName()).append("\n");
 		campContent.append("\n");
 	}
 }

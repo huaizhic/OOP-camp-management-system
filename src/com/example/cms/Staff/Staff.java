@@ -1,22 +1,16 @@
 package com.example.cms.Staff;
 
-import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
 import com.example.cms.DisplayOptions.*;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
-import com.example.cms.Format;
 import com.example.cms.Status;
-import com.example.cms.Student.Committee;
 import com.example.cms.Suggestions.Suggestion;
-import com.example.cms.generate_report.GenerateReport;
-import com.example.cms.generate_report.StaffGenerateReport;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -33,144 +27,130 @@ public class Staff extends Staff_User{
 	private Scanner input;
 
 	protected void createCamp() {
-	    Scanner scanner = new Scanner(System.in);
-	    input = new Scanner(System.in);
-	    System.out.println("===== Creating a New Camp =====");
+		input = new Scanner(System.in);
+		System.out.println("===== Creating a New Camp =====");
+		boolean uniqueCampName = true;
+		String campName;
+		do {
+			System.out.println("    Please insert the new camp name that is unique");
+			campName = input.nextLine();
+			for (Camp camp : campData.getCampList()) {
+				if (camp.getCampName().equals(campName)) {
+					System.out.println("This name has already been taken, please have an unique camp name");
+					uniqueCampName = false;
+					break;
+				}
+			}
+		}while(!uniqueCampName);
+		System.out.println("    Camp name: " + campName);
 
-	    // Get a unique camp name
-	    String campName = null;
-	    boolean uniqueCampName;
-	    do {
-	        System.out.println("Please insert the new camp name that is unique:");
-	        String campName1 = input.nextLine().trim();
-	        campName = campName1;
-	        uniqueCampName = campData.getCampList().stream().noneMatch(camp -> camp.getCampName().equalsIgnoreCase(campName1));
-	        if (!uniqueCampName) {
-	            System.out.println("This name has already been taken, please choose a unique camp name.");
-	        }
-	    } while (!uniqueCampName);
-	    
-	    System.out.println("Camp name: " + campName);
+		System.out.println("    Please insert the starting date of the camp in the format yyyy-mm-dd");
+		LocalDate startDate = null;
+		do{String dateString = input.nextLine();
+		try{
+			startDate = LocalDate.parse(dateString);
+			System.out.println("Starting date: " + startDate);
+		}catch(DateTimeParseException e){
+			System.out.println("Please insert the data in the correct format: yyyy-mm-dd");
+		}}while(startDate == null);
 
-	    // Get and validate start date
-	    LocalDate startDate = getDateFromUser("Please insert the starting date of the camp in the format yyyy-mm-dd:");
+		System.out.println("    Please insert the ending date of the camp in the format yyyy-mm-dd");
+		LocalDate endDate = null;
+		do{String endDateString = input.nextLine();
+			try{
+				endDate = LocalDate.parse(endDateString);
+				System.out.println("End date: " + endDate);
+			}catch(DateTimeParseException e){
+				System.out.println("Please insert the ending data in the correct format: yyyy-mm-dd");
+			}}while(endDate == null);
 
-	    // Get and validate end date
-	    LocalDate endDate = getDateFromUser("Please insert the ending date of the camp in the format yyyy-mm-dd:");
+		System.out.println("    Please insert the registration close date of the camp in the format yyyy-mm-dd");
+		LocalDate regCloseDate = null;
+		do{String regCloseString = input.nextLine();
+			try{
+				regCloseDate = LocalDate.parse(regCloseString);
+				System.out.println("Registration Close Date: " + regCloseDate);
+			}catch(DateTimeParseException e){
+				System.out.println("Please insert the registration close data in the correct format: yyyy-mm-dd");
+			}}while(regCloseDate == null);
 
-	    // Get and validate registration close date
-	    LocalDate regCloseDate = getDateFromUser("Please insert the registration close date of the camp in the format yyyy-mm-dd:");
+		boolean conti = true;
+		String ans;
+		ArrayList<Faculty> userGroups = new ArrayList<>();
+		System.out.println("Is the camp open to all NTU faculties?");
+		String allNTU;
+		do{
+			System.out.println("Enter 'Yes' or 'No' ");
+			allNTU = input.next();
+			if(allNTU.compareToIgnoreCase("Yes") ==0 ){
+				userGroups.add(Faculty.ALL);
+			}
 
-	    // Determine user groups
-	    ArrayList<Faculty> userGroups = getUserGroups();
+		}while(allNTU.compareTo("Yes") != 0 && allNTU.compareToIgnoreCase("No") != 0);
 
-	    // Get location
-	    System.out.println("Nearly there... Insert the location of the camp:");
-	    String location = input.nextLine().trim();
-	    System.out.println("Location: " + location);
+		if(userGroups.contains(Faculty.ALL)){
+			System.out.println("The camp is open to all NTU schools");
+		}else {
 
-	    // Get total slots
-	    int slots = getNumericInput("Enter the total slot of the attendee:");
-	    System.out.println("The total slot is " + slots);
+			do {
+				System.out.println("    Please insert the school/faculty that have access to the camp separated by space");
+				String userGroupString = input.nextLine();
+				String[] usergroups = userGroupString.split("\\s+");
+				ArrayList<String> userGroupArray = new ArrayList<>();
+				Collections.addAll(userGroupArray, usergroups);
+				for (String usergroup : userGroupArray) {
+					for (Faculty enumUserGroup : Faculty.values()) {
+						if (usergroup.equals(enumUserGroup.name())) {
+							userGroups.add(enumUserGroup);
+							break;
+						}
+					}
+				}
+				if (userGroups.size() == userGroupArray.size()) {
+					System.out.println("The following school/faculty can view and register");
+					for (Faculty userGroup : userGroups) {
+						System.out.print(userGroup + " ");
+					}
+				} else {
+					System.out.println("Invalid input has received, only the following is valid, continue? ");
+					for (Faculty userGroup : userGroups) {
+						System.out.print(userGroup + " ");
+					}
+					do {
+						System.out.println("Insert Yes or Re-enter");
+						ans = input.next();
+						conti = ans.equals("Yes");
+					} while (!ans.equals("Yes") && !ans.equals("Re-enter"));
+				}
+			} while (!conti);
+		}
 
-	    // Get visibility
-	    boolean visibility = getVisibility();
+			System.out.println("    Nearly there... Insert the location of the camp");
+			String location = input.nextLine();
+			System.out.println("Location: " + location);
 
-	    ArrayList<LocalDate> campDate = new ArrayList<>();
-	    campDate.add(startDate);
-	    campDate.add(endDate);
+			System.out.println("    Enter the total slot of the attendee");
+			int slots = input.nextInt();
+			System.out.println("The total slot is " + slots);
 
-	    // Create new camp
-	    Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots, slots, 10, 10, this.getName(), visibility);
+			String visibilityStr;
+			boolean visibility;
 
-	    // Update camp data
-	    campData.setCampList(newCamp);
-	    campData.addCampToMap(campName, newCamp);
-	    this.setCampsCreated(newCamp);
+			do {
+				System.out.println("Enter the visibility of the camp: On or Off");
+				visibilityStr = input.next();
+				visibility = visibilityStr.equals("On");
+			}while(!visibilityStr.equals("On") && !visibilityStr.equals("Off"));
 
-	    // Update CSV file for the new camp
-	    CSVDataManager.updateCampCSVFile(newCamp);
-	}
+			ArrayList<LocalDate> campDate = new ArrayList<>();
+			campDate.add(startDate);
+			campDate.add(endDate);
+			Camp newCamp = new Camp(campName, campDate, regCloseDate, userGroups, location, slots,this, visibility);
 
-	private LocalDate getDateFromUser(String message) {
-	    LocalDate date = null;
-	    do {
-	        System.out.println(message);
-	        String dateString = input.nextLine().trim();
-	        try {
-	            date = LocalDate.parse(dateString);
-	            System.out.println("Date: " + date);
-	        } catch (DateTimeParseException e) {
-	            System.out.println("Please insert the date in the correct format: yyyy-mm-dd");
-	        }
-	    } while (date == null);
-	    return date;
-	}
+			campData.setCampList(newCamp);
+			campData.addCampToMap(campName, newCamp);
+			this.setCampsCreated(newCamp);
 
-	private ArrayList<Faculty> getUserGroups() {
-	    ArrayList<Faculty> userGroups = new ArrayList<>();
-	    boolean conti = true;
-	    String ans;
-	    do {
-	        System.out.println("Please insert the school/faculty that have access to the camp separated by space:");
-	        String userGroupString = input.nextLine();
-	        String[] usergroups = userGroupString.split("\\s+");
-	        ArrayList<String> userGroupArray = new ArrayList<>(Arrays.asList(usergroups));
-	        for (String usergroup : userGroupArray) {
-	            for (Faculty enumUserGroup : Faculty.values()) {
-	                if (usergroup.equals(enumUserGroup.name())) {
-	                    userGroups.add(enumUserGroup);
-	                    break;
-	                }
-	            }
-	        }
-	        if (userGroups.size() == userGroupArray.size()) {
-	            System.out.println("The following school/faculty can view and register:");
-	            userGroups.forEach(userGroup -> System.out.print(userGroup + " "));
-	        } else {
-	            System.out.println("Invalid input received, only the following are valid. Continue?");
-	            userGroups.forEach(userGroup -> System.out.print(userGroup + " "));
-	            do {
-	                System.out.println("Insert Yes or Re-enter:");
-	                ans = input.next();
-	                conti = ans.equalsIgnoreCase("Yes");
-	            } while (!ans.equalsIgnoreCase("Yes") && !ans.equalsIgnoreCase("Re-enter"));
-	        }
-	    } while (!conti);
-	    return userGroups;
-	}
-
-	private int getNumericInput(String message) {
-	    int inputNumber = 0;
-	    boolean validInput = false;
-
-	    while (!validInput) {
-	        try {
-	            System.out.println(message);
-	            String inputLine = input.nextLine().trim();
-
-	            if (!inputLine.isEmpty()) {
-	                inputNumber = Integer.parseInt(inputLine);
-	                validInput = true;
-	            } else {
-	                System.out.println("Invalid input. Please enter a valid number.");
-	            }
-	        } catch (NumberFormatException e) {
-	            System.out.println("Invalid input. Please enter a valid number.");
-	        }
-	    }
-
-	    return inputNumber;
-	}
-
-	private boolean getVisibility() {
-	    boolean visibility;
-	    do {
-	        System.out.println("Enter the visibility of the camp: On or Off");
-	        String visibilityStr = input.next().trim();
-	        visibility = visibilityStr.equalsIgnoreCase("On") || visibilityStr.equalsIgnoreCase("Off");
-	    } while (!visibility);
-	    return visibility;
 	}
 
 	protected void viewCampCreated(Staff staff){
@@ -236,14 +216,13 @@ public class Staff extends Staff_User{
 	}
 
 
-	public void editCamp(Staff staff) {
+	public String editCamp(Staff staff) {
 		viewCampCreated(staff);
 			boolean completedEditing = false;
 			do {
 				Camp campToBeEdited = selectCamp(staff.getCampsCreated());
 				if(campToBeEdited == null){
-					System.out.println("Action terminated, exiting...") ;
-					return;
+					return "Action terminated, exiting...";
 				}
 				System.out.println("====What camp information would you like to edit====");
 				System.out.println("1. Camp name");
@@ -365,8 +344,8 @@ public class Staff extends Staff_User{
 						campToBeEdited.setUserGroup(userGroups);
 						break;
 					case(8):
-						System.out.println("Action terminated by the user，exiting...");
-						return;
+						System.out.println("Action terminated by the user");
+						return "Exiting...";
 				}
 				String ans;
 				do {
@@ -374,23 +353,22 @@ public class Staff extends Staff_User{
 					ans = input.nextLine();
 					completedEditing = (ans == "No");
 				}while(ans != "Yes" && ans != "No");
-
-				CSVDataManager.updateCampCSVFile(campToBeEdited);
 			}while(!completedEditing);
-			System.out.println("Edit successful!");
+
+			return "Edit successful!";
 		}
 
 
-	public void deleteCamp(Staff staff) {
+	public String deleteCamp(Staff staff) {
 		if(staff.getCampsCreated().isEmpty()){
-			System.out.println("No camp has been created, exiting");
-			return;
+			System.out.println("No camp has been created");
+			return "exiting...";
 		}
 		else {
 			viewCampCreated(staff);
 			Camp campToBeDeleted = selectCamp(staff.getCampsCreated());
 			if (campToBeDeleted == null) {
-				return;
+				return null;
 			} else {
 				String campNameToDeleteStr = campToBeDeleted.getCampName();
 				if (campToBeDeleted.getAttendeesRegistered().isEmpty() && campToBeDeleted.getCommitteeRegistered().isEmpty()) {
@@ -399,17 +377,17 @@ public class Staff extends Staff_User{
 						staff.getCampsCreated().remove(campToBeDeleted);
 						campData.getCampList().remove(campToBeDeleted);
 						campData.getCampHashMap().remove(campNameToDeleteStr);
-						for(Camp camp : campData.getCampList()){
-							CSVDataManager.updateCampCSVFile(camp);
-						}
-						System.out.println("Camp deletes successfully");
-                    }
+						//int originalCounter = Camp.getCounter();
+						//Camp.setCounter(originalCounter - 1);
+						return "Camp deletes successfully";
+					}
 					else{
-						System.out.println("Action terminated by user, exiting...");
+						System.out.println("Action terminated by user");
+						return "exiting...";
 					}
 				} else {
 					System.out.println("There is already attendee or committee registered, the camp cannot be deleted");
-					System.out.println("Action terminated, exiting...");
+					return "Action terminated, exiting...";
 				}
 			}
 		}
@@ -481,7 +459,6 @@ public class Staff extends Staff_User{
 		System.out.println("Enter \"confirm\" to submit your reply or any other key to cancel");
 		if(input.next().equalsIgnoreCase("confirm")){
 			enquiryToReply.setReply(reply);
-			CSVDataManager.updateEnquiryCSVFile(enquiryToReply);
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
 		}
@@ -557,77 +534,12 @@ public class Staff extends Staff_User{
 		if(input.next().equalsIgnoreCase("confirm")){
 			suggestionToApprove.setStatus(response);
 			suggestionToApprove.setProcessed(true);
-			Committee submitter = Committee.committeeNameMap.get(suggestionToApprove.getSubmitter());
-			int points = submitter.getPoints();
-			submitter.setPoints(points + 1);
-			CSVDataManager.updateSuggestionCSVFile(suggestionToApprove);
-			CSVDataManager.updateCommitteeCSVFile(submitter);
+			int points = suggestionToApprove.getSubmitter().getPoints();
+			suggestionToApprove.getSubmitter().setPoints(points + 1);
 			System.out.println("The suggestion has been processed and your response has been successfully recorded");
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
 		}
-	}
-
-	public void generateReport(Staff staff) {
-		viewCampCreated(staff);
-		Camp campToReport = selectCamp(staff.getCampsCreated());
-		Scanner scanner = new Scanner(System.in);
-		GenerateReport staffGenerator = new StaffGenerateReport();
-		boolean exit = false;
-		do {
-			System.out.println("Generate Report Menu:");
-			System.out.println("1. View Camp Committee Reports");
-			System.out.println("2. View Camp Attendee Reports");
-			System.out.println("3. Back to Main Menu");
-
-			int choice;
-			do {
-				try {
-					System.out.print("Enter your choice: ");
-					choice = scanner.nextInt();
-				} catch (InputMismatchException e) {
-					System.out.println("Invalid input. Please enter a valid integer.");
-					scanner.nextLine(); // Consume the invalid input
-					choice = -1; // Set a default value or use a flag to handle the loop
-				}
-			} while (choice != 1 && choice != 2 && choice != 3);
-			switch (choice) {
-				case 1:
-					String format = null;
-					do {
-						System.out.println("What format do you want to use, CSV or TXT? Please enter CSV or TXT");
-						format = scanner.next();
-						if (format.equalsIgnoreCase("CSV")) {
-							staffGenerator.generateCommitteeList(campToReport, Format.CSV);
-						} else if (format.equalsIgnoreCase("TXT")) {
-							staffGenerator.generateCommitteeList(campToReport, Format.TXT);
-						} else {
-							System.out.println("Only CSV and TXT are accepted");
-						}
-					}while(!format.equalsIgnoreCase("CSV") && !format.equalsIgnoreCase("TXT"));
-					break;
-				case 2:
-					String format2 = null;
-					do {
-						System.out.println("What format do you want to use, CSV or TXT? Please enter CSV or TXT");
-						format2 = scanner.next();
-						if (format2.equalsIgnoreCase("CSV")) {
-							staffGenerator.generateAttendeeList(campToReport, Format.CSV);
-						} else if (format2.equalsIgnoreCase("TXT")) {
-							staffGenerator.generateAttendeeList(campToReport, Format.CSV);
-						} else {
-							System.out.println("Only CSV and TXT are accepted");
-						}
-					}while(!format2.equalsIgnoreCase("CSV") && !format2.equalsIgnoreCase("TXT"));
-					break;
-				case 3:
-					exit = true;
-					break;
-				default:
-					System.out.println("Invalid choice. Please enter a valid option.");
-					break;
-			}
-		}while(!exit);
 	}
 
 

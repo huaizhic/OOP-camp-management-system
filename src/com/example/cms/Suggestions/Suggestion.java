@@ -1,6 +1,7 @@
 package com.example.cms.Suggestions;
 
 import com.example.cms.Status;
+import com.example.cms.Student.Committee;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.HashMap;
  */
 public class Suggestion {
     private String suggestion_Subject;
-    private String submitter;
+    private Committee submitter;
     private String content;
     private LocalDate dateSubmitted;
     private Status status;
@@ -29,14 +30,14 @@ public class Suggestion {
      * @param content Body of this suggestion
      * @param dateSubmitted Date on which this suggestion was submitted
      */
-    public Suggestion(String suggestion_Subject, String committee, String content, LocalDate dateSubmitted, Status status, boolean processed) {
+    public Suggestion(String suggestion_Subject, Committee committee, String content, LocalDate dateSubmitted) {
         this.suggestion_Subject = suggestion_Subject;
         this.submitter = submitter;
         this.content = content;
         this.dateSubmitted = dateSubmitted;
-        this.status = status;
-        this.processed = processed;
+        this.status = Status.Pending;
         // Add the suggestion to the HashMap using suggestion_Subject as the key
+        suggestionHashMap.put(suggestion_Subject, this);
     }
 
     /**
@@ -45,7 +46,7 @@ public class Suggestion {
      */
     public static void printSuggestionInfo(Suggestion suggestion){
         System.out.println("The subject: " + suggestion.getSuggestion_Subject());
-        System.out.println("The submitter: " + suggestion.getSubmitter());
+        System.out.println("The submitter: " + suggestion.getSubmitter().getName());
         System.out.println("The date submitted: " + suggestion.getDateSubmitted());
         System.out.println("The content: "+ suggestion.getContent());
         System.out.println("The status: " + suggestion.getStatus());
@@ -75,7 +76,7 @@ public class Suggestion {
      * Get the sender of the suggestion
      * @return Sender of the suggestion
      */
-    public String getSubmitter() {
+    public Committee getSubmitter() {
         return this.submitter;
     }
 
@@ -83,7 +84,7 @@ public class Suggestion {
      * Sets the sender of the suggestion
      * @param submitter sender of the suggestion
      */
-    public void setSubmitter(String submitter) {
+    public void setSubmitter(Committee submitter) {
         this.submitter = submitter;
     }
 

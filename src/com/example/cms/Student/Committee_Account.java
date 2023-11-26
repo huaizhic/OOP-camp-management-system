@@ -1,10 +1,12 @@
 package com.example.cms.Student;
 
-import com.example.cms.user_Login.account_Manager;
+import com.example.cms.CSVConverter.CSVDataManager;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.user_Login.account_Manager;
 
 /**
  * When a Camp committee member logs in, they will first see the menu provided by this class.
@@ -31,7 +33,7 @@ public class Committee_Account extends Student_Account {
 	    public void start() {
 	    	Scanner scanner = new Scanner(System.in);
 	        boolean exit = false;
-	        Committee committee = Committee.committeeMap.get(studentID);
+	        Committee committee = CSVDataManager.loadCommitteeFromCSV(existingCommittee.get(studentID));
 
 	        System.out.println("Welcome," + committee.getName());
 	        
