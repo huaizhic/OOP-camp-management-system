@@ -38,6 +38,7 @@ public class account_Manager {
 
         // For Staff User
         if (userTypeChoice == 2) {
+<<<<<<< HEAD
             // Print a header for Staff Login
             System.out.println("\n===== Staff Login =====");
 
@@ -47,10 +48,19 @@ public class account_Manager {
             CSVDataManager.loadSuggestionFromCSV();
             CSVDataManager.loadEnquiryFromCSV();
             CSVDataManager.loadCampsFromCSV();
+=======
+            staffId = getStaffId();
+            System.out.println("This is the staff id entered: " + staffId);
+            // Create Staff_Account instance and start staff account functionality
+            CSVDataManager.loadSuggestionFromCSV();
+            CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadCampsFromCSV(); // all attendee and committee name are placed in the hashmap
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
             CSVDataManager.loadStaffFromCSV();
             CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadAttendeeFromCSV();
 
+<<<<<<< HEAD
             // Populate camp data with registered attendees and committee members
             System.out.println("Processing data...");
 
@@ -61,30 +71,49 @@ public class account_Manager {
                 }
 
                 for (String string : registeredCommitteeToCampNameMap.get(camp)) {
+=======
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredAttendeeToCampNameMap.get(camp)){
+                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                    camp.setAttendeesRegistered(registeredAttendee);
+                }
+            }
+
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredCommitteeToCampNameMap.get(camp)){
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
                     Committee registeredCommittee = Committee.committeeNameMap.get(string);
                     camp.setCommitteeRegistered(registeredCommittee);
                 }
             }
 
+<<<<<<< HEAD
             // Start Staff Setup functionality
             System.out.println("Data loaded successfully!\n");
+=======
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
             Staff_Setup staff_Setup = new Staff_Setup();
             staff_Setup.start();
+
         }
         // For Student User
         else if (userTypeChoice == 1) {
+<<<<<<< HEAD
             // Print a header for Student Login
             System.out.println("\n===== Student Login =====");
 
             // Load necessary data from CSV files
             System.out.println("Loading data, please wait...");
 
+=======
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
             CSVDataManager.loadEnquiryFromCSV();
             CSVDataManager.loadSuggestionFromCSV();
             CSVDataManager.loadCampsFromCSV();
             CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadAttendeeFromCSV();
 
+<<<<<<< HEAD
             // Populate camp data with registered attendees and committee members
             System.out.println("Processing data...");
 
@@ -96,12 +125,26 @@ public class account_Manager {
                 }
 
                 for (String string : registeredCommitteeToCampNameMap.get(camp)) {
+=======
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredAttendeeToCampNameMap.get(camp)){
+                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                    camp.setAttendeesRegistered(registeredAttendee);
+                }
+            }
+
+            for(Camp camp : campData.getCampList()){
+                for(String string : registeredCommitteeToCampNameMap.get(camp)){
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
                     Committee registeredCommittee = Committee.committeeNameMap.get(string);
                     camp.setCommitteeRegistered(registeredCommittee);
                 }
             }
 
+<<<<<<< HEAD
             // Get account choice (existing student or new registration)
+=======
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
             int accountChoice = getAccountChoice();
 
             // Existing Student Account
