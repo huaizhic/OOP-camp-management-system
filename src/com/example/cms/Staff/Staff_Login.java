@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Staff_Login {
-    private Scanner scanner;
+	Scanner scanner = new Scanner(System.in);
 
     public void start(String staffID) {
         Staff staff = Staff.existingStaff.get(staffID);
