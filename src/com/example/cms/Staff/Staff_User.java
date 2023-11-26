@@ -20,10 +20,11 @@ public class Staff_User {
     private String name;
     private Faculty userGroup;
     private ArrayList<Camp> campsCreated;
-    private String securityQuestion;
-    private String securityAns;
+    private String securityQuestion = null;
+    private String securityAns = null ;
 
-    protected static HashMap<String, Staff> existingStaff;
+    public static HashMap<String, Staff> existingStaff;
+    public static HashMap<String, Staff> staffByNameMap;
 
     public Staff_User(String staffID, String name, Faculty userGroup, String securityQuestion, String securityAns){
         this.staffID = staffID;
@@ -32,6 +33,14 @@ public class Staff_User {
         campsCreated = new ArrayList<>();
         this.securityQuestion = securityQuestion;
         this.securityAns = securityAns;
+    }
+
+    public static HashMap<String, Staff> getStaffByNameMap() {
+        return staffByNameMap;
+    }
+
+    public static void setStaffByNameMap(HashMap<String, Staff> staffByNameMap) {
+        Staff_User.staffByNameMap = staffByNameMap;
     }
 
     public String getStaffID() {
@@ -85,7 +94,7 @@ public class Staff_User {
         return existingStaff;
     }
 
-    protected Staff getStaffByID(String staffID){
+    public static Staff getStaffByID(String staffID){
         for(Staff staff : existingStaff.values()){
             if(staff.getStaffID().equals(staffID)){
                 return staff;
