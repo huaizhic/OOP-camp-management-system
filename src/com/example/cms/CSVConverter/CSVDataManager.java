@@ -4,6 +4,7 @@ import com.example.cms.Faculty;
 import com.example.cms.Student_Role;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Staff.Staff_User;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
@@ -608,6 +609,7 @@ public class CSVDataManager {
                 if (data.length >= 12) {
                     // Create a new Student_User instance and set its attributes
                     Committee committee1 = new Committee();
+                    
                     committee1.setStudentID(data[0]);
                     committee1.setName(data[1]);
                     committee1.setPassword(data[2]);
@@ -816,6 +818,181 @@ public class CSVDataManager {
         }
     }
 
+/*************************STAFF****************************************/
+    public static Staff_User loadStaffFromCSV(Staff_User staff) {
+        String csvFilePath = "staff.csv";
+        
+        // If the attendee is null, create a new one
+        if (staff == null) {
+            staff = new Staff_User();
+        }
 
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            boolean firstLine = true; // flag for header
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip the first line (headers)
+                }
+
+                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                if (data.length >= 8) {
+                    // Create a new Staff_User instance and set its attributes
+                    Staff_User staffs = new Staff_User();
+
+                    staffs.setStaffID(data[0]);
+                    staffs.setName(data[1]);
+                    staffs.setPassword(data[2]);
+                    staffs.setSalt(data[3]);
+                    staffs.setFaculty(Faculty.valueOf(data[4]));
+
+                    // Parse campsCreated from the CSV
+                    Camp campCreated = Camp.getCampByName(data[5]);
+                    staffs.setCampsCreated(campCreated);
+
+                    // Parse SecurityQuestions from the CSV
+                    List<String> securityQuestions = new ArrayList<>();
+                    String[] securityQuestionsArray = data[6].split("\\|");
+                    for (String question : securityQuestionsArray) {
+                        securityQuestions.add(question);
+                    }
+                    staffs.setSecurityQuestions(securityQuestions);
+
+                    // Parse SecurityAnswers from the CSV
+                    List<String> securityAnswers = new ArrayList<>();
+                    String[] securityAnswersArray = data[7].split("\\|");
+                    for (String answer : securityAnswersArray) {
+                        securityAnswers.add(answer);
+                    }
+                    staffs.setSecurityAnswers(securityAnswers);
+
+                    // Check if staff is null and instantiate it if needed
+ 
+//
+//                    // Add the current staff to the existingStaff map
+//                    staff.addStaff(staffs);
+
+                    // Print details about the loaded staff
+                    System.out.println("Staff ID: " + staffs.getStaffID());
+                    System.out.println("Name: " + staffs.getName());
+                    System.out.println("Password: " + staffs.getPassword());
+                    System.out.println("Faculty: " + staffs.getFaculty());
+
+                    // Print campCreated if not null
+                    if (staffs.getCampsCreated() != null) {
+                        System.out.println("Created Camp: " + staffs.getCampsCreated().getCampName());
+                    } else {
+                        System.out.println("Created Camp: null");
+                    }
+                    System.out.println();
+
+                    // Print SecurityQuestions
+                    System.out.print("Security Questions: ");
+                    for (String question : staffs.getSecurityQuestion()) {
+                        System.out.print(question + "|");
+                    }
+                    System.out.println();
+
+                    // Print SecurityAnswers
+                    System.out.print("Security Answers: ");
+                    for (String answer : staffs.getSecurityAnswers()) {
+                        System.out.print(answer + "|");
+                    }
+                    System.out.println();
+                    System.out.println();
+
+                    System.out.println("Staff details printed successfully.");
+                } else {
+                    System.out.println("Incomplete data in the CSV line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from the CSV file.");
+            e.printStackTrace();
+        }
+
+        // Return the newly created staff instance or the existing one
+        return staff;
+    }
+
+    
+    public static void updateStaffCSVFile(Staff_User staff) {
+        // Get the path to the CSV file
+        String csvFilePath = "staff.csv";
+
+        // Read the existing content of the CSV file
+        List<String> existingLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                existingLines.add(line);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the existing CSV file content.");
+            e.printStackTrace();
+            return;  // Exit the method if an error occurs while reading the existing content
+        }
+
+        // Create a StringBuilder to store the updated content
+        StringBuilder updatedContent = new StringBuilder();
+
+        // Check if the attendee exists
+        if (staff != null) {
+            // Append the header to the StringBuilder if the existing content is empty
+            if (existingLines.isEmpty()) {
+                updatedContent.append("StaffID,Name,Password,Salt,Faculty,CampsCreated,SecurityQuesion,SecurityAnswers\n");
+            }
+
+            // Iterate through each line in the existing content
+            boolean staffIdFound = false;
+            for (String existingLine : existingLines) {
+                // Split the line into fields
+                String[] fields = existingLine.split(",", -1); // Use -1 to keep empty fields
+
+                // Check if the first field (attendee ID) matches the target attendee ID
+                if (fields.length > 0 && fields[0].equals(staff.getStaffID())) {
+                    // Append the updated information for the specific attendee to the StringBuilder
+                    updatedContent.append(staff.getName()).append(",");
+                    updatedContent.append(staff.getPassword()).append(",");
+                    updatedContent.append(staff.getSalt()).append(",");
+                    updatedContent.append(staff.getFaculty()).append(",");
+                    updatedContent.append(staff.getCampsCreated().getCampName()).append(",");  // Assuming getCampName() returns the camp name
+                    updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
+                    updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
+                    
+                    staffIdFound = true;
+                } else {
+                    // Append the unchanged line to the StringBuilder
+                    updatedContent.append(existingLine).append("\n");
+                }
+            }
+
+            // If the attendee ID was not found, add a new line for the attendee
+            if (!staffIdFound) {
+            	updatedContent.append(staff.getName()).append(",");
+                updatedContent.append(staff.getPassword()).append(",");
+                updatedContent.append(staff.getSalt()).append(",");
+                updatedContent.append(staff.getFaculty()).append(",");
+                updatedContent.append(staff.getCampsCreated().getCampName()).append(",");  // Assuming getCampName() returns the camp name
+                updatedContent.append(String.join("|", staff.getSecurityQuestion())).append(",");
+                updatedContent.append(String.join("|", staff.getSecurityAnswers())).append(",");
+                            }
+
+            // Write the updated content to the CSV file
+            try (FileWriter writer = new FileWriter(csvFilePath)) {
+                writer.write(updatedContent.toString());
+                System.out.println("Staff CSV file updated successfully.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while updating the CSV file.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Staff is null. CSV file not updated.");
+        }
+    }
+    
 }
