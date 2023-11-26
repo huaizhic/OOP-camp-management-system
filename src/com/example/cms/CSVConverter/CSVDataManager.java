@@ -590,7 +590,7 @@ public class CSVDataManager {
 
  
 /********************************COMMITTEE*********************************************/
- // Load Attendee from CSV
+ // Load Committee from CSV
     public static Committee loadCommitteeFromCSV(Committee committee) {
         String csvFilePath = "committee.csv";
 
