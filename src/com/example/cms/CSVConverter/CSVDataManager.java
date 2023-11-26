@@ -4,6 +4,7 @@ import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
+import com.example.cms.Staff.Staff;
 import com.example.cms.Staff.Staff_User;
 import com.example.cms.Status;
 import com.example.cms.Student.Attendee;
@@ -861,7 +862,7 @@ public class CSVDataManager {
 
                 if (data.length >= 8) {
                     // Create a new Staff_User instance and set its attributes
-                    Staff_User staffs = new Staff_User();
+                    Staff staffs = new Staff(null,null,null,null,null);
 
                     staffs.setStaffID(data[0]);
                     staffs.setName(data[1]);

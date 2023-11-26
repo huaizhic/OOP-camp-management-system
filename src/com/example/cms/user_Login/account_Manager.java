@@ -50,10 +50,7 @@ public class account_Manager {
             staffId = getStaffId();
             System.out.println("This is the staff id entered: " + staffId);
             // Create Staff_Account instance and start staff account functionality
-            CSVDataManager.loadSuggestionFromCSV();
-            CSVDataManager.loadEnquiryFromCSV();
-            CSVDataManager.loadCampsFromCSV(); // all attendee and committee name are placed in the hashmap
-            CSVDataManager.loadStaffFromCSV();
+             CSVDataManager.loadStaffFromCSV();
             CSVDataManager.loadCommitteeFromCSV();
             CSVDataManager.loadAttendeeFromCSV();
 
