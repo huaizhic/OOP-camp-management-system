@@ -1,11 +1,16 @@
 package com.example.cms.user_Login;
 
 import com.example.cms.CSVConverter.CSVDataManager;
-import com.example.cms.Staff.Staff_Account;
+import com.example.cms.Camp.Camp;
+import com.example.cms.Camp.campData;
 import com.example.cms.Staff.Staff_Setup;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_Account;
 import com.example.cms.Student.Student_User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
@@ -16,13 +21,14 @@ public class account_Manager {
     private Scanner scanner;
     String userId = null;
     String staffId  = null;
-
+    public static HashMap<Camp, ArrayList<String>> registeredAttendeeToCampNameMap = new HashMap<>();
+    public static HashMap<Camp, ArrayList<String>> registeredCommitteeToCampNameMap = new HashMap<>();
     // Constructor to initialize the AccountManager with a Scanner
     public account_Manager(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    // Method to start the Account Manager application
+ // Method to start the Account Manager application
     public void start() {
         System.out.println("Welcome to the Account Manager");
 
@@ -32,21 +38,76 @@ public class account_Manager {
 
         // For Staff User
         if (userTypeChoice == 2) {
-            staffId = getStaffId();
-            System.out.println("This is the staff id entered: " + staffId);
+            // Print a header for Staff Login
+            System.out.println("\n===== Staff Login =====");
 
-            // Create Staff_Account instance and start staff account functionality
+            // Load necessary data from CSV files
+            System.out.println("Loading data, please wait...");
+
+            CSVDataManager.loadSuggestionFromCSV();
+            CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadCampsFromCSV();
+            CSVDataManager.loadStaffFromCSV();
+            CSVDataManager.loadCommitteeFromCSV();
+            CSVDataManager.loadAttendeeFromCSV();
+
+            // Populate camp data with registered attendees and committee members
+            System.out.println("Processing data...");
+
+            for (Camp camp : campData.getCampList()) {
+                for (String string : registeredAttendeeToCampNameMap.get(camp)) {
+                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                    camp.setAttendeesRegistered(registeredAttendee);
+                }
+
+                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
+                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
+                    camp.setCommitteeRegistered(registeredCommittee);
+                }
+            }
+
+            // Start Staff Setup functionality
+            System.out.println("Data loaded successfully!\n");
             Staff_Setup staff_Setup = new Staff_Setup();
             staff_Setup.start();
         }
         // For Student User
         else if (userTypeChoice == 1) {
+            // Print a header for Student Login
+            System.out.println("\n===== Student Login =====");
+
+            // Load necessary data from CSV files
+            System.out.println("Loading data, please wait...");
+
+            CSVDataManager.loadEnquiryFromCSV();
+            CSVDataManager.loadSuggestionFromCSV();
+            CSVDataManager.loadCampsFromCSV();
+            CSVDataManager.loadCommitteeFromCSV();
+            CSVDataManager.loadAttendeeFromCSV();
+
+            // Populate camp data with registered attendees and committee members
+            System.out.println("Processing data...");
+
+            
+            for (Camp camp : campData.getCampList()) {
+                for (String string : registeredAttendeeToCampNameMap.get(camp)) {
+                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                    camp.setAttendeesRegistered(registeredAttendee);
+                }
+
+                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
+                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
+                    camp.setCommitteeRegistered(registeredCommittee);
+                }
+            }
+
             // Get account choice (existing student or new registration)
             int accountChoice = getAccountChoice();
 
             // Existing Student Account
             if (accountChoice == 1) {
                 // Create Student_User instance and load student data from CSV
+                System.out.println("Loading student data, please wait...");
                 Student_User studentUser = new Student_User();
                 CSVDataManager.loadStudentsFromCSV(studentUser);
 
@@ -101,16 +162,14 @@ public class account_Manager {
     }
 
 
-
  // Method to get user type choice (staff or student)
     private int getUserTypeChoice() {
         int userTypeChoice = 0;
 
-        // Continue looping until a valid choice is entered
         while (true) {
             try {
                 // Prompt the user to enter '1' for student or '2' for staff
-                System.out.print("Are you a staff or a student? (Enter '1' for student or '2' for staff): ");
+                System.out.print("Select your role:\n1. Student\n2. Staff\nEnter the corresponding number: ");
 
                 // Read the input as a string and trim leading/trailing spaces
                 String input = scanner.nextLine().trim();

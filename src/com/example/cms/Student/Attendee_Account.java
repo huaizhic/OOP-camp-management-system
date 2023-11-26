@@ -1,6 +1,5 @@
 package com.example.cms.Student;
 
-import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.user_Login.account_Manager;
 
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public class Attendee_Account extends Student_Account {
 
         System.out.println("Default Student ID: " + studentID);
 
-        Attendee attendee = CSVDataManager.loadAttendeeFromCSV(existingAttendees.get(studentID));
+        Attendee attendee = Attendee.attendeesMap.get(studentID);
 
         if (attendee != null) {
             System.out.println("Attendee in attendee account:");

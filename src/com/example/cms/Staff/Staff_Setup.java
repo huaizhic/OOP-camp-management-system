@@ -1,22 +1,15 @@
 package com.example.cms.Staff;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
-import com.example.cms.Faculty;
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.CSVConverter.CSVWriter;
+import com.example.cms.Faculty;
 import com.example.cms.Password.Password_Hasher;
-import com.example.cms.Password.Password_Manager;
 import com.example.cms.Password.Password_Manager_Staff;
 import com.example.cms.Password.password_Data;
-import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.user_Login.account_Manager;
+
+import java.util.*;
 
 public class Staff_Setup {
 	Scanner scanner = new Scanner(System.in);
@@ -36,7 +29,7 @@ public class Staff_Setup {
           System.out.print("Enter Staff ID: ");
           String staffID = scanner.nextLine().trim().toUpperCase();
           System.out.println("Staff id inputted: " + staffID);
-          CSVDataManager.loadStaffFromCSV();           // Check if staff ID already exists
+                  // Check if staff ID already exists
           Staff_User staff = Staff_User.getExistingStaff().get(staffID);
           
           // Check if staff is not null and staffID is not null

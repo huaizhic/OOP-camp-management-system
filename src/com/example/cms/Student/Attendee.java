@@ -3,7 +3,9 @@ package com.example.cms.Student;
 import com.example.cms.Camp.Camp;
 import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Staff.Staff_User;
 import com.example.cms.Faculty;
+import com.example.cms.CSVConverter.CSVDataManager;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ import java.util.Scanner;
  */
 public class Attendee extends Student_User {
 
-	 public static Map<String, Attendee> attendeesMap = new HashMap<>();
+	 public static Map<String, Attendee> attendeesMap = new HashMap<>(); //student ID
+    public static HashMap<String, Attendee> attendeeToNameMap = new HashMap<>();
      private ArrayList<Camp> registeredCamps;
 
      private ArrayList<Enquiry> enquirySubmitted;
@@ -31,33 +34,38 @@ public class Attendee extends Student_User {
          }
      }
 
-     // Method to add an attendee
+  // Method to add an attendee
      public void addAttendee(Attendee newAttendee) {
-    	    if (newAttendee != null) {
-    	        attendeesMap.put(newAttendee.getStudentID(), newAttendee);
+         if (newAttendee != null) {
+             // Add the new attendee to the map
+             attendeesMap.put(newAttendee.getStudentID(), newAttendee);
 
-    	        // Print success message and details about the added attendee
-    	        System.out.println("New Attendee added successfully  in add attendee method:");
-    	        System.out.println("Student ID: " + newAttendee.getStudentID());
-    	        System.out.println("Name: " + newAttendee.getName());  // Assuming you have a getName method in Attendee
+             // Print success message and details about the added attendee
+             System.out.println("\nNew Attendee added successfully:");
+             System.out.println("Student ID: " + newAttendee.getStudentID());
+             System.out.println("Name: " + newAttendee.getName());
+         } else {
+             System.out.println("Failed to add attendee. The provided attendee is null.");
+         }
+     }
 
-    	        // You can add more details based on your Attendee class properties
-
-    	        // You may want to save the updated attendeesMap to a file or perform other actions.
-    	    } else {
-    	        System.out.println("Failed to add attendee. The provided attendee is null.");
-    	    }
-    	}
      
   // Method to get an Attendee by ID
      public Attendee getAttendeeByID(String attendeeID) {
          if (attendeesMap.containsKey(attendeeID)) {
+             // Print success message and details about the found attendee
+             System.out.println("\nAttendee with ID " + attendeeID + " found:");
+             System.out.println("Student ID: " + attendeesMap.get(attendeeID).getStudentID());
+             System.out.println("Name: " + attendeesMap.get(attendeeID).getName());
+  
              return attendeesMap.get(attendeeID);
          } else {
+             // Print failure message
              System.out.println("Attendee with ID " + attendeeID + " not found.");
              return null;
          }
      }
+
      
      // Method to get existing attendees
      public Map<String, Attendee> existingAttendees() {
@@ -81,16 +89,21 @@ public class Attendee extends Student_User {
         enquirySubmitted.add(enquiry);
     }
 
-    // New method to display registered camps for a specific student
+ // New method to display registered camps for a specific student
     public static void displayRegisteredCamps(Attendee attendee) {
-            if (attendee.getRegisteredCamps().isEmpty()) {
-                System.out.println("You have not register any camp.");
-            } else {
-                for (Camp camp : attendee.getRegisteredCamps()) {
-                    Camp.printAllCampInfo(camp);
-                }
+        if (attendee.getRegisteredCamps().isEmpty()) {
+            // Print a message when the attendee has not registered for any camps
+            System.out.println("You have not registered for any camps.");
+            return;
+        } else {
+            // Print information for each registered camp
+            System.out.println("Registered Camps:");
+            for (Camp camp : attendee.getRegisteredCamps()) {
+                Camp.printAllCampInfo(camp);
             }
-	    }
+        }
+    }
+
 	    
 
     public static void manageCamp(Attendee attendee) {
@@ -98,7 +111,11 @@ public class Attendee extends Student_User {
         boolean exit = false;
 
         do {
-            System.out.println("Camp Enquiries Menu:");
+            // Decorative header for the Manage Camp Menu
+            System.out.println("-------------- Attendee: " + attendee.getName() + " --------------");
+            System.out.println("-------- Welcome to Manage Camp Menu --------");
+
+            // Display menu options
             System.out.println("1. View Camps");
             System.out.println("2. Register for a Camp. Note: if you do not know the camp name, please select view camps to check the camp name first");
             System.out.println("3. Withdraw from a Camp");
@@ -122,7 +139,8 @@ public class Attendee extends Student_User {
                 case 4:
                     exit = true;
                     Attendee_Account attendee_Account = new Attendee_Account(attendee.studentID, attendee.existingStudents);
-                    
+
+                    // Start the Attendee_Account functionality
                     attendee_Account.start();
                     break;
                 default:
@@ -230,6 +248,19 @@ public class Attendee extends Student_User {
                                 int originalSlot = campToRegister.getRemainingSlots();
                                 campToRegister.setRemainingSlots(originalSlot - 1);
                                 System.out.println("Camp registration successful");
+                                
+                                attendee = Attendee.attendeesMap.get(attendee.getStudentID());
+                                
+                                attendee.setRegisteredCamps(campToRegister);
+                                // Update the CSV file for attendee
+    	                        CSVDataManager.updateAttendeeCSVFile(attendee);
+    	                        
+    	                        Camp camp = Camp.getCampMap().get(campName);
+    	                        camp.setAttendeesRegistered(attendee);
+    	                        
+    	                        // Update the CSV file for Camp;
+    	                        CSVDataManager.updateCampCSVFile(camp);
+    	                        
                             } else {
                                 System.out.println("Action canceled by the user, exiting...");
                                 manageCamp(attendee);
@@ -310,10 +341,22 @@ public class Attendee extends Student_User {
                     String confirm = input.next().trim().toUpperCase(); // Trim and convert input to uppercase
 
                     if (confirm.equals("CONFIRM")) {
+                    	  // Remove the camp from the attendee
                         attendee.getRegisteredCamps().remove(campToWithdraw);
+
+                        // Remove the attendee from the camp
                         campToWithdraw.getAttendeesRegistered().remove(attendee);
-                        int originalSlot = campToWithdraw.getRemainingSlots();
-                        campToWithdraw.setRemainingSlots(originalSlot + 1);
+
+                        // Update remaining slots for the camp
+                        int originalSlots = campToWithdraw.getRemainingSlots();
+                        campToWithdraw.setRemainingSlots(originalSlots + 1);
+
+                        // Update the CSV file for the attendee
+                        CSVDataManager.updateAttendeeCSVFile(attendee);
+
+                        // Update the CSV file for the camp
+                        CSVDataManager.updateCampCSVFile(campToWithdraw);
+                        
                         System.out.println("Camp withdrawal successful");
                     } else {
                         System.out.println("Action terminated by the user, exiting...");
@@ -487,7 +530,7 @@ public class Attendee extends Student_User {
             return;
         }
         LocalDate todayDate = LocalDate.now();
-        Enquiry newEnquiry = new Enquiry(subject, content, todayDate, attendee);
+        Enquiry newEnquiry = new Enquiry(subject, content, todayDate, attendee.getName(), null, false);
 
         Enquiry.getEnquiryHashMap().put(subject, newEnquiry); //add enquiry to hashmap
         Enquiry.setEnquiryArrayList(newEnquiry); //add enquiry to the total enquiry

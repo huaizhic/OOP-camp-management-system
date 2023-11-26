@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Staff_Account {
 	
-    protected void start(Staff_User existingStaffMember){
+    protected void start(Staff existingStaffMember){
         Scanner input = new Scanner(System.in);
         boolean exit = false;
 
@@ -56,7 +56,7 @@ public class Staff_Account {
         }while(!exit);
     }
 
-    private void manageCamp(Staff_User existingStaffMember){
+    private void manageCamp(Staff existingStaffMember){
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
@@ -109,7 +109,7 @@ public class Staff_Account {
         }while(!exit);
     }
 
-    private void manageEnquiry(Staff_User existingStaffMember){
+    private void manageEnquiry(Staff existingStaffMember){
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
@@ -150,7 +150,7 @@ public class Staff_Account {
         }while(!exit);
     }
 
-    private void manageSuggestion(Staff_User existingStaffMember) {
+    private void manageSuggestion(Staff existingStaffMember) {
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
