@@ -57,17 +57,21 @@ public class account_Manager {
             // Populate camp data with registered attendees and committee members
             System.out.println("Processing data...");
 
-            for (Camp camp : campData.getCampList()) {
-                for (String string : registeredAttendeeToCampNameMap.get(camp)) {
-                    Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
-                    camp.setAttendeesRegistered(registeredAttendee);
+            if(!registeredAttendeeToCampNameMap.isEmpty()){
+                for (Camp camp : campData.getCampList()) {
+                    for (String string : registeredAttendeeToCampNameMap.get(camp)) {
+                        Attendee registeredAttendee = Attendee.attendeeToNameMap.get(string);
+                        camp.setAttendeesRegistered(registeredAttendee);
+                    }
                 }
             }
 
-            for (Camp camp : campData.getCampList()) {
-                for (String string : registeredCommitteeToCampNameMap.get(camp)) {
-                    Committee registeredCommittee = Committee.committeeNameMap.get(string);
-                    camp.setCommitteeRegistered(registeredCommittee);
+            if(!registeredCommitteeToCampNameMap.isEmpty()) {
+                for (Camp camp : campData.getCampList()) {
+                    for (String string : registeredCommitteeToCampNameMap.get(camp)) {
+                        Committee registeredCommittee = Committee.committeeNameMap.get(string);
+                        camp.setCommitteeRegistered(registeredCommittee);
+                    }
                 }
             }
 
