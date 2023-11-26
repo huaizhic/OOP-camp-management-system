@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
+import com.example.cms.Staff.Staff_User;
 import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Suggestions.Suggestion;
@@ -140,6 +141,42 @@ public class CSVWriter {
         }
     }
 
+    
+/******************************FOR STAFF *******************************************/
+    public static void writeStaffToCSV(Staff_User staff, boolean appendHeader) {
+        String csvFilePath = "staff.csv";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath, true))) {
+            // Check if the CSV file is empty
+            if (isFileEmpty(csvFilePath)) {
+                // Add the CSV header
+                writer.write("StaffID,Name,Password,Salt,Faculty,CampsCreated,SecurityQuesion,SecurityAnswers");
+                writer.newLine();
+            }
+
+            // Convert ArrayList<Camp> to an array of CharSequence with null check
+            CharSequence[] campCreatedArray = toArrayWithNullCheckCamp(staff.getCampsCreated());
+          
+            // Append the user information to the CSV file
+            writer.write(staff.getStaffID() + ","
+                    + staff.getName() + ","
+                    + staff.getPassword() + ","
+                    + staff.getSalt()+ ","
+                    + staff.getFaculty() + ","
+                    + String.join("|", campCreatedArray) + ","
+                    + String.join("|", staff.getSecurityQuestion()) + ","
+                    + String.join("|", staff.getSecurityAnswers())); 
+            writer.newLine();
+
+            System.out.println("Staff information written to " + csvFilePath + " successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the CSV file.");
+            e.printStackTrace();
+        }
+    }
+    
+    /******************************FOR STAFF *******************************************/
+    
     // Helper method to handle null check and conversion to array
     private static CharSequence[] toArrayWithNullCheckCamp(List<Camp> list) {
         if (list != null) {
@@ -175,6 +212,16 @@ public class CSVWriter {
             return new CharSequence[0];
         }
     }
+    
+ // Helper method to handle null check and conversion to array for a single Camp object
+    private static CharSequence[] toArrayWithNullCheckCamp(Camp camp) {
+        if (camp != null) {
+            return new CharSequence[]{camp.toString()}; // Assuming you have a meaningful way to convert a Camp object to a string
+        } else {
+            return new CharSequence[0];
+        }
+    }
+
     
     public static boolean isFileEmpty(String filePath) {
         File file = new File(filePath);
