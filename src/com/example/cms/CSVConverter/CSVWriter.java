@@ -1,14 +1,10 @@
 package com.example.cms.CSVConverter;
 
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Student.Student_User;
-import com.example.cms.Suggestions.Suggestion;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.cms.Camp.Camp;
@@ -24,12 +20,6 @@ import com.example.cms.Suggestions.Suggestion;
 public class CSVWriter {
 
     // Method to write user information to a CSV file
-
-    /**
-     * Writes student user information to CSV file
-     * @param student Student user object with the information to be written
-     * @param appendHeader unused parameter at the moment
-     */
     public static void writeStudentUserToCSV(Student_User student, boolean appendHeader) {
         String csvFilePath = "student.csv";
 
@@ -71,11 +61,7 @@ public class CSVWriter {
             e.printStackTrace();
         }
     }
-    /**
-     * Writes Camp Attendee user information to CSV file
-     * @param student Student user object with the information to be written
-     * @param appendHeader unused parameter at the moment
-     */
+    
     public static void writeAttendeeToCSV(Student_User student, boolean appendHeader) {
         String csvFilePath = "attendee.csv";
 
@@ -115,11 +101,7 @@ public class CSVWriter {
             e.printStackTrace();
         }
     }
-    /**
-     * Writes Camp committee member information to CSV file
-     * @param student Student user object with the information to be written
-     * @param appendHeader unused parameter at the moment
-     */
+
     public static void writeCommitteeToCSV(Student_User student, boolean appendHeader) {
         String csvFilePath = "committee.csv";
 
@@ -196,11 +178,6 @@ public class CSVWriter {
     /******************************FOR STAFF *******************************************/
     
     // Helper method to handle null check and conversion to array
-    /**
-     * Helper method to handle null check and conversion to array
-     * @param list Camp list format
-     * @return  Character Sequence Array format
-     */
     private static CharSequence[] toArrayWithNullCheckCamp(List<Camp> list) {
         if (list != null) {
             return list.toArray(new CharSequence[0]);
@@ -208,14 +185,8 @@ public class CSVWriter {
             return new CharSequence[0];
         }
     }
-
-
+    
     // Helper method to handle null check and conversion to array
-    /**
-     * Helper method to handle null check and conversion to array
-     * @param list Enquiry list format
-     * @return  Character Sequence Array format
-     */
     private static CharSequence[] toArrayWithNullCheckEnquiry(List<Enquiry> list) {
         if (list != null) {
             return list.toArray(new CharSequence[0]);
@@ -225,11 +196,6 @@ public class CSVWriter {
     }
     
  // Helper method to handle null check and conversion to array
-    /**
-     * Helper method to handle null check and conversion to array
-     * @param list Suggestion list format
-     * @return  Character Sequence Array format
-     */
     private static CharSequence[] toArrayWithNullCheckSuggestion(List<Suggestion> list) {
         if (list != null) {
             return list.toArray(new CharSequence[0]);
@@ -239,11 +205,6 @@ public class CSVWriter {
     }
     
     // Helper method to handle null check and conversion to array
-    /**
-     * Helper method to handle null check and conversion to array
-     * @param list String list format
-     * @return  Character Sequence Array format
-     */
     private static CharSequence[] toArrayWithNullCheckList(List<String> list) {
         if (list != null) {
             return list.toArray(new CharSequence[0]);
@@ -251,8 +212,6 @@ public class CSVWriter {
             return new CharSequence[0];
         }
     }
-
-
     
  // Helper method to handle null check and conversion to array for a single Camp object
     private static CharSequence[] toArrayWithNullCheckCamp(Camp camp) {
@@ -263,11 +222,7 @@ public class CSVWriter {
         }
     }
 
-    /**
-     * Helper method to check if csv file in the filepath is empty or not
-     * @param filePath Filepath to find the specified file
-     * @return True if file is empty, false if not
-     */
+    
     public static boolean isFileEmpty(String filePath) {
         File file = new File(filePath);
         return file.length() == 0;
