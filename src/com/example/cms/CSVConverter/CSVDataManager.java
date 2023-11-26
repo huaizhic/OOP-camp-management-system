@@ -1031,10 +1031,8 @@ public class CSVDataManager {
         }
     }
 
-<<<<<<< HEAD
 /*********************************************CAMP************************************/
-=======
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
+
     public static void loadCampsFromCSV() {
         String csvFilePath = "camp.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -1055,10 +1053,7 @@ public class CSVDataManager {
                             data[4], // Location
                             Integer.parseInt(data[5]), // Total Slots
                             Integer.parseInt(data[6]), // remaining slots
-<<<<<<< HEAD
-=======
                             10,
->>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
                             Integer.parseInt(data[8]), //
                             data[9], // Staff in Charge
                             Boolean.parseBoolean(data[10]) // Visibility
