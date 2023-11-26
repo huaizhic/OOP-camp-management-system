@@ -173,66 +173,89 @@ public class Staff extends Staff_User{
 	    return visibility;
 	}
 
-	protected void viewCampCreated(Staff staff){
-		if(staff.getCampsCreated().isEmpty()){
-			System.out.println("No camp has been created, please create one before editing");
-		}else {
-			System.out.println("Please view the camp that you have created with the following ways:");
-			System.out.println("1. Default: alphabetical order of camp name");
-			System.out.println("2. Search for keywords");
-			System.out.println("3. Sort by camp features");
-			int choice = input.nextInt();
-			switch (choice) {
-				case (1):
-					DisplayBySort aOb = new SortByName_Default();
-					ArrayList<Camp> sorted = aOb.Sorting(staff.getCampsCreated());
-					for (Camp camp : sorted) {
-						Camp.printAllCampInfo(camp);
-					}
-					break;
-				case (2):
-					ArrayList<Camp> afterSearchCamp;
-					do {
-						afterSearchCamp = SearchApp.startSearch(staff.getCampsCreated());
-						if (afterSearchCamp == null) {
-							System.out.println("Please choose a correct option");
-						} else {
-							for (Camp camp : afterSearchCamp) {
-								Camp.printAllCampInfo(camp);
-							}
-						}
-					} while (afterSearchCamp == null);
-				case (3):
-					ArrayList<Camp> afterSortCamp;
-					do {
-						afterSortCamp = SortApp.startSorting(staff.getCampsCreated());
-						if (afterSortCamp == null) {
-							System.out.println("Please choose a correct option");
-						} else {
-							for (Camp camp : afterSortCamp) {
-								Camp.printAllCampInfo(camp);
-							}
-						}
-					} while (afterSortCamp == null);
-			}
-		}
+	protected void viewCampCreated(Staff staff) {
+	    if (staff.getCampsCreated().isEmpty()) {
+	        System.out.println("No camp has been created, please create one before editing");
+	    } else {
+	        System.out.println("Please view the camp that you have created with the following ways:");
+	        System.out.println("1. Default: alphabetical order of camp name");
+	        System.out.println("2. Search for keywords");
+	        System.out.println("3. Sort by camp features");
+
+	        int choice = getNumericInput2("Enter your choice:");
+	        switch (choice) {
+	            case 1:
+	                DisplayBySort aOb = new SortByName_Default();
+	                ArrayList<Camp> sorted = aOb.Sorting(staff.getCampsCreated());
+	                sorted.forEach(camp -> Camp.printAllCampInfo(camp));
+	                break;
+	            case 2:
+	                ArrayList<Camp> afterSearchCamp;
+	                do {
+	                    afterSearchCamp = SearchApp.startSearch(staff.getCampsCreated());
+	                    if (afterSearchCamp == null) {
+	                        System.out.println("Please choose a correct option");
+	                    } else {
+	                        afterSearchCamp.forEach(camp -> Camp.printAllCampInfo(camp));
+	                    }
+	                } while (afterSearchCamp == null);
+	                break;
+	            case 3:
+	                ArrayList<Camp> afterSortCamp;
+	                do {
+	                    afterSortCamp = SortApp.startSorting(staff.getCampsCreated());
+	                    if (afterSortCamp == null) {
+	                        System.out.println("Please choose a correct option");
+	                    } else {
+	                        afterSortCamp.forEach(camp -> Camp.printAllCampInfo(camp));
+	                    }
+	                } while (afterSortCamp == null);
+	                break;
+	        }
+	    }
 	}
-	private Camp selectCamp(ArrayList<Camp> campArrayList){
-		String campToBeSelectedStr;
-		Camp campToBeSelected;
-		do{System.out.println("Please insert the camp name or enter exit to cancel in lower case");
-			campToBeSelectedStr = input.nextLine();
-			if(campToBeSelectedStr.equals("exit")){
-				return null;
-			}
-			else {
-				campToBeSelected = campData.getCampHashMap().get(campToBeSelectedStr);
-				if (campToBeSelected == null) {
-					System.out.println("The camp does not exist, please verify the CAMP NAME");
-				}
-			}
-		}while(campToBeSelected == null);
-		return campToBeSelected;
+
+	private Camp selectCamp(ArrayList<Camp> campArrayList) {
+	    String campToBeSelectedStr;
+	    Camp campToBeSelected;
+
+	    do {
+	        campToBeSelectedStr = getStringInput("Please insert the camp name or enter 'exit' to cancel:");
+	        if (campToBeSelectedStr.equalsIgnoreCase("exit")) {
+	            return null;
+	        } else {
+	            campToBeSelected = campData.getCampHashMap().get(campToBeSelectedStr);
+	            if (campToBeSelected == null) {
+	                System.out.println("The camp does not exist, please verify the CAMP NAME");
+	            }
+	        }
+	    } while (campToBeSelected == null);
+
+	    return campToBeSelected;
+	}
+
+	private int getNumericInput2(String prompt) {
+	    int input = 0;
+	    boolean validInput = false;
+	    Scanner scanner = new Scanner(System.in);
+
+	    while (!validInput) {
+	        try {
+	            System.out.print(prompt);
+	            input = Integer.parseInt(scanner.nextLine().trim());
+	            validInput = true;
+	        } catch (NumberFormatException e) {
+	            System.out.println("Invalid input. Please enter a valid number.");
+	        }
+	    }
+
+	    return input;
+	}
+
+	private String getStringInput(String prompt) {
+	    Scanner scanner = new Scanner(System.in);
+	    System.out.print(prompt);
+	    return scanner.nextLine().trim();
 	}
 
 

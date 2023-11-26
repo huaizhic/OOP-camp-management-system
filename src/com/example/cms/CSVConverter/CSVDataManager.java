@@ -909,7 +909,7 @@ public class CSVDataManager {
 
                     // Print campCreated if not null
                     if (staffs.getCampsCreated() != null) {
-                    	System.out.println("Created Camp: " + staffs.getCampsCreated().get(0).getCampName());
+                    //	System.out.println("Created Camp: " + staffs.getCampsCreated().get(0).getCampName());
                     } else {
                         System.out.println("Created Camp: null");
                     }
@@ -1045,6 +1045,8 @@ public class CSVDataManager {
                     continue; // Skip the first line (headers)
                 }
                 String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                // Check if the data array has the expected length
                 if (data.length >= 12) {
                     Camp camp = new Camp(
                             data[0], // Camp Name
@@ -1055,9 +1057,9 @@ public class CSVDataManager {
                             Integer.parseInt(data[5]), // Total Slots
                             Integer.parseInt(data[6]), // remaining slots
                             10,
-                            Integer.parseInt(data[8]), //
-                            data[9], // Staff in Charge
-                            Boolean.parseBoolean(data[10]) // Visibility
+                            Integer.parseInt(data[7]), //
+                            data[8], // Staff in Charge
+                            Boolean.parseBoolean(data[9]) // Visibility
                     );
 
                     String[] UserGroupArray = data[3].split("\\|");
@@ -1068,7 +1070,7 @@ public class CSVDataManager {
                         userGroupList.add(userGroup);
                     }
 
-                    String[] registeredAttendeeArray = data[11].split("\\|");
+                    String[] registeredAttendeeArray = data[10].split("\\|");
 
                     ArrayList<String> registeredAttendeeName = new ArrayList<>();
                     for (String attendeeName : registeredAttendeeArray) {
@@ -1077,7 +1079,7 @@ public class CSVDataManager {
 
                     account_Manager.registeredAttendeeToCampNameMap.put(camp, registeredAttendeeName);
 
-                    String[] registeredCommitteeArray = data[12].split("\\|");
+                    String[] registeredCommitteeArray = data[11].split("\\|");
 
                     ArrayList<String> registeredCommitteeName = new ArrayList<>();
                     for (String committeeName : registeredCommitteeArray) {
@@ -1088,7 +1090,6 @@ public class CSVDataManager {
                     camp.setUserGroup(userGroupList);
                     campData.addCampToMap(camp.getCampName(), camp);
                     campData.getCampList().add(camp);
-
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
                 }
@@ -1098,6 +1099,7 @@ public class CSVDataManager {
             e.printStackTrace();
         }
     }
+
     private static ArrayList<LocalDate> parseDatesFromString(String input) {
         String[] dateStrings = input.split("\\|");
         ArrayList<LocalDate> dates = new ArrayList<>();
@@ -1106,6 +1108,7 @@ public class CSVDataManager {
         }
         return dates;
     }
+
     public static void updateCampCSVFile(Camp camp) {
         // Get the path to the CSV file
         String csvFilePath = "camp.csv";
