@@ -64,6 +64,7 @@ public class account_Manager {
 
             Staff_Setup staff_Setup = new Staff_Setup();
             staff_Setup.start();
+
         }
         // For Student User
         else if (userTypeChoice == 1) {

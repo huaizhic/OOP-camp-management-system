@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor update in Attendee and Committee load" />
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor bug">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/user_Login/account_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/user_Login/account_Manager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -337,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700994388880</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="minor bug">
+      <option name="closed" value="true" />
+      <created>1700996080816</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1700996080816</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,9 +387,9 @@
     <MESSAGE value="Committee, suggestion and Staff" />
     <MESSAGE value="minor change" />
     <MESSAGE value="Load and saving committed" />
-    <MESSAGE value="minor bug" />
     <MESSAGE value="minor update in Attendee and Committee load" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor update in Attendee and Committee load" />
+    <MESSAGE value="minor bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

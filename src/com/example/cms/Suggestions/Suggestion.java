@@ -37,7 +37,6 @@ public class Suggestion {
         this.status = status;
         this.processed = processed;
         // Add the suggestion to the HashMap using suggestion_Subject as the key
-        suggestionHashMap.put(suggestion_Subject, this);
     }
 
     /**

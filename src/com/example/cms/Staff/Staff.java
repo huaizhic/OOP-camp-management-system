@@ -1,5 +1,6 @@
 package com.example.cms.Staff;
 
+import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Camp.Camp;
 import com.example.cms.Camp.campData;
 import com.example.cms.DisplayOptions.*;
@@ -151,6 +152,7 @@ public class Staff extends Staff_User{
 			campData.setCampList(newCamp);
 			campData.addCampToMap(campName, newCamp);
 			this.setCampsCreated(newCamp);
+		CSVDataManager.updateCampCSVFile(newCamp);
 
 	}
 
@@ -217,13 +219,14 @@ public class Staff extends Staff_User{
 	}
 
 
-	public String editCamp(Staff staff) {
+	public void editCamp(Staff staff) {
 		viewCampCreated(staff);
 			boolean completedEditing = false;
 			do {
 				Camp campToBeEdited = selectCamp(staff.getCampsCreated());
 				if(campToBeEdited == null){
-					return "Action terminated, exiting...";
+					System.out.println("Action terminated, exiting...") ;
+					return;
 				}
 				System.out.println("====What camp information would you like to edit====");
 				System.out.println("1. Camp name");
@@ -345,8 +348,8 @@ public class Staff extends Staff_User{
 						campToBeEdited.setUserGroup(userGroups);
 						break;
 					case(8):
-						System.out.println("Action terminated by the user");
-						return "Exiting...";
+						System.out.println("Action terminated by the user，exiting...");
+						return;
 				}
 				String ans;
 				do {
@@ -354,22 +357,23 @@ public class Staff extends Staff_User{
 					ans = input.nextLine();
 					completedEditing = (ans == "No");
 				}while(ans != "Yes" && ans != "No");
-			}while(!completedEditing);
 
-			return "Edit successful!";
+				CSVDataManager.updateCampCSVFile(campToBeEdited);
+			}while(!completedEditing);
+			System.out.println("Edit successful!");
 		}
 
 
-	public String deleteCamp(Staff staff) {
+	public void deleteCamp(Staff staff) {
 		if(staff.getCampsCreated().isEmpty()){
-			System.out.println("No camp has been created");
-			return "exiting...";
+			System.out.println("No camp has been created, exiting");
+			return;
 		}
 		else {
 			viewCampCreated(staff);
 			Camp campToBeDeleted = selectCamp(staff.getCampsCreated());
 			if (campToBeDeleted == null) {
-				return null;
+				return;
 			} else {
 				String campNameToDeleteStr = campToBeDeleted.getCampName();
 				if (campToBeDeleted.getAttendeesRegistered().isEmpty() && campToBeDeleted.getCommitteeRegistered().isEmpty()) {
@@ -378,17 +382,17 @@ public class Staff extends Staff_User{
 						staff.getCampsCreated().remove(campToBeDeleted);
 						campData.getCampList().remove(campToBeDeleted);
 						campData.getCampHashMap().remove(campNameToDeleteStr);
-						//int originalCounter = Camp.getCounter();
-						//Camp.setCounter(originalCounter - 1);
-						return "Camp deletes successfully";
-					}
+						for(Camp camp : campData.getCampList()){
+							CSVDataManager.updateCampCSVFile(camp);
+						}
+						System.out.println("Camp deletes successfully");
+                    }
 					else{
-						System.out.println("Action terminated by user");
-						return "exiting...";
+						System.out.println("Action terminated by user, exiting...");
 					}
 				} else {
 					System.out.println("There is already attendee or committee registered, the camp cannot be deleted");
-					return "Action terminated, exiting...";
+					System.out.println("Action terminated, exiting...");
 				}
 			}
 		}
@@ -460,6 +464,7 @@ public class Staff extends Staff_User{
 		System.out.println("Enter \"confirm\" to submit your reply or any other key to cancel");
 		if(input.next().equalsIgnoreCase("confirm")){
 			enquiryToReply.setReply(reply);
+			CSVDataManager.updateEnquiryCSVFile(enquiryToReply);
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
 		}
@@ -538,6 +543,8 @@ public class Staff extends Staff_User{
 			Committee submitter = Committee.committeeNameMap.get(suggestionToApprove.getSubmitter());
 			int points = submitter.getPoints();
 			submitter.setPoints(points + 1);
+			CSVDataManager.updateSuggestionCSVFile(suggestionToApprove);
+			CSVDataManager.updateCommitteeCSVFile(submitter);
 			System.out.println("The suggestion has been processed and your response has been successfully recorded");
 		}else{
 			System.out.println("Action terminated by the user, exiting...");
