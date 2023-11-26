@@ -4,9 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor change">
+<<<<<<< HEAD
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor update in Attendee and Committee load">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/CSVConverter/CSVDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/Camp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Password/Password_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Password/Password_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Attendee_Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee_Account.java" afterDir="false" />
+=======
+    <list default="true" id="8f8a7118-c7cb-4f99-b67f-cf44920b97a8" name="Changes" comment="minor bug">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Camp/campData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Staff/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/Student/Committee.java" afterDir="false" />
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
+      <change beforePath="$PROJECT_DIR$/src/com/example/cms/user_Login/account_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/example/cms/user_Login/account_Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +129,7 @@
       <workItem from="1700722712958" duration="5647000" />
       <workItem from="1700848427940" duration="1432000" />
       <workItem from="1700884344246" duration="4805000" />
+      <workItem from="1700982381514" duration="1988000" />
     </task>
     <task id="LOCAL-00001" summary="SortByTotalSlots">
       <option name="closed" value="true" />
@@ -299,7 +315,59 @@
       <option name="project" value="LOCAL" />
       <updated>1700882504015</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="minor change">
+      <option name="closed" value="true" />
+      <created>1700983266361</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1700983266361</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Load and saving committed">
+      <option name="closed" value="true" />
+      <created>1700988206158</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1700988206158</updated>
+    </task>
+    <task id="LOCAL-00026" summary="minor bug">
+      <option name="closed" value="true" />
+      <created>1700988369786</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1700988369786</updated>
+    </task>
+    <task id="LOCAL-00027" summary="minor bug">
+      <option name="closed" value="true" />
+      <created>1700988703579</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1700988703579</updated>
+    </task>
+<<<<<<< HEAD
+    <option name="localTasksCounter" value="28" />
+=======
+    <task id="LOCAL-00028" summary="minor update in Attendee and Committee load">
+      <option name="closed" value="true" />
+      <created>1700994388880</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1700994388880</updated>
+    </task>
+    <task id="LOCAL-00029" summary="minor bug">
+      <option name="closed" value="true" />
+      <created>1700996080816</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1700996080816</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +402,16 @@
     <MESSAGE value="Implementing suggestion and some committee methods" />
     <MESSAGE value="Committee, suggestion and Staff" />
     <MESSAGE value="minor change" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor change" />
+    <MESSAGE value="Load and saving committed" />
+<<<<<<< HEAD
+    <MESSAGE value="minor bug" />
+    <MESSAGE value="minor update in Attendee and Committee load" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor update in Attendee and Committee load" />
+=======
+    <MESSAGE value="minor update in Attendee and Committee load" />
+    <MESSAGE value="minor bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor bug" />
+>>>>>>> 485f19e4bc61975291f91716931c57060ab7dccc
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

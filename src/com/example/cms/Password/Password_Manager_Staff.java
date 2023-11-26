@@ -1,8 +1,9 @@
 package com.example.cms.Password;
 
 import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Staff.Staff;
+import com.example.cms.Staff.Staff_User;
 import com.example.cms.Student.Attendee;
-import com.example.cms.Student.Committee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Student_Role;
 import com.example.cms.user_Login.account_Manager;
@@ -12,49 +13,45 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
+import com.example.cms.Student_Role;
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Student.Attendee;
+import com.example.cms.Student.Committee;
+import com.example.cms.Student.Student_User;
+import com.example.cms.user_Login.account_Manager;
+
 /**
  * Controller class to handle passwords for logging in
  * Includes all the standard features such as forgot password, reset password, etc.
  */
-public class Password_Manager {
+public class Password_Manager_Staff {
 
 	 private Scanner scanner; // Add a Scanner field
-	 private Student_User studentUser; // Add a field to hold the Student_User instance
-	 private Map<String, Attendee> existingAttendees;
-	 private Map<String, Committee> existingCommittee;
+	 private Staff_User staff_User; // Add a field to hold the Student_User instance
+	 private Map<String, Staff_User> existingStaff;
 	    // Constructor to initialize the Scanner
-	    public Password_Manager(Scanner scanner, Student_User studentUser) {
+	    public Password_Manager_Staff(Scanner scanner, Staff_User staffUser) {
 	        this.scanner = scanner;
-	        this.studentUser = studentUser;
+	        this.staff_User = staff_User;
 	    }
 
-	    public boolean checkPassword(String studentID, Student_Role roleChoice, String enteredPassword) {
-	        //System.out.println("Debugging - Before calling passwordManager.checkPassword");
-	        //System.out.println("Your password is, " + enteredPassword);
 
-	        // Retrieve the student based on studentID
-	        Student_User student_Information = studentUser.getStudentById(studentID);
-	       // System.out.println("Debugging - Inside checkPassword");
 
-	        // Check if the student exists and validate the password and roleChoice.
-	        if (student_Information != null) {
-	            // Assuming the roleChoice is stored in the user group.
-	            Student_Role studentRoleChoice = student_Information.getUserGroup();
-	            String storedPassword = student_Information.getPassword();
-	            String storedSalt = student_Information.getSalt();
-//	            System.out.println("Entered Role: " + roleChoice);
-//	            System.out.println("Entered Password: " + enteredPassword);
-//	            System.out.println("Stored Role: " + studentRoleChoice);
-//	            System.out.println("Stored Password: " + storedPassword);
+	    public boolean checkPassword(String staffID, String enteredPassword) {
+	        // Retrieve the staff based on staffID
+	        Staff_User staffMember = Staff_User.getExistingStaff().get(staffID);
 
-	            // Debugging statement to check equality
-	           // System.out.println("Role Equality: " + roleChoice.equals(studentRoleChoice));
-	         // Check if the entered password matches the stored hashed password
+	        // Check if the staff exists
+	        if (staffMember != null) {
+	            // Retrieve stored password and salt
+	            String storedPassword = staffMember.getPassword();
+	            String storedSalt = staffMember.getSalt();
+
+	            // Check if the entered password matches the stored hashed password
 	            String enteredPasswordHashed = Password_Hasher.hashPassword(enteredPassword, storedSalt);
 
-	            if (enteredPasswordHashed != null && enteredPasswordHashed.equals(storedPassword) && roleChoice.equals(studentRoleChoice)) {
-	                return true;
-	            }
+	            return enteredPasswordHashed != null && enteredPasswordHashed.equals(storedPassword);
 	        }
 
 	        return false;
@@ -63,14 +60,14 @@ public class Password_Manager {
 	    
 	    public boolean updatePassword(String userID, String updatedPassword) {
 	        // Find the student based on the userID (you need to implement this part)
-	        this.existingAttendees = new HashMap<>();
-	        this.existingCommittee  = new HashMap<>();
-	        Student_User student = studentUser.getStudentById(userID);
-
-	        if (student != null) {
-	            String oldPasswordHash = student.getPassword();
-	            String oldSalt = student.getSalt();
-	            
+	        this.existingStaff= new HashMap<>();
+	        CSVDataManager.loadStaffFromCSV();
+	        
+	        Staff_User staff = Staff_User.getExistingStaff().get(userID);
+            
+	        if (staff != null) {
+	            String oldPasswordHash = staff.getPassword();
+	            String oldSalt = staff.getSalt();
 
 	            // Check if the updatedPassword is different from the old password
 	            if (!updatedPassword.equals(oldPasswordHash)) {
@@ -82,30 +79,13 @@ public class Password_Manager {
 	                    // Hash the updated password with the new salt
 	                    String newPasswordHash = Password_Hasher.hashPassword(updatedPassword, newSalt);
 
-	                    // Update the passwordHash and salt in the Student_User instance
-	                    student.setPassword(newPasswordHash);
-	                    student.setSalt(newSalt);
+	                    // Update the passwordHash and salt in the Staff_User instance
+	                    staff.setPassword(newPasswordHash);
+	                    staff.setSalt(newSalt);
 
-	                    // Check if student_Role is equal to attendee
-	                    if (student.getUserGroup().equals(Student_Role.ATTENDEE)) {
-	                        Attendee attendee = Attendee.attendeesMap.get(student.getStudentID());
-	                        // Update the passwordHash and salt in the Attendee instance
-	                        attendee.setPassword(newPasswordHash);
-	                        // Update the CSV file for attendee
-	                        CSVDataManager.updateAttendeeCSVFile(attendee);
-	                    } else {
-                            Committee committee = Committee.getCommitteeMap().get(student.getStudentID());
-	                        // Update the passwordHash and salt in the Committee instance
-	                        committee.setPassword(newPasswordHash);
-	                        // Update the CSV file for committee
-	                        CSVDataManager.updateCommitteeCSVFile(committee);
-	                    }
 
-	                    // Update the existingStudents map with the modified Student_User object
-	                    student.existingStudents.put(student.getStudentID(), student);
-
-	                    // Update the CSV file for student
-	                    CSVDataManager.updateStudentCSVFile(student, userID);
+	                    // Update the CSV file for staff
+	                    CSVDataManager.updateStaffCSVFile(staff);
 
 	                    System.out.println("Password reset successful.");
 	                    // Return true to indicate success
@@ -128,17 +108,22 @@ public class Password_Manager {
 	    }
 
 
+
     public void forgotPassword(String userID) {
     	
-        // First, retrieve the student based on the userID
-        Student_User student = studentUser.getStudentById(userID);
+        // First, retrieve the staff based on the userID
+    	CSVDataManager.loadStaffFromCSV();
+    	
+    
+        Staff_User staff = Staff_User.getExistingStaff().get(userID);
+        
 
-        if (student != null) {
-            System.out.println("Password recovery for " + student.getName());
+        if (staff != null) {
+            System.out.println("Password recovery for " + staff.getName());
 
-            // Get security questions and answers from the student
-            ArrayList<String> securityQuestions = student.getSecurityQuestion();
-            ArrayList<String> securityAnswers = student.getSecurityAnswers();
+            // Get security questions and answers from the staff
+            ArrayList<String> securityQuestions = staff.getSecurityQuestion();
+            ArrayList<String> securityAnswers = staff.getSecurityAnswers();
 
             // Maximum wrong attempts allowed per question
             int maxWrongAttempts = 2;
@@ -150,12 +135,12 @@ public class Password_Manager {
             for (int i = 0; i < securityQuestions.size(); i++) {
                 String securityQuestion = securityQuestions.get(i);
                 System.out.println("Security Question: " + securityQuestion);
-                
+
                 String userAnswer;
                 do {
                     System.out.print("Enter your answer: ");
                     userAnswer = scanner.nextLine().toUpperCase().trim();
-                    
+
                     if (userAnswer.isEmpty()) {
                         System.out.println("Invalid input. Please enter a non-empty value.");
                     }
@@ -167,11 +152,11 @@ public class Password_Manager {
                 while (!userAnswer.equals(securityAnswers.get(i)) && wrongAttempts < maxWrongAttempts) {
                     wrongAttempts++;
                     System.out.println("Wrong answer. Attempts left: " + (maxWrongAttempts - wrongAttempts));
-                    
+
                     do {
                         System.out.print("Try again: ");
                         userAnswer = scanner.nextLine().toUpperCase().trim();
-                        
+
                         if (userAnswer.isEmpty()) {
                             System.out.println("Invalid input. Please enter a non-empty value.");
                         }
@@ -196,18 +181,17 @@ public class Password_Manager {
                     String newPassword = scanner.next();
 
                     if (newPassword.equals("1")) {
-                    	Scanner scanner = new Scanner(System.in);
+                        Scanner scanner = new Scanner(System.in);
                         System.out.println("Password reset canceled.");
                         account_Manager account_Manager = new account_Manager(scanner);
                         account_Manager.start();
                         break; // Exit the loop if the user chooses to cancel
                     }
 
-                    if (updatePassword(userID, newPassword)) {
-                    	Scanner scanner = new Scanner(System.in);
+                    if (updatePassword(staff.getStaffID(), newPassword)) {
+                        Scanner scanner = new Scanner(System.in);
                         System.out.println("Password reset successful. You can now log in with your new password.");
                         passwordResetSuccessful = true; // Exit the loop when the password meets the criteria
-                        // Student_Account studentAccount = new  Student_Account(userID, studentUser.getExistingStudents());
 
                         account_Manager account_Manager = new account_Manager(scanner);
                         account_Manager.start();

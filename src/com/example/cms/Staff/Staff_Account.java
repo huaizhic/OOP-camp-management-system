@@ -6,7 +6,8 @@ import java.util.Scanner;
  * When a Staff logs in, they will first see the menu provided by this class.
  */
 public class Staff_Account {
-    protected void start(Staff staff){
+	
+    protected void start(Staff existingStaffMember){
         Scanner input = new Scanner(System.in);
         boolean exit = false;
 
@@ -31,17 +32,17 @@ public class Staff_Account {
 
             switch (choice) {
                 case 1:
-                    manageCamp(staff);
+                    manageCamp(existingStaffMember);
 
                     break;
                 case 2:
-                    manageEnquiry(staff);
+                    manageEnquiry(existingStaffMember);
                     // Use the Attendee class method to manage camps
 
                     break;
                 case 3:
                     // Use the Attendee class method to manage enquiries
-                    manageSuggestion(staff);
+                    manageSuggestion(existingStaffMember);
                     break;
                 case 4:
                     exit = true;
@@ -55,7 +56,7 @@ public class Staff_Account {
         }while(!exit);
     }
 
-    private void manageCamp(Staff staff){
+    private void manageCamp(Staff existingStaffMember){
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
@@ -65,7 +66,8 @@ public class Staff_Account {
             System.out.println("3. Delete Existing Camp");
             System.out.println("4. View All Camp");
             System.out.println("5. View Camp Created");
-            System.out.println("6. Back To the Main Page");
+            System.out.println("6. Generate Camp Report");
+            System.out.println("7. Back To the Main Page");
 
             System.out.print("Enter your choice: ");
             Scanner scanner = null;
@@ -84,21 +86,23 @@ public class Staff_Account {
             switch (choice) {
                 case (1):
                     // Delegate to specific functionality in the Attendee class
-                    staff.createCamp();
+                    existingStaffMember.createCamp();
                     break;
                 case (2):
                     // Delegate to specific functionality in the Attendee class
-                    staff.editCamp(staff);
+                    existingStaffMember.editCamp(existingStaffMember);
                     break;
                 case (3):
-                    staff.deleteCamp(staff);
+                    existingStaffMember.deleteCamp(existingStaffMember);
                     break;
                 case (4):
-                    staff.viewAllCamps();
+                    existingStaffMember.viewAllCamps();
                     break;
                 case (5):
-                    staff.viewCampCreated(staff);
+                    existingStaffMember.viewCampCreated(existingStaffMember);
                 case(6):
+                    existingStaffMember.generateReport(existingStaffMember);
+                case(7):
                     exit = true;
                     break;
                 default:
@@ -108,7 +112,7 @@ public class Staff_Account {
         }while(!exit);
     }
 
-    private void manageEnquiry(Staff staff){
+    private void manageEnquiry(Staff existingStaffMember){
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
@@ -133,11 +137,11 @@ public class Staff_Account {
             switch (choice) {
                 case (1):
                     // Delegate to specific functionality in the Attendee class
-                    staff.viewEnquiry(staff);
+                    existingStaffMember.viewEnquiry(existingStaffMember);
                     break;
                 case (2):
                     // Delegate to specific functionality in the Attendee class
-                    staff.replyEnquiry(staff);
+                    existingStaffMember.replyEnquiry(existingStaffMember);
                     break;
                 case(3):
                     exit = true;
@@ -149,7 +153,7 @@ public class Staff_Account {
         }while(!exit);
     }
 
-    private void manageSuggestion(Staff staff) {
+    private void manageSuggestion(Staff existingStaffMember) {
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         do {
@@ -174,11 +178,11 @@ public class Staff_Account {
             switch (choice) {
                 case (1):
                     // Delegate to specific functionality in the Attendee class
-                    staff.viewSuggestion(staff);
+                    existingStaffMember.viewSuggestion(existingStaffMember);
                     break;
                 case (2):
                     // Delegate to specific functionality in the Attendee class
-                    staff.approveSuggestion(staff);
+                    existingStaffMember.approveSuggestion(existingStaffMember);
                     break;
                 case (3):
                     exit = true;

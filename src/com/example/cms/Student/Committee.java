@@ -1,10 +1,12 @@
 package com.example.cms.Student;
 
+import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Camp.Camp;
 import com.example.cms.DisplayOptions.DisplayApp;
 import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Faculty;
 import com.example.cms.Format;
+import com.example.cms.Status;
 import com.example.cms.Suggestions.Suggestion;
 import com.example.cms.generate_report.CommitteeGenerateReport;
 import com.example.cms.generate_report.GenerateReport;
@@ -16,6 +18,7 @@ import java.util.*;
  */
 public class Committee extends Student_User {
 	public static Map<String, Committee> committeeMap = new HashMap<>();
+    public static HashMap<String, Committee> committeeNameMap = new HashMap<>();
     private Camp registeredCamp;
     private ArrayList<Camp> accessibleCamp;
 
@@ -33,7 +36,12 @@ public class Committee extends Student_User {
         return committeeMap;
     }
 
- // Method to add an attendee
+    public static HashMap<String, Committee> getCommitteeNameMap() {
+        return committeeNameMap;
+    }
+
+
+    // Method to add an attendee
     public void addCommittee(Committee newCommittee) {
         committeeMap.put(newCommittee.getStudentID(), newCommittee);
         // You may want to save the updated attendeesMap to a file or perform other actions.
@@ -157,16 +165,6 @@ public class Committee extends Student_User {
         }
     }
 
-    
-    // Example conversion function
-    /*private static Camp convertToCamp(camp_Test_Data campData) {
-        // Create a new Camp object and set its properties based on camp_Test_Data
-        Camp camp = new Camp();
-        camp.setCampName(campData.getcamp_Test_DataName());
-        // Set other properties...
-
-        return camp;
-    }*/
     
 /*************************FOR MANAGE ENQUIRIES**********************************/
 
@@ -292,6 +290,8 @@ public class Committee extends Student_User {
                 enquiryToBeAnswer.setReply(reply);
                 enquiryToBeAnswer.setProcessed(true);
                 committee.setPoints(committee.getPoints() + 1);
+                CSVDataManager.updateEnquiryCSVFile(enquiryToBeAnswer);
+                CSVDataManager.updateCommitteeCSVFile(committee);
                 System.out.println("Reply sent successfully");
                 
                 String ans;
@@ -423,10 +423,12 @@ public class Committee extends Student_User {
 
             System.out.println("Confirm to submit? Enter \"confirm\" to continue or any other key to cancel ");
             if (input.nextLine().equalsIgnoreCase("confirm")) {
-                Suggestion newSuggestion = new Suggestion(subject, this, content, todayDate);
+                Suggestion newSuggestion = new Suggestion(subject, this.getName(), content, todayDate, Status.Pending, false);
                 committee.setSuggestions(newSuggestion);
                 Suggestion.getSuggestionHashMap().put(subject, newSuggestion);
                 Suggestion.getSuggestionArrayList().add(newSuggestion);
+                CSVDataManager.updateSuggestionCSVFile(newSuggestion);
+                CSVDataManager.updateCampCSVFile(committee.getRegisteredCamp());
                 System.out.println("Your suggestion has been successfully submitted");
 
                 // Ask the user if they want to submit another suggestion
@@ -565,14 +567,14 @@ public class Committee extends Student_User {
                             System.out.println("Invalid choice");
                             break;
                     }
+                    CSVDataManager.updateCommitteeCSVFile(committee);
+                    CSVDataManager.updateSuggestionCSVFile(suggestionToBeEdit);
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a valid integer.");
                     input.nextLine(); // Consume the invalid input
                 }
             } while (!exitEditing);
 
-            // Return to the suggestions management menu
-            manageSuggestions(committee);
         } catch (Exception e) {
             System.out.println("An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
@@ -623,6 +625,10 @@ public class Committee extends Student_User {
                 committee.getRegisteredCamp().getSuggestion().remove(suggestionToBeDel); // delete in camp suggestion
                 Suggestion.getSuggestionHashMap().remove(suggestionToBeDel.getSuggestion_Subject()); // delete in suggestion hashmap
                 Suggestion.getSuggestionArrayList().remove(suggestionToBeDel); // delete in suggestion arraylist
+                for(Suggestion suggestion : Suggestion.getSuggestionArrayList()){
+                    CSVDataManager.updateSuggestionCSVFile(suggestion);
+                }
+
                 System.out.println("Suggestion deleted successfully, exiting...");
             } else {
                 System.out.println("Action terminated by user, exiting");

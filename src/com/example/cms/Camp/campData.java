@@ -7,7 +7,7 @@ import java.util.HashMap;
  * This class represents entity class campData to hold and process data of camps.
  */
 public class campData {
-	private static ArrayList<Camp> campList;
+	private static ArrayList<Camp> campList = new ArrayList<>();
 	private static HashMap<String, Camp> campHashMap= new HashMap<String, Camp>();
 
 	/**
