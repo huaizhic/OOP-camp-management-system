@@ -21,6 +21,10 @@ import java.util.List;
  */
 public class CSVDataManager {
 
+    /**
+     * Loads student details from CSV, upon specification of Student_User in the parameter.
+     * @param studentUser Inputted Student User
+     */
 	// Load students from CSV
     public static void loadStudentsFromCSV(Student_User studentUser) {
         String csvFilePath = "student.csv";
@@ -180,6 +184,11 @@ public class CSVDataManager {
         }
     }
 
+    /**
+     * Updates details of student in CSV
+     * @param studentUser Specified Student User object containing the updated information
+     * @param studentId Student ID to identify the Student User
+     */
     public static void updateStudentCSVFile(Student_User studentUser, String studentId) {
         // Get the path to the CSV file
         String csvFilePath = "student.csv";
@@ -387,6 +396,12 @@ public class CSVDataManager {
 //        }
 //    }
 
+    /**
+     * Loads attendee details from CSV, upon specification of attendee in the parameter.
+     * Parameter attendee object is mostly empty at this point, hence this function is required to fill in the rest of the relevant information about the specified attendee.
+     * @param attendee Specified attendee object with just userID attribute
+     * @return Same attendee object, with all the attributes filled with information from the CSV
+     */
     public static Attendee loadAttendeeFromCSV(Attendee attendee) {
         String csvFilePath = "attendee.csv";
         
@@ -501,7 +516,10 @@ public class CSVDataManager {
         return attendee;
     }
 
-
+    /**
+     * Update attendee details in the CSV
+     * @param attendee attendee object with updated information
+     */
     public static void updateAttendeeCSVFile(Attendee attendee) {
         // Get the path to the CSV file
         String csvFilePath = "attendee.csv";
@@ -590,6 +608,12 @@ public class CSVDataManager {
  
 /********************************COMMITTEE*********************************************/
  // Load Attendee from CSV
+
+    /**
+     * Loads committee member details from CSV, upon specification of committee member object in the parameter.
+     * @param committee Specified committee member object with just userID attribute
+     * @return Same committee member object, with all the attributes filled with information from the CSV
+     */
     public static Committee loadCommitteeFromCSV(Committee committee) {
         String csvFilePath = "committee.csv";
 
@@ -730,7 +754,11 @@ public class CSVDataManager {
         }
         return committee;
     }
-  
+
+    /**
+     * Update committee member details in the CSV
+     * @param committee Committee member object with updated information
+     */
     public static void updateCommitteeCSVFile(Committee committee) {
         // Get the path to the CSV file
         String csvFilePath = "committee.csv";
