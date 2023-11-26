@@ -14,12 +14,9 @@ import java.util.*;
 public class Staff_Setup {
 	Scanner scanner = new Scanner(System.in);
 	password_Data password;
-	private Map<String, Staff_User> getExistingStaff;
 
     public Staff_Setup() {
         this.scanner = new Scanner(System.in);
-        // Initialize existingAttendees by filtering Attendee objects
-        this.getExistingStaff = new HashMap<>();
     }
 
     public void start() {
@@ -41,9 +38,9 @@ public class Staff_Setup {
                   updateAccount(staffID);
               } else {
                   System.out.println("Redirecting to staff login.");
-                  Staff_Login staff_Login = new Staff_Login(staffID, getExistingStaff);
+                  Staff_Login staff_Login = new Staff_Login();
                   // Redirect to staff login logic
-                  staff_Login.start();
+                  staff_Login.start(staffID);
               }
           } else {
         	    // Staff ID doesn't exist
