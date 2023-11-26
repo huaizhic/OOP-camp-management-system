@@ -17,7 +17,7 @@ public class Staff_User {
     private String name;
     private Faculty faculty;
 
-    protected ArrayList<Camp> campsCreated ;
+    protected ArrayList<Camp> campsCreated = new ArrayList<>();
     private ArrayList<String> securityQuestion;
     private ArrayList<String> securityAnswers;
 	private Scanner input;
