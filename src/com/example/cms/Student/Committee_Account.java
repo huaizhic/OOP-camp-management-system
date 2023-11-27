@@ -36,8 +36,24 @@ public class Committee_Account extends Student_Account {
 	        System.out.println("Welcome," + committee.getName());
 	        
 	        while (!exit) {
+	        	int borderLength = 53;  // Adjust the border length based on your preference
+
+	        	// Print the decorative border
+	        	System.out.println("=".repeat(borderLength));
+
+	        	// Print the STAFF header
+	        	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+	        	// Print staff information
+	        	System.out.println("               Name: " + committee.getName());
+	        	System.out.println("               ID: " + committee.getStudentID());
+
+	        	// Print the decorative border again
+	        	System.out.println("=".repeat(borderLength));
+	        	System.out.println("================STUDENT - COMMITEE HOME PAGE================");
+
+	        	
 	            // Display menu options for camp committee members
-	            System.out.println("Camp Committee Member Options:");
 	            System.out.println("1. Manage Camps including generating reports");
 	            System.out.println("2. Manage Suggestions");
 	            System.out.println("3. Manage Enquiries");
