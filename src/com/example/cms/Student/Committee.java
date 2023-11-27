@@ -71,6 +71,23 @@ public class Committee extends Student_User {
     }
 
     public static void manageCamp(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - CAMP MANAGEMENT MENU================");
+
+    	
         boolean exit = false;
         do {
             System.out.println("Camp Management Menu:");
@@ -121,6 +138,23 @@ public class Committee extends Student_User {
     }
     
     public static void viewAllCamp(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - VIEW ALL CAMP================");
+
+    	
         try {
             ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
 
@@ -169,6 +203,23 @@ public class Committee extends Student_User {
 /*************************FOR MANAGE ENQUIRIES**********************************/
 
     public static void manageEnquiries(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - MANAGE ENQUIRIES================");
+
+    	
         boolean exit = false;
         do {
             System.out.println("Enquiries Management Menu:");
@@ -219,6 +270,22 @@ public class Committee extends Student_User {
 
 
     public void viewEnquiries(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - VIEW ENQUIRIES PAGE================");
+
         try {
             Camp campOfEnquiry = committee.getRegisteredCamp();
 
@@ -255,6 +322,23 @@ public class Committee extends Student_User {
 
 
     public void answerEnquiries(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - ANSWER ENQUIRIES PAGE================");
+
+    	
         Scanner input = new Scanner(System.in);
         boolean exitAnswerEnquiry = false;
 
@@ -322,6 +406,23 @@ public class Committee extends Student_User {
  /*************************************FOR SUGGESTIONS****************************************/
 
     public static void manageSuggestions(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - MANAGE SUGGESTIONS PAGE================");
+
+    	
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
 
@@ -385,6 +486,22 @@ public class Committee extends Student_User {
     }
 
     public void submitSuggestion(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - SUBMIT SUGGESTIONS PAGE================");
+
         Scanner input = new Scanner(System.in);
 
         boolean exitSubmitSuggestion = false;
@@ -449,6 +566,22 @@ public class Committee extends Student_User {
     }
 
     public void editSuggestion(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - EDIT SUGGESTIONS================");
+
         Scanner input = new Scanner(System.in);
 
         try {
@@ -582,6 +715,24 @@ public class Committee extends Student_User {
     }
 
     public void deleteSuggestion(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - DELETE SUGGESTIONS PAGE================");
+
+    	
+    	
         Scanner input = new Scanner(System.in);
 
         try {
@@ -646,6 +797,23 @@ public class Committee extends Student_User {
     }
 
     public void generateReport(Committee committee) {
+     	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - COMMITTEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + committee.getName());
+    	System.out.println("               ID: " + committee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - GENERATE REPORT================");
+
+    	
         Scanner scanner = new Scanner(System.in);
         GenerateReport committeeGenerator = new CommitteeGenerateReport();
         boolean exit = false;

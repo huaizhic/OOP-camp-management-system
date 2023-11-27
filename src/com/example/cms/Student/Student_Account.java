@@ -2,6 +2,7 @@ package com.example.cms.Student;
 
 import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.Password.Password_Manager;
+import com.example.cms.Staff.Staff;
 import com.example.cms.Student_Role;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ public class Student_Account {
     protected String userId; // Add a field to hold the student ID
     private Scanner scanner;
     private Map<String, Student_User> existingStudents;
+    
 
     public Student_Account(Map<String, Student_User> existingStudents) {
         this.existingStudents = existingStudents;
@@ -42,6 +44,8 @@ public class Student_Account {
         
         Student_User existingStudent = existingStudents.get(userId);
         CSVDataManager.loadStudentsFromCSV(existingStudent);
+        
+   
         
         System.out.println("Welcome," + existingStudent.getName());
         role = existingStudent.getUserGroup();
@@ -70,16 +74,19 @@ public class Student_Account {
                 // Check the password and get the student's name
                 System.out.println("Your password is, " + enteredPassword);
                 if (passwordManager.checkPassword(userId, role, enteredPassword)) {
-                    System.out.println("This is check password manager");
+                    //System.out.println("This is check password manager");
                     String studentName = existingStudent.getName();
 
                     if ("COMMITTEE".equals(role.name())) {
-                        System.out.println("Welcome, Committee Member " + studentName);
+                    	System.out.println("Login Successful!");
+                    	System.out.println("Welcome, Committee Member " + studentName + "!");
                         Committee_Account committee_Account = new Committee_Account(userId, existingStudent.getExistingStudents());
 						committee_Account.start();
                         // Redirect to the committee class here
                     } else if ("ATTENDEE".equals(role.name())) {
-                        System.out.println("Welcome, Attendee " + studentName);
+                    	System.out.println("Login Successful!");
+                    	System.out.println("Welcome, Attendee " + userId+ ","+studentName+"!");
+
                         // Redirect to the attendee class here
                         
                         Attendee_Account attendee_Account = new Attendee_Account(userId, existingStudent.getExistingStudents());

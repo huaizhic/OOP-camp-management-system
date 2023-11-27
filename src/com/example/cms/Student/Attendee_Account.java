@@ -1,5 +1,7 @@
 package com.example.cms.Student;
 
+import com.example.cms.CSVConverter.CSVDataManager;
+import com.example.cms.Staff.Staff;
 import com.example.cms.user_Login.account_Manager;
 
 import java.util.HashMap;
@@ -36,11 +38,6 @@ public class Attendee_Account extends Student_Account {
 	public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
-        
-        
-
-        //System.out.println("Default Student ID: " + studentID);
-
         Attendee attendee = Attendee.attendeesMap.get(studentID);
 
         if (attendee != null) {
@@ -56,7 +53,22 @@ public class Attendee_Account extends Student_Account {
 
         while (running) {
         	
-            System.out.println("Student Home Page");
+        	int borderLength = 53;  // Adjust the border length based on your preference
+
+        	// Print the decorative border
+        	System.out.println("=".repeat(borderLength));
+
+        	// Print the STAFF header
+        	System.out.println("                        STUDENT - ATTENDEE                       ");
+
+        	// Print staff information
+        	System.out.println("               Name: " + attendee.getName());
+        	System.out.println("               ID: " + attendee.getStudentID());
+
+        	// Print the decorative border again
+        	System.out.println("=".repeat(borderLength));
+        	System.out.println("================STUDENT - ATTENDEE HOME PAGE================");
+
             System.out.println("1. Display Registered Camps");
             System.out.println("2. Manage Camp");
             System.out.println("3. Manage Enquiries");

@@ -122,7 +122,7 @@ public class account_Manager {
                             // Existing Student Account
                             if (accountChoice == 1) {
                                 // Create Student_User instance and load student data from CSV
-                                System.out.println("Loading student data, please wait...");
+                                //System.out.println("Loading student data, please wait...");
                                 Student_User studentUser = new Student_User();
                                 CSVDataManager.loadStudentsFromCSV(studentUser);
 
@@ -130,6 +130,8 @@ public class account_Manager {
 
                                 // Loop until a valid student is found or user chooses to retry or register
                                 while (!userFound) {
+                                	System.out.println("Student Data Loaded Successfully");
+                                	
                                     userId = getStudentId();
                                     System.out.println("This is the student id entered: " + userId);
 
@@ -138,6 +140,7 @@ public class account_Manager {
 
                                     // If student exists, start student account functionality
                                     if (studentAccount.getStudentAccount(userId)) {
+                                        System.out.println("Welcome to the Student Account Page!");
                                         studentAccount.start();
                                         userFound = true;
                                     } else {

@@ -121,7 +121,7 @@ public class CSVDataManager {
                     }
                     student.setSuggestionSubmitted(suggestionSubmitted);
 
-                    System.out.println("Student loaded successfully");
+                    //System.out.println("Student loaded successfully");
 
                     studentUser.addStudent(student);
 
@@ -176,9 +176,9 @@ public class CSVDataManager {
 //                    for (Suggestion suggestion : student.getSuggestionSubmitted()) {
 //                        System.out.print(suggestion.getSuggestion_Subject() + "|");
 //                    }
-                    System.out.println();
+//                    System.out.println();
 
-                    System.out.println("Student details printed successfully.");
+                    //System.out.println("Student Data Loaded Successfully.");
 
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
@@ -391,7 +391,7 @@ public class CSVDataManager {
 //                    System.out.println("Attendee loaded successfully:");
 //                    System.out.println("Student ID: " + attendee.getStudentID());
 //                    System.out.println("Name: " + attendee.getName());
-
+//                    Staff_User.existingStaff.put(staffs.getStaffID(), staffs);
                     Attendee.attendeesMap.put(attendee.getStudentID(), attendee);
                     Attendee.attendeeToNameMap.put(attendee.getName(), attendee);
 
@@ -629,7 +629,7 @@ public class CSVDataManager {
 //                    }
 //                    System.out.println();
 
-                    System.out.println("Student details printed successfully.");
+//                    System.out.println("Student Committee details printed successfully.");
 
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
@@ -818,7 +818,7 @@ public class CSVDataManager {
                     System.out.println();
                     System.out.println();
 
-                    System.out.println("Staff details printed successfully.");
+//                    System.out.println("Staff details printed successfully.");
                 } else {
                     System.out.println("Incomplete data in the CSV line: " + line);
                 }

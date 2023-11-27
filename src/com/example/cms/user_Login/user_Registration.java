@@ -23,7 +23,7 @@ public class user_Registration {
 	Student_Role userGroup  = null;
 	//String password = null;   
 	int points = 0;
-	password_Data password;
+	password_Data password = null;
 	
 	   public user_Registration (Scanner scanner) {
 	        this.scanner = scanner;
@@ -113,7 +113,6 @@ public class user_Registration {
 	        newStudent.setUserGroup(userGroup);
 	        newStudent.setPassword(password.getPassword());
 	        newStudent.setSalt(password.getSalt());
-	        newStudent.setSalt(null);
 	        newStudent.setFaculty(facultyInput);
 	        newStudent.setPoints(points);
 	        newStudent.setCampAccessibility(campAccessibility);
@@ -304,10 +303,7 @@ public class user_Registration {
 	            }
 
 	            if (Password_Manager.isValidPassword(password)) {
-	                // Generate salt using Password_Manager
-	                salt = Password_Hasher.generateSalt();
-	                // Hash the password using Password_Manager
-	                password = Password_Hasher.hashPassword(password, salt);
+	            	System.out.println("Entered Password is: " + password);
 
 	                break; // Exit the loop if the password is valid
 	            } else {
@@ -324,14 +320,8 @@ public class user_Registration {
 	            // Confirm the password
 	            System.out.print("Confirm your password: ");
 	            String confirmPassword = scanner.nextLine().trim();
-	            
-	            if (Password_Manager.isValidPassword(confirmPassword)) {
-	                // Hash the password using Password_Manager
-	                password = Password_Hasher.hashPassword(confirmPassword, salt);
+	            System.out.println("This is your confirm password: "+confirmPassword);
 
-	                break; // Exit the loop if the password is valid
-	            }
-	            
 	            // Check if the input is empty
 	            if (confirmPassword.isEmpty()) {
 	                System.out.println("Invalid input. Please enter a non-empty password confirmation.");
@@ -339,6 +329,11 @@ public class user_Registration {
 	            }
 
 	            if (password.equals(confirmPassword)) {
+	            	// Generate salt using Password_Manager
+                    salt = Password_Hasher.generateSalt();
+                    System.out.println("This is salt: " + salt); 
+                    // Hash the password using Password_Manager
+                    password = Password_Hasher.hashPassword(password, salt);
 	                break; // Exit the confirmation loop if the passwords match
 	            } else {
 	                System.out.println("Password confirmation doesn't match. Please try again.");
@@ -347,33 +342,9 @@ public class user_Registration {
 	                if (!choice.equals("1")) {
 	                    continue; // Re-enter the confirmation password
 	                } else {
+	                	System.out.println("Re-entered Password: " + choice);
 	                    // User wants to create a new password
-	                    while (true) {
-	                        try {
-	                            System.out.print("Create a new password: ");
-	                            password = scanner.nextLine().trim();
-
-	                            // Check if the input is empty
-	                            if (password.isEmpty()) {
-	                                System.out.println("Invalid input. Please enter a non-empty password.");
-	                                continue; // Restart the loop if the input is empty
-	                            }
-
-	                            if (Password_Manager.isValidPassword(password)) {
-	                                // Generate salt using Password_Manager
-	                                salt = Password_Hasher.generateSalt();
-	                                // Hash the password using Password_Manager
-	                                password = Password_Hasher.hashPassword(password, salt);
-
-	                                break; // Exit the loop if the new password is valid
-	                            } else {
-	                                System.out.println("Password does not meet the criteria. Please make sure it has 8 characters, includes both upper and lower case letters, and is alphanumeric.");
-	                            }
-	                        } catch (InputMismatchException e) {
-	                            System.out.println("Invalid input. Please enter a valid password.");
-	                            scanner.nextLine(); // Consume the invalid input
-	                        }
-	                    }
+	                    
 	                }
 	            }
 	        } catch (InputMismatchException e) {
@@ -384,6 +355,7 @@ public class user_Registration {
 
 	    return new password_Data(password, salt);
 	}
+
 
 	private int getFacultyChoice() {
 	    int facultyChoice = 0;

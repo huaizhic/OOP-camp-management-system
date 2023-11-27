@@ -32,6 +32,10 @@ public class Attendee extends Student_User {
          if (attendeesMap == null) {
              attendeesMap = new HashMap<>();
          }
+         
+         if (attendeeToNameMap == null) {
+        	 attendeeToNameMap = new HashMap<>();
+         }
      }
 
   // Method to add an attendee
@@ -421,11 +425,27 @@ public class Attendee extends Student_User {
     /**************** FOR ENQUIRIES ***********************************/
     
     public static void manageEnquiries(Attendee attendee) {
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - ATTENDEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - CAMP ENQUIRIES MENU================");
+
+    	
         boolean exit = false;
         Scanner scanner = new Scanner(System.in);
 
         do {
-            System.out.println("Camp Enquiries Menu:");
             System.out.println("1. View Enquiries");
             System.out.println("2. Make Enquiries");
             System.out.println("3. Edit Enquiries");
@@ -487,6 +507,24 @@ public class Attendee extends Student_User {
 
     
     public static void viewEnquiry(Attendee attendee) {
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - ATTENDEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - VIEW ENQURIY ================");
+
+    	
+    	
         if(attendee.getEnquirySubmitted().isEmpty()){
             System.out.println("No enquiry has been submitted");
             manageEnquiries(attendee);
@@ -501,6 +539,25 @@ public class Attendee extends Student_User {
     }
 
     public static void makeEnquiry(Attendee attendee){
+    	
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - ATTENDEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - MAKE ENQUIRIES MENU================");
+
+    	
+    	
         System.out.println("Please firstly select the camp that you want to submit the enquiry to");
         System.out.println("Please note down the camp name of the interested camp");
         ArrayList<Camp> campArrayList = DisplayApp.viewAllCamp();
@@ -589,6 +646,24 @@ public class Attendee extends Student_User {
     }
 
     public static void editEnquiry(Attendee attendee){
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - ATTENDEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================STUDENT - EDIT ENQUIRIE MENU================");
+
+    	
+    	
         Scanner input = new Scanner(System.in);
         // if no enquiry has been submitted, exit.
         if(attendee.getEnquirySubmitted().isEmpty()){
@@ -716,6 +791,25 @@ public class Attendee extends Student_User {
     }
 
     public static void deleteEnquiry(Attendee attendee) {
+    	int borderLength = 53;  // Adjust the border length based on your preference
+
+    	// Print the decorative border
+    	System.out.println("=".repeat(borderLength));
+
+    	// Print the STAFF header
+    	System.out.println("                        STUDENT - ATTENDEE                       ");
+
+    	// Print staff information
+    	System.out.println("               Name: " + attendee.getName());
+    	System.out.println("               ID: " + attendee.getStudentID());
+
+    	// Print the decorative border again
+    	System.out.println("=".repeat(borderLength));
+    	System.out.println("================DELETE ENQUIRIES- CAMP ENQUIRIES MENU================");
+
+    	
+    	
+    	
         Scanner input = new Scanner(System.in);
 
         try {
