@@ -7,6 +7,9 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Functionality for staff log in
+ */
 public class Staff_Login {
 	Scanner scanner = new Scanner(System.in);
 
@@ -40,7 +43,7 @@ public class Staff_Login {
 	            }
 
 	            // Retrieve existing staff member
-	            Staff_User existingStaffMember = Staff_User.getExistingStaff().get(staffID);
+	            com.example.cms.Staff.Staff_User existingStaffMember = com.example.cms.Staff.Staff_User.getExistingStaff().get(staffID);
 
 	            // Check if staff member exists
 	            if (existingStaffMember != null) {
@@ -67,7 +70,7 @@ public class Staff_Login {
 	                	System.out.println("\n".repeat(10));  // Adjust the number of new lines as needed
 	                	
 	                    // Create and start staff account
-	                    Staff_Account staff_Account = new Staff_Account();
+	                    com.example.cms.Staff.Staff_Account staff_Account = new com.example.cms.Staff.Staff_Account();
 	                    staff_Account.start(staff);
 
 	                    // Reset the attempts counter

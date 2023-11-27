@@ -4,15 +4,19 @@ import com.example.cms.CSVConverter.CSVDataManager;
 import com.example.cms.CSVConverter.CSVWriter;
 import com.example.cms.Faculty;
 import com.example.cms.Password.Password_Hasher;
-import com.example.cms.Password.Password_Manager;
 import com.example.cms.Password.Password_Manager_Staff;
 import com.example.cms.Password.password_Data;
 import com.example.cms.Student.Student_User;
 import com.example.cms.user_Login.account_Manager;
-import com.example.cms.Staff.Staff_Login;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
+/**
+ * Functionality for staff registration
+ */
 public class Staff_Setup {
 	Scanner scanner = new Scanner(System.in);
 	password_Data password;
@@ -29,7 +33,7 @@ public class Staff_Setup {
           String staffID = scanner.nextLine().trim().toUpperCase();
           System.out.println("Staff id inputted: " + staffID);
                   // Check if staff ID already exists
-          Staff_User staff = Staff_User.getExistingStaff().get(staffID);
+          com.example.cms.Staff.Staff_User staff = com.example.cms.Staff.Staff_User.getExistingStaff().get(staffID);
           
           // Check if staff is not null and staffID is not null
           if (staff != null && staff.getStaffID() != null && staff.getStaffID().equals(staffID)) {
@@ -40,7 +44,7 @@ public class Staff_Setup {
                   updateAccount(staffID);
               } else {
                   System.out.println("Redirecting to staff login.");
-                  Staff_Login staff_Login = new Staff_Login();
+                  com.example.cms.Staff.Staff_Login staff_Login = new com.example.cms.Staff.Staff_Login();
                   // Redirect to staff login logic
                   staff_Login.start(staffID);
               }
@@ -92,7 +96,7 @@ public class Staff_Setup {
         getSecurityQuestionsAndAnswers(securityQuestions, securityAnswers);
 
      // Store the confirmed information in the staff instance
-	    Staff_User staff_Information = new Staff_User();
+	    com.example.cms.Staff.Staff_User staff_Information = new com.example.cms.Staff.Staff_User();
 	    staff_Information.setStaffID(staffID);
 	    staff_Information.setName(name);
 	    staff_Information.setPassword(password.getPassword());
@@ -398,7 +402,7 @@ public class Staff_Setup {
 	    // Get current staff information
 	    //this.getExistingStaff = new HashMap<>();
 	    //Staff_User staff = CSVDataManager.loadStaffFromCSV(getExistingStaff.get(staffID));
-		Staff_User staff = Staff_User.getExistingStaff().get(staffID);
+		com.example.cms.Staff.Staff_User staff = com.example.cms.Staff.Staff_User.getExistingStaff().get(staffID);
 	    // Display current information
 	    System.out.println("Current Faculty: " + staff.getFaculty());
 	    System.out.println("Current Password: " + staff.getPassword());
