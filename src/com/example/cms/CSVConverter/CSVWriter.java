@@ -171,11 +171,12 @@ public class CSVWriter {
 
             boolean isFileEmpty = isFileEmpty(csvFilePath);
 
+            /*
             // Check if the CSV file is empty
             if (!isFileEmpty && !staffExistsInCSV(staff.getStaffID(), csvFilePath)) {
                 // Add a new line before appending the new staff information
                 writer.newLine();
-            }
+            } */
 
             // Check if the CSV file is empty or if a header needs to be added
             if (isFileEmpty || (isFileEmpty && appendHeader)) {
@@ -195,8 +196,8 @@ public class CSVWriter {
                     + staff.getFaculty() + ","
                     + String.join("|", campCreatedArray) + ","
                     + String.join("|", staff.getSecurityQuestion()) + ","
-                    + String.join("|", staff.getSecurityAnswers()));
-            writer.newLine();
+                    + String.join("|", staff.getSecurityAnswers()) + "");
+           
 
             System.out.println("Staff information written to " + csvFilePath + " successfully.");
         } catch (IOException e) {
