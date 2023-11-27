@@ -2,23 +2,12 @@ package com.example.cms.CSVConverter;
 
 import com.example.cms.Camp.Camp;
 import com.example.cms.Enquiries.Enquiry;
-import com.example.cms.Student.Student_User;
-import com.example.cms.Suggestions.Suggestion;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-
-import com.example.cms.Camp.Camp;
-import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Staff.Staff_User;
-import com.example.cms.Student.Attendee;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Suggestions.Suggestion;
+
+import java.io.*;
+import java.util.List;
 
 /**
  * Controller class to write new information for the first time to CSV (data) of several classes, such as Student User, Attendee, Committee, etc.
@@ -171,12 +160,12 @@ public class CSVWriter {
 
             boolean isFileEmpty = isFileEmpty(csvFilePath);
 
-            /*
+
             // Check if the CSV file is empty
             if (!isFileEmpty && !staffExistsInCSV(staff.getStaffID(), csvFilePath)) {
                 // Add a new line before appending the new staff information
                 writer.newLine();
-            } */
+            }
 
             // Check if the CSV file is empty or if a header needs to be added
             if (isFileEmpty || (isFileEmpty && appendHeader)) {
