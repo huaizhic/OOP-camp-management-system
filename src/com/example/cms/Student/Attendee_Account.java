@@ -38,6 +38,7 @@ public class Attendee_Account extends Student_Account {
 	public void start() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        
         Attendee attendee = Attendee.attendeesMap.get(studentID);
 
         if (attendee != null) {

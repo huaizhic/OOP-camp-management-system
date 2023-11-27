@@ -30,7 +30,7 @@ public class Staff_User {
         this.password = "password";
         this.salt = null;
         this.faculty = null;
-        this.campsCreated = null;
+        this.campsCreated = new ArrayList<>();
         this.securityQuestion = new ArrayList<>();
         this.securityAnswers = new ArrayList<>();
         

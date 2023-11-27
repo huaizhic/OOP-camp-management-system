@@ -5,8 +5,10 @@ import com.example.cms.Enquiries.Enquiry;
 import com.example.cms.Student.Student_User;
 import com.example.cms.Suggestions.Suggestion;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -164,9 +166,19 @@ public class CSVWriter {
     public static void writeStaffToCSV(Staff_User staff, boolean appendHeader) {
         String csvFilePath = "staff.csv";
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath, true))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath, true))) {
+
+            boolean isFileEmpty = isFileEmpty(csvFilePath);
+
             // Check if the CSV file is empty
-            if (isFileEmpty(csvFilePath)) {
+            if (!isFileEmpty && !staffExistsInCSV(staff.getStaffID(), csvFilePath)) {
+                // Add a new line before appending the new staff information
+                writer.newLine();
+            }
+
+            // Check if the CSV file is empty or if a header needs to be added
+            if (isFileEmpty || (isFileEmpty && appendHeader)) {
                 // Add the CSV header
                 writer.write("StaffID,Name,Password,Salt,Faculty,CampsCreated,SecurityQuesion,SecurityAnswers");
                 writer.newLine();
@@ -174,7 +186,7 @@ public class CSVWriter {
 
             // Convert ArrayList<Camp> to an array of CharSequence with null check
             CharSequence[] campCreatedArray = toArrayWithNullCheckCamp(staff.getCampsCreated());
-          
+
             // Append the user information to the CSV file
             writer.write(staff.getStaffID() + ","
                     + staff.getName() + ","
@@ -183,7 +195,7 @@ public class CSVWriter {
                     + staff.getFaculty() + ","
                     + String.join("|", campCreatedArray) + ","
                     + String.join("|", staff.getSecurityQuestion()) + ","
-                    + String.join("|", staff.getSecurityAnswers())); 
+                    + String.join("|", staff.getSecurityAnswers()));
             writer.newLine();
 
             System.out.println("Staff information written to " + csvFilePath + " successfully.");
@@ -192,7 +204,29 @@ public class CSVWriter {
             e.printStackTrace();
         }
     }
-    
+
+    private static boolean staffExistsInCSV(String staffID, String csvFilePath) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            boolean firstLine = true; // flag for header
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue; // Skip the first line (headers)
+                }
+
+                String[] data = line.split(",", -1); // Use -1 to keep empty fields
+
+                if (data.length > 0 && data[0].equals(staffID)) {
+                    // Staff ID exists in the CSV
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /******************************FOR STAFF *******************************************/
     
     // Helper method to handle null check and conversion to array

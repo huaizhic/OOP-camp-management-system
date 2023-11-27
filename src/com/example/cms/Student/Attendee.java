@@ -25,9 +25,6 @@ public class Attendee extends Student_User {
 
      public Attendee() {
          super();
-         this.registeredCamps = new ArrayList<>();
-         this.enquirySubmitted = new ArrayList<>();
-         
          // Initialize the map only if it's null
          if (attendeesMap == null) {
              attendeesMap = new HashMap<>();
@@ -36,6 +33,12 @@ public class Attendee extends Student_User {
          if (attendeeToNameMap == null) {
         	 attendeeToNameMap = new HashMap<>();
          }
+         
+         this.registeredCamps = new ArrayList<>();
+         this.enquirySubmitted = new ArrayList<>();
+         attendeesMap.put(studentID, this); // Use studentID as the key
+         
+ 
      }
 
   // Method to add an attendee
