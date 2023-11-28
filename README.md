@@ -1,3 +1,5 @@
 # OOP-camp-management-system
 
-building in progress
+Incomplete Build
+
+Demonstration Video: https://youtu.be/cFJeNSEB_mM
